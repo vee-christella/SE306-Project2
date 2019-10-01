@@ -7,9 +7,9 @@ public class OilRefinery : Building
     // Initialise stats for each Oil Refinery building
     public OilRefinery()
     {
-        this.InitialMoney = -50;
-        this.InitialGreen = -80
-        this.InitialHappiness = -10;
+        this.InitialBuildMoney = -50;
+        this.InitialBuildGreen = -80
+        this.InitialBuildHappiness = -10;
 
         this.GenerateGreen = -20;
         this.GenerateMoney = 40;

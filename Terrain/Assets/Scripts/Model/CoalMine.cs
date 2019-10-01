@@ -7,9 +7,9 @@ public class CoalMine : Building
     // Initialise stats for each Coal Mine building
     public CoalMine()
     {
-        this.InitialMoney = -20;
-        this.InitialGreen = -10;
-        this.InitialHappiness = -10;
+        this.InitialBuildMoney = -20;
+        this.InitialBuildGreen = -10;
+        this.InitialBuildHappiness = -10;
 
         this.GenerateGreen = -10;
         this.GenerateMoney = 50;

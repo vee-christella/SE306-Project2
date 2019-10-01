@@ -7,9 +7,9 @@ public class MovieTheatre : Building
     // Initialise stats for each Movie Theatre building
     public MovieTheatre()
     {
-        this.InitialMoney = -100;
-        this.InitialGreen = 0;
-        this.InitialHappiness = 10;
+        this.InitialBuildMoney = -100;
+        this.InitialBuildGreen = 0;
+        this.InitialBuildHappiness = 10;
 
         this.GenerateGreen = 0;
         this.GenerateMoney = 30;

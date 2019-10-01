@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zoo : MonoBehaviour
+public class Zoo : Building
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Initialise stats for each Zoo building
+    public Zoo() { 
+    
+        this.InitialBuildMoney = -150;
+        this.InitialBuildGreen = 30;
+        this.InitialBuildHappiness = 40;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.GenerateGreen = 10;
+        this.GenerateMoney = -60;
     }
 }
