@@ -6,14 +6,9 @@ public class WindTurbine : Building
 {
 
     // Initialise stats for each Wind Turbine building
-   public WindTurbine()
+   public WindTurbine() :  base(-40, 10, 2, 20, 0)
     {
-        this.InitialBuildMoney = -40;
-        this.InitialBuildGreen = 10;
-        this.InitialBuildHappiness = 2;
 
-        this.GenerateGreen = 20;
-        this.GenerateMoney = 0;
     }
 
 

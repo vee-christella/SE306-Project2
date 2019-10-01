@@ -5,13 +5,8 @@ using UnityEngine;
 public class SolarFarm : Building
 {
     // Initialise stats for each Solar Farm building
-    public SolarFarm()
+    public SolarFarm() : base(-80, 30, 0, 20, -10)
     {
-        this.InitialBuildMoney = -80;
-        this.InitialBuildGreen = 30;
-        this.InitialBuildHappiness = 0;
-
-        this.GenerateGreen = 20;
-        this.GenerateMoney = -10;
+    
     }
 }

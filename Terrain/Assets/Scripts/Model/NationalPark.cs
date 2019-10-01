@@ -5,13 +5,8 @@ using UnityEngine;
 public class NationalPark : Building
 {
     // Initialise stats for each National Park building
-    public NationalPark()
+    public NationalPark() : base(-100, 20, 30, 5, -10)
     {
-        this.InitialBuildMoney = -100;
-        this.InitialBuildGreen = 20;
-        this.InitialBuildHappiness = 30;
-
-        this.GenerateGreen = 5;
-        this.GenerateMoney = -10;
+       
     }
 }

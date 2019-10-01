@@ -5,13 +5,8 @@ using UnityEngine;
 public class CoalMine : Building
 {
     // Initialise stats for each Coal Mine building
-    public CoalMine()
+    public CoalMine() : base(-20, -10, -10, -10, 50)
     {
-        this.InitialBuildMoney = -20;
-        this.InitialBuildGreen = -10;
-        this.InitialBuildHappiness = -10;
 
-        this.GenerateGreen = -10;
-        this.GenerateMoney = 50;
     }
 }

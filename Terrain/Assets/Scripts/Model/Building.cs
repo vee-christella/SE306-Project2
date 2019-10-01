@@ -17,5 +17,17 @@ public abstract class Building
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
+
+    // Constructor to initialise the building with their respective stats
+    public Building(float initBuildMoney, float initBuildGreen, 
+    float initBuildHappiness, float genMoney, float genGreen)
+    {
+        this.initialBuildMoney = initBuildMoney;
+        this.initialBuildGreen = initBuildGreen;
+        this.initialBuildHappiness = initBuildHappiness;
+
+        this.generateGreen = genGreen;
+        this.generateMoney = genMoney;
+    }
 }
 

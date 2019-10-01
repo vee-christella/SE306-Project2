@@ -5,14 +5,9 @@ using UnityEngine;
 public class Nuclear : Building
 {
     // Initialise stats for each Nuclear plant building
-    public Nuclear()
+    public Nuclear() : base(-60, 0, -20, 0, 50)
     {
-        this.InitialBuildMoney = -60;
-        this.InitialBuildGreen = 0;
-        this.InitialBuildHappiness = -20;
 
-        this.GenerateGreen = 0;
-        this.GenerateMoney = 50;
     }
 
     // TODO: Add chance of nuclear disaster
