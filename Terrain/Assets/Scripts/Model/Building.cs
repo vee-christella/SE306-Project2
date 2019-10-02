@@ -29,5 +29,17 @@ public abstract class Building
         this.generateGreen = genGreen;
         this.generateMoney = genMoney;
     }
+
+    public Building(float initBuildMoney, float initBuildGreen,
+    float initBuildHappiness, float genMoney, float genGreen, float genHappiness)
+    {
+        this.initialBuildMoney = initBuildMoney;
+        this.initialBuildGreen = initBuildGreen;
+        this.initialBuildHappiness = initBuildHappiness;
+
+        this.generateGreen = genGreen;
+        this.generateMoney = genMoney;
+        this.generateHappiness = genHappiness;
+    }
 }
 
