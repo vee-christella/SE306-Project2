@@ -42,6 +42,9 @@ public class GameController : MonoBehaviour
                 }
                 tileSR.sprite = sprites[random];
             }
+
+            // Wait for user to click end turn
+            game.nextTurn();
         }
         Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
     }
