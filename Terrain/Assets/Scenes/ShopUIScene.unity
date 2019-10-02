@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 82002302}
   - component: {fileID: 82002301}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Movie Theatre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &82002301
 MonoBehaviour:
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 137116604}
   - component: {fileID: 137116603}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +450,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137116603
 MonoBehaviour:
@@ -615,7 +615,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Oil Refinery
+
+'
 --- !u!222 &156096182
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -713,7 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 716027605}
   m_Horizontal: 1
-  m_Vertical: 1
+  m_Vertical: 0
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -1021,6 +1023,7 @@ RectTransform:
   m_Children:
   - {fileID: 855432476}
   - {fileID: 93979047}
+  - {fileID: 1016237773}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1043,7 +1046,7 @@ GameObject:
   - component: {fileID: 457552212}
   - component: {fileID: 457552211}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: Nuclear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1067,7 +1070,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457552211
 MonoBehaviour:
@@ -1314,7 +1317,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Forest
 --- !u!222 &630720091
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1402,7 +1405,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1028814266}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.6706376
+  m_Size: 0.6707133
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1456,7 +1459,7 @@ GameObject:
   - component: {fileID: 683015232}
   - component: {fileID: 683015231}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Coal Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1480,7 +1483,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683015231
 MonoBehaviour:
@@ -1617,8 +1620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -469.5, y: -0.000001126152}
-  m_SizeDelta: {x: 1400, y: 203}
+  m_AnchoredPosition: {x: -469.49994, y: -0.000001126152}
+  m_SizeDelta: {x: 1400, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &716027606
 MonoBehaviour:
@@ -1827,11 +1830,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016237770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -469.5, y: -347, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 374899555}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028814265
@@ -1974,7 +1977,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Hydro
 --- !u!222 &1227092735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2051,7 +2054,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BUILDING(coal mine)
+  m_Text: Coal Mine
 --- !u!222 &1263118816
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2128,7 +2131,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'Nuclear
+
+'
 --- !u!222 &1367191201
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2330,7 +2335,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: National Park
 --- !u!222 &1702063460
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2353,7 +2358,7 @@ GameObject:
   - component: {fileID: 1714562647}
   - component: {fileID: 1714562646}
   m_Layer: 5
-  m_Name: Button (6)
+  m_Name: Oil Refinery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2377,7 +2382,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1714562646
 MonoBehaviour:
@@ -2488,7 +2493,7 @@ GameObject:
   - component: {fileID: 1799979934}
   - component: {fileID: 1799979933}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: National Park
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2512,7 +2517,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1799979933
 MonoBehaviour:
@@ -2677,7 +2682,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Movie Theatre
 --- !u!222 &2098020478
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2700,7 +2705,7 @@ GameObject:
   - component: {fileID: 2125683451}
   - component: {fileID: 2125683450}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Hydro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2724,7 +2729,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 203}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2125683450
 MonoBehaviour:

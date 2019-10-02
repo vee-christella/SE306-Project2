@@ -4,6 +4,9 @@ using UnityEngine;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 public class MouseController : MonoBehaviour
 {
+
+    string buildingForCreating = null;
+
     Vector3 lastFramePosition;
     // Start is called before the first frame update
     void Start()
@@ -22,5 +25,39 @@ public class MouseController : MonoBehaviour
             Camera.main.transform.Translate(diff);
         }
         lastFramePosition= Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public void SetMode_CoalMine() {
+        buildingForCreating = "CoalMine";
+    }
+    public void SetMode_Forest() {
+        buildingForCreating = "Forest";
+    }
+    public void SetMode_Hydro() {
+        buildingForCreating = "Hydro";
+    }
+    public void SetMode_MovieTheatre() {
+        buildingForCreating = "MovieTheatre";
+    }
+    public void SetMode_NationalPark() {
+        buildingForCreating = "NationalPark";
+    }
+    public void SetMode_Nuclear() {
+        buildingForCreating = "Nuclear";
+    }
+    public void SetMode_OilRefinery() {
+        buildingForCreating = "OilRefinery";
+    }
+    public void SetMode_RaceTrack() {
+        buildingForCreating = "RaceTrack";
+    }
+    public void SetMode_SolarFarm(){
+        buildingForCreating = "SolarFarm";
+    }
+    public void SetMode_WindTurbine() {
+        buildingForCreating = "WindTurbine";
+    }
+    public void SetMode_Zoo() {
+        buildingForCreating = "Zoo";
     }
 }
