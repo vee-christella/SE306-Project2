@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Terrain
 {
-    public enum TerrainType { Desert, Mountain, Plain, Water };
+    public enum TerrainType
+    {
+        Desert, Mountain, Plain, Water
+    };
 
     TerrainType type;
     private int x;
@@ -25,5 +28,5 @@ public class Terrain
         this.y = y;
         this.z = z;
     }
-    
+
 }
