@@ -5,7 +5,8 @@ using UnityEngine;
 public class Hydro : Building
 {
     // Initialise stats for each Hydro building
-    public Hydro() : base(-80, 20, 5, 20, 10, 0)
+    public Hydro() : base(-80, 20, 5, 20, 10, 0, 4)
     {
+        this.TypeOfBuilding = BuildingType.EnergySource;
     }
 }
