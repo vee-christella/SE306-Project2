@@ -4,6 +4,16 @@ using UnityEngine;
 
 public abstract class Building
 {
+
+    public enum BuildingType
+    {
+        Utility,
+        Recreational,
+        EnergySource,
+        Misc
+    };
+
+
     float initialBuildMoney;
     float initialBuildGreen;
     float initialBuildHappiness;
@@ -11,6 +21,7 @@ public abstract class Building
     float generateGreen;
     float generateHappiness;
     int turnsToBuild;
+    BuildingType typeOfBuilding;
 
     public float InitialBuildMoney { get => initialBuildMoney; set => initialBuildMoney = value; }
     public float InitialBuildGreen { get => initialBuildGreen; set => initialBuildGreen = value; }
@@ -19,6 +30,7 @@ public abstract class Building
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
     public int TurnsToBuild { get => turnsToBuild; set => turnsToBuild = value; }
+    public BuildingType TypeOfBuilding { get => typeOfBuilding; set => typeOfBuilding = value; }
 
 
     // Constructor to initialise the building with their respective stats
@@ -45,6 +57,10 @@ public abstract class Building
         this.generateMoney = genMoney;
         this.generateHappiness = genHappiness;
         this.turnsToBuild = buildTime;
+
+
     }
 }
+
+
 
