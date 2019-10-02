@@ -8,7 +8,11 @@ public class WindTurbine : Building
     // Initialise stats for each Wind Turbine building
    public WindTurbine() :  base(-40, 10, 2, 20, 0, 0, 1)
     {
-    this.TypeOfBuilding = BuildingType.EnergySource;
+        this.TypeOfBuilding = BuildingType.EnergySource;
+        this.Name = "Wind Turbine";
+        this.Blurb = "Wind Turbines are a sustainable choice of energy" +
+        	"generation, but are very loud. Your citizens may not appreciate" +
+        	"the noise if they live close by.";
     }
 
 
