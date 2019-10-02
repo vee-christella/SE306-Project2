@@ -6,7 +6,7 @@ public class WindTurbine : Building
 {
 
     // Initialise stats for each Wind Turbine building
-   public WindTurbine() :  base(-40, 10, 2, 20, 0, 0)
+   public WindTurbine() :  base(-40, 10, 2, 20, 0, 0, 1)
     {
 
     }

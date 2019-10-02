@@ -1,0 +1,12 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Forest : Building
+{
+    // Initialise stats for each Forest
+    public Forest() : base(0, 50, 5, 0, 20, 0, 3)
+    {
+
+    }
+}

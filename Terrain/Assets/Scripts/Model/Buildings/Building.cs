@@ -10,6 +10,7 @@ public abstract class Building
     float generateMoney;
     float generateGreen;
     float generateHappiness;
+    int turnsToBuild;
 
     public float InitialBuildMoney { get => initialBuildMoney; set => initialBuildMoney = value; }
     public float InitialBuildGreen { get => initialBuildGreen; set => initialBuildGreen = value; }
@@ -17,9 +18,11 @@ public abstract class Building
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
+    public int TurnsToBuild { get => turnsToBuild; set => turnsToBuild = value; }
+
 
     // Constructor to initialise the building with their respective stats
-    public Building(float initBuildMoney, float initBuildGreen, 
+    public Building(float initBuildMoney, float initBuildGreen,
     float initBuildHappiness, float genMoney, float genGreen)
     {
         this.initialBuildMoney = initBuildMoney;
@@ -31,7 +34,8 @@ public abstract class Building
     }
 
     public Building(float initBuildMoney, float initBuildGreen,
-    float initBuildHappiness, float genMoney, float genGreen, float genHappiness)
+    float initBuildHappiness, float genMoney, float genGreen, float genHappiness,
+        int buildTime)
     {
         this.initialBuildMoney = initBuildMoney;
         this.initialBuildGreen = initBuildGreen;
@@ -40,6 +44,7 @@ public abstract class Building
         this.generateGreen = genGreen;
         this.generateMoney = genMoney;
         this.generateHappiness = genHappiness;
+        this.turnsToBuild = buildTime;
     }
 }
 

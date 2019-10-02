@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaceTrack : Building
 {
     // Initialise stats for each Race Track
-    public RaceTrack() : base(-150, 0, 20, -10, 20, 0)
+    public RaceTrack() : base(-150, 0, 40, -10, 20, 0, 7)
     {
        
     }
