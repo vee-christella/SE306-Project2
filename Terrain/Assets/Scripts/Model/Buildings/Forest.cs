@@ -8,5 +8,8 @@ public class Forest : Building
     public Forest() : base(0, 50, 5, 0, 20, 0, 3)
     {
         this.TypeOfBuilding = BuildingType.Misc;
+        this.Name = "Forest";
+        this.Blurb = "Forests are extremely green, and can house habitats for " +
+            "animals. Build more forests to increase your green points!";
     }
 }
