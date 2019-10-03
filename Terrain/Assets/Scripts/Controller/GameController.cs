@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -9,11 +10,11 @@ public class GameController : MonoBehaviour
 
     public Sprite[] sprites = new Sprite[4];
 
-    public Text coinCount;
-    public Text greenCount;
-    public Text happinessCount;
-    public Text currentTurn;
-    public Text maxTurn;
+    public TextMeshProUGUI coinCount;
+    public TextMeshProUGUI greenCount;
+    public TextMeshProUGUI happinessCount;
+    public TextMeshProUGUI currentTurn;
+    public TextMeshProUGUI maxTurn;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +81,10 @@ public class GameController : MonoBehaviour
 
     public void SetMetrics(float coin, float green, float happiness)
     {
+        //coinCount.text = (System.Int32.Parse(coinCount.text) + 10).ToString();
+        //greenCount.text = (System.Int32.Parse(greenCount.text) + 10).ToString();
+        //happinessCount.text = (System.Int32.Parse(happinessCount.text) + 10).ToString();
+
         coinCount.text = coin.ToString();
         greenCount.text = green.ToString();
         happinessCount.text = happiness.ToString();

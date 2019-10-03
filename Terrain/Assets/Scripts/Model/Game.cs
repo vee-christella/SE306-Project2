@@ -32,9 +32,6 @@ public class Game
 
     public Game(int rows = 30, int columns = 30)
     {
-        this.Money = 100;
-        this.Green = 0;
-        this.Happiness = 50;
         this.currentTurn = 0;
         this.rows = rows;
         this.columns = columns;
