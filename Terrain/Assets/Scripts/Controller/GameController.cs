@@ -6,9 +6,14 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     Game game;
-    MetricsController metricsController;
 
     public Sprite[] sprites = new Sprite[4];
+
+    public Text coinCount;
+    public Text greenCount;
+    public Text happinessCount;
+    public Text currentTurn;
+    public Text maxTurn;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +23,6 @@ public class GameController : MonoBehaviour
             for (int j = 0; j < game.Columns; j++)
             {
                 Tile tile = game.getTileAt(i, j);
-                metricsController = new MetricsController();
                 GameObject tileGO = new GameObject();
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
@@ -46,11 +50,12 @@ public class GameController : MonoBehaviour
                 tileSR.sprite = sprites[random];
             }
 
-            metricsController.SetMoney();
       
             // Wait for user to click end turn
             //game.nextTurn();
         }
+
+        StartingMetrics();
         Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
     }
 
@@ -58,5 +63,26 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void StartingMetrics()
+    {
+        coinCount.text = "200";
+        greenCount.text = "0";
+        happinessCount.text = "50";
+        currentTurn.text = "0";
+        maxTurn.text = "50";
+    }
+
+    public void SetMetrics(float coin, float green, float happiness)
+    {
+        coinCount.text = coin.ToString();
+        greenCount.text = green.ToString();
+        happinessCount.text = happiness.ToString();
+    }
+
+    public void SetTurn(float turn)
+    {
+        currentTurn.text = turn.ToString();
     }
 }

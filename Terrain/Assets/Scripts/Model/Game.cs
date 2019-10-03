@@ -77,6 +77,10 @@ public class Game
         this.green = Green + GenerateGreen;
         this.happiness = Happiness + GenerateHappiness;
 
+        //// Display updated metrics
+        //metricsCont.SetMetrics(money, green, happiness);
+        //metricsCont.SetTurn(currentTurn);
+
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
@@ -91,6 +95,7 @@ public class Game
         }
         else
         {
+
             // TODO: Method for user actions
         }
     }
