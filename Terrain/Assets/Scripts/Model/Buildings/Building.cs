@@ -20,6 +20,7 @@ public abstract class Building
     float generateMoney;
     float generateGreen;
     float generateHappiness;
+    int id = 0;
     int turnsToBuild;
     BuildingType typeOfBuilding;
 
@@ -29,6 +30,7 @@ public abstract class Building
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
+    public int Id { get => id; set => id = value; }
     public int TurnsToBuild { get => turnsToBuild; set => turnsToBuild = value; }
     public BuildingType TypeOfBuilding { get => typeOfBuilding; set => typeOfBuilding = value; }
 
