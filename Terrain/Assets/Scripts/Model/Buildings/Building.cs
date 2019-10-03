@@ -35,7 +35,7 @@ public abstract class Building
     public int Id { get => id; set => id = value; }
     public int TurnsToBuild { get => turnsToBuild; set => turnsToBuild = value; }
     public BuildingType TypeOfBuilding { get => typeOfBuilding; set => typeOfBuilding = value; }
-    public string Name { get => name; set => name = value;  }
+    public string Name { get => name; set => name = value; }
     public string Blurb { get => blurb; set => blurb = value; }
 
 
@@ -83,6 +83,49 @@ public abstract class Building
 
 
     }
+
+    /* This method is called each time a building is to be built on a tile. 
+    Some builds are restricted to the tile that it is being on. For example,
+    no buildings can be built if the tile is of mountain type. */
+    public bool IsBuildable(Tile tile)
+    {
+
+        // No buildings can be built on mountain tiles
+        if (tile.Type == Tile.TileType.Mountain)
+        {
+            return false;
+        }
+
+        // Hydro plants can only be built on water tiles
+        else if (this.name.Equals("Hydro Plant"))
+        {
+            if (tile.Type != Tile.TileType.Water)
+            {
+                return false;
+            }
+
+            // Oil Refineries can only be built on desert tiles
+        }
+        else if (this.name.Equals("Oil Refinery"))
+        {
+            if (tile.Type != Tile.TileType.Desert)
+            {
+                return false;
+            }
+
+            // Forests can only be built on grassland tiles
+        }
+        else if (this.name.Equals("Forest"))
+        {
+            if (tile.Type != Tile.TileType.Plain)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
 
 
