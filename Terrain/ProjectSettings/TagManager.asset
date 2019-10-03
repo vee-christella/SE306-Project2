@@ -16,6 +16,8 @@ TagManager:
   - Overlay Layer
   - PauseMenu Layer
   - 
+  - Shop
+  - 
   - 
   - 
   - 
@@ -40,4 +42,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tile
+    uniqueID: 4155393549
+    locked: 0
+  - name: Building
+    uniqueID: 2240306899
     locked: 0
