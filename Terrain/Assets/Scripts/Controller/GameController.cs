@@ -6,7 +6,10 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
+
+    public static GameController Instance { get; protected set; }
     Game game;
+    public Game Game { get => game; protected set => game = value; }
 
     public Sprite[] sprites = new Sprite[4];
 
@@ -18,17 +21,18 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        game = new Game();
-        for (int i = 0; i < game.Rows; i++)
+        Instance = this;
+        Game = new Game();
+        for (int i = 0; i < Game.Rows; i++)
         {
-            for (int j = 0; j < game.Columns; j++)
+            for (int j = 0; j < Game.Columns; j++)
             {
-                Tile tile = game.getTileAt(i, j);
+                Tile tile = Game.getTileAt(i, j);
                 GameObject tileGO = new GameObject();
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
                 SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-
+                tileSR.sortingLayerName = "Tile";
                 int random = Random.Range(0, 4);
                 switch (random)
                 {
