@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Event
+public abstract class Event 
 {
 
     public enum EventType
