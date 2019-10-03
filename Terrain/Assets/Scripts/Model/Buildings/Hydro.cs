@@ -12,6 +12,4 @@ public class Hydro : Building
         this.Blurb = "Hydro plants can only be built on water! It uses the " +
         	"water's tidal waves to generate sustainable energy.";
     }
-
-    public void isBuildable(Tile
 }
