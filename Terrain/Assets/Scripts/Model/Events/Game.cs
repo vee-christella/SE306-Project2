@@ -6,6 +6,7 @@ public class Game
 {
     int rows;
     int columns;
+    int turn;
     Tile[,] tiles;
     float money;
     float green;
@@ -23,6 +24,7 @@ public class Game
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
+    public int Turn { get => turn; set => turn = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
@@ -52,8 +54,44 @@ public class Game
 
     public void nextTurn()
     {
+        Event event = eventForNextTurn();
+    
+       if (event != null) {
+            GenerateGreen = GenerateGreen + event.GreenPointDelta;
+            GenerateMoney = GenerateMoney + event.MoneyDelta;
+            GenerateHappiness = GenerateHappiness + event.HappinessDelta;
+        }
+
         Money = Money + GenerateMoney;
         Green = Green + GenerateGreen;
         Happiness = Happiness + GenerateHappiness;
     }
+
+public Event eventForNextTurn()
+{
+
+    List<Event> randomEventList = initaliseRandomEventList();
+    Event event;
+
+    if (Turn == 10)
+    {
+        event = new Drought();
+    }
+    
+    else if (random.Next(1, 100) < 10)
+    {
+        event = randomEventList[random.Next(0,randomEventList.Count)];
+    }
+
+    return event;
+}
+
+private List<Event> initaliseRandomEventList() 
+{
+    List<Event> randomEventList = new List<Event>();
+
+    randomEventList.Add(new AcidRain());
+    randomEventList.Add(new Earthquake());
+    randomEventList.Add(new ForestSpawn());
+    randomEventList.Add(new Tsunami());   
 }
