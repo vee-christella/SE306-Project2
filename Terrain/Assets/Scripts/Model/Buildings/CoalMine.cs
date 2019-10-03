@@ -10,6 +10,6 @@ public class CoalMine : Building
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Coal Mine";
         this.Blurb = "Coal Mines are bad for the environment, but produces an" +
-        	"abundant source of energy."
+            "abundant source of energy.";
     }
 }

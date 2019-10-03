@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     Game game;
+    MetricsController metricsController;
 
     public Sprite[] sprites = new Sprite[4];
     // Start is called before the first frame update
@@ -16,6 +18,7 @@ public class GameController : MonoBehaviour
             for (int j = 0; j < game.Columns; j++)
             {
                 Tile tile = game.getTileAt(i, j);
+                metricsController = new MetricsController();
                 GameObject tileGO = new GameObject();
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
@@ -43,8 +46,10 @@ public class GameController : MonoBehaviour
                 tileSR.sprite = sprites[random];
             }
 
+            metricsController.SetMoney();
+      
             // Wait for user to click end turn
-            game.nextTurn();
+            //game.nextTurn();
         }
         Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
     }
