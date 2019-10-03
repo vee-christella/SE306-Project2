@@ -7,12 +7,19 @@ public class MetricsController : MonoBehaviour
 {
 
     public Text coinCount;
+    public Text greenCount;
+    public Text happinessCount;
+    public Text currentTurn;
+    public Text maxTurn;
 
     // Start is called before the first frame update
     void Start()
     {
-        coinCount.text = "3";
-  
+        coinCount.text = "200";
+        greenCount.text = "0";
+        happinessCount.text = "50";
+        currentTurn.text = "0";
+        maxTurn.text = "50";  
 
     }
 
@@ -22,8 +29,10 @@ public class MetricsController : MonoBehaviour
         
     }
 
-    public void SetMoney()
+    public void SetMetrics(float coin, float green, float happiness)
     {
-       
+        coinCount.text = coin.ToString();
+        greenCount.text = green.ToString();
+        happinessCount.text = happiness.ToString();
     }
 }
