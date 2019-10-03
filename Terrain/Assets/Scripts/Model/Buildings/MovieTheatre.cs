@@ -8,5 +8,8 @@ public class MovieTheatre : Building
     public MovieTheatre() : base(3, -100, 0, 10, 0, 30, 0, 5)
     {
         this.TypeOfBuilding = BuildingType.Recreational;
+        this.Name = "Movie Theatre";
+        this.Blurb = "Your citizens will enjoy the latest movies with a " +
+        	"movie theatre in the city!";
     }
 }
