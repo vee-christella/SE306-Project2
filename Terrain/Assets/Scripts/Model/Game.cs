@@ -71,9 +71,12 @@ public class Game
 
         Event randomEvent = EventForNextTurn();
 
-        GenerateMoney = GenerateMoney + randomEvent.MoneyDelta;
-        GenerateGreen = GenerateGreen + randomEvent.GreenPointDelta;
-        GenerateHappiness = GenerateHappiness + randomEvent.HappinessDelta;
+        if (randomEvent != null)
+        {
+            GenerateMoney = GenerateMoney + randomEvent.MoneyDelta;
+            GenerateGreen = GenerateGreen + randomEvent.GreenPointDelta;
+            GenerateHappiness = GenerateHappiness + randomEvent.HappinessDelta;
+        }
 
         // Increase the metrics
         this.money = Money + GenerateMoney;
@@ -107,7 +110,7 @@ public class Game
     {
         List<Event> randomEventList = InitaliseRandomEventList();
         Random random = new Random();
-        if (Turn == 0)
+        if (Turn == 10)
         {
             return new Drought();
         }
