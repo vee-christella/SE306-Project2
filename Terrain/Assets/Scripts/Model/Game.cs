@@ -56,4 +56,27 @@ public class Game
         Green = Green + GenerateGreen;
         Happiness = Happiness + GenerateHappiness;
     }
+
+    public Building addBuildingToTile(string buildingType, Tile tile)
+    {
+        Building building = null;
+        switch (buildingType)
+        {
+            case "Hydro":
+                building = new Hydro();
+                break;
+            default:
+                building = new Zoo();
+                break;
+        }
+        if (tile.placeBuilding(building))
+        {
+            buildings[tile.X, tile.Y] = building;
+            return building;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
