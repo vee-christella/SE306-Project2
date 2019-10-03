@@ -18,8 +18,8 @@ public class Game
     float maxTurns;
     float maxGreen;
 
-    public int Rows { get => rows;}
-    public int Columns { get => columns;}
+    public int Rows { get => rows; }
+    public int Columns { get => columns; }
     public float Money { get => money; set => money = value; }
     public float Green { get => green; set => green = value; }
     public float Happiness { get => happiness; set => happiness = value; }
@@ -37,9 +37,9 @@ public class Game
         this.columns = columns;
         tiles = new Tile[rows, columns];
         buildings = new Building[rows, columns];
-        for(int i=0; i<rows; i++)
+        for (int i = 0; i < rows; i++)
         {
-            for(int j =0; j<columns; j++)
+            for (int j = 0; j < columns; j++)
             {
                 tiles[i, j] = new Tile(this, i, j);
             }
@@ -63,7 +63,7 @@ public class Game
     /* This method proceeds with the next turn after the user clicks the 
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
-     */   
+     */
     public void nextTurn()
     {
         this.currentTurn++;
@@ -85,7 +85,8 @@ public class Game
 
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed 
-        } else if (currentTurn >= maxTurns)
+        }
+        else if (currentTurn >= maxTurns)
         {
             this.endGame(false);
         }
@@ -101,9 +102,6 @@ public class Game
         // TODO: Victory/Fail screen goes here
     }
 
-
-}
-
     public Building addBuildingToTile(string buildingType, Tile tile)
     {
         Building building = null;
@@ -114,6 +112,7 @@ public class Game
                 break;
             case "CoalMine":
                 building = new CoalMine();
+                break;
             case "Zoo":
                 break;
                 building = new Zoo();
@@ -142,8 +141,8 @@ public class Game
             case "Forest":
                 building = new Forest();
                 break;
-                return null;
             default:
+                return null;
                 break;
         }
         if (tile.placeBuilding(building))
@@ -152,8 +151,9 @@ public class Game
             return building;
         }
         else
-            return null;
         {
+            return null;
         }
+
     }
 }
