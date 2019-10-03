@@ -62,6 +62,23 @@ public abstract class Building
 
 
     }
+
+    public Building(int id, float initBuildMoney, float initBuildGreen,
+    float initBuildHappiness, float genMoney, float genGreen, float genHappiness,
+        int buildTime)
+    {
+        Id = id;
+        this.initialBuildMoney = initBuildMoney;
+        this.initialBuildGreen = initBuildGreen;
+        this.initialBuildHappiness = initBuildHappiness;
+
+        this.generateGreen = genGreen;
+        this.generateMoney = genMoney;
+        this.generateHappiness = genHappiness;
+        this.turnsToBuild = buildTime;
+
+
+    }
 }
 
 

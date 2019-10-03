@@ -65,8 +65,38 @@ public class Game
             case "Hydro":
                 building = new Hydro();
                 break;
-            default:
+            case "CoalMine":
+                building = new CoalMine();
+                break;
+            case "Zoo":
                 building = new Zoo();
+                break;
+            case "WindTurbine":
+                building = new WindTurbine();
+                break;
+            case "SolarFarm":
+                building = new SolarFarm();
+                break;
+            case "RaceTrack":
+                building = new RaceTrack();
+                break;
+            case "OilRefinery":
+                building = new OilRefinery();
+                break;
+            case "Nuclear":
+                building = new Nuclear();
+                break;
+            case "NationalPark":
+                building = new NationalPark();
+                break;
+            case "MovieTheatre":
+                building = new MovieTheatre();
+                break;
+            case "Forest":
+                building = new Forest();
+                break;
+            default:
+                return null;
                 break;
         }
         if (tile.placeBuilding(building))
