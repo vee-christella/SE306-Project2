@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +20,11 @@ public abstract class Building
     float generateMoney;
     float generateGreen;
     float generateHappiness;
+    int id = 0;
     int turnsToBuild;
     BuildingType typeOfBuilding;
+    string name;
+    string blurb;
 
     public float InitialBuildMoney { get => initialBuildMoney; set => initialBuildMoney = value; }
     public float InitialBuildGreen { get => initialBuildGreen; set => initialBuildGreen = value; }
@@ -29,8 +32,11 @@ public abstract class Building
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
+    public int Id { get => id; set => id = value; }
     public int TurnsToBuild { get => turnsToBuild; set => turnsToBuild = value; }
     public BuildingType TypeOfBuilding { get => typeOfBuilding; set => typeOfBuilding = value; }
+    public string Name { get => name; set => name = value;  }
+    public string Blurb { get => blurb; set => blurb = value; }
 
 
     // Constructor to initialise the building with their respective stats
@@ -49,6 +55,23 @@ public abstract class Building
     float initBuildHappiness, float genMoney, float genGreen, float genHappiness,
         int buildTime)
     {
+        this.initialBuildMoney = initBuildMoney;
+        this.initialBuildGreen = initBuildGreen;
+        this.initialBuildHappiness = initBuildHappiness;
+
+        this.generateGreen = genGreen;
+        this.generateMoney = genMoney;
+        this.generateHappiness = genHappiness;
+        this.turnsToBuild = buildTime;
+
+
+    }
+
+    public Building(int id, float initBuildMoney, float initBuildGreen,
+    float initBuildHappiness, float genMoney, float genGreen, float genHappiness,
+        int buildTime)
+    {
+        Id = id;
         this.initialBuildMoney = initBuildMoney;
         this.initialBuildGreen = initBuildGreen;
         this.initialBuildHappiness = initBuildHappiness;
