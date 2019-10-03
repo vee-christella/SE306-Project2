@@ -49,7 +49,6 @@ public class Game
         }
         Debug.Log("game created");
 
-        this.nextTurn();
 
 
     }

@@ -49,14 +49,18 @@ public class GameController : MonoBehaviour
                 }
                 tileSR.sprite = sprites[random];
             }
-
-      
-            // Wait for user to click end turn
-            //game.nextTurn();
         }
 
         StartingMetrics();
         Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
+
+    }
+
+    public void callNextTurn()
+    {
+        game.nextTurn();
+        SetMetrics(game.Money, game.Green, game.Happiness);
+        SetTurn(game.CurrentTurn);
     }
 
     // Update is called once per frame
