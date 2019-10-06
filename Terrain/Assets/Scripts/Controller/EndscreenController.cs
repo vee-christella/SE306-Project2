@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,10 @@ public class EndscreenController : MonoBehaviour
 {
     public GameObject endScreenUI;
 
-    void update()
+    void Update()
     {
+        Debug.Log("...." + GameController.Instance.Game.CurrentTurn);
+
         if (GameController.Instance.Game.CurrentTurn > GameController.Instance.Game.MaxTurns)
         {
             EndGame();

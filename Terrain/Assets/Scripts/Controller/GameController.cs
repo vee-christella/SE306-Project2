@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
 
     public void StartingMetrics()
     {
-        coinCount.text = "200";
+        coinCount.text = "500";
         greenCount.text = "0";
         happinessCount.text = "50";
         currentTurn.text = "0";
