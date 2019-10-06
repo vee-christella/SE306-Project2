@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Game
 {
+
     int rows;
     int columns;
     Tile[,] tiles;
@@ -14,7 +15,8 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
-   
+    private Event gameEvent;
+
     float currentTurn;
     float maxTurns;
     float maxGreen;
@@ -32,6 +34,7 @@ public class Game
     public float MaxTurns { get => maxTurns; set => maxTurns = value; }
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
     public int Turn { get => turn; set => turn = value; }
+    public Event GameEvent { get => gameEvent; set => gameEvent = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
@@ -67,15 +70,16 @@ public class Game
      */
     public void nextTurn()
     {
+        GameEvent = null;
         this.currentTurn++;
 
-        Event randomEvent = EventForNextTurn();
+        GameEvent = EventForNextTurn();
 
-        if (randomEvent != null)
+        if (GameEvent != null)
         {
-            GenerateMoney = GenerateMoney + randomEvent.MoneyDelta;
-            GenerateGreen = GenerateGreen + randomEvent.GreenPointDelta;
-            GenerateHappiness = GenerateHappiness + randomEvent.HappinessDelta;
+          //  GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
+           // GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+           // GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
         }
 
         // Increase the metrics
@@ -105,14 +109,16 @@ public class Game
 
             // TODO: Method for user actions
         }
+
     }
 
     public Event EventForNextTurn()
     {
         List<Event> randomEventList = InitaliseRandomEventList();
         Random random = new Random();
-        if (Turn == 10)
+        if (currentTurn == 2)
         {
+            Debug.Log("turn 2");
             return new Drought();
         }
         else if (Random.Range(0, 100) < 10)
@@ -152,10 +158,9 @@ public class Game
                 building = new CoalMine();
                 break;
             case "Zoo":
-                break;
                 building = new Zoo();
-            case "WindTurbine":
                 break;
+            case "WindTurbine":
                 building = new WindTurbine();
                 break;
             case "SolarFarm":
@@ -181,7 +186,6 @@ public class Game
                 break;
             default:
                 return null;
-                break;
         }
         if (tile.placeBuilding(building))
         {

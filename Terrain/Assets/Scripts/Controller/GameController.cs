@@ -8,9 +8,11 @@ public class GameController : MonoBehaviour
 {
 
     public static GameController Instance { get; protected set; }
-    Game game;
-    public Game Game { get => game; protected set => game = value; }
 
+    Game game;
+    EventController eventController;
+
+    public Game Game { get => game; protected set => game = value; }
     public Sprite[] sprites = new Sprite[4];
 
     public TextMeshProUGUI coinCount;
@@ -18,11 +20,16 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI happinessCount;
     public TextMeshProUGUI currentTurn;
     public TextMeshProUGUI maxTurn;
+
+    public GameObject eventPanel;
+
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         Game = new Game();
+        eventController = gameObject.AddComponent<EventController>();
+
         for (int i = 0; i < Game.Rows; i++)
         {
             for (int j = 0; j < Game.Columns; j++)
@@ -66,6 +73,14 @@ public class GameController : MonoBehaviour
         game.nextTurn();
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetTurn(game.CurrentTurn);
+
+        Debug.Log("has there been an event " + (game.GameEvent != null));
+        if (game.GameEvent != null)
+        {
+            eventPanel.SetActive(true);
+            Debug.Log("Canvas pop up");
+            eventController.DisplayPopup(game.GameEvent);
+        }
     }
 
     // Update is called once per frame

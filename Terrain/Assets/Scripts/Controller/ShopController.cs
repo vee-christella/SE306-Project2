@@ -15,6 +15,7 @@ public class ShopController : MonoBehaviour
     public GameObject RecreationalShop;
     public Button OtherTab;
     public GameObject OtherShop;
+
    public void OpenShop(){
        Shop.SetActive(true);
        Debug.Log("clicked");
