@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
-
     public GameObject Shop;
     public Button EnergyGeneratorTab;
     public GameObject EnergyGeneratorShop;
@@ -46,8 +45,6 @@ public class ShopController : MonoBehaviour
        OtherTab.interactable = false;
        OtherShop.SetActive(true);
    }
-
-
    private void reset(){
        EnergyGeneratorTab.interactable = true;
        UtilitiesTab.interactable = true;
