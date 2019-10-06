@@ -73,9 +73,6 @@ public class Game
         this.green = Green + GenerateGreen;
         this.happiness = Happiness + GenerateHappiness;
 
-        //// Display updated metrics
-        //metricsCont.SetMetrics(money, green, happiness);
-        //metricsCont.SetTurn(currentTurn);
 
         // Check if the user has won the game by reaching the number of green
         // points required
@@ -148,12 +145,30 @@ public class Game
         if (tile.placeBuilding(building))
         {
             buildings[tile.X, tile.Y] = building;
+            UpdateMetrics(building);
             return building;
         }
         else
         {
             return null;
         }
+
+    }
+
+
+    // Change the metrics with regards to the effects of the building
+    // that has just been placed.
+    public void UpdateMetrics(Building building)
+    {
+        Money += building.InitialBuildMoney;
+        Green += building.InitialBuildGreen;
+        Happiness += building.InitialBuildHappiness;
+
+        GenerateMoney += building.GenerateMoney;
+        GenerateGreen += building.GenerateGreen;
+        GenerateHappiness += building.GenerateHappiness;
+
+        GameController.Instance.SetMetrics(Money, Green, Happiness);
 
     }
 }

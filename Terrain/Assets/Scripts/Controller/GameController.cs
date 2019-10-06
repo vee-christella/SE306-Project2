@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
+
     }
 
     public void StartingMetrics()
@@ -85,10 +86,6 @@ public class GameController : MonoBehaviour
 
     public void SetMetrics(float coin, float green, float happiness)
     {
-        //coinCount.text = (System.Int32.Parse(coinCount.text) + 10).ToString();
-        //greenCount.text = (System.Int32.Parse(greenCount.text) + 10).ToString();
-        //happinessCount.text = (System.Int32.Parse(happinessCount.text) + 10).ToString();
-
         coinCount.text = coin.ToString();
         greenCount.text = green.ToString();
         happinessCount.text = happiness.ToString();
