@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
                 GameObject tileGO = new GameObject();
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-                
+
                 SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
                 tileSR.sortingLayerName = "Tile";
 
@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
     // Initialise the starting metrics on the screen
     public void StartingMetrics()
     {
-        game.InitialiseMetrics(200, 0, 50);
+        game.InitialiseMetrics(200, 0, 50, 1000);
         SetMetrics(game.Money, game.Green, game.Happiness);
 
         game.InitialiseTurns(0, 50);

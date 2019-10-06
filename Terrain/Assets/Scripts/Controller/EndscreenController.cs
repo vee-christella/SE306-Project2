@@ -16,7 +16,7 @@ public class EndscreenController : MonoBehaviour
         Debug.Log("...." + GameController.Instance.Game.CurrentTurn);
         Debug.Log("----" + GameController.Instance.Game.MaxTurns);
 
-        if (GameController.Instance.Game.CurrentTurn > GameController.Instance.Game.MaxTurns)
+        if (GameController.Instance.Game.IsEnd)
         {
             EndGame();
         }
@@ -26,7 +26,7 @@ public class EndscreenController : MonoBehaviour
     {
         endScreenUI.SetActive(true);
 
-        if (GameController.Instance.Game.Green >= 1000) {
+        if (GameController.Instance.Game.IsVictory) {
             endText.text = "YOU WIN! GREEN POINT GOAL REACHED.";
         } else {
             endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS. THE WORLD IS RUINED!";
