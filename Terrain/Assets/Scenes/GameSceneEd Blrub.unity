@@ -414,6 +414,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3214827380498354073, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_Text
@@ -11347,7 +11357,7 @@ PrefabInstance:
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -11358,16 +11368,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1255053616}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: set_Blurb
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380498354073, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}

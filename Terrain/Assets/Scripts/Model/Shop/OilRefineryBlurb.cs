@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Text blurb;
     public GameObject blurbObject;
@@ -25,6 +25,10 @@ public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     public void OnPointerExit(PointerEventData pointerEventData){
+        panel.SetActive(false);
+        blurbObject.SetActive(false);
+    }
+    public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
         blurbObject.SetActive(false);
     }
