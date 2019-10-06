@@ -75,13 +75,15 @@ public class GameController : MonoBehaviour
 
     }
 
+    // Initialise the starting metrics on the screen
     public void StartingMetrics()
     {
-        coinCount.text = "200";
-        greenCount.text = "0";
-        happinessCount.text = "50";
-        currentTurn.text = "0";
-        maxTurn.text = "50";
+
+        game.InitialiseMetrics(200, 0, 50);
+        SetMetrics(game.Money, game.Green, game.Happiness);
+
+        game.InitialiseTurns(0, 50);
+        SetTurn(0);
     }
 
     public void SetMetrics(float coin, float green, float happiness)

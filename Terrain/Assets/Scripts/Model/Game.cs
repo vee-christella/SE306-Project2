@@ -60,6 +60,19 @@ public class Game
         return tiles[x, y];
     }
 
+    public void InitialiseMetrics(float money, float green, float happiness)
+    {
+        Money = money;
+        Green = green;
+        Happiness = happiness;
+    }
+
+    public void InitialiseTurns(float currentTurn, float maxTurn)
+    {
+        CurrentTurn = currentTurn;
+        MaxTurns = maxTurn;
+    }
+
     /* This method proceeds with the next turn after the user clicks the 
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
