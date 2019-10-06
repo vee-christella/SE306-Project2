@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     Game game;
     public Game Game { get => game; protected set => game = value; }
 
-    public Sprite[] sprites = new Sprite[4];
+    public Sprite[] sprites = new Sprite[7];
 
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
@@ -28,30 +28,35 @@ public class GameController : MonoBehaviour
             for (int j = 0; j < Game.Columns; j++)
             {
                 Tile tile = Game.getTileAt(i, j);
+
                 GameObject tileGO = new GameObject();
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
                 SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                tileSR.sortingLayerName="Tile";
-                int random = Random.Range(0, 4);
+                tileSR.sortingLayerName = "Tile";
+
+                int random = Random.Range(0, 7);
+
                 switch (random)
                 {
                     case 0:
+                    case 1:
                         tile.setType(Tile.TileType.Desert);
                         break;
-                    case 1:
+                    case 2:
+                    case 3:
                         tile.setType(Tile.TileType.Mountain);
                         break;
-                    case 2:
+                    case 4:
+                    case 5:
                         tile.setType(Tile.TileType.Plain);
                         break;
-                    case 3:
+                    case 6:
                         tile.setType(Tile.TileType.Water);
                         break;
-                    case 4:
-                        tile.setType(Tile.TileType.Plain);
-                        break;
                 }
+
                 tileSR.sprite = sprites[random];
             }
         }
@@ -74,21 +79,19 @@ public class GameController : MonoBehaviour
 
     }
 
+    // Initialise the starting metrics on the screen
     public void StartingMetrics()
     {
-        coinCount.text = "200";
-        greenCount.text = "0";
-        happinessCount.text = "50";
-        currentTurn.text = "0";
-        maxTurn.text = "50";
+        game.InitialiseMetrics(200, 0, 50, 1000);
+        SetMetrics(game.Money, game.Green, game.Happiness);
+
+        game.InitialiseTurns(0, 50);
+        maxTurn.text = game.MaxTurns.ToString();
+        SetTurn(0);
     }
 
     public void SetMetrics(float coin, float green, float happiness)
     {
-        //coinCount.text = (System.Int32.Parse(coinCount.text) + 10).ToString();
-        //greenCount.text = (System.Int32.Parse(greenCount.text) + 10).ToString();
-        //happinessCount.text = (System.Int32.Parse(happinessCount.text) + 10).ToString();
-
         coinCount.text = coin.ToString();
         greenCount.text = green.ToString();
         happinessCount.text = happiness.ToString();

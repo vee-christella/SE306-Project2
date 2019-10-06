@@ -17,6 +17,8 @@ public class Game
     float currentTurn;
     float maxTurns;
     float maxGreen;
+    bool isEnd;
+    bool isVictory;
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -29,9 +31,12 @@ public class Game
     public float CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public float MaxTurns { get => maxTurns; set => maxTurns = value; }
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
+    public bool IsEnd { get => isEnd; set => isEnd = value; }
+    public bool IsVictory { get => isVictory; set => isVictory = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
+        this.isEnd = false;
         this.currentTurn = 0;
         this.rows = rows;
         this.columns = columns;
@@ -60,6 +65,20 @@ public class Game
         return tiles[x, y];
     }
 
+    public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
+    {
+        Money = money;
+        Green = green;
+        Happiness = happiness;
+        MaxGreen = maxGreen;
+    }
+
+    public void InitialiseTurns(float currentTurn, float maxTurn)
+    {
+        CurrentTurn = currentTurn;
+        MaxTurns = maxTurn;
+    }
+
     /* This method proceeds with the next turn after the user clicks the 
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
@@ -69,37 +88,29 @@ public class Game
         this.currentTurn++;
 
         // Increase the metrics
-        this.money = Money + GenerateMoney;
-        this.green = Green + GenerateGreen;
-        this.happiness = Happiness + GenerateHappiness;
-
-        //// Display updated metrics
-        //metricsCont.SetMetrics(money, green, happiness);
-        //metricsCont.SetTurn(currentTurn);
-
+        Money = Money + GenerateMoney;
+        Green = Green + GenerateGreen;
+        Happiness = Happiness + GenerateHappiness;
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
         {
             this.endGame(true);
-
             // Check if the user has lost the game by exceeding the max number
-            // of turns allowed 
+            // of turns allowed, or having a negative money value (as they
+            // now are stuck in debt)
         }
-        else if (currentTurn >= maxTurns)
+
+        else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
-        }
-        else
-        {
-
-            // TODO: Method for user actions
         }
     }
 
     public void endGame(bool isVictory)
     {
-        // TODO: Victory/Fail screen goes here
+        this.isEnd = true;
+        this.IsVictory = isVictory;
     }
 
     public Building addBuildingToTile(string buildingType, Tile tile)
@@ -107,35 +118,34 @@ public class Game
         Building building = null;
         switch (buildingType)
         {
-            case "Hydro":
+            case "Hydro Plant":
                 building = new Hydro();
                 break;
-            case "CoalMine":
+            case "Coal Mine":
                 building = new CoalMine();
                 break;
             case "Zoo":
-                break;
                 building = new Zoo();
-            case "WindTurbine":
                 break;
+            case "Wind Turbine":
                 building = new WindTurbine();
                 break;
-            case "SolarFarm":
+            case "Solar Farm":
                 building = new SolarFarm();
                 break;
-            case "RaceTrack":
+            case "Race Track":
                 building = new RaceTrack();
                 break;
-            case "OilRefinery":
+            case "Oil Refinery":
                 building = new OilRefinery();
                 break;
-            case "Nuclear":
+            case "Nuclear Plant":
                 building = new Nuclear();
                 break;
-            case "NationalPark":
+            case "National Park":
                 building = new NationalPark();
                 break;
-            case "MovieTheatre":
+            case "Movie Theatre":
                 building = new MovieTheatre();
                 break;
             case "Forest":
@@ -143,17 +153,61 @@ public class Game
                 break;
             default:
                 return null;
-                break;
         }
-        if (tile.placeBuilding(building))
+
+
+        // Check if funds are sufficient
+        if (Money + building.InitialBuildMoney >= 0)
         {
-            buildings[tile.X, tile.Y] = building;
-            return building;
+            if (tile.placeBuilding(building))
+            {
+                buildings[tile.X, tile.Y] = building;
+                UpdateMetrics(building);
+                return building;
+            }
+            else
+            {
+                // TODO: display pop up to say tile is unavailable to be built
+                return null;
+            }
         }
         else
         {
+            // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
+
         }
+
+
+    }
+
+
+    // Change the metrics with regards to the effects of the building
+    // that has just been placed.
+    public void UpdateMetrics(Building building)
+    {
+        Money += building.InitialBuildMoney;
+        Green += building.InitialBuildGreen;
+
+        if (Happiness + building.InitialBuildHappiness < 0)
+        {
+            Happiness = 0;
+        }
+        else if (Happiness + building.InitialBuildHappiness > 100)
+        {
+            Happiness = 100;
+        }
+        else
+        {
+            Happiness += building.InitialBuildHappiness;
+        }
+
+        GenerateMoney += building.GenerateMoney;
+        GenerateGreen += building.GenerateGreen;
+        GenerateHappiness += building.GenerateHappiness;
+
+        GameController.Instance.SetMetrics(Money, Green, Happiness);
+
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 public class MouseController : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class MouseController : MonoBehaviour
     void Update()
     {
         Vector3 currFramePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //If mouse over a UI element, bail out
+        if ( EventSystem.current.IsPointerOverGameObject() ){
+            return;
+        }
+
 
         if (Input.GetMouseButton(1))
         {
@@ -47,7 +54,7 @@ public class MouseController : MonoBehaviour
     }
 
     public void SetMode_CoalMine() {
-        buildingForCreating = "CoalMine";
+        buildingForCreating = "Coal Mine";
         setCancelButton();
     }
     public void SetMode_Forest() {
@@ -55,35 +62,35 @@ public class MouseController : MonoBehaviour
         setCancelButton();
     }
     public void SetMode_Hydro() {
-        buildingForCreating = "Hydro";
+        buildingForCreating = "Hydro Plant";
         setCancelButton();
     }
     public void SetMode_MovieTheatre() {
-        buildingForCreating = "MovieTheatre";
+        buildingForCreating = "Movie Theatre";
         setCancelButton();
     }
     public void SetMode_NationalPark() {
-        buildingForCreating = "NationalPark";
+        buildingForCreating = "National Park";
         setCancelButton();
     }
     public void SetMode_Nuclear() {
-        buildingForCreating = "Nuclear";
+        buildingForCreating = "Nuclear Plant";
         setCancelButton();
     }
     public void SetMode_OilRefinery() {
-        buildingForCreating = "OilRefinery";
+        buildingForCreating = "Oil Refinery";
         setCancelButton();
     }
     public void SetMode_RaceTrack() {
-        buildingForCreating = "RaceTrack";
+        buildingForCreating = "Race Track";
         setCancelButton();
     }
     public void SetMode_SolarFarm(){
-        buildingForCreating = "SolarFarm";
+        buildingForCreating = "Solar Farm";
         setCancelButton();
     }
     public void SetMode_WindTurbine() {
-        buildingForCreating = "WindTurbine";
+        buildingForCreating = "Wind Turbine";
         setCancelButton();
     }
     public void SetMode_Zoo() {

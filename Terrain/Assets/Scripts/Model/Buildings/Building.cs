@@ -87,42 +87,48 @@ public abstract class Building
     /* This method is called each time a building is to be built on a tile. 
     Some builds are restricted to the tile that it is being on. For example,
     no buildings can be built if the tile is of mountain type. */
-    public bool IsBuildable(Tile tile)
-    {
+    // public bool IsBuildable(Tile tile)
+    // {
 
-        // No buildings can be built on mountain tiles
-        if (tile.Type == Tile.TileType.Mountain)
-        {
-            return false;
-        }
+    //     // No buildings can be built on mountain tiles
+    //     if (tile.Type == Tile.TileType.Mountain)
+    //     {
+    //         return false;
+    //     }
 
-        // Hydro plants can only be built on water tiles
-        else if (this.name.Equals("Hydro Plant"))
-        {
-            if (tile.Type != Tile.TileType.Water)
-            {
-                return false;
-            }
+    //     // Hydro plants can only be built on water tiles
+    //     else if (this.name.Equals("Hydro Plant"))
+    //     {
+    //         if (tile.Type != Tile.TileType.Water)
+    //         {
+    //             return false;
+    //         }
 
-            // Oil Refineries can only be built on desert tiles
-        } else if (this.name.Equals("Oil Refinery"))
-        {
-            if (tile.Type != Tile.TileType.Desert)
-            {
-                return false;
-            }
+    //         // Oil Refineries can only be built on desert tiles
+    //     } else if (this.name.Equals("Oil Refinery"))
+    //     {
+    //         if (tile.Type != Tile.TileType.Desert)
+    //         {
+    //             return false;
+    //         }
 
-            // Forests can only be built on grassland tiles
-        } else if (this.name.Equals("Forest"))
-        {
-            if (tile.Type != Tile.TileType.Plain)
-            {
-                return false;
-            }
-        } 
+    //         // Forests can only be built on grassland tiles
+    //     } else if (this.name.Equals("Forest"))
+    //     {
+    //         if (tile.Type != Tile.TileType.Plain)
+    //         {
+    //             return false;
+    //         }
 
-        return true;
-    }
+    //         //Zoos can only be built on plains
+    //     } else if (this.name.Equals("Zoo")){
+    //         if (tile.Type != Tile.TileType.Plain){
+    //             return false;
+    //         }
+    //     }
+
+    //     return true;
+    // }
 
 }
 
