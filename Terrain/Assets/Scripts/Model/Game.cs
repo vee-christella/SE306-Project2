@@ -118,35 +118,34 @@ public class Game
         Building building = null;
         switch (buildingType)
         {
-            case "Hydro":
+            case "Hydro Plant":
                 building = new Hydro();
                 break;
-            case "CoalMine":
+            case "Coal Mine":
                 building = new CoalMine();
                 break;
             case "Zoo":
-                break;
                 building = new Zoo();
-            case "WindTurbine":
                 break;
+            case "Wind Turbine":
                 building = new WindTurbine();
                 break;
-            case "SolarFarm":
+            case "Solar Farm":
                 building = new SolarFarm();
                 break;
-            case "RaceTrack":
+            case "Race Track":
                 building = new RaceTrack();
                 break;
-            case "OilRefinery":
+            case "Oil Refinery":
                 building = new OilRefinery();
                 break;
-            case "Nuclear":
+            case "Nuclear Plant":
                 building = new Nuclear();
                 break;
-            case "NationalPark":
+            case "National Park":
                 building = new NationalPark();
                 break;
-            case "MovieTheatre":
+            case "Movie Theatre":
                 building = new MovieTheatre();
                 break;
             case "Forest":

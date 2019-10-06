@@ -9,8 +9,8 @@ public class NationalPark : Building
     {
        this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "National Park";
-        this.Blurb = "National parks provide a fresh, clean and green " +
-        	"environment for your citizens to enjoy for free. Plants can" +
-        	"also be planted here, giving an increase in green points!";
+        this.Blurb = "A national park is where visitors can explore beautiful and natural scenery. " +
+            "These parks are essential to the sustainability of the environment as they educate " +
+            "visitors about the importance of environmental preservation while providing an enjoyable experience.";
     }
 }

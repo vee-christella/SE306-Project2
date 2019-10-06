@@ -9,10 +9,9 @@ public class OilRefinery : Building
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Oil Refinery";
-        this.Blurb = "Oil Refineries can only be built on top of desert tiles," +
-        	"as most of the oil are extracted underground. This is a good way" +
-        	"to generate energy, but is dangerous to the environment. It can" +
-        	"also cause a spill which will heavily decrease your green points.";
+        this.Blurb = "An oil refinery is an industrial process plant where crude oil is " +
+            "transformed and refined into other products such as petroleum. This " +
+            "petroleum is used as fuel in other processes as well as transportation.";
     }
 
     // TODO: Add chance of oil spill
