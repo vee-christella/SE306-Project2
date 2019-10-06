@@ -91,16 +91,13 @@ public class Game
         {
             this.endGame(true);
             // Check if the user has lost the game by exceeding the max number
-            // of turns allowed 
+            // of turns allowed, or having a negative money value (as they
+            // now are stuck in debt)
         }
-        else if (currentTurn >= maxTurns)
+
+        else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
-        }
-        else
-        {
-
-            // TODO: Method for user actions
         }
     }
 
@@ -185,7 +182,19 @@ public class Game
     {
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
-        Happiness += building.InitialBuildHappiness;
+
+        if (Happiness + building.InitialBuildHappiness < 0)
+        {
+            Happiness = 0;
+        }
+        else if (Happiness + building.InitialBuildHappiness > 100)
+        {
+            Happiness = 100;
+        }
+        else
+        {
+            Happiness += building.InitialBuildHappiness;
+        }
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
