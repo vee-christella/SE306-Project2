@@ -155,16 +155,30 @@ public class Game
                 return null;
                 break;
         }
-        if (tile.placeBuilding(building))
+
+
+        // Check if funds are sufficient
+        if (Money + building.InitialBuildMoney >= 0)
         {
-            buildings[tile.X, tile.Y] = building;
-            UpdateMetrics(building);
-            return building;
+            if (tile.placeBuilding(building))
+            {
+                buildings[tile.X, tile.Y] = building;
+                UpdateMetrics(building);
+                return building;
+            }
+            else
+            {
+                // TODO: display pop up to say tile is unavailable to be built
+                return null;
+            }
         }
         else
         {
+            // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
+
         }
+
 
     }
 
