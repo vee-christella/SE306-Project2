@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EventController : MonoBehaviour
 {
 
     public GameObject eventPopupPanel;
 
-    public Text eventInfo;
+    public TextMeshProUGUI eventInfo;
 
     public void DisplayPopup(Event gameEvent)
     {
