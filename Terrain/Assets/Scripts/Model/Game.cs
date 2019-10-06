@@ -15,7 +15,7 @@ public class Game
     float generateHappiness;
     Building[,] buildings;
     float currentTurn;
-    float maxTurns;
+    float maxTurns = 50;
     float maxGreen;
 
     public int Rows { get => rows; }
@@ -99,7 +99,7 @@ public class Game
 
     public void endGame(bool isVictory)
     {
-        // TODO: Victory/Fail screen goes here
+        
     }
 
     public Building addBuildingToTile(string buildingType, Tile tile)
