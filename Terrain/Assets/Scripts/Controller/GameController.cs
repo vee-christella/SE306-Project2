@@ -72,13 +72,11 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
-
     }
 
     // Initialise the starting metrics on the screen
     public void StartingMetrics()
     {
-
         game.InitialiseMetrics(200, 0, 50);
         SetMetrics(game.Money, game.Green, game.Happiness);
 

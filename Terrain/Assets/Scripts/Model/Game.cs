@@ -82,17 +82,14 @@ public class Game
         this.currentTurn++;
 
         // Increase the metrics
-        this.money = Money + GenerateMoney;
-        this.green = Green + GenerateGreen;
-        this.happiness = Happiness + GenerateHappiness;
-
-
+        Money = Money + GenerateMoney;
+        Green = Green + GenerateGreen;
+        Happiness = Happiness + GenerateHappiness;
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
         {
             this.endGame(true);
-
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed 
         }
@@ -153,7 +150,6 @@ public class Game
                 break;
             default:
                 return null;
-                break;
         }
 
 
@@ -196,6 +192,7 @@ public class Game
         GenerateHappiness += building.GenerateHappiness;
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
+
 
     }
 }
