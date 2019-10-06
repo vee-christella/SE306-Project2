@@ -14,6 +14,7 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
+    Event gameEvent;
     float currentTurn;
     float maxTurns;
     float maxGreen;
@@ -29,6 +30,7 @@ public class Game
     public float CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public float MaxTurns { get => maxTurns; set => maxTurns = value; }
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
+    public Event GameEvent { get => gameEvent; set => gameEvent = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
@@ -45,9 +47,6 @@ public class Game
             }
         }
         Debug.Log("game created");
-
-
-
     }
 
 
@@ -80,6 +79,15 @@ public class Game
     public void nextTurn()
     {
         this.currentTurn++;
+        
+        GameEvent = EventForNextTurn();
+
+        if (GameEvent != null)
+        {
+            GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
+            GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
+            GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+        }
 
         // Increase the metrics
         Money = Money + GenerateMoney;
@@ -174,6 +182,38 @@ public class Game
 
     }
 
+
+    // get the event  for the next turn
+    public Event EventForNextTurn()
+    {
+        List<Event> randomEventList = InitaliseRandomEventList();
+        Random random = new Random();
+        if (currentTurn == 5)
+        {
+            Debug.Log("turn 2");
+            return new Drought();
+        }
+        else if (Random.Range(0, 100) < 10)
+        {
+            return randomEventList[Random.Range(0, randomEventList.Count)];
+        }
+
+        return null;
+    }
+
+
+    // method to create list of all random events
+    public List<Event> InitaliseRandomEventList()
+    {
+        List<Event> randomEventList = new List<Event>();
+
+        randomEventList.Add(new AcidRain());
+        randomEventList.Add(new Earthquake());
+        randomEventList.Add(new ForestSpawn());
+        randomEventList.Add(new Tsunami());
+
+        return randomEventList;
+    }
 
     // Change the metrics with regards to the effects of the building
     // that has just been placed.

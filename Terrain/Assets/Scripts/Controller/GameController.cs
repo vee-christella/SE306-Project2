@@ -9,7 +9,10 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance { get; protected set; }
     Game game;
+    EventController eventController;
+
     public Game Game { get => game; protected set => game = value; }
+    public EventController EventController { get => eventController; set => eventController = value; }
 
     public Sprite[] sprites = new Sprite[4];
 
@@ -23,6 +26,7 @@ public class GameController : MonoBehaviour
     {
         Instance = this;
         Game = new Game();
+        eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         for (int i = 0; i < Game.Rows; i++)
         {
             for (int j = 0; j < Game.Columns; j++)
@@ -64,6 +68,12 @@ public class GameController : MonoBehaviour
     public void callNextTurn()
     {
         game.nextTurn();
+
+        if (game.GameEvent != null)
+        {
+            EventController.DisplayPopup(game.GameEvent);
+        }
+
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetTurn(game.CurrentTurn);
     }
