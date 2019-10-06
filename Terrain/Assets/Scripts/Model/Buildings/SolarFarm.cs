@@ -9,8 +9,8 @@ public class SolarFarm : Building
     {   
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Solar Farm";
-        this.Blurb = "Solar farms are a great way to obtain sustainable, green" +
-        	"energy! However, these require the sun to be out, so darker weather" +
-        	"conditions may cause generation to slow down.";
+        this.Blurb = "A solar farm comprises of a large amount of solar panels and can generate electricity" +
+            " from capturing solar energy. This is advantageous as this is a low cost form of renewable energy" +
+            " generation, however it is weather dependent and utilises a large amount of land.";
     }
 }
