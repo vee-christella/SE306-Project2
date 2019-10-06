@@ -29,7 +29,7 @@ public class EndscreenController : MonoBehaviour
         if (GameController.Instance.Game.IsVictory) {
             endText.text = "YOU WIN! GREEN POINT GOAL REACHED.";
         } else {
-            endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS. THE WORLD IS RUINED!";
+            endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS OR MONEY. THE WORLD IS RUINED!";
         }
     }
 }
