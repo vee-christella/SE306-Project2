@@ -9,6 +9,14 @@ public class EndscreenController : MonoBehaviour
 
     void update()
     {
-        
+        if (GameController.Instance.Game.CurrentTurn > GameController.Instance.Game.MaxTurns)
+        {
+            EndGame();
+        }
+    }
+
+    public void EndGame()
+    {
+        endScreenUI.SetActive(true);
     }
 }
