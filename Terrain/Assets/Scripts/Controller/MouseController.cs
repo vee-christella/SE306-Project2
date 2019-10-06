@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 public class MouseController : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class MouseController : MonoBehaviour
     void Update()
     {
         Vector3 currFramePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //If mouse over a UI element, bail out
+        if ( EventSystem.current.IsPointerOverGameObject() ){
+            return;
+        }
+
 
         if (Input.GetMouseButton(1))
         {
