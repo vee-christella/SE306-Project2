@@ -26,10 +26,18 @@ public class EndscreenController : MonoBehaviour
     {
         endScreenUI.SetActive(true);
 
-        if (GameController.Instance.Game.IsVictory) {
+        if (GameController.Instance.Game.IsVictory)
+        {
             endText.text = "YOU WIN! GREEN POINT GOAL REACHED.";
-        } else {
-            endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS OR MONEY. THE WORLD IS RUINED!";
+        }
+        else
+        {
+            if (GameController.Instance.Game.Green < GameController.Instance.Game.MaxGreen)
+            {
+                endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS. THE WORLD IS RUINED!";
+            } else {
+                endText.text = "YOU LOSE! RAN OUT OF MONEY. THE WORLD IS RUINED!";
+            }
         }
     }
 }
