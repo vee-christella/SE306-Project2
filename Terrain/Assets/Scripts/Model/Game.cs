@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 public class Game
 {
@@ -186,12 +188,14 @@ public class Game
             }
             else
             {
+                EditorUtility.DisplayDialog("Failed to build " + building.Name, building.Name + " cannot be built on a " + tile.Type + " tile.", "OK");
                 // TODO: display pop up to say tile is unavailable to be built
                 return null;
             }
         }
         else
         {
+            EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
             // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
 
@@ -258,6 +262,7 @@ public class Game
         GenerateHappiness += building.GenerateHappiness;
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
+        GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
 
 
     }
