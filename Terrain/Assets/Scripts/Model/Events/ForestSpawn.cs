@@ -11,14 +11,6 @@ public class ForestSpawn : Event
         this.Type = EventType.Random;
     }
 
-    public ForestSpawn(int greenPointDelta, int happinessDelta, int moneyDelta)
-    {
-        this.GreenPointDelta = greenPointDelta;
-        this.HappinessDelta = happinessDelta;
-        this.MoneyDelta = moneyDelta;
-        this.Type = EventType.Random;
-    }
-
     public double Probability { get => probability; set => probability = value; }
 
     public override void TitleDelta()

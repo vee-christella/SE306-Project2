@@ -9,7 +9,8 @@ public class Forest : Building
     {
         this.TypeOfBuilding = BuildingType.Misc;
         this.Name = "Forest";
-        this.Blurb = "Forests are extremely green, and can house habitats for " +
-            "animals. Build more forests to increase your green points!";
+         this.Blurb = "Forests are an ecosystem that comprise of trees, plants and other flora and fauna. " +
+            "They are a natural habitat for many species and are essential for the world’s ecosystem " +
+            "as they ensure biodiversity, affect rainfall and offset carbon emissions.";
     }
 }

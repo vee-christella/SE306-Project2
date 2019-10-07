@@ -9,7 +9,9 @@ public class CoalMine : Building
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Coal Mine";
-        this.Blurb = "Coal Mines are bad for the environment, but produces an" +
-            "abundant source of energy.";
+        this.Blurb = "Coal mines are used to extract coal from the ground to be used as fuel." +
+            "This coal is transported from the mine to refineries which can then use coal for electricity generation" +
+            "due to its high energy content. Coal mining is a dangerous activity and air pollution from coal-fired power" +
+            " plants can lead to negative events such as smog and acid rain.";
     }
 }
