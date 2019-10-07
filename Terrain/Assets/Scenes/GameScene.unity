@@ -1516,7 +1516,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Terrain is an educational city builder game with the purpose of raising
-    awareness of the ever increasing threat of climate change.
+    awareness for the ever increasing threat of climate change.
 --- !u!222 &151120763
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5559,8 +5559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -114.3, y: -153.9}
+  m_AnchoredPosition: {x: 0, y: -5.1}
+  m_SizeDelta: {x: -114.3, y: -164.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672532234
 MonoBehaviour:
@@ -6592,7 +6592,7 @@ MonoBehaviour:
     can cause detrimental effects to your city if unprepared!
 
 
-    GOOD LUCK !!!'
+    GOOD LUCK!'
 --- !u!222 &743008861
 CanvasRenderer:
   m_ObjectHideFlags: 0
