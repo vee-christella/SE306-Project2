@@ -37,7 +37,7 @@ public class EventController : MonoBehaviour
     {
         if (effect < 0)
         {
-            return "- ";
+            return "";
         }
         else
         {

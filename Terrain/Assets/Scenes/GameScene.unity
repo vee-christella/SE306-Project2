@@ -1049,8 +1049,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.2000122, y: 1.8999939}
-  m_SizeDelta: {x: -189, y: -269.1}
+  m_AnchoredPosition: {x: -5.299988, y: -14.700012}
+  m_SizeDelta: {x: -197.3, y: -302.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151120762
 MonoBehaviour:
@@ -1083,8 +1083,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Terrain is an educational city builder game with the purpose of raising
-    awareness for the ever increasing threat of climate change.
+  m_Text: 'Hi, Mayor!
+
+
+    Terrain is a City-Builder game where you''ll learn all about Climate Change!'
 --- !u!222 &151120763
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1125,7 +1127,7 @@ RectTransform:
   m_Children:
   - {fileID: 235195267}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1421,7 +1423,7 @@ RectTransform:
   - {fileID: 75576588}
   - {fileID: 1677269603}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4115,8 +4117,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -18}
-  m_SizeDelta: {x: -170.3, y: -312.9}
+  m_AnchoredPosition: {x: 0, y: -11}
+  m_SizeDelta: {x: -170.3, y: -365.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423874260
 MonoBehaviour:
@@ -4149,13 +4151,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "The map will consist of a randomly generated grid of tiles bring either
-    plains, mountains, desert or water body.\n\nYou will be in charge of placing/removing
-    buildings with the limited resources given, however each building can only be
-    built on certain tiles.\n\nThere are three main metrics you must focus on in this
-    game - money, green points and population happiness. Each building has its own
-    unique amount of metric generation or reduction. \n\nYou must make the decisions
-    on what to build by considering the impacts on the three metrics "
+  m_Text: 'Your city will have plains, desert, water, and mountains. Each building
+    can be built on different tiles, so make sure you place your buildings carefully!
+
+
+    At the end of the maximum number of turns, you need to make sure you gain as much
+    money, green points and happiness as possible!'
 --- !u!222 &423874261
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5178,7 +5179,7 @@ RectTransform:
   - {fileID: 1422419705}
   - {fileID: 1912444942}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6033,7 +6034,7 @@ RectTransform:
   - {fileID: 685418851}
   - {fileID: 588252395}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6229,6 +6230,7 @@ RectTransform:
   - {fileID: 1544312382}
   - {fileID: 773437090}
   - {fileID: 680003064}
+  - {fileID: 699806447}
   m_Father: {fileID: 1176673094}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6306,8 +6308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.2000122, y: 4.449936}
-  m_SizeDelta: {x: -219.3, y: -337.19998}
+  m_AnchoredPosition: {x: 0, y: -28}
+  m_SizeDelta: {x: -219.3, y: -322}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672532234
 MonoBehaviour:
@@ -6340,11 +6342,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "The setting is set in the year 2050, climate change has been detrimental
-    and the world is on the verge of destruction. The prime minister has given you,
-    the mayor of a small city, a certain budget and deadline to develop and convert
-    their city in the most suitable manner in order to reduce the effect of climate
-    change, as well as satisfy the needs of their city and the population.\r\n"
+  m_Text: "The year is 2050.\n\nClimate Change has been destroying the world, and
+    it's your goal to save the world! \n\nYou are the mayor of a small city. As a
+    mayor, you need make sure that the city runs properly with enough money, citizen
+    happiness, while making sure you get as much green points as possible.\n"
 --- !u!222 &672532235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6779,15 +6780,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1911882967}
-  - {fileID: 1743342082}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 347}
-  m_SizeDelta: {x: 0, y: -694}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 940, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &679800709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6874,8 +6874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5215c54ad5a8de345941cc1f2c5bff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disappearing: {fileID: 1187253090}
-  appearing: {fileID: 1509923211}
+  disappearing: {fileID: 680003063}
+  appearing: {fileID: 699806446}
 --- !u!114 &680003066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6944,7 +6944,7 @@ RectTransform:
   - {fileID: 902106893}
   - {fileID: 1142567786}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7307,6 +7307,94 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697654573}
   m_CullTransparentMesh: 0
+--- !u!1 &699806446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 699806447}
+  - component: {fileID: 699806450}
+  - component: {fileID: 699806449}
+  - component: {fileID: 699806448}
+  m_Layer: 8
+  m_Name: Text5Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &699806447
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699806446}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1143627901}
+  m_Father: {fileID: 649222620}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -6}
+  m_SizeDelta: {x: 105, y: 173}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &699806448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699806446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5215c54ad5a8de345941cc1f2c5bff66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disappearing: {fileID: 1187253090}
+  appearing: {fileID: 1509923211}
+--- !u!114 &699806449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699806446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &699806450
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699806446}
+  m_CullTransparentMesh: 0
 --- !u!1 &699811419
 GameObject:
   m_ObjectHideFlags: 0
@@ -7539,8 +7627,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.2000122, y: -0.70007324}
-  m_SizeDelta: {x: -207.6, y: -338.6}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: -250.4, y: -309.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &743008860
 MonoBehaviour:
@@ -7573,16 +7661,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'The goal is to accumulate 1000 green points within the given timeframe.
-    If you run out of money or have population happiness go below zero, without accumulating
-    enough green points, you will lose.
-
-
-    Also be aware of the random events that will occur throughout the game, as they
-    can cause detrimental effects to your city if unprepared!
-
-
-    GOOD LUCK!'
+  m_Text: "To win this game, you have to get 1000 GREEN POINTS at the end of the time
+    given. \n\nBe careful not to lose too much money! You'll lose the game if you
+    go into debt. Also, you need to make sure your people are happy, or you'll lose
+    as well.\n\nLastly, make sure to prepare for some RANDOM EVENTS that might happen!"
 --- !u!222 &743008861
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10845,6 +10927,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142567785}
   m_CullTransparentMesh: 0
+--- !u!1 &1143627900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1143627901}
+  - component: {fileID: 1143627903}
+  - component: {fileID: 1143627902}
+  m_Layer: 8
+  m_Name: Text 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1143627901
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143627900}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 699806447}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -23}
+  m_SizeDelta: {x: -250.4, y: -429.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1143627902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143627900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 10
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 32
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'You''re now ready to start!
+
+
+    GOOD LUCK, MAYOR!'
+--- !u!222 &1143627903
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143627900}
+  m_CullTransparentMesh: 0
 --- !u!1 &1165839870
 GameObject:
   m_ObjectHideFlags: 0
@@ -12891,6 +13053,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1743342082}
   - {fileID: 162244225}
   - {fileID: 2061256841}
   - {fileID: 1663199099}
@@ -13227,7 +13390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.2000122, y: 0.70007324}
+  m_AnchoredPosition: {x: 1.2000122, y: 0}
   m_SizeDelta: {x: 105, y: 173}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1544312383
@@ -14452,7 +14615,7 @@ RectTransform:
   m_Children:
   - {fileID: 417305508}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -15084,19 +15247,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743342081}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2076951931}
-  m_Father: {fileID: 679800708}
-  m_RootOrder: 1
+  m_Father: {fileID: 1509923215}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -7, y: -89}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 1, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 100, y: 30}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1743342083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18146,7 +18309,7 @@ RectTransform:
   - {fileID: 1926041955}
   - {fileID: 1092979210}
   m_Father: {fileID: 1509923215}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
