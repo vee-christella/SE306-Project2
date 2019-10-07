@@ -20,7 +20,7 @@ public class BuildingController : MonoBehaviour
     }
 
     public bool addBuildingToTile(string buildingType, Tile tile)
-    {
+    {   
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
         if(building!= null)
         {

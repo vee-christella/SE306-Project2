@@ -22,6 +22,6 @@ public abstract class Event
     public string Description { get => description; set => description = value; }
     public EventType Type { get => type; set => type = value; }
 
-    public abstract void TitleDelta();
+    public abstract void TileDelta(Tile[,] tiles);
 
 }

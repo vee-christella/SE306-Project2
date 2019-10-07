@@ -14,9 +14,12 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
+    Event gameEvent;
     float currentTurn;
     float maxTurns;
     float maxGreen;
+    bool isEnd;
+    bool isVictory;
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -29,9 +32,13 @@ public class Game
     public float CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public float MaxTurns { get => maxTurns; set => maxTurns = value; }
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
+    public bool IsEnd { get => isEnd; set => isEnd = value; }
+    public bool IsVictory { get => isVictory; set => isVictory = value; }
+    public Event GameEvent { get => gameEvent; set => gameEvent = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
+        this.isEnd = false;
         this.currentTurn = 0;
         this.rows = rows;
         this.columns = columns;
@@ -42,12 +49,10 @@ public class Game
             for (int j = 0; j < columns; j++)
             {
                 tiles[i, j] = new Tile(this, i, j);
+                tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
         Debug.Log("game created");
-
-
-
     }
 
 
@@ -60,6 +65,20 @@ public class Game
         return tiles[x, y];
     }
 
+    public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
+    {
+        Money = money;
+        Green = green;
+        Happiness = happiness;
+        MaxGreen = maxGreen;
+    }
+
+    public void InitialiseTurns(float currentTurn, float maxTurn)
+    {
+        CurrentTurn = currentTurn;
+        MaxTurns = maxTurn;
+    }
+
     /* This method proceeds with the next turn after the user clicks the 
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
@@ -68,38 +87,46 @@ public class Game
     {
         this.currentTurn++;
 
-        // Increase the metrics
-        this.money = Money + GenerateMoney;
-        this.green = Green + GenerateGreen;
-        this.happiness = Happiness + GenerateHappiness;
-
-        //// Display updated metrics
-        //metricsCont.SetMetrics(money, green, happiness);
-        //metricsCont.SetTurn(currentTurn);
-
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
         {
             this.endGame(true);
-
             // Check if the user has lost the game by exceeding the max number
-            // of turns allowed 
+            // of turns allowed, or having a negative money value (as they
+            // now are stuck in debt)
+
+            return;
         }
-        else if (currentTurn >= maxTurns)
+        else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
+            return;
         }
-        else
-        {
 
-            // TODO: Method for user actions
+        GameEvent = EventForNextTurn();
+
+        if (GameEvent != null)
+        {
+            GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
+            GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
+            GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+            if (GameEvent.Type == Event.EventType.Transition)
+            {
+                GameEvent.TileDelta(tiles);
+            }
         }
+
+        // Increase the metrics
+        Money = Money + GenerateMoney;
+        Green = Green + GenerateGreen;
+        Happiness = Happiness + GenerateHappiness;
     }
 
     public void endGame(bool isVictory)
     {
-        // TODO: Victory/Fail screen goes here
+        this.isEnd = true;
+        this.IsVictory = isVictory;
     }
 
     public Building addBuildingToTile(string buildingType, Tile tile)
@@ -107,35 +134,34 @@ public class Game
         Building building = null;
         switch (buildingType)
         {
-            case "Hydro":
+            case "Hydro Plant":
                 building = new Hydro();
                 break;
-            case "CoalMine":
+            case "Coal Mine":
                 building = new CoalMine();
                 break;
             case "Zoo":
-                break;
                 building = new Zoo();
-            case "WindTurbine":
                 break;
+            case "Wind Turbine":
                 building = new WindTurbine();
                 break;
-            case "SolarFarm":
+            case "Solar Farm":
                 building = new SolarFarm();
                 break;
-            case "RaceTrack":
+            case "Race Track":
                 building = new RaceTrack();
                 break;
-            case "OilRefinery":
+            case "Oil Refinery":
                 building = new OilRefinery();
                 break;
-            case "Nuclear":
+            case "Nuclear Plant":
                 building = new Nuclear();
                 break;
-            case "NationalPark":
+            case "National Park":
                 building = new NationalPark();
                 break;
-            case "MovieTheatre":
+            case "Movie Theatre":
                 building = new MovieTheatre();
                 break;
             case "Forest":
@@ -143,17 +169,107 @@ public class Game
                 break;
             default:
                 return null;
-                break;
         }
-        if (tile.placeBuilding(building))
+
+
+        // Check if funds are sufficient
+        if (Money + building.InitialBuildMoney >= 0)
         {
-            buildings[tile.X, tile.Y] = building;
-            return building;
+            if (tile.placeBuilding(building))
+            {
+                buildings[tile.X, tile.Y] = building;
+                UpdateMetrics(building);
+                return building;
+            }
+            else
+            {
+                // TODO: display pop up to say tile is unavailable to be built
+                return null;
+            }
         }
         else
         {
+            // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
+
         }
 
+
+    }
+
+
+    // get the event  for the next turn
+    public Event EventForNextTurn()
+    {
+        List<Event> randomEventList = InitaliseRandomEventList();
+        Random random = new Random();
+        if (currentTurn == 5)
+        {
+            Debug.Log("turn 2");
+            return new Drought();
+        }
+        else if (Random.Range(0, 100) < 10)
+        {
+            return randomEventList[Random.Range(0, randomEventList.Count)];
+        }
+
+        return null;
+    }
+
+
+    // method to create list of all random events
+    public List<Event> InitaliseRandomEventList()
+    {
+        List<Event> randomEventList = new List<Event>();
+
+        randomEventList.Add(new AcidRain());
+        randomEventList.Add(new Earthquake());
+        randomEventList.Add(new ForestSpawn());
+        randomEventList.Add(new Tsunami());
+
+        return randomEventList;
+    }
+
+    // Change the metrics with regards to the effects of the building
+    // that has just been placed.
+    public void UpdateMetrics(Building building)
+    {
+        Money += building.InitialBuildMoney;
+        Green += building.InitialBuildGreen;
+
+        if (Happiness + building.InitialBuildHappiness < 0)
+        {
+            Happiness = 0;
+        }
+        else if (Happiness + building.InitialBuildHappiness > 100)
+        {
+            Happiness = 100;
+        }
+        else
+        {
+            Happiness += building.InitialBuildHappiness;
+        }
+
+        GenerateMoney += building.GenerateMoney;
+        GenerateGreen += building.GenerateGreen;
+        GenerateHappiness += building.GenerateHappiness;
+
+        GameController.Instance.SetMetrics(Money, Green, Happiness);
+
+
+    }
+    
+    public void stillBuildable(Tile tile)
+    {
+        Debug.Log("still buildable called");
+        if (tile.Building != null)
+        {
+            if (!tile.IsBuildable(tile.Building))
+            {
+                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+            }
+        }
     }
 }

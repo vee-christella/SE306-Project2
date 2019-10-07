@@ -5,12 +5,12 @@ using UnityEngine;
 public class NationalPark : Building
 {
     // Initialise stats for each National Park building
-    public NationalPark() : base(4, -100, 20, 30, 5, -10, 0, 5)
+    public NationalPark() : base(4, -150, 50, 5, -60, 15, 1, 5)
     {
        this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "National Park";
-        this.Blurb = "National parks provide a fresh, clean and green " +
-        	"environment for your citizens to enjoy for free. Plants can" +
-        	"also be planted here, giving an increase in green points!";
+        this.Blurb = "A national park is where visitors can explore beautiful and natural scenery. " +
+            "These parks are essential to the sustainability of the environment as they educate " +
+            "visitors about the importance of environmental preservation while providing an enjoyable experience.";
     }
 }

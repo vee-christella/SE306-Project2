@@ -54,7 +54,7 @@ public class MouseController : MonoBehaviour
     }
 
     public void SetMode_CoalMine() {
-        buildingForCreating = "CoalMine";
+        buildingForCreating = "Coal Mine";
         setCancelButton();
     }
     public void SetMode_Forest() {
@@ -62,35 +62,35 @@ public class MouseController : MonoBehaviour
         setCancelButton();
     }
     public void SetMode_Hydro() {
-        buildingForCreating = "Hydro";
+        buildingForCreating = "Hydro Plant";
         setCancelButton();
     }
     public void SetMode_MovieTheatre() {
-        buildingForCreating = "MovieTheatre";
+        buildingForCreating = "Movie Theatre";
         setCancelButton();
     }
     public void SetMode_NationalPark() {
-        buildingForCreating = "NationalPark";
+        buildingForCreating = "National Park";
         setCancelButton();
     }
     public void SetMode_Nuclear() {
-        buildingForCreating = "Nuclear";
+        buildingForCreating = "Nuclear Plant";
         setCancelButton();
     }
     public void SetMode_OilRefinery() {
-        buildingForCreating = "OilRefinery";
+        buildingForCreating = "Oil Refinery";
         setCancelButton();
     }
     public void SetMode_RaceTrack() {
-        buildingForCreating = "RaceTrack";
+        buildingForCreating = "Race Track";
         setCancelButton();
     }
     public void SetMode_SolarFarm(){
-        buildingForCreating = "SolarFarm";
+        buildingForCreating = "Solar Farm";
         setCancelButton();
     }
     public void SetMode_WindTurbine() {
-        buildingForCreating = "WindTurbine";
+        buildingForCreating = "Wind Turbine";
         setCancelButton();
     }
     public void SetMode_Zoo() {

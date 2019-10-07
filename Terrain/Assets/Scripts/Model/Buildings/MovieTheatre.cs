@@ -5,11 +5,12 @@ using UnityEngine;
 public class MovieTheatre : Building
 {
     // Initialise stats for each Movie Theatre building
-    public MovieTheatre() : base(3, -100, 0, 10, 0, 30, 0, 5)
+    public MovieTheatre() : base(3, -50, 0, 10, -10, 0, 2, 5)
     {
         this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "Movie Theatre";
-        this.Blurb = "Your citizens will enjoy the latest movies with a " +
-        	"movie theatre in the city!";
+        this.Blurb = "A movie theatre is a place where people can gather and watch screenings of " +
+            "movies at various times. For general public entertainment, cinema goers can purchase " +
+            "tickets to watch films with their friends and family, however, the film industry contributes large amounts of waste to the environment.";
     }
 }
