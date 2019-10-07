@@ -20,7 +20,7 @@ public abstract class Event
     public int MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
     public EventType Type { get => type; set => type = value; }
 
-    public abstract void TitleDelta();
+    public abstract void TileDelta(Tile[,] tiles);
 
 
 }

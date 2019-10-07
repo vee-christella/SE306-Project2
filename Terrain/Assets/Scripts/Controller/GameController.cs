@@ -115,6 +115,7 @@ public class GameController : MonoBehaviour
 
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
+        Debug.Log("on tile type changed");
         int random = 0;
         if (tile.Type == Tile.TileType.Desert)
         {

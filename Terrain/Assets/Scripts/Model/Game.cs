@@ -111,6 +111,10 @@ public class Game
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+            if (GameEvent.Type == Event.EventType.Transition)
+            {
+                GameEvent.TileDelta(tiles);
+            }
         }
 
         // Increase the metrics
@@ -257,6 +261,7 @@ public class Game
     
     public void stillBuildable(Tile tile)
     {
+        Debug.Log("still buildable called");
         if (tile.Building != null)
         {
             if (!tile.IsBuildable(tile.Building))
