@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 
 
 public class Game
@@ -187,14 +191,18 @@ public class Game
             }
             else
             {
+                #if UNITY_EDITOR
                 EditorUtility.DisplayDialog("Failed to build " + building.Name, building.Name + " cannot be built on a " + tile.Type + " tile.", "OK");
+                #endif
                 // TODO: display pop up to say tile is unavailable to be built
                 return null;
             }
         }
         else
         {
+            #if UNITY_EDITOR
             EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
+            #endif
             // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
 
