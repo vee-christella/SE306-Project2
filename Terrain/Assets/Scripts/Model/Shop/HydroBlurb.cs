@@ -16,7 +16,7 @@ public class HydroBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // Start is called before the first frame update
     void Start()
     {
-        Hydro hydro = new Hydro();
+        Building hydro = new Hydro();
         blurb.text = hydro.Blurb;
         metrics.text = "METRICS\n\n" +
         "Cost: " + hydro.InitialBuildMoney.ToString() +
