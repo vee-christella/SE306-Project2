@@ -6,17 +6,15 @@ public class Drought : Event
 {
     private int turnToOccur;
 
-    public Drought()
+    public Drought():base (-5,-1,-5)
     {
         this.Type = EventType.Transition;
     }
-
-    public Drought(int greenPointDelta, int happinessDelta, int moneyDelta)
+    
+    public Drought(Game game) :base(-5,-1,-5)
     {
-        this.GreenPointDelta = greenPointDelta;
-        this.HappinessDelta = happinessDelta;
-        this.MoneyDelta = moneyDelta;
         this.Type = EventType.Transition;
+        Game = game;
     }
 
     public int TurnToOccur { get => turnToOccur; set => turnToOccur = value; }

@@ -7,18 +7,13 @@ public class Tsunami : Event
 
     private double probability;
 
-    public Tsunami()
+    public Tsunami(Game game) : base (-5,-1,-5)
     {
         this.Type = EventType.Random;
+        this.Game = game;
     }
 
-    public Tsunami(int greenPointDelta, int happinessDelta, int moneyDelta)
-    {
-        this.GreenPointDelta = greenPointDelta;
-        this.HappinessDelta = happinessDelta;
-        this.MoneyDelta = moneyDelta;
-        this.Type = EventType.Random;
-    }
+
 
     public double Probability { get => probability; set => probability = value; }
 

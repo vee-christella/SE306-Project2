@@ -87,6 +87,11 @@ public class Game
     {
         this.currentTurn++;
 
+        // Increase the metrics
+        Money = Money + GenerateMoney;
+        Green = Green + GenerateGreen;
+        Happiness = Happiness + GenerateHappiness;
+
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
@@ -111,16 +116,10 @@ public class Game
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
-            if (GameEvent.Type == Event.EventType.Transition)
-            {
-                GameEvent.TileDelta(tiles);
-            }
+            GameEvent.TileDelta(tiles);       
         }
 
-        // Increase the metrics
-        Money = Money + GenerateMoney;
-        Green = Green + GenerateGreen;
-        Happiness = Happiness + GenerateHappiness;
+
     }
 
     public void endGame(bool isVictory)
@@ -205,8 +204,7 @@ public class Game
         Random random = new Random();
         if (currentTurn == 5)
         {
-            Debug.Log("turn 2");
-            return new Drought();
+            return new Drought(this);
         }
         else if (Random.Range(0, 100) < 10)
         {
@@ -222,10 +220,10 @@ public class Game
     {
         List<Event> randomEventList = new List<Event>();
 
-        randomEventList.Add(new AcidRain());
-        randomEventList.Add(new Earthquake());
-        randomEventList.Add(new ForestSpawn());
-        randomEventList.Add(new Tsunami());
+        randomEventList.Add(new AcidRain(this));
+        randomEventList.Add(new Earthquake(this));
+        randomEventList.Add(new ForestSpawn(this));
+        randomEventList.Add(new Tsunami(this));
 
         return randomEventList;
     }
@@ -234,6 +232,8 @@ public class Game
     // that has just been placed.
     public void UpdateMetrics(Building building)
     {
+
+
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 

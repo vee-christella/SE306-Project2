@@ -6,23 +6,17 @@ public class Earthquake : Event
 {
     private double probability;
 
-    public Earthquake()
+    public Earthquake(Game game) :base (-5,-1,-5)
     {
         this.Type = EventType.Random;
+        this.Game = game;
     }
 
-    public Earthquake(int greenPointDelta, int happinessDelta, int moneyDelta)
-    {
-        this.GreenPointDelta = greenPointDelta;
-        this.HappinessDelta = happinessDelta;
-        this.MoneyDelta = moneyDelta;
-        this.Type = EventType.Random;
-    }
 
     public double Probability { get => probability; set => probability = value; }
 
     public override void TileDelta(Tile[,] tiles)
     {
-        throw new System.NotImplementedException();
+        return;
     }
 }

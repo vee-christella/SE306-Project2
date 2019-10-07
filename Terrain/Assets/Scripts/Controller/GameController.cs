@@ -63,6 +63,13 @@ public class GameController : MonoBehaviour
 
                 tileSR.sprite = sprites[random];
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+
+                GameObject buildingGO = new GameObject();
+                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
+                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
+                buildingSR.sortingLayerName = "Building";
+                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
             }
         }
 
@@ -120,7 +127,8 @@ public class GameController : MonoBehaviour
         if (tile.Type == Tile.TileType.Desert)
         {
             random = Random.Range(0, 1);
-        }else if(tile.Type == Tile.TileType.Mountain)
+        }
+        else if (tile.Type == Tile.TileType.Mountain)
         {
             random = Random.Range(2, 3);
         }
@@ -134,5 +142,10 @@ public class GameController : MonoBehaviour
         }
         tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
 
+    }
+
+    public void OnBuildingChange(Tile tile, GameObject buildingGO)
+    {
+        BuildingController.Instance.ChangeBuildingSprite(tile, buildingGO);
     }
 }
