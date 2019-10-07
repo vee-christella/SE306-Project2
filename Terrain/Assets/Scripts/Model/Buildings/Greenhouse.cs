@@ -10,4 +10,5 @@ public class Greenhouse : Building
             "Growing plants in a greenhouse allows for the growing season to be extended, particularly for plants " +
             "that do not thrive in winter. Recent technological changes have allowed for greenhouses to reduce carbon emissions by 75%.";
     }
+
 }

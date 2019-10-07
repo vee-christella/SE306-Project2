@@ -13,7 +13,7 @@ public class ForestSpawn : Event
 
     public double Probability { get => probability; set => probability = value; }
 
-    public override void TitleDelta()
+    public override void TileDelta(Tile[,] tiles)
     {
         throw new System.NotImplementedException();
     }

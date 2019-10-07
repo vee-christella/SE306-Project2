@@ -9,9 +9,12 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance { get; protected set; }
     Game game;
-    public Game Game { get => game; protected set => game = value; }
+    EventController eventController;
 
-    public Sprite[] sprites = new Sprite[4];
+    public Game Game { get => game; protected set => game = value; }
+    public EventController EventController { get => eventController; set => eventController = value; }
+
+    public Sprite[] sprites = new Sprite[7];
 
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
@@ -23,36 +26,43 @@ public class GameController : MonoBehaviour
     {
         Instance = this;
         Game = new Game();
+        eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         for (int i = 0; i < Game.Rows; i++)
         {
             for (int j = 0; j < Game.Columns; j++)
             {
                 Tile tile = Game.getTileAt(i, j);
+
                 GameObject tileGO = new GameObject();
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
                 SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                tileSR.sortingLayerName="Tile";
-                int random = Random.Range(0, 4);
+                tileSR.sortingLayerName = "Tile";
+
+                int random = Random.Range(0, 7);
+
                 switch (random)
                 {
                     case 0:
+                    case 1:
                         tile.setType(Tile.TileType.Desert);
                         break;
-                    case 1:
+                    case 2:
+                    case 3:
                         tile.setType(Tile.TileType.Mountain);
                         break;
-                    case 2:
+                    case 4:
+                    case 5:
                         tile.setType(Tile.TileType.Plain);
                         break;
-                    case 3:
+                    case 6:
                         tile.setType(Tile.TileType.Water);
                         break;
-                    case 4:
-                        tile.setType(Tile.TileType.Plain);
-                        break;
                 }
+
                 tileSR.sprite = sprites[random];
+                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
             }
         }
 
@@ -64,6 +74,12 @@ public class GameController : MonoBehaviour
     public void callNextTurn()
     {
         game.nextTurn();
+
+        if (game.GameEvent != null)
+        {
+            EventController.DisplayPopup(game.GameEvent);
+        }
+
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetTurn(game.CurrentTurn);
     }
@@ -74,21 +90,19 @@ public class GameController : MonoBehaviour
 
     }
 
+    // Initialise the starting metrics on the screen
     public void StartingMetrics()
     {
-        coinCount.text = "200";
-        greenCount.text = "0";
-        happinessCount.text = "50";
-        currentTurn.text = "0";
-        maxTurn.text = "50";
+        game.InitialiseMetrics(200, 0, 50, 1000);
+        SetMetrics(game.Money, game.Green, game.Happiness);
+
+        game.InitialiseTurns(0, 50);
+        maxTurn.text = game.MaxTurns.ToString();
+        SetTurn(0);
     }
 
     public void SetMetrics(float coin, float green, float happiness)
     {
-        //coinCount.text = (System.Int32.Parse(coinCount.text) + 10).ToString();
-        //greenCount.text = (System.Int32.Parse(greenCount.text) + 10).ToString();
-        //happinessCount.text = (System.Int32.Parse(happinessCount.text) + 10).ToString();
-
         coinCount.text = coin.ToString();
         greenCount.text = green.ToString();
         happinessCount.text = happiness.ToString();
@@ -97,5 +111,28 @@ public class GameController : MonoBehaviour
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
+    }
+
+    public void OnTileTypeChanged(Tile tile, GameObject tileGO)
+    {
+        Debug.Log("on tile type changed");
+        int random = 0;
+        if (tile.Type == Tile.TileType.Desert)
+        {
+            random = Random.Range(0, 1);
+        }else if(tile.Type == Tile.TileType.Mountain)
+        {
+            random = Random.Range(2, 3);
+        }
+        else if (tile.Type == Tile.TileType.Plain)
+        {
+            random = Random.Range(4, 5);
+        }
+        else if (tile.Type == Tile.TileType.Water)
+        {
+            random = 6;
+        }
+        tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
+
     }
 }
