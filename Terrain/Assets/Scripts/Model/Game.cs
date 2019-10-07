@@ -18,6 +18,8 @@ public class Game
     float currentTurn;
     float maxTurns;
     float maxGreen;
+    bool isEnd;
+    bool isVictory;
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -30,10 +32,13 @@ public class Game
     public float CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public float MaxTurns { get => maxTurns; set => maxTurns = value; }
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
+    public bool IsEnd { get => isEnd; set => isEnd = value; }
+    public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
+        this.isEnd = false;
         this.currentTurn = 0;
         this.rows = rows;
         this.columns = columns;
@@ -59,11 +64,12 @@ public class Game
         return tiles[x, y];
     }
 
-    public void InitialiseMetrics(float money, float green, float happiness)
+    public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
     {
         Money = money;
         Green = green;
         Happiness = happiness;
+        MaxGreen = maxGreen;
     }
 
     public void InitialiseTurns(float currentTurn, float maxTurn)
@@ -111,7 +117,8 @@ public class Game
 
     public void endGame(bool isVictory)
     {
-        // TODO: Victory/Fail screen goes here
+        this.isEnd = true;
+        this.IsVictory = isVictory;
     }
 
     public Building addBuildingToTile(string buildingType, Tile tile)
