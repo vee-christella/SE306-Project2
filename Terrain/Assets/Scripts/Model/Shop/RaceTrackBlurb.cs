@@ -11,6 +11,7 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public GameObject metricsObject;
     public GameObject blurbObject;
     public GameObject panel;
+    public Button endTurn;
 
     // Start is called before the first frame update
     void Start()
@@ -43,5 +44,6 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         panel.SetActive(false);
         blurbObject.SetActive(false);
         metricsObject.SetActive(false);
+        endTurn.interactable = false;
     }
 }
