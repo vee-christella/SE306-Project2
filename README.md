@@ -19,3 +19,7 @@ The wiki of this repository contains detailed information about the project. Thi
 - Code Documentation
 - Project planning 
 - Meeting Minutes
+
+<br/> <br/>
+
+Game hosted on [itch.io](https://waihaidere.itch.io/terrain)
