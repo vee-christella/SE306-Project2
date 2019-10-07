@@ -72,6 +72,13 @@ public class GameController : MonoBehaviour
                 Debug.Log("i = " + i + ", j = " + j);
                 Debug.Log(i == 5 && j == 4);
 
+                GameObject buildingGO = new GameObject();
+                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
+                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
+                buildingSR.sortingLayerName = "Building";
+                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
+
                 // Place the TownHall
                 if (i == 5 && j == 4)
                 {
@@ -79,12 +86,7 @@ public class GameController : MonoBehaviour
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
 
-                GameObject buildingGO = new GameObject();
-                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
-                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-                buildingSR.sortingLayerName = "Building";
-                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
+                
             }
         }
 
