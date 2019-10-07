@@ -18,7 +18,8 @@ public class HydroBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         Hydro hydro = new Hydro();
         blurb.text = hydro.Blurb;
-        metrics.text = "Cost: " + hydro.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + hydro.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + hydro.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + hydro.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + hydro.GenerateMoney.ToString() +

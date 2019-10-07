@@ -18,7 +18,8 @@ public class NuclearBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         Nuclear nuclear = new Nuclear();
         blurb.text = nuclear.Blurb;
-        metrics.text = "Cost: " + nuclear.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + nuclear.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + nuclear.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + nuclear.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + nuclear.GenerateMoney.ToString() +

@@ -18,7 +18,8 @@ public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         OilRefinery oilRefinery = new OilRefinery();
         blurb.text = oilRefinery.Blurb;
-        metrics.text = "Cost: " + oilRefinery.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + oilRefinery.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + oilRefinery.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + oilRefinery.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + oilRefinery.GenerateMoney.ToString() +

@@ -18,7 +18,8 @@ public class NationalParkBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         NationalPark nationalPark = new NationalPark();
         blurb.text = nationalPark.Blurb;
-        metrics.text = "Cost: " + nationalPark.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + nationalPark.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + nationalPark.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + nationalPark.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + nationalPark.GenerateMoney.ToString() +

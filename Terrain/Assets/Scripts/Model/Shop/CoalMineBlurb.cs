@@ -18,7 +18,8 @@ public class CoalMineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         CoalMine coalMine = new CoalMine();
         blurb.text = coalMine.Blurb;
-        metrics.text = "Cost: " + coalMine.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + coalMine.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + coalMine.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + coalMine.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + coalMine.GenerateMoney.ToString() +

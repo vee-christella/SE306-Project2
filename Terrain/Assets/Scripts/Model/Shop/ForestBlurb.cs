@@ -18,7 +18,8 @@ public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Forest forest = new Forest();
         blurb.text = forest.Blurb;
-        metrics.text = "Cost: " + forest.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + forest.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + forest.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + forest.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + forest.GenerateMoney.ToString() +

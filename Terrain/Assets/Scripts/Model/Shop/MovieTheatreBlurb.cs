@@ -18,7 +18,8 @@ public class MovieTheatreBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         MovieTheatre movieTheatre = new MovieTheatre();
         blurb.text = movieTheatre.Blurb;
-        metrics.text = "Cost: " + movieTheatre.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + movieTheatre.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + movieTheatre.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + movieTheatre.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + movieTheatre.GenerateMoney.ToString() +

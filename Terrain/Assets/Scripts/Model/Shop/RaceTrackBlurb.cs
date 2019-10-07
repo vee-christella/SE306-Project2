@@ -18,7 +18,8 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         RaceTrack raceTrack = new RaceTrack();
         blurb.text = raceTrack.Blurb;
-        metrics.text = "Cost: " + raceTrack.InitialBuildMoney.ToString() +
+        metrics.text = "METRICS\n\n" +
+        "Cost: " + raceTrack.InitialBuildMoney.ToString() +
         "\n\nInitial Green Points: " + raceTrack.InitialBuildGreen.ToString() +
         "\nInitial Happiness: " + raceTrack.InitialBuildHappiness.ToString() +
         "\n\nMoney per turn: " + raceTrack.GenerateMoney.ToString() +
