@@ -85,7 +85,24 @@ public class Game
     public void nextTurn()
     {
         this.currentTurn++;
-        
+
+        // Check if the user has won the game by reaching the number of green
+        // points required
+        if (this.green >= maxGreen)
+        {
+            this.endGame(true);
+            // Check if the user has lost the game by exceeding the max number
+            // of turns allowed, or having a negative money value (as they
+            // now are stuck in debt)
+
+            return;
+        }
+        else if (currentTurn >= maxTurns || Money < 0)
+        {
+            this.endGame(false);
+            return;
+        }
+
         GameEvent = EventForNextTurn();
 
         if (GameEvent != null)
@@ -99,20 +116,6 @@ public class Game
         Money = Money + GenerateMoney;
         Green = Green + GenerateGreen;
         Happiness = Happiness + GenerateHappiness;
-        // Check if the user has won the game by reaching the number of green
-        // points required
-        if (this.green >= maxGreen)
-        {
-            this.endGame(true);
-            // Check if the user has lost the game by exceeding the max number
-            // of turns allowed, or having a negative money value (as they
-            // now are stuck in debt)
-        }
-
-        else if (currentTurn >= maxTurns || Money < 0)
-        {
-            this.endGame(false);
-        }
     }
 
     public void endGame(bool isVictory)
