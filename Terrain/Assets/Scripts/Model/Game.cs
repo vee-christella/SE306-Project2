@@ -14,6 +14,7 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
+    Event gameEvent;
     float currentTurn;
     float maxTurns;
     float maxGreen;
@@ -33,6 +34,7 @@ public class Game
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
+    public Event GameEvent { get => gameEvent; set => gameEvent = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
@@ -50,9 +52,6 @@ public class Game
             }
         }
         Debug.Log("game created");
-
-
-
     }
 
 
@@ -87,10 +86,6 @@ public class Game
     {
         this.currentTurn++;
 
-        // Increase the metrics
-        Money = Money + GenerateMoney;
-        Green = Green + GenerateGreen;
-        Happiness = Happiness + GenerateHappiness;
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
@@ -99,12 +94,28 @@ public class Game
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed, or having a negative money value (as they
             // now are stuck in debt)
-        }
 
+            return;
+        }
         else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
+            return;
         }
+
+        GameEvent = EventForNextTurn();
+
+        if (GameEvent != null)
+        {
+            GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
+            GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
+            GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+        }
+
+        // Increase the metrics
+        Money = Money + GenerateMoney;
+        Green = Green + GenerateGreen;
+        Happiness = Happiness + GenerateHappiness;
     }
 
     public void endGame(bool isVictory)
@@ -181,6 +192,38 @@ public class Game
 
     }
 
+
+    // get the event  for the next turn
+    public Event EventForNextTurn()
+    {
+        List<Event> randomEventList = InitaliseRandomEventList();
+        Random random = new Random();
+        if (currentTurn == 5)
+        {
+            Debug.Log("turn 2");
+            return new Drought();
+        }
+        else if (Random.Range(0, 100) < 10)
+        {
+            return randomEventList[Random.Range(0, randomEventList.Count)];
+        }
+
+        return null;
+    }
+
+
+    // method to create list of all random events
+    public List<Event> InitaliseRandomEventList()
+    {
+        List<Event> randomEventList = new List<Event>();
+
+        randomEventList.Add(new AcidRain());
+        randomEventList.Add(new Earthquake());
+        randomEventList.Add(new ForestSpawn());
+        randomEventList.Add(new Tsunami());
+
+        return randomEventList;
+    }
 
     // Change the metrics with regards to the effects of the building
     // that has just been placed.
