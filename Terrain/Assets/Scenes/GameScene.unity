@@ -10913,8 +10913,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "The year is 2050.\n\nClimate Change has been destroying the world, and
     it's your goal to save the world! \n\nYou are the mayor of a small city. As a
-    mayor, you need make sure that the city runs properly with enough money, citizen
-    happiness, while making sure you get as much green points as possible.\n"
+    mayor, you need make sure that the city runs properly with enough money and happiness,
+    while making sure you get as much green points as possible.\n"
 --- !u!222 &1172200468
 CanvasRenderer:
   m_ObjectHideFlags: 0
