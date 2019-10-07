@@ -255,6 +255,7 @@ public class Game
         GenerateHappiness += building.GenerateHappiness;
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
+        GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
 
 
     }

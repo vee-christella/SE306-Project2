@@ -21,6 +21,10 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI happinessCount;
     public TextMeshProUGUI currentTurn;
     public TextMeshProUGUI maxTurn;
+
+    public TextMeshProUGUI coinDeltaText;
+    public TextMeshProUGUI greenDeltaText;
+    public TextMeshProUGUI happinessDeltaText;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +92,7 @@ public class GameController : MonoBehaviour
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);
+        SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
         SetTurn(game.CurrentTurn);
     }
 
@@ -102,6 +107,7 @@ public class GameController : MonoBehaviour
     {
         game.InitialiseMetrics(200, 0, 50, 1000);
         SetMetrics(game.Money, game.Green, game.Happiness);
+        SetDelta(0, 0, 0);
 
         game.InitialiseTurns(0, 50);
         maxTurn.text = game.MaxTurns.ToString();
@@ -113,6 +119,35 @@ public class GameController : MonoBehaviour
         coinCount.text = coin.ToString();
         greenCount.text = green.ToString();
         happinessCount.text = happiness.ToString();
+    }
+
+    public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
+    {
+        if(coinDelta < 0)
+        {
+            coinDeltaText.text = coinDelta.ToString();
+        }
+        else
+        {
+            coinDeltaText.text = "+ " + coinDelta.ToString();
+        }
+
+        if(greenDelta < 0)
+        {
+            greenDeltaText.text = greenDelta.ToString();
+
+        } else
+        {
+            greenDeltaText.text = "+ " + greenDelta.ToString();
+        }
+
+        if (happinessDelta < 0)
+        {
+            happinessDeltaText.text = happinessDelta.ToString();
+        } else
+        {
+            happinessDeltaText.text = "+ " + happinessDelta.ToString();
+        }
     }
 
     public void SetTurn(float turn)
