@@ -6,7 +6,7 @@ public class BuildingController : MonoBehaviour
 {
     public static BuildingController Instance { get; protected set; }
 
-    public Sprite[] buildingSprites = new Sprite[11];
+    public Sprite[] buildingSprites = new Sprite[12];
     // Start is called before the first frame update
     void Start()
     {

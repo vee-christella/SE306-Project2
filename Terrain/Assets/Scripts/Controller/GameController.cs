@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Instance = this;
-        Game = new Game();
+        Game = new Game(10, 10);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         for (int i = 0; i < Game.Rows; i++)
         {
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
 
                 int random = Random.Range(0, 7);
 
-                switch (random)
+                switch (PrototypeLevel.Arr[i, j])
                 {
                     case 0:
                     case 1:
@@ -65,8 +65,19 @@ public class GameController : MonoBehaviour
                         break;
                 }
 
-                tileSR.sprite = sprites[random];
+                tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+
+
+                Debug.Log("i = " + i + ", j = " + j);
+                Debug.Log(i == 5 && j == 4);
+
+                // Place the TownHall
+                if (i == 5 && j == 4)
+                {
+                    Debug.Log("BANANA");
+                    BuildingController.Instance.addBuildingToTile("Town Hall", tile);
+                }
 
                 GameObject buildingGO = new GameObject();
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
