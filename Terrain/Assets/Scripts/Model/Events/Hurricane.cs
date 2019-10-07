@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tsunami : Event
+public class Hurricane : Event
 {
-
     private double probability;
 
-    public Tsunami()
+    public Hurricane()
     {
         this.Type = EventType.Random;
+        this.Description = "The intensity, frequency and duration of the strongest hurricanes, have all increased since the early 1980s. Hurricane-associated storm intensity and rainfall rates are projected to increase as the climate continues to warm.";
     }
 
-    public Tsunami(int greenPointDelta, int happinessDelta, int moneyDelta)
+    public Hurricane(int greenPointDelta, int happinessDelta, int moneyDelta)
     {
         this.GreenPointDelta = greenPointDelta;
         this.HappinessDelta = happinessDelta;
@@ -26,5 +26,4 @@ public class Tsunami : Event
     {
         throw new System.NotImplementedException();
     }
-
 }

@@ -1,17 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Earthquake : Event
+public class WildFire : Event
 {
     private double probability;
 
-    public Earthquake()
+    public WildFire()
     {
         this.Type = EventType.Random;
     }
 
-    public Earthquake(int greenPointDelta, int happinessDelta, int moneyDelta)
+    public WildFire(int greenPointDelta, int happinessDelta, int moneyDelta)
     {
         this.GreenPointDelta = greenPointDelta;
         this.HappinessDelta = happinessDelta;

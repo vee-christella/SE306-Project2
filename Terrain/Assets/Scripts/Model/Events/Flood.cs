@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AcidRain : Event
+public class Flood : Event
 {
 
     private double probability;
 
-    public AcidRain()
+    public Flood()
     {
         this.Type = EventType.Random;
-        this.Description = "";
+        this.Description = "Storm surges and high tides combined with rising sea levels is increasing flooding in many regions. Furthermore, frequent intense rainfalls increases the likelihood of rivers flooding, and flash flooding when urban drainage systems become overwhelmed.";
     }
 
-    public AcidRain(int greenPointDelta, int happinessDelta, int moneyDelta)
+    public Flood(int greenPointDelta, int happinessDelta, int moneyDelta)
     {
         this.GreenPointDelta = greenPointDelta;
         this.HappinessDelta = happinessDelta;

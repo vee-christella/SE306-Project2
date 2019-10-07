@@ -9,6 +9,7 @@ public class Drought : Event
     public Drought()
     {
         this.Type = EventType.Transition;
+        this.Description = "Droughts everywhere are projected to become more intense, and summer temperatures are projected to continue rising.";
     }
 
     public Drought(int greenPointDelta, int happinessDelta, int moneyDelta)
