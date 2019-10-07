@@ -13,9 +13,6 @@ public class EndscreenController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("...." + GameController.Instance.Game.CurrentTurn);
-        Debug.Log("----" + GameController.Instance.Game.MaxTurns);
-
         if (GameController.Instance.Game.IsEnd)
         {
             EndGame();
@@ -35,7 +32,9 @@ public class EndscreenController : MonoBehaviour
             if (GameController.Instance.Game.Green < GameController.Instance.Game.MaxGreen)
             {
                 endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS. THE WORLD IS RUINED!";
-            } else {
+            }
+            else
+            {
                 endText.text = "YOU LOSE! RAN OUT OF MONEY. THE WORLD IS RUINED!";
             }
         }
