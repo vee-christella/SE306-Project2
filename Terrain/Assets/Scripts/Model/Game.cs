@@ -224,6 +224,10 @@ public class Game
         randomEventList.Add(new Earthquake(this));
         randomEventList.Add(new ForestSpawn(this));
         randomEventList.Add(new Tsunami(this));
+        randomEventList.Add(new Heatwave(this));
+        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new Flood(this));
+
 
         return randomEventList;
     }

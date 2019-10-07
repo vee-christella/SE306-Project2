@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tsunami : Event
+public class RisingSeaLevel : Event
 {
-
     private double probability;
 
-    public Tsunami(Game game) : base (-5,-1,-5)
+    public RisingSeaLevel(Game game) : base(-5, -1, -5)
     {
         this.Type = EventType.Random;
         this.Game = game;
     }
-
-
 
     public double Probability { get => probability; set => probability = value; }
 
@@ -21,4 +18,5 @@ public class Tsunami : Event
     {
         return;
     }
+
 }

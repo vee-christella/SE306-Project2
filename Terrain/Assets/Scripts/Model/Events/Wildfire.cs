@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tsunami : Event
+public class Wildfire : Event
 {
-
     private double probability;
 
-    public Tsunami(Game game) : base (-5,-1,-5)
+    public Wildfire(Game game) : base(-5, -1, -5)
     {
         this.Type = EventType.Random;
         this.Game = game;
     }
-
-
 
     public double Probability { get => probability; set => probability = value; }
 
