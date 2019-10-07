@@ -49,6 +49,7 @@ public class Game
             for (int j = 0; j < columns; j++)
             {
                 tiles[i, j] = new Tile(this, i, j);
+                tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
         Debug.Log("game created");
@@ -252,5 +253,18 @@ public class Game
         GameController.Instance.SetMetrics(Money, Green, Happiness);
 
 
+    }
+    
+    public void stillBuildable(Tile tile)
+    {
+        if (tile.Building != null)
+        {
+            if (!tile.IsBuildable(tile.Building))
+            {
+                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+            }
+        }
     }
 }

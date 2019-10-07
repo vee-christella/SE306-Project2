@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
                 }
 
                 tileSR.sprite = sprites[random];
+                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
             }
         }
 
@@ -110,5 +111,27 @@ public class GameController : MonoBehaviour
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
+    }
+
+    public void OnTileTypeChanged(Tile tile, GameObject tileGO)
+    {
+        int random = 0;
+        if (tile.Type == Tile.TileType.Desert)
+        {
+            random = Random.Range(0, 1);
+        }else if(tile.Type == Tile.TileType.Mountain)
+        {
+            random = Random.Range(2, 3);
+        }
+        else if (tile.Type == Tile.TileType.Plain)
+        {
+            random = Random.Range(4, 5);
+        }
+        else if (tile.Type == Tile.TileType.Water)
+        {
+            random = 6;
+        }
+        tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
+
     }
 }
