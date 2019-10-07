@@ -5,7 +5,7 @@ using UnityEngine;
 public class Forest : Building
 {
     // Initialise stats for each Forest
-    public Forest() : base(2, 0, 50, 5, 0, 20, 0, 3)
+    public Forest() : base(2, -5, 5, 0, -10, 10, 0, 3)
     {
         this.TypeOfBuilding = BuildingType.Misc;
         this.Name = "Forest";
