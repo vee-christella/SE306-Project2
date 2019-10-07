@@ -3257,11 +3257,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NationalMetrics
       objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3366,6 +3361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
@@ -4253,11 +4253,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OilRefineryMetrics
       objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4362,6 +4357,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
@@ -4714,11 +4714,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NuclearMetrics
       objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4824,6 +4819,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
 --- !u!1 &561707779 stripped
@@ -4861,11 +4861,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ForestMetrics
-      objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
@@ -4972,6 +4967,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
 --- !u!1 &575310123 stripped
@@ -5009,11 +5009,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RaceTrackMetrics
-      objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
@@ -5119,6 +5114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
@@ -6667,11 +6667,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380498354072, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -6715,6 +6710,11 @@ PrefabInstance:
     - target: {fileID: 3214827380498354072, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9117,11 +9117,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HydroMetrics
       objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9226,6 +9221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
@@ -9900,6 +9900,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2ae40d930084b1d4082c0a873eddc04c, type: 3}
   - {fileID: 21300000, guid: 469245a30d830d644b90b44b687250fe, type: 3}
   - {fileID: 21300000, guid: f1271bd6f37c2094fb2c7890b845569d, type: 3}
+  - {fileID: 21300000, guid: 3aea3929fb064054eb3acf8ed8879407, type: 3}
 --- !u!4 &1083359872
 Transform:
   m_ObjectHideFlags: 0
@@ -12661,11 +12662,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovieTheatreMetrics
       objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12770,6 +12766,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}
@@ -16813,11 +16814,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoalMineMetrics
       objectReference: {fileID: 0}
-    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
-        type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6474411928747412900, guid: e6cd9e713d2a4584b945b1edeee521ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16922,6 +16918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474411928747412903, guid: e6cd9e713d2a4584b945b1edeee521ce,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6cd9e713d2a4584b945b1edeee521ce, type: 3}

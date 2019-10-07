@@ -17,7 +17,7 @@ public class Tile
     private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
     "Race Track", "Wind Turbine", "Solar Farm"};
     private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo"};
+    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall"};
 
     Action<Tile> callbackTypeChanged;
     TileType type;
@@ -63,6 +63,7 @@ public class Tile
     }
     public bool placeBuilding(Building building)
     {
+        Debug.Log("Building Created");
         if (this.building == null){
             if (IsBuildable(building)){
                 this.building = building;

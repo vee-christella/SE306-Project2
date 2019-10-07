@@ -6,7 +6,7 @@ public class BuildingController : MonoBehaviour
 {
     public static BuildingController Instance { get; protected set; }
 
-    public Sprite[] buildingSprites = new Sprite[11];
+    public Sprite[] buildingSprites = new Sprite[12];
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +24,7 @@ public class BuildingController : MonoBehaviour
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
         if(building!= null)
         {
+            Debug.Log("Building added asdfqwer");
             GameObject buildingGO = new GameObject();
             buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
             buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
