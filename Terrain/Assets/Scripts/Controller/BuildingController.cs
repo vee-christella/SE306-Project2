@@ -24,18 +24,22 @@ public class BuildingController : MonoBehaviour
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
         if(building!= null)
         {
-            Debug.Log("Building added asdfqwer");
-            GameObject buildingGO = new GameObject();
-            buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
-            buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-            SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-            buildingSR.sortingLayerName="Building";
-            buildingSR.sprite = buildingSprites[building.Id];
+        //    GameObject buildingGO = new GameObject();
+       //     buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
+       //     buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+        //    SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
+       //     buildingSR.sortingLayerName="Building";
+        //    buildingSR.sprite = buildingSprites[building.Id];
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    public void ChangeBuildingSprite(Tile tile, GameObject buildingGO)
+    {
+        buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
     }
 }

@@ -81,7 +81,6 @@ public abstract class Building
         this.generateHappiness = genHappiness;
         this.turnsToBuild = buildTime;
 
-
     }
 
     /* This method is called each time a building is to be built on a tile. 
