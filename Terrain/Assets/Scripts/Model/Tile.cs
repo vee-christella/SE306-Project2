@@ -19,6 +19,7 @@ public class Tile
     private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
     "Race Track", "Wind Turbine", "Solar Farm", "Zoo"};
 
+    Action<Tile> callbackTypeChanged;
     TileType type;
     private int x;
     private int y;
@@ -26,7 +27,14 @@ public class Tile
     private Building building = null;
     private Game game;
 
-    public TileType Type { get => type; set => type = value; }
+    public TileType Type { get => type; set {
+            type = value;
+            if (callbackTypeChanged != null)
+            {
+                callbackTypeChanged(this);
+            }
+        }
+    }
     public int X { get => x; set => x = value; }
     public int Y { get => y; set => y = value; }
     public int Z { get => z; set => z = value; }
@@ -98,4 +106,8 @@ public class Tile
         return true;
     }
 
+    public void registerMethodCallbackTypeChanged(Action<Tile> method)
+    {
+        callbackTypeChanged += method;
+    }
 }
