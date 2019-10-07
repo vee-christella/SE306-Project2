@@ -169,9 +169,7 @@ public class Game
                 break;
             case "Town Hall":
                 building = new TownHall();
-                buildings[tile.X, tile.Y] = building;
-                UpdateMetrics(building);
-                return building;
+                break;
             default:
                 return null;
         }

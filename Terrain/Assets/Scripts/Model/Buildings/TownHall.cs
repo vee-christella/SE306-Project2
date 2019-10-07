@@ -5,7 +5,7 @@ using UnityEngine;
 public class TownHall : Building
 {
     // Initialise stats for each Coal Mine building
-    public TownHall() : base(11, -10, -50, 0, 15, -30, 0, 3)
+    public TownHall() : base(11, 0, 0, 0, 0, 0, 0, 0)
     {
         this.TypeOfBuilding = BuildingType.Misc;
         this.Name = "Town Hall";

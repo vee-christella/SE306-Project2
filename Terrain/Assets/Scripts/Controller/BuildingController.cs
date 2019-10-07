@@ -24,6 +24,7 @@ public class BuildingController : MonoBehaviour
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
         if(building!= null)
         {
+            Debug.Log("Building added asdfqwer");
             GameObject buildingGO = new GameObject();
             buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
             buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);

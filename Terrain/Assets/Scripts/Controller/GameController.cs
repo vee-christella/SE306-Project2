@@ -66,10 +66,10 @@ public class GameController : MonoBehaviour
 
 
                 Debug.Log("i = " + i + ", j = " + j);
-                Debug.Log(i == 4 && j == 7);
+                Debug.Log(i == 5 && j == 4);
 
                 // Place the TownHall
-                if (i == 8 && j == 5)
+                if (i == 5 && j == 4)
                 {
                     Debug.Log("BANANA");
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
