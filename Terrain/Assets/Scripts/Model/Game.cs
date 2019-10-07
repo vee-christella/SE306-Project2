@@ -18,7 +18,7 @@ public class Game
     float currentTurn;
     float maxTurns;
     float maxGreen;
-    bool isEnd;
+    bool isEnd = false;
     bool isVictory;
 
     public int Rows { get => rows; }
@@ -167,6 +167,11 @@ public class Game
             case "Forest":
                 building = new Forest();
                 break;
+            case "Town Hall":
+                building = new TownHall();
+                buildings[tile.X, tile.Y] = building;
+                UpdateMetrics(building);
+                return building;
             default:
                 return null;
         }

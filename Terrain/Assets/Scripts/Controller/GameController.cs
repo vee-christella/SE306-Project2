@@ -63,6 +63,17 @@ public class GameController : MonoBehaviour
 
                 tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+
+
+                Debug.Log("i = " + i + ", j = " + j);
+                Debug.Log(i == 4 && j == 7);
+
+                // Place the TownHall
+                if (i == 8 && j == 5)
+                {
+                    Debug.Log("BANANA");
+                    BuildingController.Instance.addBuildingToTile("Town Hall", tile);
+                }
             }
         }
 
@@ -120,7 +131,8 @@ public class GameController : MonoBehaviour
         if (tile.Type == Tile.TileType.Desert)
         {
             random = Random.Range(0, 1);
-        }else if(tile.Type == Tile.TileType.Mountain)
+        }
+        else if (tile.Type == Tile.TileType.Mountain)
         {
             random = Random.Range(2, 3);
         }
