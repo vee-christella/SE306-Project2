@@ -1083,8 +1083,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Terrain is an educational city builder game with the purpose of raising
-    awareness for the ever increasing threat of climate change.
+  m_Text: Terrain is a City-Builder game where you'll learn all about Climate Change!
 --- !u!222 &151120763
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4149,13 +4148,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "The map will consist of a randomly generated grid of tiles bring either
-    plains, mountains, desert or water body.\n\nYou will be in charge of placing/removing
-    buildings with the limited resources given, however each building can only be
-    built on certain tiles.\n\nThere are three main metrics you must focus on in this
-    game - money, green points and population happiness. Each building has its own
-    unique amount of metric generation or reduction. \n\nYou must make the decisions
-    on what to build by considering the impacts on the three metrics "
+  m_Text: 'Your city will have plains, desert, water, and mountains. Each building
+    can be built on different tiles, so make sure you place your buildings carefully!
+
+
+    At the end of the maximum number of turns, you need to make sure you gain as much
+    money, green points and happiness as possible!'
 --- !u!222 &423874261
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6340,11 +6338,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "The setting is set in the year 2050, climate change has been detrimental
-    and the world is on the verge of destruction. The prime minister has given you,
-    the mayor of a small city, a certain budget and deadline to develop and convert
-    their city in the most suitable manner in order to reduce the effect of climate
-    change, as well as satisfy the needs of their city and the population.\r\n"
+  m_Text: "The year is 2050.\n\nClimate Change has been destroying the world, and
+    it's your goal to save the world! \n\nYou are the mayor of a small city. As a
+    mayor, you need make sure that the city runs properly with enough money, citizen
+    happiness, while making sure you get as much green points as possible.\n"
 --- !u!222 &672532235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7573,16 +7570,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'The goal is to accumulate 1000 green points within the given timeframe.
-    If you run out of money or have population happiness go below zero, without accumulating
-    enough green points, you will lose.
-
-
-    Also be aware of the random events that will occur throughout the game, as they
-    can cause detrimental effects to your city if unprepared!
-
-
-    GOOD LUCK!'
+  m_Text: "To win this game, you have to get 1000 GREEN POINTS at the end of the time
+    given. \n\nBe careful not to lose too much money! You'll lose the game if you
+    go into debt. Also, you need to make sure your people are happy, or you'll lose
+    as well.\n\nLastly, make sure to prepare for some RANDOM EVENTS that might happen
+    to your city!\n\nGOOD LUCK, MAYOR!"
 --- !u!222 &743008861
 CanvasRenderer:
   m_ObjectHideFlags: 0
