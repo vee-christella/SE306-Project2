@@ -29,7 +29,7 @@ public class EndscreenController : MonoBehaviour
         }
         else
         {
-            if (GameController.Instance.Game.Green < GameController.Instance.Game.MaxGreen)
+            if ((GameController.Instance.Game.CurrentTurn >= GameController.Instance.Game.MaxTurns) && (GameController.Instance.Game.Green < GameController.Instance.Game.MaxGreen))
             {
                 endText.text = "YOU LOSE! NOT ENOUGH GREEN POINTS. THE WORLD IS RUINED!";
             }
