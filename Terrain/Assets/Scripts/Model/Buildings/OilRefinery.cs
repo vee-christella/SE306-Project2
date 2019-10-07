@@ -5,7 +5,7 @@ using UnityEngine;
 public class OilRefinery : Building
 {
     // Initialise stats for each Oil Refinery building
-    public OilRefinery() : base(6, -50, -80, -10, -20, 40, 0, 3)
+    public OilRefinery() : base(6, -20, -30, 0, 30, -20, 0, 3)
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Oil Refinery";
