@@ -7,17 +7,18 @@ public class AcidRain : Event
 
     private double probability;
 
-    public AcidRain()
+    public AcidRain(Game game) :base (-5,-1,-5)
     {
         this.Type = EventType.Random;
         this.Description = "";
+        this.Game = game;
     }
 
     public double Probability { get => probability; set => probability = value; }
 
     public override void TileDelta(Tile[,] tiles)
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
 }

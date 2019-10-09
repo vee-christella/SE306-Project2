@@ -1,12 +1,12 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WildFire : Event
+public class Heatwave : Event
 {
     private double probability;
 
-    public WildFire(Game game) : base (-5,-1,-5)
+    public Heatwave(Game game) : base(-5, -1, -5)
     {
         this.Type = EventType.Random;
         this.Game = game;

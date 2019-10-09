@@ -17,9 +17,10 @@ public class Tile
     private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
     "Race Track", "Wind Turbine", "Solar Farm"};
     private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo"};
+    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall"};
 
     Action<Tile> callbackTypeChanged;
+    Action<Tile> callbackBuildingChange;
     TileType type;
     private int x;
     private int y;
@@ -39,6 +40,7 @@ public class Tile
     public int Y { get => y; set => y = value; }
     public int Z { get => z; set => z = value; }
     public Building Building { get => building; }
+    public Action<Tile> CallbackBuildingChange { get => callbackBuildingChange;  }
 
     public Tile(Game game, TileType type, int x, int y, int z)
     {
@@ -63,14 +65,28 @@ public class Tile
     }
     public bool placeBuilding(Building building)
     {
+        Debug.Log("Building Created");
         if (this.building == null){
             if (IsBuildable(building)){
                 this.building = building;
+
+                if (CallbackBuildingChange != null)
+                {
+                    CallbackBuildingChange(this);
+                }
+
                 return true;
             }
         }
         return false;
     }
+
+    public void registerMethodCallbackBuildingCreated(Action<Tile> method)
+    {
+        callbackBuildingChange += method;
+    }
+
+
     public bool IsBuildable(Building building)
     {
         // No buildings can be built on mountain tiles

@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
+
 public class Game
 {
     int rows;
@@ -18,7 +24,7 @@ public class Game
     float currentTurn;
     float maxTurns;
     float maxGreen;
-    bool isEnd;
+    bool isEnd = false;
     bool isVictory;
 
     public int Rows { get => rows; }
@@ -87,6 +93,11 @@ public class Game
     {
         this.currentTurn++;
 
+        // Increase the metrics
+        Money = Money + GenerateMoney;
+        Green = Green + GenerateGreen;
+        Happiness = Happiness + GenerateHappiness;
+
         // Check if the user has won the game by reaching the number of green
         // points required
         if (this.green >= maxGreen)
@@ -111,16 +122,10 @@ public class Game
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
-            if (GameEvent.Type == Event.EventType.Transition)
-            {
-                GameEvent.TileDelta(tiles);
-            }
+            GameEvent.TileDelta(tiles);       
         }
 
-        // Increase the metrics
-        Money = Money + GenerateMoney;
-        Green = Green + GenerateGreen;
-        Happiness = Happiness + GenerateHappiness;
+
     }
 
     public void endGame(bool isVictory)
@@ -167,6 +172,9 @@ public class Game
             case "Forest":
                 building = new Forest();
                 break;
+            case "Town Hall":
+                building = new TownHall();
+                break;
             default:
                 return null;
         }
@@ -183,12 +191,18 @@ public class Game
             }
             else
             {
+                #if UNITY_EDITOR
+                EditorUtility.DisplayDialog("Failed to build " + building.Name, building.Name + " cannot be built on a " + tile.Type + " tile.", "OK");
+                #endif
                 // TODO: display pop up to say tile is unavailable to be built
                 return null;
             }
         }
         else
         {
+            #if UNITY_EDITOR
+            EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
+            #endif
             // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
 
@@ -205,8 +219,7 @@ public class Game
         Random random = new Random();
         if (currentTurn == 5)
         {
-            Debug.Log("turn 2");
-            return new Drought();
+            return new Drought(this);
         }
         else if (Random.Range(0, 100) < 10)
         {
@@ -222,10 +235,14 @@ public class Game
     {
         List<Event> randomEventList = new List<Event>();
 
-        randomEventList.Add(new AcidRain());
-        randomEventList.Add(new Earthquake());
-        randomEventList.Add(new ForestSpawn());
-        randomEventList.Add(new Tsunami());
+        randomEventList.Add(new AcidRain(this));
+        randomEventList.Add(new Earthquake(this));
+        randomEventList.Add(new ForestSpawn(this));
+        randomEventList.Add(new Tsunami(this));
+        randomEventList.Add(new Heatwave(this));
+        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new Flood(this));
+
 
         return randomEventList;
     }
@@ -234,6 +251,8 @@ public class Game
     // that has just been placed.
     public void UpdateMetrics(Building building)
     {
+
+
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
@@ -255,6 +274,7 @@ public class Game
         GenerateHappiness += building.GenerateHappiness;
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
+        GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
 
 
     }

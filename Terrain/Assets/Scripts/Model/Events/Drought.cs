@@ -5,11 +5,11 @@ using UnityEngine;
 public class Drought : Event
 {
     private int turnToOccur;
-
-    public Drought()
+    public Drought(Game game) :base(-5,-1,-5)
     {
         this.Type = EventType.Transition;
         this.Description = "Droughts everywhere are projected to become more intense, and summer temperatures are projected to continue rising.";
+        Game = game;
     }
 
     public int TurnToOccur { get => turnToOccur; set => turnToOccur = value; }
