@@ -47,6 +47,7 @@ public class Game
 
     public Game(int rows = 30, int columns = 30)
     {
+        AchievementManager.GetAchievementManager();
         this.isEnd = false;
         this.currentTurn = 0;
         this.rows = rows;
@@ -206,7 +207,8 @@ public class Game
                 UpdateMetrics(building);
                 creatingBuildings.Add(tile);
                 if(String.Equals(buildingType, "Oil Refinery")){
-                    Achievement.increaseAchievementCounter(AchievementType.Fail);
+                    Debug.Log("achievement Trigger " + AchievementType.Fail);
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
                 }
                 return building;
             }

@@ -46,12 +46,4 @@ public class Achievement
         return achievementComplete;
     }
 
-    public static void increaseAchievementCounter(AchievementType type){
-        if(!achievements[(int) type].achievementComplete){
-            if(achievements[(int) type].upAchievementCounter() && achievements[(int) type].CallbackAchievementCount!= null){
-                Debug.Log("AchievementComplete: " + achievements[(int) type].Title);
-                achievements[(int) type].CallbackAchievementCount(achievements[(int) type]);
-            }
-        }
-    }
 }
