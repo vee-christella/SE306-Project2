@@ -236,13 +236,13 @@ public class Game
         List<Event> randomEventList = new List<Event>();
 
         randomEventList.Add(new AcidRain(this));
-        randomEventList.Add(new Earthquake(this));
-        randomEventList.Add(new ForestSpawn(this));
-        randomEventList.Add(new Tsunami(this));
-        randomEventList.Add(new Heatwave(this));
-        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new Drought(this));
         randomEventList.Add(new Flood(this));
-
+        randomEventList.Add(new Hurricane(this));
+        randomEventList.Add(new ForestSpawn(this));
+        randomEventList.Add(new RisingSeaLevel(this));
+        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new HeatWave(this));
 
         return randomEventList;
     }
