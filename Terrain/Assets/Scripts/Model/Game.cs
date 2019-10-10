@@ -20,6 +20,7 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
+    GameDifficulty gameDifficulty;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
@@ -41,6 +42,11 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+
+    public enum GameDifficulty
+    {
+        Easy, Medium, Hard
+    };
 
     public Game(int rows = 30, int columns = 30)
     {
@@ -119,9 +125,9 @@ public class Game
 
         if (GameEvent != null)
         {
-            GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
-            GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
-            GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+            Money = Money + GameEvent.MoneyDelta;
+            Happiness = Happiness + GameEvent.HappinessDelta;
+            Green = Green + GameEvent.GreenPointDelta;
             GameEvent.TileDelta(tiles);       
         }
 
@@ -216,6 +222,21 @@ public class Game
     public Event EventForNextTurn()
     {
         List<Event> randomEventList = InitaliseRandomEventList();
+        int probability;
+
+
+        switch (gameDifficulty) {
+            case GameDifficulty.Easy:
+                probability = 0;
+                break;
+            case GameDifficulty.Medium:
+                probability = 5;
+                break;
+            case GameDifficulty.Hard:
+                probability = 15;
+                break;
+        }
+
         Random random = new Random();
         if (currentTurn == 5)
         {
@@ -242,7 +263,7 @@ public class Game
         randomEventList.Add(new Heatwave(this));
         randomEventList.Add(new Wildfire(this));
         randomEventList.Add(new Flood(this));
-
+        randomEventList.Add(new Drought(this));
 
         return randomEventList;
     }
