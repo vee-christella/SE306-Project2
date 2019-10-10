@@ -195,9 +195,15 @@ public class Game
             }
             else
             {
-           
-                // Show error message
-                GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
+                if (tile.Building != null)
+                {
+                    GameController.Instance.ShowError("Another building already exists on this tile.");
+                }
+                else
+                {
+                    // Show error message
+                    GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
+                }
 
                 return null;
             }
