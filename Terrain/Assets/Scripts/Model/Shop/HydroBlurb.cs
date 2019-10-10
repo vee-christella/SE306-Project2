@@ -12,16 +12,21 @@ public class HydroBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public GameObject blurbObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         Building hydro = new Hydro();
+        goldCost.text = " "+hydro.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+hydro.InitialBuildGreen.ToString();
+        happinessCost.text = " "+hydro.InitialBuildHappiness.ToString()+"%";
         blurb.text = hydro.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + hydro.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + hydro.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + hydro.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS"+
         "\n\nMoney per turn: " + hydro.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + hydro.GenerateGreen.ToString() +
         "\nHappiness per turn: " + hydro.GenerateHappiness.ToString();

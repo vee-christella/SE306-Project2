@@ -12,16 +12,21 @@ public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public GameObject blurbObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         OilRefinery oilRefinery = new OilRefinery();
+        goldCost.text = " "+oilRefinery.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+oilRefinery.InitialBuildGreen.ToString();
+        happinessCost.text = " "+oilRefinery.InitialBuildHappiness.ToString()+"%";
         blurb.text = oilRefinery.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + oilRefinery.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + oilRefinery.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + oilRefinery.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS"+
         "\n\nMoney per turn: " + oilRefinery.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + oilRefinery.GenerateGreen.ToString() +
         "\nHappiness per turn: " + oilRefinery.GenerateHappiness.ToString();

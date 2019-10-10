@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CoalMineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    CoalMine coalMine = new CoalMine();
     public Text blurb;
     public Text metrics;
     public GameObject metricsObject;
@@ -13,15 +14,19 @@ public class CoalMineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public GameObject panel;
     public Button endTurn;
 
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
+    
     // Start is called before the first frame update
     void Start()
     {
-        CoalMine coalMine = new CoalMine();
+        goldCost.text = " "+coalMine.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+coalMine.InitialBuildGreen.ToString();
+        happinessCost.text = " "+coalMine.InitialBuildHappiness.ToString()+"%";
         blurb.text = coalMine.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + coalMine.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + coalMine.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + coalMine.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS" + 
         "\n\nMoney per turn: " + coalMine.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + coalMine.GenerateGreen.ToString() +
         "\nHappiness per turn: " + coalMine.GenerateHappiness.ToString();

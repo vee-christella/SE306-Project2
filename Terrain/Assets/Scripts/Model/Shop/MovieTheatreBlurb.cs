@@ -12,16 +12,21 @@ public class MovieTheatreBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public GameObject blurbObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         MovieTheatre movieTheatre = new MovieTheatre();
+        goldCost.text = " "+movieTheatre.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+movieTheatre.InitialBuildGreen.ToString();
+        happinessCost.text = " "+movieTheatre.InitialBuildHappiness.ToString()+"%";
         blurb.text = movieTheatre.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + movieTheatre.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + movieTheatre.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + movieTheatre.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS"+
         "\n\nMoney per turn: " + movieTheatre.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + movieTheatre.GenerateGreen.ToString() +
         "\nHappiness per turn: " + movieTheatre.GenerateHappiness.ToString();

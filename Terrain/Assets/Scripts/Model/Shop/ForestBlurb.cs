@@ -12,16 +12,21 @@ public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject metricsObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         Forest forest = new Forest();
+        goldCost.text = " "+forest.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+forest.InitialBuildGreen.ToString();
+        happinessCost.text = " "+forest.InitialBuildHappiness.ToString()+"%";
         blurb.text = forest.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + forest.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + forest.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + forest.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS" +
         "\n\nMoney per turn: " + forest.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + forest.GenerateGreen.ToString() +
         "\nHappiness per turn: " + forest.GenerateHappiness.ToString();

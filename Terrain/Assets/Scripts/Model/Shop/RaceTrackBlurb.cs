@@ -12,16 +12,21 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public GameObject blurbObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         RaceTrack raceTrack = new RaceTrack();
+        goldCost.text = " "+raceTrack.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+raceTrack.InitialBuildGreen.ToString();
+        happinessCost.text = " "+raceTrack.InitialBuildHappiness.ToString()+"%";
         blurb.text = raceTrack.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + raceTrack.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + raceTrack.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + raceTrack.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS"+
         "\n\nMoney per turn: " + raceTrack.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + raceTrack.GenerateGreen.ToString() +
         "\nHappiness per turn: " + raceTrack.GenerateHappiness.ToString();

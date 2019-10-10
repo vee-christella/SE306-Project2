@@ -12,16 +12,21 @@ public class NationalParkBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public GameObject blurbObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         NationalPark nationalPark = new NationalPark();
+        goldCost.text = " "+nationalPark.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+nationalPark.InitialBuildGreen.ToString();
+        happinessCost.text = " "+nationalPark.InitialBuildHappiness.ToString()+"%";
         blurb.text = nationalPark.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + nationalPark.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + nationalPark.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + nationalPark.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS"+
         "\n\nMoney per turn: " + nationalPark.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + nationalPark.GenerateGreen.ToString() +
         "\nHappiness per turn: " + nationalPark.GenerateHappiness.ToString();

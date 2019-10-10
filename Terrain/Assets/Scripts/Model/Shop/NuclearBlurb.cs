@@ -12,16 +12,21 @@ public class NuclearBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public GameObject blurbObject;
     public GameObject panel;
     public Button endTurn;
+    
+    public Text goldCost;
+    public Text greenPointsCost;
+    public Text happinessCost;
+    public Text name;
 
     // Start is called before the first frame update
     void Start()
     {
         Nuclear nuclear = new Nuclear();
+        goldCost.text = " "+nuclear.InitialBuildMoney.ToString();
+        greenPointsCost.text = " "+nuclear.InitialBuildGreen.ToString();
+        happinessCost.text = " "+nuclear.InitialBuildHappiness.ToString()+"%";
         blurb.text = nuclear.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + nuclear.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + nuclear.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + nuclear.InitialBuildHappiness.ToString() +
+        metrics.text = "METRICS"+
         "\n\nMoney per turn: " + nuclear.GenerateMoney.ToString() +
         "\nGreen Points per turn: " + nuclear.GenerateGreen.ToString() +
         "\nHappiness per turn: " + nuclear.GenerateHappiness.ToString();
