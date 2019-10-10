@@ -29,6 +29,10 @@ public class Drought : Event
                     // 50% chance to change tiles to desert
                     if (random == 1)
                     {
+                        if (doDestroyBuildings)
+                        {
+
+                        }
                         tiles[i, j].Type = Tile.TileType.Desert;
                     }
                 }
