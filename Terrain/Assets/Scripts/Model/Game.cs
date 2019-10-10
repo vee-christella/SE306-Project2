@@ -289,6 +289,9 @@ public class Game
                 GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                tile.Building.GenerateGreen = 0;
+                tile.Building.GenerateHappiness = 0;
+                tile.Building.GenerateMoney = 0;
             }
         }
     }
