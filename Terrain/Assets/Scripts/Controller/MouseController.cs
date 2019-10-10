@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 public class MouseController : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class MouseController : MonoBehaviour
 
     public Text cancelButtonString;
 
+    private TextMeshProUGUI toolTipText;
+
     Vector3 lastFramePosition;
     // Start is called before the first frame update
     void Start()
     {
-        
+        toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -57,6 +60,8 @@ public class MouseController : MonoBehaviour
                         //Show tooltip
                         toolTip.SetActive(true);
                         toolTip.transform.position = Input.mousePosition;
+                        SetToolTipText(tileUnderMouse.Building);
+                        
                     }
                     else
                     {
@@ -83,6 +88,7 @@ public class MouseController : MonoBehaviour
                         Debug.Log("Building Selected");
                         toolTip.SetActive(true);                 
                         toolTip.transform.position = Input.mousePosition;
+                        SetToolTipText(tileUnderMouse.Building);
 
 
 
@@ -150,5 +156,32 @@ public class MouseController : MonoBehaviour
 
     public void setNull(){
         buildingForCreating = null;
+    }
+
+    private void SetToolTipText(Building building)
+    {
+
+        //toolTipText.SetText("TestText");
+        string name = building.Name;
+        string money, green, happiness;
+
+        money = deltaToString(building.GenerateMoney);
+        green = deltaToString(building.GenerateGreen);
+        happiness = deltaToString(building.GenerateHappiness);
+
+        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness);
+
+    }
+
+    private string deltaToString(float delta) 
+    {
+        if (delta >= 0)
+        {
+            return "+ " + delta.ToString();
+
+        }
+        return delta.ToString();
+
+
     }
 }
