@@ -27,6 +27,7 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+  
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -42,6 +43,7 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+    public Tile[,] Tiles { get => tiles; set => tiles = value; }
 
     public enum GameDifficulty
     {
@@ -54,16 +56,17 @@ public class Game
         this.currentTurn = 0;
         this.rows = rows;
         this.columns = columns;
-        tiles = new Tile[rows, columns];
+        Tiles = new Tile[rows, columns];
         buildings = new Building[rows, columns];
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < columns; j++)
             {
-                tiles[i, j] = new Tile(this, i, j);
-                tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
+                Tiles[i, j] = new Tile(this, i, j);
+                Tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
+
         Debug.Log("game created");
     }
 
@@ -74,7 +77,7 @@ public class Game
         {
             return null;
         }
-        return tiles[x, y];
+        return Tiles[x, y];
     }
 
     public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
@@ -128,7 +131,7 @@ public class Game
             Money = Money + GameEvent.MoneyDelta;
             Happiness = Happiness + GameEvent.HappinessDelta;
             Green = Green + GameEvent.GreenPointDelta;
-            GameEvent.TileDelta(tiles);       
+         //   GameEvent.TileDelta(Tiles);       
         }
 
 
@@ -222,8 +225,7 @@ public class Game
     public Event EventForNextTurn()
     {
         List<Event> randomEventList = InitaliseRandomEventList();
-        int probability;
-
+        int probability = 0;
 
         switch (gameDifficulty) {
             case GameDifficulty.Easy:
@@ -237,12 +239,7 @@ public class Game
                 break;
         }
 
-        Random random = new Random();
-        if (currentTurn == 5)
-        {
-            return new Drought(this);
-        }
-        else if (Random.Range(0, 100) < 10)
+        if (Random.Range(1, 101) < probability)
         {
             return randomEventList[Random.Range(0, randomEventList.Count)];
         }
@@ -250,20 +247,19 @@ public class Game
         return null;
     }
 
-
     // method to create list of all random events
     public List<Event> InitaliseRandomEventList()
     {
         List<Event> randomEventList = new List<Event>();
 
         randomEventList.Add(new AcidRain(this));
-        randomEventList.Add(new Earthquake(this));
-        randomEventList.Add(new ForestSpawn(this));
-        randomEventList.Add(new Tsunami(this));
-        randomEventList.Add(new Heatwave(this));
-        randomEventList.Add(new Wildfire(this));
-        randomEventList.Add(new Flood(this));
         randomEventList.Add(new Drought(this));
+        randomEventList.Add(new Flood(this));
+        randomEventList.Add(new Hurricane(this));
+        randomEventList.Add(new ForestSpawn(this));
+        randomEventList.Add(new RisingSeaLevel(this));
+        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new HeatWave(this));
 
         return randomEventList;
     }

@@ -85,8 +85,6 @@ public class GameController : MonoBehaviour
                     Debug.Log("BANANA");
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
-
-                
             }
         }
 
@@ -101,8 +99,10 @@ public class GameController : MonoBehaviour
 
         if (game.GameEvent != null)
         {
-            EventController.DisplayPopup(game.GameEvent);
+           EventController.DisplayPopup(game.GameEvent);
         }
+
+        game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
 
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
