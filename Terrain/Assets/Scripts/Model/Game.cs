@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,6 +27,9 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+
+    GameObject errorMessage;
+
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -191,18 +195,21 @@ public class Game
             }
             else
             {
-                #if UNITY_EDITOR
-                EditorUtility.DisplayDialog("Failed to build " + building.Name, building.Name + " cannot be built on a " + tile.Type + " tile.", "OK");
-                #endif
-                // TODO: display pop up to say tile is unavailable to be built
+           
+                GameController.Instance.ShowError("Failed to build " + building.Name + ". " + building.Name + " cannot be built on a " + tile.Type + " tile.");
+
                 return null;
             }
         }
         else
         {
-            #if UNITY_EDITOR
-            EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
-            #endif
+
+            GameController.Instance.ShowError("Failed to build: " + building.Name + ". " + "You do not have enough money to build this building.");
+            Debug.Log("No Money");
+
+            //#if UNITY_EDITOR
+            //EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
+            //#endif
             // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
 

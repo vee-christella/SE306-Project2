@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
+
+    public GameObject errorMessage;
     // Start is called before the first frame update
     void Start()
     {
@@ -191,6 +193,12 @@ public class GameController : MonoBehaviour
         tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
 
     }
+
+    public void ShowError(string textToShow)
+    { 
+        errorMessage.SetActive(true);
+    }
+
 
     public void OnBuildingChange(Tile tile, GameObject buildingGO)
     {
