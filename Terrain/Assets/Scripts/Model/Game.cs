@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -204,6 +205,9 @@ public class Game
                 buildings[tile.X, tile.Y] = building;
                 UpdateMetrics(building);
                 creatingBuildings.Add(tile);
+                if(String.Equals(buildingType, "Oil Refinery")){
+                    Achievement.increaseAchievementCounter(AchievementType.Fail);
+                }
                 return building;
             }
             else
@@ -233,14 +237,14 @@ public class Game
     public Event EventForNextTurn()
     {
         List<Event> randomEventList = InitaliseRandomEventList();
-        Random random = new Random();
+        UnityEngine.Random random = new UnityEngine.Random();
         if (currentTurn == 5)
         {
             return new Drought(this);
         }
-        else if (Random.Range(0, 100) < 10)
+        else if (UnityEngine.Random.Range(0, 100) < 10)
         {
-            return randomEventList[Random.Range(0, randomEventList.Count)];
+            return randomEventList[UnityEngine.Random.Range(0, randomEventList.Count)];
         }
 
         return null;
@@ -303,9 +307,11 @@ public class Game
         {
             if (!tile.IsBuildable(tile.Building))
             {
-                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
-                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
-                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                if(tile.Building.CurrentConstructionTurn>=tile.Building.TurnsToBuild){
+                    GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                    GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                    GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                }
             }
         }
     }
