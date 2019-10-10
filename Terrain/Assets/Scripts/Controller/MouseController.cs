@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class MouseController : MonoBehaviour
 {
 
+    public GameObject toolTip;
+
     private string buildingForCreating = null;
 
     private bool buildingIsSelected = false;
@@ -48,10 +50,12 @@ public class MouseController : MonoBehaviour
                         buildingIsSelected = true;
                         Debug.Log("Building Selected");
                         //Show tooltip
+                        toolTip.SetActive(true);
                     }
                     else
                     {
                         //Remove tooltip
+                        toolTip.SetActive(false);
                         buildingIsSelected = false;
                         Debug.Log("Building Deselected");
                     }
@@ -71,7 +75,7 @@ public class MouseController : MonoBehaviour
                     {
                         buildingIsSelected = true;
                         Debug.Log("Building Selected");
-                        //Show tooltip
+                        toolTip.SetActive(true);
 
 
                     }
