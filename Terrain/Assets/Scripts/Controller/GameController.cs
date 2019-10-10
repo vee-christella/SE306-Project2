@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
+    public TextMeshProUGUI errorText;
 
     public GameObject errorMessage;
     // Start is called before the first frame update
@@ -196,6 +197,9 @@ public class GameController : MonoBehaviour
 
     public void ShowError(string textToShow)
     { 
+
+        //errorText = (TextMeshProUGUI)errorMessage.GetComponentInChildren(typeof(TextMeshProUGUI), true);
+        errorText.text = textToShow;
         errorMessage.SetActive(true);
     }
 

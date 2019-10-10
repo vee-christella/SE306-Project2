@@ -196,7 +196,8 @@ public class Game
             else
             {
            
-                GameController.Instance.ShowError("Failed to build " + building.Name + ". " + building.Name + " cannot be built on a " + tile.Type + " tile.");
+                // Show error message
+                GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
 
                 return null;
             }
@@ -204,13 +205,9 @@ public class Game
         else
         {
 
-            GameController.Instance.ShowError("Failed to build: " + building.Name + ". " + "You do not have enough money to build this building.");
-            Debug.Log("No Money");
+            // Show error message
+            GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
-            //#if UNITY_EDITOR
-            //EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
-            //#endif
-            // TODO: display pop up to say "INSUFFICIENT FUNDS"
             return null;
 
         }
