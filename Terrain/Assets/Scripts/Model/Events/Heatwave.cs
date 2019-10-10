@@ -16,6 +16,6 @@ public class HeatWave : Event
 
     public override void TileDelta(Tile[,] tiles)
     {
-        return;
+        throw new System.NotImplementedException();
     }
 }
