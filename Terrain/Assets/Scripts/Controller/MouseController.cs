@@ -9,6 +9,8 @@ public class MouseController : MonoBehaviour
 
     private string buildingForCreating = null;
 
+    private bool buildingIsSelected = false;
+
     public Text cancelButtonString;
 
     Vector3 lastFramePosition;
@@ -39,12 +41,39 @@ public class MouseController : MonoBehaviour
             Tile tileUnderMouse = getTileAtMouse(currFramePosition);
             if (tileUnderMouse != null)
             {
-                if (buildingForCreating != null)
+                if (buildingIsSelected)
                 {
-                    if(BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                    if (tileUnderMouse.Building != null)
                     {
+                        buildingIsSelected = true;
+                        Debug.Log("Building Selected");
+                        //Show tooltip
+                    }
+                    else
+                    {
+                        //Remove tooltip
+                        buildingIsSelected = false;
+                        Debug.Log("Building Deselected");
+                    }
+             
+                }
+                else
+                {
+                    if (buildingForCreating != null) //Building has been selected to build
+                    {
+                        if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                        {
 
-                        Debug.Log("Building "+ buildingForCreating+ " Created at " +"(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                            Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                        }
+                    }
+                    else if (tileUnderMouse.Building != null)
+                    {
+                        buildingIsSelected = true;
+                        Debug.Log("Building Selected");
+                        //Show tooltip
+
+
                     }
                 }
             }
