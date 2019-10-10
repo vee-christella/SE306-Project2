@@ -37,13 +37,18 @@ public class MouseController : MonoBehaviour
         {
             Vector3 diff = lastFramePosition - currFramePosition;
             Camera.main.transform.Translate(diff);
+
+            //Remove tooltip
+            toolTip.SetActive(false);
+            buildingIsSelected = false;
+            Debug.Log("Building Deselected");
         }
         if (Input.GetMouseButtonUp(0))
         {
             Tile tileUnderMouse = getTileAtMouse(currFramePosition);
             if (tileUnderMouse != null)
             {
-                if (buildingIsSelected)
+                if (buildingIsSelected) 
                 {
                     if (tileUnderMouse.Building != null)
                     {
@@ -51,6 +56,7 @@ public class MouseController : MonoBehaviour
                         Debug.Log("Building Selected");
                         //Show tooltip
                         toolTip.SetActive(true);
+                        toolTip.transform.position = Input.mousePosition;
                     }
                     else
                     {
@@ -75,7 +81,9 @@ public class MouseController : MonoBehaviour
                     {
                         buildingIsSelected = true;
                         Debug.Log("Building Selected");
-                        toolTip.SetActive(true);
+                        toolTip.SetActive(true);                 
+                        toolTip.transform.position = Input.mousePosition;
+
 
 
                     }
