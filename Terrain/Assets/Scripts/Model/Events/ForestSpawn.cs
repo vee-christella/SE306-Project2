@@ -12,7 +12,6 @@ public class ForestSpawn : Event
         this.Game = game;
     }
 
-
     public double Probability { get => probability; set => probability = value; }
 
     public override void TileDelta(Tile[,] tiles)
