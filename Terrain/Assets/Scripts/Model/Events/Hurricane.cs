@@ -6,7 +6,7 @@ public class Hurricane : Event
 {
     private double probability;
 
-    public Earthquake(Game game) :base (-5,-1,-5)
+    public Hurricane(Game game) :base (-5,-1,-5)
     {
         this.Type = EventType.Random;
         this.Game = game;
@@ -15,7 +15,7 @@ public class Hurricane : Event
 
     public double Probability { get => probability; set => probability = value; }
 
-    public override void TitleDelta()
+    public override void TileDelta(Tile[,] tiles)
     {
         return;
     }
