@@ -211,6 +211,18 @@ public class Game
 
     }
 
+    public void SellBuilding(Tile tile)
+    {
+        Debug.Log("Yeet");
+        Building building = tile.Building;
+        buildings[tile.X, tile.Y] = null;
+        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        Money += CostToSell;
+
+        tile.placeBuilding(null);
+
+    }
+
 
     // get the event  for the next turn
     public Event EventForNextTurn()
