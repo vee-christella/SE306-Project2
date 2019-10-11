@@ -7,6 +7,7 @@ using TMPro;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 public class MouseController : MonoBehaviour
 {
+    public static MouseController Instance { get; protected set; }
 
     public GameObject toolTip;
 
@@ -51,11 +52,7 @@ public class MouseController : MonoBehaviour
             Camera.main.transform.Translate(diff);
 
             //Remove tooltip
-            toolTip.SetActive(false);
-            buildingIsSelected = false;
-            sellText.text = "Sell: ";
-            sellButton.interactable = false;
-            Debug.Log("Building Deselected");
+            RemoveTooltip();
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -67,24 +64,12 @@ public class MouseController : MonoBehaviour
                 {
                     if (tileUnderMouse.Building != null)
                     {
-                        buildingIsSelected = true;
-                        Debug.Log("Building Selected");
-                        //Show tooltip
-                        toolTip.SetActive(true);
-                        toolTip.transform.position = Input.mousePosition;
-                        SetToolTipText(tileUnderMouse.Building);
-                        sellText.text = "Sell: " + getSellPrice(tileUnderMouse.Building);
-                        sellButton.interactable = true;
-                        
+                        SetToolTip(tileUnderMouse.Building);
                     }
                     else
                     {
                         //Remove tooltip
-                        toolTip.SetActive(false);
-                        buildingIsSelected = false;
-                        sellText.text = "Sell: ";
-                        sellButton.interactable = false;
-                        Debug.Log("Building Deselected");
+                        RemoveTooltip();
                     }
              
                 }
@@ -101,15 +86,11 @@ public class MouseController : MonoBehaviour
                     else if (tileUnderMouse.Building != null)
                     {
                         buildingIsSelected = true;
-                        Debug.Log("Building Selected");
-                        toolTip.SetActive(true);                 
-                        toolTip.transform.position = Input.mousePosition;
-                        SetToolTipText(tileUnderMouse.Building);
-                        sellText.text = "Sell: " + getSellPrice(tileUnderMouse.Building);
-                        sellButton.interactable = true;
+                        SetToolTip(tileUnderMouse.Building);
 
-
-
+                    } else if (tileUnderMouse.Building == null)
+                    {
+                        RemoveTooltip();
                     }
                 }
             }
@@ -212,6 +193,32 @@ public class MouseController : MonoBehaviour
 
     public void SellBuilding()
     {
-        GameController.Instance.Game.SellBuilding(tileSelected);
+        if (tileSelected.Building.Name != "Town Hall")
+        {
+            GameController.Instance.Game.SellBuilding(tileSelected);
+            RemoveTooltip();
+        } 
+       
+    }
+
+    public void RemoveTooltip()
+    {
+        toolTip.SetActive(false);
+        buildingIsSelected = false;
+        sellText.text = "Sell: ";
+        sellButton.interactable = false;
+        Debug.Log("Building Deselected");
+    }
+
+    public void SetToolTip(Building building) {
+        toolTip.SetActive(true);
+        toolTip.transform.position = Input.mousePosition;
+        SetToolTipText(building);
+
+        if (building.Name != "Town Hall")
+        {
+            sellText.text = "Sell: " + getSellPrice(building);
+            sellButton.interactable = true;
+        }
     }
 }

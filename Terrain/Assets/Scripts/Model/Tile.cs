@@ -83,6 +83,8 @@ public class Tile
                 return true;
             }
         }
+
+        Debug.Log(building.Name);
         return false;
     }
 

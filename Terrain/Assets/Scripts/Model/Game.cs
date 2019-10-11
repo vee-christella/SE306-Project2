@@ -216,14 +216,14 @@ public class Game
         Debug.Log("Yeet");
         Building building = tile.Building;
         float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
-        GameController.Instance.SetMetrics(Money, Green, Happiness);
         if (tile.removeBuilding())
         {
-            Debug.Log(tile.Building.Name);
             buildings[tile.X, tile.Y] = null;
             Money += CostToSell;
+            GameController.Instance.SetMetrics(Money, Green, Happiness);
+
         }
-        
+
 
 
     }
