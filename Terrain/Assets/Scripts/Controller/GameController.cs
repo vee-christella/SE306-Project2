@@ -10,11 +10,15 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; protected set; }
     Game game;
     EventController eventController;
+    private GameGrid gameGrid;
+
 
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
 
-    public Sprite[] sprites = new Sprite[7];
+    // public Sprite[] sprites = new Sprite[7];
+
+    public GameObject[] tileGameObjs = new GameObject[4];
 
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
@@ -31,44 +35,55 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
         Game = new Game(10, 10);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
+
         for (int i = 0; i < Game.Rows; i++)
         {
             for (int j = 0; j < Game.Columns; j++)
             {
                 Tile tile = Game.getTileAt(i, j);
 
-                GameObject tileGO = new GameObject();
+                // GameObject tileGO = new GameObject();
+                GameObject tileGO = Instantiate(tileGameObjs[Random.Range(0, 4)]) as GameObject;
+
                 tileGO.name = "Tile(" + i + ", " + j + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-                SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                tileSR.sortingLayerName = "Tile";
+                Vector3 vect = new Vector3(i, 1, j);
+                var finalPosition = gameGrid.GetNearestPointOnGrid(vect);
+                tileGO.transform.position = finalPosition;
 
-                int random = Random.Range(0, 7);
 
-                switch (PrototypeLevel.Arr[i, j])
-                {
-                    case 0:
-                    case 1:
-                        tile.setType(Tile.TileType.Desert);
-                        break;
-                    case 2:
-                    case 3:
-                        tile.setType(Tile.TileType.Mountain);
-                        break;
-                    case 4:
-                    case 5:
-                        tile.setType(Tile.TileType.Plain);
-                        break;
-                    case 6:
-                        tile.setType(Tile.TileType.Water);
-                        break;
-                }
 
-                tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
+
+                // SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
+                // tileSR.sortingLayerName = "Tile";
+
+                // int random = Random.Range(0, 7);
+
+                // switch (PrototypeLevel.Arr[i, j])
+                // {
+                //     case 0:
+                //     case 1:
+                //         tile.setType(Tile.TileType.Desert);
+                //         break;
+                //     case 2:
+                //     case 3:
+                //         tile.setType(Tile.TileType.Mountain);
+                //         break;
+                //     case 4:
+                //     case 5:
+                //         tile.setType(Tile.TileType.Plain);
+                //         break;
+                //     case 6:
+                //         tile.setType(Tile.TileType.Water);
+                //         break;
+                // }
+
+                // tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
 
@@ -89,12 +104,13 @@ public class GameController : MonoBehaviour
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
 
-                
+
             }
         }
 
         StartingMetrics();
         Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
+        Camera.main.transform.eulerAngles = new Vector3(20, 0, 0);
 
     }
 
@@ -139,7 +155,7 @@ public class GameController : MonoBehaviour
 
     public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
     {
-        if(coinDelta < 0)
+        if (coinDelta < 0)
         {
             coinDeltaText.text = coinDelta.ToString();
         }
@@ -148,11 +164,12 @@ public class GameController : MonoBehaviour
             coinDeltaText.text = "+ " + coinDelta.ToString();
         }
 
-        if(greenDelta < 0)
+        if (greenDelta < 0)
         {
             greenDeltaText.text = greenDelta.ToString();
 
-        } else
+        }
+        else
         {
             greenDeltaText.text = "+ " + greenDelta.ToString();
         }
@@ -160,7 +177,8 @@ public class GameController : MonoBehaviour
         if (happinessDelta < 0)
         {
             happinessDeltaText.text = happinessDelta.ToString();
-        } else
+        }
+        else
         {
             happinessDeltaText.text = "+ " + happinessDelta.ToString();
         }
@@ -191,12 +209,12 @@ public class GameController : MonoBehaviour
         {
             random = 6;
         }
-        tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
+        // tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
 
     }
 
     public void ShowError(string textToShow)
-    { 
+    {
 
         //errorText = (TextMeshProUGUI)errorMessage.GetComponentInChildren(typeof(TextMeshProUGUI), true);
         errorText.text = textToShow;
