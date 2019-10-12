@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
     {
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
-        Game = new Game(10, 10);
+        Game = new Game(20, 20);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
 
         for (int i = 0; i < Game.Rows; i++)
@@ -110,7 +110,7 @@ public class GameController : MonoBehaviour
 
         StartingMetrics();
         Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
-        Camera.main.transform.eulerAngles = new Vector3(20, 0, 0);
+        Camera.main.transform.eulerAngles = new Vector3(25, 0, 0);
 
     }
 
