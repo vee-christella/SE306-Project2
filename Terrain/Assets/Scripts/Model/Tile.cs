@@ -13,7 +13,7 @@ public class Tile
         Water
     };
 
-    private List<string> waterBuildable = new List<string>(){"Hydro Plant"};
+    private List<string> waterBuildable = new List<string>() { "Hydro Plant" };
     private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
     "Race Track", "Wind Turbine", "Solar Farm"};
     private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
@@ -28,7 +28,10 @@ public class Tile
     private Building building = null;
     private Game game;
 
-    public TileType Type { get => type; set {
+    public TileType Type
+    {
+        get => type; set
+        {
             type = value;
             if (callbackTypeChanged != null)
             {
@@ -40,7 +43,7 @@ public class Tile
     public int Y { get => y; set => y = value; }
     public int Z { get => z; set => z = value; }
     public Building Building { get => building; }
-    public Action<Tile> CallbackBuildingChange { get => callbackBuildingChange;  }
+    public Action<Tile> CallbackBuildingChange { get => callbackBuildingChange; }
 
     public Tile(Game game, TileType type, int x, int y, int z)
     {
@@ -51,12 +54,12 @@ public class Tile
         this.z = z;
     }
 
-    public Tile(Game game, int x, int y)
+    public Tile(Game game, int x, int z)
     {
         this.game = game;
         this.x = x;
-        this.y = y;
-        this.z = 0;
+        this.y = 0;
+        this.z = z;
     }
 
     public void setType(TileType type)
@@ -66,8 +69,10 @@ public class Tile
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
-        if (this.building == null){
-            if (IsBuildable(building)){
+        if (this.building == null)
+        {
+            if (IsBuildable(building))
+            {
                 this.building = building;
 
                 if (CallbackBuildingChange != null)
@@ -101,8 +106,8 @@ public class Tile
             {
                 return false;
             }
-        } 
-        
+        }
+
         else if (this.type == Tile.TileType.Desert)
         {
             if (!desertBuildable.Contains(building.Name))
@@ -110,7 +115,7 @@ public class Tile
                 return false;
             }
         }
-        
+
         else if (this.type == Tile.TileType.Plain)
         {
             if (!plainBuildable.Contains(building.Name))

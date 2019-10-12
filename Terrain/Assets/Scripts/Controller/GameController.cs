@@ -40,19 +40,19 @@ public class GameController : MonoBehaviour
         Game = new Game(20, 20);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
 
-        for (int i = 0; i < Game.Rows; i++)
+        for (int x = 0; x < Game.Rows; x++)
         {
-            for (int j = 0; j < Game.Columns; j++)
+            for (int z = 0; z < Game.Columns; z++)
             {
-                Tile tile = Game.getTileAt(i, j);
+                Tile tile = Game.getTileAt(x, z);
 
                 // GameObject tileGO = new GameObject();
                 GameObject tileGO = Instantiate(tileGameObjs[Random.Range(0, 4)]) as GameObject;
 
-                tileGO.name = "Tile(" + i + ", " + j + ")";
+                tileGO.name = "Tile(" + x + ", " + z + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-                Vector3 vect = new Vector3(i, 1, j);
+                Vector3 vect = new Vector3(x, 1, z);
                 var finalPosition = gameGrid.GetNearestPointOnGrid(vect);
                 tileGO.transform.position = finalPosition;
 
@@ -87,8 +87,8 @@ public class GameController : MonoBehaviour
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
 
-                Debug.Log("i = " + i + ", j = " + j);
-                Debug.Log(i == 5 && j == 4);
+                Debug.Log("i = " + x + ", j = " + z);
+                Debug.Log(x == 5 && z == 4);
 
                 GameObject buildingGO = new GameObject();
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
@@ -98,7 +98,7 @@ public class GameController : MonoBehaviour
                 tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
 
                 // Place the TownHall
-                if (i == 5 && j == 4)
+                if (x == 5 && z == 4)
                 {
                     Debug.Log("BANANA");
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);

@@ -13,7 +13,6 @@ public abstract class Building
         Misc
     };
 
-
     float initialBuildMoney;
     float initialBuildGreen;
     float initialBuildHappiness;

@@ -46,22 +46,26 @@ public class Game
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
 
-    public Game(int rows = 30, int columns = 30)
+    public Game(int rows, int columns)
     {
         this.isEnd = false;
         this.currentTurn = 0;
+        
         this.rows = rows;
         this.columns = columns;
-        tiles = new Tile[rows, columns];
-        buildings = new Building[rows, columns];
-        for (int i = 0; i < rows; i++)
+
+        this.tiles = new Tile[rows, columns];
+        this.buildings = new Building[rows, columns];
+
+        for (int x = 0; x < rows; x++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int z = 0; z < columns; z++)
             {
-                tiles[i, j] = new Tile(this, i, j);
-                tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
+                tiles[x, z] = new Tile(this, x, z);
+                tiles[x, z].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
+
         Debug.Log("game created");
     }
 
@@ -126,7 +130,7 @@ public class Game
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
-            GameEvent.TileDelta(tiles);       
+            GameEvent.TileDelta(tiles);
         }
 
 
@@ -288,7 +292,7 @@ public class Game
 
 
     }
-    
+
     public void stillBuildable(Tile tile)
     {
         Debug.Log("still buildable called");
