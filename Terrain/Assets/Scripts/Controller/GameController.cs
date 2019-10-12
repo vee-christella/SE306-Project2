@@ -109,8 +109,8 @@ public class GameController : MonoBehaviour
         }
 
         StartingMetrics();
-        Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
-        Camera.main.transform.eulerAngles = new Vector3(25, 0, 0);
+        // Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
+        // Camera.main.transform.eulerAngles = new Vector3(25, 0, 0);
 
     }
 
