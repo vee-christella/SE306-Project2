@@ -3,53 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class NuclearBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    Nuclear nuclear = new Nuclear();
     public Text blurb;
-    public Text metrics;
-    public GameObject metricsObject;
-    public GameObject blurbObject;
+    public TextMeshProUGUI buildingName;
+    public TextMeshProUGUI coinMetric;
+    public TextMeshProUGUI greenMetric;
+    public TextMeshProUGUI happinessMetric;
     public GameObject panel;
     public Button endTurn;
-    
+
     public Text goldCost;
     public Text greenPointsCost;
     public Text happinessCost;
     public Text name;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        Nuclear nuclear = new Nuclear();
         goldCost.text = " "+nuclear.InitialBuildMoney.ToString();
-        greenPointsCost.text = " "+nuclear.InitialBuildGreen.ToString();
-        happinessCost.text = " "+nuclear.InitialBuildHappiness.ToString()+"%";
-        blurb.text = nuclear.Blurb;
-        metrics.text = "METRICS"+
-        "\n\nMoney per turn: " + nuclear.GenerateMoney.ToString() +
-        "\nGreen Points per turn: " + nuclear.GenerateGreen.ToString() +
-        "\nHappiness per turn: " + nuclear.GenerateHappiness.ToString();
-        metricsObject.SetActive(false);
+        if(nuclear.InitialBuildGreen > 0){
+            greenPointsCost.text = " +"+nuclear.InitialBuildGreen.ToString();
+        } else {
+            greenPointsCost.text = " "+nuclear.InitialBuildGreen.ToString();
+        }
+        if(nuclear.InitialBuildHappiness > 0){
+            happinessCost.text = " +"+nuclear.InitialBuildHappiness.ToString()+"%";
+        } else {
+            happinessCost.text = " "+nuclear.InitialBuildHappiness.ToString()+"%";
+        }
         panel.SetActive(false);
-        blurbObject.SetActive(false);
     }
     
     public void OnPointerEnter(PointerEventData pointerEventData){
+        blurb.text = nuclear.Blurb;
+        buildingName.text = nuclear.Name;
+        coinMetric.text = nuclear.GenerateMoney.ToString() + " per turn";
+        greenMetric.text = nuclear.GenerateGreen.ToString() + " per turn";
+        happinessMetric.text = nuclear.GenerateHappiness.ToString() + " per turn";
         panel.SetActive(true);
-        blurbObject.SetActive(true);
-        metricsObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData pointerEventData){
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
         endTurn.interactable = false;
     }
 }
