@@ -295,7 +295,6 @@ public class Game
 
     public void stillBuildable(Tile tile)
     {
-        Debug.Log("still buildable called");
         if (tile.Building != null)
         {
             if (!tile.IsBuildable(tile.Building))

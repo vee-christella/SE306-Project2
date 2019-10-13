@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-// Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
+
+/*
+Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
+*/
 public class MouseController : MonoBehaviour
 {
-
     private GameGrid gameGrid;
     private string buildingForCreating = null;
-
     public Text cancelButtonString;
-
     Vector3 lastFramePosition;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void Awake()
     {
@@ -42,11 +37,8 @@ public class MouseController : MonoBehaviour
         //     Camera.main.transform.Translate(diff);
         // }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-
-
-
 
             Debug.Log("PLACING CUBE");
 
@@ -60,10 +52,6 @@ public class MouseController : MonoBehaviour
 
                 // tileGO.transform.position = finalPosition;
             }
-
-
-
-
 
 
             Tile tileUnderMouse = getTileAtMouse(currFramePosition);
