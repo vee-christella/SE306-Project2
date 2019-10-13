@@ -31,9 +31,19 @@ public class Drought : Event
                     {
                         if (doDestroyBuildings)
                         {
-
+                            tiles[i, j].Type = Tile.TileType.Desert;
                         }
-                        tiles[i, j].Type = Tile.TileType.Desert;
+                        else
+                        {
+                            if (tiles[i, j].Building == null) // if no building on title then change tile type
+                            {
+                                tiles[i, j].Type = Tile.TileType.Desert;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
                     }
                 }
             }
