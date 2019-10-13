@@ -58,7 +58,7 @@ public class Tile
     {
         this.game = game;
         this.x = x;
-        this.y = 1;
+        this.y = 0;
         this.z = z;
     }
 

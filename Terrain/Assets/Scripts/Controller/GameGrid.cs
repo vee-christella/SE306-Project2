@@ -14,9 +14,9 @@ public class GameGrid : MonoBehaviour
     {
         position -= transform.position;
 
-        int xCount = (int)Mathf.Floor(position.x / size);
-        int yCount = (int)Mathf.Floor(position.y / size);
-        int zCount = (int)Mathf.Floor(position.z / size);
+        int xCount = (int)Mathf.Round(position.x / size);
+        int yCount = (int)Mathf.Round(position.y / size);
+        int zCount = (int)Mathf.Round(position.z / size);
 
         Vector3 result = new Vector3(
             (float)xCount * size,
@@ -30,7 +30,7 @@ public class GameGrid : MonoBehaviour
     }
 
     /*
-    Method to draw circles to show the grid squares
+    Method to draw circles to show the grid squares' corners
     */
     private void OnDrawGizmos()
     {
@@ -42,7 +42,7 @@ public class GameGrid : MonoBehaviour
                 var point = GetNearestPointOnGrid(new Vector3(x, 0f, z));
                 Gizmos.DrawSphere(point, 0.1f);
             }
-
         }
     }
+
 }

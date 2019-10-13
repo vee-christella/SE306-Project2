@@ -10,20 +10,21 @@ Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial 
 public class MouseController : MonoBehaviour
 {
     private GameGrid gameGrid;
+    private Camera mainCamera;
     private string buildingForCreating = null;
     public Text cancelButtonString;
     Vector3 lastFramePosition;
 
     private void Awake()
     {
-        Debug.Log("------------------- AWAKEN");
         gameGrid = FindObjectOfType<GameGrid>();
+        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 currFramePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 currFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         //If mouse over a UI element, bail out
         // if (EventSystem.current.IsPointerOverGameObject())
@@ -37,37 +38,43 @@ public class MouseController : MonoBehaviour
         //     Camera.main.transform.Translate(diff);
         // }
 
+
         if (Input.GetMouseButtonDown(0))
         {
-
             Debug.Log("PLACING CUBE");
 
             RaycastHit hitInfo;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
-                GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
-
-                // tileGO.transform.position = finalPosition;
+                PlaceCubeNear(hitInfo.point);
             }
 
 
-            Tile tileUnderMouse = getTileAtMouse(currFramePosition);
-            if (tileUnderMouse != null)
-            {
-                if (buildingForCreating != null)
-                {
-                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
-                    {
-                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-                    }
-                }
-            }
+            // Tile tileUnderMouse = getTileAtMouse(currFramePosition);
+            // if (tileUnderMouse != null)
+            // {
+            //     if (buildingForCreating != null)
+            //     {
+            //         if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+            //         {
+            //             Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+            //         }
+            //     }
+            // }
 
         }
-        lastFramePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // lastFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    private void PlaceCubeNear(Vector3 clickPoint)
+    {
+        Debug.Log("PLACING CUBE");
+        var finalPosition = gameGrid.GetNearestPointOnGrid(clickPoint);
+        GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
+
+        //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = nearPoint;
     }
 
     public void SetMode_CoalMine()
@@ -128,6 +135,10 @@ public class MouseController : MonoBehaviour
 
     Tile getTileAtMouse(Vector3 coord)
     {
+        // ----------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------
+        // MIGHT NEED TO CHANGE TO ROUND INSTEAD OF FLOOR
         return GameController.Instance.Game.getTileAt(Mathf.FloorToInt(coord.x), Mathf.FloorToInt(coord.y));
     }
 
