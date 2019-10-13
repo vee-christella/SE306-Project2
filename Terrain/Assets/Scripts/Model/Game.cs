@@ -221,6 +221,23 @@ public class Game
 
     }
 
+    public void SellBuilding(Tile tile)
+    {
+        Debug.Log("Yeet");
+        Building building = tile.Building;
+        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        if (tile.removeBuilding())
+        {
+            buildings[tile.X, tile.Y] = null;
+            Money += CostToSell;
+            GameController.Instance.SetMetrics(Money, Green, Happiness);
+
+        }
+
+
+
+    }
+
 
     // get the event  for the next turn
     public Event EventForNextTurn()
@@ -299,6 +316,9 @@ public class Game
                 GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                tile.Building.GenerateGreen = 0;
+                tile.Building.GenerateHappiness = 0;
+                tile.Building.GenerateMoney = 0;
             }
         }
     }
