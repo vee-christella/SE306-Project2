@@ -230,7 +230,11 @@ public class Game
         {
             buildings[tile.X, tile.Y] = null;
             Money += CostToSell;
+            GenerateHappiness -= building.GenerateHappiness;
+            GenerateMoney -= building.GenerateMoney;
+            GenerateGreen -= building.GenerateGreen;
             GameController.Instance.SetMetrics(Money, Green, Happiness);
+            GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
 
         }
 
