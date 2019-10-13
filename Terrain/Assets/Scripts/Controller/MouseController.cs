@@ -37,35 +37,43 @@ public class MouseController : MonoBehaviour
         //     Vector3 diff = lastFramePosition - currFramePosition;
         //     Camera.main.transform.Translate(diff);
         // }
-
-
-        if (Input.GetMouseButtonDown(0))
+        try
         {
-            Debug.Log("PLACING CUBE");
-
-            RaycastHit hitInfo;
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hitInfo))
+            if (GameController.Instance.Game.HasStarted)
             {
-                PlaceCubeNear(hitInfo.point);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Debug.Log("PLACING CUBE");
+
+                    RaycastHit hitInfo;
+                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out hitInfo))
+                    {
+                        PlaceCubeNear(hitInfo.point);
+                    }
+
+
+                    // Tile tileUnderMouse = getTileAtMouse(currFramePosition);
+                    // if (tileUnderMouse != null)
+                    // {
+                    //     if (buildingForCreating != null)
+                    //     {
+                    //         if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                    //         {
+                    //             Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                    //         }
+                    //     }
+                    // }
+
+                }
+                // lastFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             }
-
-
-            // Tile tileUnderMouse = getTileAtMouse(currFramePosition);
-            // if (tileUnderMouse != null)
-            // {
-            //     if (buildingForCreating != null)
-            //     {
-            //         if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
-            //         {
-            //             Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-            //         }
-            //     }
-            // }
-
         }
-        // lastFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        catch
+        {
+            // Do nothing
+        }
     }
 
     private void PlaceCubeNear(Vector3 clickPoint)

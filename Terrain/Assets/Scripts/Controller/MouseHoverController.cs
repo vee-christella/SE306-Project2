@@ -21,11 +21,21 @@ public class MouseHoverController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out theObject))
+        try
         {
-            selectedObject = theObject.transform.gameObject.name;
-            internalObject = theObject.transform.gameObject.name;
-            mousePoint = theObject.point;
+            if (GameController.Instance.Game.HasStarted)
+            {
+                if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out theObject))
+                {
+                    selectedObject = theObject.transform.gameObject.name;
+                    internalObject = theObject.transform.gameObject.name;
+                    mousePoint = theObject.point;
+                }
+            }
+        }
+        catch
+        {
+            // Do nothing
         }
     }
 }

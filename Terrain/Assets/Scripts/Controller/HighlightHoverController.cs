@@ -15,7 +15,7 @@ public class HighlightHoverController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hoveringOverObject)
+        if (GameController.Instance.Game.HasStarted && hoveringOverObject)
         {
             selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
         }

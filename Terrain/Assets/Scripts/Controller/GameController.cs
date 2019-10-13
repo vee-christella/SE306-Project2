@@ -16,13 +16,11 @@ public class GameController : MonoBehaviour
     // public Sprite[] sprites = new Sprite[7];
 
     public GameObject[] tileGameObjs = new GameObject[4];
-
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
     public TextMeshProUGUI happinessCount;
     public TextMeshProUGUI currentTurn;
     public TextMeshProUGUI maxTurn;
-
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
@@ -32,6 +30,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
 
