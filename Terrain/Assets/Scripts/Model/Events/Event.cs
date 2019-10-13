@@ -14,6 +14,7 @@ public abstract class Event
     private int happinessDelta;
     private int moneyDelta;
     private EventType type;
+    private string description;
     private Game game;
 
     public Event(int greenPointDelta, int happinessDelta, int moneyDelta)
@@ -26,10 +27,10 @@ public abstract class Event
     public int GreenPointDelta { get => greenPointDelta; set => greenPointDelta = value; }
     public int HappinessDelta { get => happinessDelta; set => happinessDelta = value; }
     public int MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public string Description { get => description; set => description = value; }
     public EventType Type { get => type; set => type = value; }
     public Game Game { get => game; set => game = value; }
 
     public abstract void TileDelta(Tile[,] tiles);
-
 
 }

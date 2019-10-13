@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,6 +27,9 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+
+    GameObject errorMessage;
+
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -191,19 +195,25 @@ public class Game
             }
             else
             {
-                #if UNITY_EDITOR
-                EditorUtility.DisplayDialog("Failed to build " + building.Name, building.Name + " cannot be built on a " + tile.Type + " tile.", "OK");
-                #endif
-                // TODO: display pop up to say tile is unavailable to be built
+                if (tile.Building != null)
+                {
+                    GameController.Instance.ShowError("Another building already exists on this tile.");
+                }
+                else
+                {
+                    // Show error message
+                    GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
+                }
+
                 return null;
             }
         }
         else
         {
-            #if UNITY_EDITOR
-            EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
-            #endif
-            // TODO: display pop up to say "INSUFFICIENT FUNDS"
+
+            // Show error message
+            GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
+
             return null;
 
         }
@@ -253,13 +263,13 @@ public class Game
         List<Event> randomEventList = new List<Event>();
 
         randomEventList.Add(new AcidRain(this));
-        randomEventList.Add(new Earthquake(this));
-        randomEventList.Add(new ForestSpawn(this));
-        randomEventList.Add(new Tsunami(this));
-        randomEventList.Add(new Heatwave(this));
-        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new Drought(this));
         randomEventList.Add(new Flood(this));
-
+        randomEventList.Add(new Hurricane(this));
+        randomEventList.Add(new ForestSpawn(this));
+        randomEventList.Add(new RisingSeaLevel(this));
+        randomEventList.Add(new Wildfire(this));
+        randomEventList.Add(new HeatWave(this));
 
         return randomEventList;
     }

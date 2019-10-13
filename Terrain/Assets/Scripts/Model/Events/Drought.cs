@@ -5,15 +5,10 @@ using UnityEngine;
 public class Drought : Event
 {
     private int turnToOccur;
-
-    public Drought():base (-5,-1,-5)
-    {
-        this.Type = EventType.Transition;
-    }
-    
     public Drought(Game game) :base(-5,-1,-5)
     {
         this.Type = EventType.Transition;
+        this.Description = "Droughts everywhere are projected to become more intense, and summer temperatures are projected to continue rising.";
         Game = game;
     }
 
@@ -32,7 +27,8 @@ public class Drought : Event
                     Debug.Log("Found a tile with water");
                     int random = Random.Range(0, 2);
                     // 50% chance to change tiles to desert
-                    if (random == 1) {
+                    if (random == 1)
+                    {
                         tiles[i, j].Type = Tile.TileType.Desert;
                     }
                 }

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Greenhouse : Building
 {
-
     public Greenhouse() : base(8, -80, 30, 0, 20, -10, 0, 3)
     {
         this.TypeOfBuilding = BuildingType.Utility;
