@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
 
+    
+
     public Sprite[] sprites = new Sprite[7];
 
     public TextMeshProUGUI coinCount;
@@ -32,7 +34,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Instance = this;
-        Game = new Game(10, 10);
+        Game = new Game(5, 5);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         for (int i = 0; i < Game.Rows; i++)
         {
