@@ -67,7 +67,7 @@ public class Game
             for (int j = 0; j < columns; j++)
             {
                 Tiles[i, j] = new Tile(this, i, j);
-                Tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
+                Tiles[i, j].registerMethodCallbackTypeChanged(StillBuildable);
             }
         }
 
@@ -248,7 +248,7 @@ public class Game
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
-
+    
         List<Event> randomEventList = InitaliseRandomEventList();
         int probability = 0;
 
@@ -294,7 +294,6 @@ public class Game
     public void UpdateMetrics(Building building)
     {
 
-
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
@@ -321,7 +320,7 @@ public class Game
 
     }
     
-    public void stillBuildable(Tile tile)
+    public void StillBuildable(Tile tile)
     {
         Debug.Log("still buildable called");
         if (tile.Building != null)
@@ -331,9 +330,12 @@ public class Game
                 GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
-                tile.Building.GenerateGreen = 0;
-                tile.Building.GenerateHappiness = 0;
-                tile.Building.GenerateMoney = 0;
+            }
+            else
+            {
+                GenerateGreen = GenerateGreen + tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney + tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness + tile.Building.GenerateHappiness;
             }
         }
     }
