@@ -27,6 +27,7 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+    bool hasStarted = false;
 
     GameObject errorMessage;
 
@@ -45,6 +46,7 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
 
     public Game(int rows, int columns)
     {

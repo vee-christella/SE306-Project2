@@ -34,7 +34,11 @@ public class GameController : MonoBehaviour
     {
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
+
         Game = new Game(20, 20);
+        Game.IsEnd = false;
+        Game.HasStarted = false;
+
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
 
         // Populate the map with game tiles
@@ -95,6 +99,7 @@ public class GameController : MonoBehaviour
         }
 
         StartingMetrics();
+        Game.HasStarted = true;
     }
 
     public void callNextTurn()
