@@ -21,7 +21,8 @@ public class GameGrid : MonoBehaviour
         Vector3 result = new Vector3(
             (float)xCount * size,
             (float)yCount * size,
-            (float)zCount * size);
+            (float)zCount * size
+            );
 
         result += transform.position;
 

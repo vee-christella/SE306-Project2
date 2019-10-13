@@ -6,13 +6,10 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-
     public static GameController Instance { get; protected set; }
     Game game;
     EventController eventController;
     private GameGrid gameGrid;
-
-
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
 
@@ -40,61 +37,52 @@ public class GameController : MonoBehaviour
         Game = new Game(20, 20);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
 
+        // Populate the map with game tiles
         for (int x = 0; x < Game.Rows; x++)
         {
             for (int z = 0; z < Game.Columns; z++)
             {
                 Tile tile = Game.getTileAt(x, z);
 
-                // GameObject tileGO = new GameObject();
-                GameObject tileGO = Instantiate(tileGameObjs[Random.Range(0, 4)]) as GameObject;
+                int rand = Random.Range(0, 4);
+                GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
 
-                tileGO.name = "Tile(" + x + ", " + z + ")";
+                // THIS SHOULD PROBABLY BE DONE IN GAME.CS WHEN TILES ARE FIRST MADE
+                switch (rand)
+                {
+                    case 0:
+                        tile.setType(Tile.TileType.Desert);
+                        break;
+                    case 1:
+                        tile.setType(Tile.TileType.Mountain);
+                        break;
+                    case 2:
+                        tile.setType(Tile.TileType.Plain);
+                        break;
+                    case 3:
+                        tile.setType(Tile.TileType.Water);
+                        break;
+                }
+
+                tileGO.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-                Vector3 vect = new Vector3(x, 1, z);
-                var finalPosition = gameGrid.GetNearestPointOnGrid(vect);
+                Vector3 tileLocation = new Vector3(x, 1, z);
+                var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
                 tileGO.transform.position = finalPosition;
 
-
-
-
-                // SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                // tileSR.sortingLayerName = "Tile";
-
-                // int random = Random.Range(0, 7);
-
-                // switch (PrototypeLevel.Arr[i, j])
-                // {
-                //     case 0:
-                //     case 1:
-                //         tile.setType(Tile.TileType.Desert);
-                //         break;
-                //     case 2:
-                //     case 3:
-                //         tile.setType(Tile.TileType.Mountain);
-                //         break;
-                //     case 4:
-                //     case 5:
-                //         tile.setType(Tile.TileType.Plain);
-                //         break;
-                //     case 6:
-                //         tile.setType(Tile.TileType.Water);
-                //         break;
-                // }
-
                 // tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
+
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
-
-                Debug.Log("i = " + x + ", j = " + z);
-                Debug.Log(x == 5 && z == 4);
-
+                // Create empty building game objects
                 GameObject buildingGO = new GameObject();
-                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
+                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
                 SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
                 buildingSR.sortingLayerName = "Building";
+
                 tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
 
                 // Place the TownHall
@@ -103,15 +91,10 @@ public class GameController : MonoBehaviour
                     Debug.Log("BANANA");
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
-
-
             }
         }
 
         StartingMetrics();
-        // Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
-        // Camera.main.transform.eulerAngles = new Vector3(25, 0, 0);
-
     }
 
     public void callNextTurn()
