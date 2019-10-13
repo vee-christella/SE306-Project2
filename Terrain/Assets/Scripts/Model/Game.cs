@@ -27,6 +27,11 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+    
+
+    float prevMoney;
+    float prevHappiness;
+
 
     GameObject errorMessage;
 
@@ -230,7 +235,7 @@ public class Game
         {
             buildings[tile.X, tile.Y] = null;
             Money += CostToSell;
-            GenerateHappiness -= building.GenerateHappiness;
+            GenerateHappiness -= building.GenerateHappiness;    
             GenerateMoney -= building.GenerateMoney;
             GenerateGreen -= building.GenerateGreen;
             GameController.Instance.SetMetrics(Money, Green, Happiness);
@@ -297,12 +302,16 @@ public class Game
         }
         else
         {
+
             Happiness += building.InitialBuildHappiness;
+            
         }
+
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
         GenerateHappiness += building.GenerateHappiness;
+
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
         GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
@@ -320,10 +329,18 @@ public class Game
                 GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
-                tile.Building.GenerateGreen = 0;
-                tile.Building.GenerateHappiness = 0;
-                tile.Building.GenerateMoney = 0;
             }
+        }
+    }
+
+    private void CheckHappiness()
+    {
+        if (Happiness < 50)
+        {
+            
+        } else
+        {
+
         }
     }
 }

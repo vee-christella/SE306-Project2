@@ -63,8 +63,9 @@ public class MouseController : MonoBehaviour
                 if (buildingIsSelected) 
                 {
                     if (tileUnderMouse.Building != null)
-                    {
-                        SetToolTip(tileUnderMouse.Building);
+                    { 
+
+                        SetToolTip(tileUnderMouse);
                     }
                     else
                     {
@@ -86,7 +87,7 @@ public class MouseController : MonoBehaviour
                     else if (tileUnderMouse.Building != null)
                     {
                         buildingIsSelected = true;
-                        SetToolTip(tileUnderMouse.Building);
+                        SetToolTip(tileUnderMouse);
 
                     } else if (tileUnderMouse.Building == null)
                     {
@@ -157,17 +158,28 @@ public class MouseController : MonoBehaviour
         buildingForCreating = null;
     }
 
-    private void SetToolTipText(Building building)
+    private void SetToolTipText(Tile tile)
     {
+        Building building = tile.Building;
 
         //toolTipText.SetText("TestText");
         string name = building.Name;
         string money, green, happiness, sellCost;
 
-        money = DeltaToString(building.GenerateMoney);
-        green = DeltaToString(building.GenerateGreen);
-        happiness = DeltaToString(building.GenerateHappiness);
+        if (tile.IsBuildable(building))
+        {
+            money = DeltaToString(building.GenerateMoney);
+            green = DeltaToString(building.GenerateGreen);
+            happiness = DeltaToString(building.GenerateHappiness);
+        } else
+        {
+            money = "0";
+            green = "0";
+            happiness = "0";
+        }
+
         sellCost = getSellPrice(building).ToString();
+
 
 
         toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness + "\n\nSell Cost: " + sellCost);
@@ -210,10 +222,11 @@ public class MouseController : MonoBehaviour
         Debug.Log("Building Deselected");
     }
 
-    public void SetToolTip(Building building) {
+    public void SetToolTip(Tile tile) {
+        Building building = tile.Building;
         toolTip.SetActive(true);
         toolTip.transform.position = Input.mousePosition;
-        SetToolTipText(building);
+        SetToolTipText(tile);
 
         if (building.Name != "Town Hall")
         {
