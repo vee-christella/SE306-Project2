@@ -242,15 +242,13 @@ public class Game
             GameController.Instance.SetMetrics(Money, Green, Happiness);
 
         }
-
-
-
     }
 
 
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
+
         List<Event> randomEventList = InitaliseRandomEventList();
         int probability = 0;
 
