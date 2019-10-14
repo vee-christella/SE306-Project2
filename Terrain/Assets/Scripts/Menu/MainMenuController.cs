@@ -7,14 +7,21 @@ public class MainMenuController : MonoBehaviour
 {
     public void PlayGame()
     {
+
+        // Set the game map to generate level 1
+        PlayerPrefs.SetInt("Level", 1);
+
         SceneManager.LoadScene("IntroScene");
 
     }
 
     public void Help()
     {
-        // TODO: change to a tutorial screen
-        SceneManager.LoadScene("IntroScene");
+
+        // Set the game map to generate the tutorial
+        PlayerPrefs.SetInt("Level", 0);
+
+        SceneManager.LoadScene("TutorialScene");
     }
 
     public void QuitGame()

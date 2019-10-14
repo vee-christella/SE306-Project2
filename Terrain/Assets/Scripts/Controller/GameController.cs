@@ -11,10 +11,12 @@ public class GameController : MonoBehaviour
     Game game;
     EventController eventController;
 
+
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
 
-    
+
+
 
     public Sprite[] sprites = new Sprite[7];
 
@@ -34,7 +36,26 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Instance = this;
-        Game = new Game(5, 5);
+
+        // Change the map generation depending on the game mode/difficulty
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 0:
+                Game = new Game(5, 5);
+                Debug.Log("5 by 5");
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                Debug.Log("10 by 10");
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                break;
+        }
+
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         for (int i = 0; i < Game.Rows; i++)
         {
