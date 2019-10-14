@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BuildingController : MonoBehaviour
 {
-
     public GameObject model_AnimalFarm;
     public GameObject model_BeeFarmModel;
     public GameObject model_CoalMineModel;
@@ -23,6 +22,14 @@ public class BuildingController : MonoBehaviour
     public GameObject model_VegetableFarm;
     public GameObject model_WindTurbine;
     public GameObject model_Zoo;
+
+
+
+    public GameObject cube;
+
+
+
+
     public static BuildingController Instance { get; protected set; }
 
     public Sprite[] buildingSprites = new Sprite[12];
@@ -41,7 +48,7 @@ public class BuildingController : MonoBehaviour
     public bool addBuildingToTile(string buildingType, Tile tile)
     {
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
-        
+
         if (building != null)
         {
             //    GameObject buildingGO = new GameObject();
@@ -60,6 +67,25 @@ public class BuildingController : MonoBehaviour
 
     public void ChangeBuildingSprite(Tile tile, GameObject buildingGO)
     {
-        buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
+        // buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
+        Debug.Log("CHANGE BUILDING SPRITE");
+        PlaceCubeNear(tile, buildingGO);
+    }
+
+
+    private void PlaceCubeNear(Tile tile, GameObject building)
+    {
+        Debug.Log("PLACING CUBE");
+        // GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
+
+        string buildingName = "Building(" + building.transform.position.x + ", " + building.transform.position.y + ", " + building.transform.position.z + ")";
+        Debug.Log("_______NAME: " + buildingName);
+        Debug.Log("_______OBJECT: " + building);
+
+        building = Instantiate(cube);
+
+        // Instantiate(cube).transform.position = finalPosition;
+
+        //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = nearPoint;
     }
 }

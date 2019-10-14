@@ -72,13 +72,14 @@ public class Game
     }
 
 
-    public Tile getTileAt(int x, int y)
+    public Tile getTileAt(int x, int z)
     {
-        if (x >= rows || x < 0 || y >= columns || y < 0)
+        if (x >= rows || x < 0 || z >= columns || z < 0)
         {
             return null;
         }
-        return tiles[x, y];
+        
+        return tiles[x, z];
     }
 
     public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)

@@ -24,7 +24,7 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Vector3 currFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        // Vector3 currFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         //If mouse over a UI element, bail out
         // if (EventSystem.current.IsPointerOverGameObject())
@@ -37,35 +37,41 @@ public class MouseController : MonoBehaviour
         //     Vector3 diff = lastFramePosition - currFramePosition;
         //     Camera.main.transform.Translate(diff);
         // }
+
         try
         {
             if (GameController.Instance.Game.HasStarted)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("PLACING CUBE");
-
                     RaycastHit hitInfo;
                     Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
                     if (Physics.Raycast(ray, out hitInfo))
                     {
-                        PlaceCubeNear(hitInfo.point);
+                        var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
+
+                        Tile tileUnderMouse = getTileAtMouse(finalPosition);
+
+                        if (tileUnderMouse != null)
+                        {
+                            if (buildingForCreating != null)
+                            {
+                                if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                                {
+                                    Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log(".... Building is null");
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log(".... Tile is null");
+                        }
                     }
-
-
-                    // Tile tileUnderMouse = getTileAtMouse(currFramePosition);
-                    // if (tileUnderMouse != null)
-                    // {
-                    //     if (buildingForCreating != null)
-                    //     {
-                    //         if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
-                    //         {
-                    //             Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-                    //         }
-                    //     }
-                    // }
-
                 }
                 // lastFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             }
@@ -74,15 +80,6 @@ public class MouseController : MonoBehaviour
         {
             // Do nothing
         }
-    }
-
-    private void PlaceCubeNear(Vector3 clickPoint)
-    {
-        Debug.Log("PLACING CUBE");
-        var finalPosition = gameGrid.GetNearestPointOnGrid(clickPoint);
-        GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
-
-        //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = nearPoint;
     }
 
     public void SetMode_CoalMine()
@@ -143,11 +140,7 @@ public class MouseController : MonoBehaviour
 
     Tile getTileAtMouse(Vector3 coord)
     {
-        // ----------------------------------------------------------------------------
-        // ----------------------------------------------------------------------------
-        // ----------------------------------------------------------------------------
-        // MIGHT NEED TO CHANGE TO ROUND INSTEAD OF FLOOR
-        return GameController.Instance.Game.getTileAt(Mathf.FloorToInt(coord.x), Mathf.FloorToInt(coord.y));
+        return GameController.Instance.Game.getTileAt((int)coord.x, (int)coord.z);
     }
 
     private void setCancelButton()

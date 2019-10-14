@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour
                 tileGO.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-                Vector3 tileLocation = new Vector3(x, 1, z);
+                Vector3 tileLocation = new Vector3(x, tile.Y, z);
                 var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
                 tileGO.transform.position = finalPosition;
 
@@ -91,7 +91,6 @@ public class GameController : MonoBehaviour
                 // Place the TownHall
                 if (x == 5 && z == 4)
                 {
-                    Debug.Log("BANANA");
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
             }

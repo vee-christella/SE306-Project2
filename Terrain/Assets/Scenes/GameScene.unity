@@ -1088,6 +1088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cancelButtonString: {fileID: 417305509}
+  cube: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e, type: 3}
 --- !u!4 &127397728
 Transform:
   m_ObjectHideFlags: 0
