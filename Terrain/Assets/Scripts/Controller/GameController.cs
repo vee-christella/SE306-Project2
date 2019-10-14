@@ -72,8 +72,8 @@ public class GameController : MonoBehaviour
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
 
-                Debug.Log("i = " + i + ", j = " + j);
-                Debug.Log(i == 5 && j == 4);
+                //Debug.Log("i = " + i + ", j = " + j);
+                //Debug.Log(i == 5 && j == 4);
 
                 GameObject buildingGO = new GameObject();
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
@@ -173,7 +173,7 @@ public class GameController : MonoBehaviour
 
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
-        Debug.Log("on tile type changed");
+        //Debug.Log("on tile type changed");
         int random = 0;
         if (tile.Type == Tile.TileType.Desert)
         {

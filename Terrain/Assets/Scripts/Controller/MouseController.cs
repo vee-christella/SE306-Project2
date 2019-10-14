@@ -81,7 +81,7 @@ public class MouseController : MonoBehaviour
                         if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                         {
 
-                            Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                            //Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                         }
                     }
                     else if (tileUnderMouse.Building != null)
@@ -219,7 +219,7 @@ public class MouseController : MonoBehaviour
         buildingIsSelected = false;
         sellText.text = "Sell: ";
         sellButton.interactable = false;
-        Debug.Log("Building Deselected");
+        //Debug.Log("Building Deselected");
     }
 
     public void SetToolTip(Tile tile) {
