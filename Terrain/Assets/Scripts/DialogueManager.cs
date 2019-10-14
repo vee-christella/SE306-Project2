@@ -9,17 +9,22 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject continueButton;
     public GameObject startButton;
+    public GameObject overlay;
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
+    public Animator animator;
+
     private void Start()
     {
         conversation = new Queue<string>();
+        animator.SetBool("isOpen", true);
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+
         Debug.Log("Start convo");
 
         nameText.text = dialogue.npcName;
@@ -72,5 +77,10 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         Debug.Log("Ended convo");
+        animator.SetBool("isOpen", false);
+
+        //overlay.SetActive(false);
     }
+
+
 }
