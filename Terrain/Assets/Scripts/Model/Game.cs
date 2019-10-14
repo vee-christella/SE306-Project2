@@ -102,9 +102,10 @@ public class Game
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
      */
-    public void nextTurn()
+    public void NextTurn()
     {
         this.currentTurn++;
+        Debug.Log("turn " + this.currentTurn);
 
         // Increase the metrics
         Money = Money + GenerateMoney;
@@ -242,7 +243,7 @@ public class Game
             GameController.Instance.SetMetrics(Money, Green, Happiness);
 
         }
-    }
+    }   
 
 
     // get the event  for the next turn
@@ -250,19 +251,19 @@ public class Game
     {
     
         List<Event> randomEventList = InitaliseRandomEventList();
-        int probability = 0;
+        int probability = 10;
 
-        switch (gameDifficulty) {
-            case GameDifficulty.Easy:
-                probability = 0;
-                break;
-            case GameDifficulty.Medium:
-                probability = 5;
-                break;
-            case GameDifficulty.Hard:
-                probability = 15;
-                break;
-        }
+   //     switch (gameDifficulty) {
+    //        case GameDifficulty.Easy:
+     //           probability = 0;
+     //           break;
+      //      case GameDifficulty.Medium:
+     //           probability = 5;
+     //           break;
+     //       case GameDifficulty.Hard:
+      //          probability = 15;
+       //         break;
+       // }
 
         if (Random.Range(1, 101) < probability)
         {

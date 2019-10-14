@@ -98,14 +98,15 @@ public class GameController : MonoBehaviour
 
     public void callNextTurn()
     {
-        game.nextTurn();
+        Debug.Log("Next turn button clicked");
+        game.NextTurn();
 
         if (game.GameEvent != null)
         {
            EventController.DisplayPopup(game.GameEvent);
-        }
+           game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
 
-        game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
+        }
 
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);

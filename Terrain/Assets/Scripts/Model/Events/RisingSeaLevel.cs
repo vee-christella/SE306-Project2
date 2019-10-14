@@ -17,7 +17,103 @@ public class RisingSeaLevel : Event
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
-        return;
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if (i == 0)
+                {
+                    if (doDestroyBuildings)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Water;
+                    }
+                    else
+                    {
+                        if (tiles[i, j].Building == null)
+                        {
+                            tiles[i, j].Type = Tile.TileType.Water;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else if (i == tiles.GetLength(0) - 1)
+                {
+                    if (doDestroyBuildings)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Water;
+                    }
+                    else
+                    {
+                        if (tiles[i, j].Building == null)
+                        {
+                            tiles[i, j].Type = Tile.TileType.Water;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+
+                else if (j == 0)
+                {
+                    if (doDestroyBuildings)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Water;
+                    }
+                    else
+                    {
+                        if (tiles[i, j].Building == null)
+                        {
+                            tiles[i, j].Type = Tile.TileType.Water;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else if (j == tiles.GetLength(1) - 1)
+                {
+                    if (doDestroyBuildings)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Water;
+                    }
+                    else
+                    {
+                        if (tiles[i, j].Building == null)
+                        {
+                            tiles[i, j].Type = Tile.TileType.Water;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    if (doDestroyBuildings)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Water;
+                    }
+                    else
+                    {
+                        if (tiles[i, j].Building == null)
+                        {
+                            tiles[i, j].Type = Tile.TileType.Water;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

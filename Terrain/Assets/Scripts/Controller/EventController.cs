@@ -18,6 +18,12 @@ public class EventController : MonoBehaviour
 
     public bool DoDestroyBuildings { get => doDestroyBuildings; set => doDestroyBuildings = value; }
 
+    public EventController()
+    {
+        this.doDestroyBuildings = false;
+    }
+
+
     public void DisplayPopup(Event gameEvent)
     {
         doDestroyBuildings = true;
