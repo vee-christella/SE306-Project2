@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+// Based off: https://www.youtube.com/watch?v=_nRzoTzeyxU
 public class DialogueManager : MonoBehaviour
 {
     private Queue<string> conversation;
