@@ -13,11 +13,11 @@ public class Tile
         Water
     };
 
-    private List<string> waterBuildable = new List<string>(){"Hydro Plant"};
+    private List<string> waterBuildable = new List<string>() { "Hydro Plant", null };
     private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
-    "Race Track", "Wind Turbine", "Solar Farm"};
+    "Race Track", "Wind Turbine", "Solar Farm", null};
     private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall"};
+    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall", null};
 
     Action<Tile> callbackTypeChanged;
     Action<Tile> callbackBuildingChange;
@@ -28,7 +28,10 @@ public class Tile
     private Building building = null;
     private Game game;
 
-    public TileType Type { get => type; set {
+    public TileType Type
+    {
+        get => type; set
+        {
             type = value;
             if (callbackTypeChanged != null)
             {
@@ -40,7 +43,7 @@ public class Tile
     public int Y { get => y; set => y = value; }
     public int Z { get => z; set => z = value; }
     public Building Building { get => building; }
-    public Action<Tile> CallbackBuildingChange { get => callbackBuildingChange;  }
+    public Action<Tile> CallbackBuildingChange { get => callbackBuildingChange; }
 
     public Tile(Game game, TileType type, int x, int y, int z)
     {
@@ -66,8 +69,10 @@ public class Tile
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
-        if (this.building == null){
-            if (IsBuildable(building)){
+        if (this.building == null)
+        {
+            if (IsBuildable(building))
+            {
                 this.building = building;
 
                 if (CallbackBuildingChange != null)
@@ -77,6 +82,25 @@ public class Tile
 
                 return true;
             }
+        }
+
+        Debug.Log(building.Name);
+        return false;
+    }
+
+    public bool removeBuilding()
+    {
+        Debug.Log("Building Removed");
+        if (this.building != null)
+        {
+            this.building = null;
+
+            if (CallbackBuildingChange != null)
+            {
+                CallbackBuildingChange(this);
+            }
+
+            return true;
         }
         return false;
     }
@@ -101,8 +125,8 @@ public class Tile
             {
                 return false;
             }
-        } 
-        
+        }
+
         else if (this.type == Tile.TileType.Desert)
         {
             if (!desertBuildable.Contains(building.Name))
@@ -110,7 +134,7 @@ public class Tile
                 return false;
             }
         }
-        
+
         else if (this.type == Tile.TileType.Plain)
         {
             if (!plainBuildable.Contains(building.Name))

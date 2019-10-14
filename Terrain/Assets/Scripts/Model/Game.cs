@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,6 +27,9 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+
+    GameObject errorMessage;
+
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -191,22 +195,45 @@ public class Game
             }
             else
             {
-                #if UNITY_EDITOR
-                EditorUtility.DisplayDialog("Failed to build " + building.Name, building.Name + " cannot be built on a " + tile.Type + " tile.", "OK");
-                #endif
-                // TODO: display pop up to say tile is unavailable to be built
+                if (tile.Building != null)
+                {
+                    GameController.Instance.ShowError("Another building already exists on this tile.");
+                }
+                else
+                {
+                    // Show error message
+                    GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
+                }
+
                 return null;
             }
         }
         else
         {
-            #if UNITY_EDITOR
-            EditorUtility.DisplayDialog("Failed to build: "+building.Name, "You do not have enough money to build this building.", "OK");
-            #endif
-            // TODO: display pop up to say "INSUFFICIENT FUNDS"
+
+            // Show error message
+            GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
+
             return null;
 
         }
+
+
+    }
+
+    public void SellBuilding(Tile tile)
+    {
+        Debug.Log("Yeet");
+        Building building = tile.Building;
+        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        if (tile.removeBuilding())
+        {
+            buildings[tile.X, tile.Y] = null;
+            Money += CostToSell;
+            GameController.Instance.SetMetrics(Money, Green, Happiness);
+
+        }
+
 
 
     }
@@ -289,6 +316,9 @@ public class Game
                 GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                tile.Building.GenerateGreen = 0;
+                tile.Building.GenerateHappiness = 0;
+                tile.Building.GenerateMoney = 0;
             }
         }
     }

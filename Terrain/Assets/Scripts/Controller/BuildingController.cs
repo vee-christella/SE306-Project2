@@ -40,6 +40,18 @@ public class BuildingController : MonoBehaviour
 
     public void ChangeBuildingSprite(Tile tile, GameObject buildingGO)
     {
-        buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
+        if (tile.Building == null)
+        {
+            buildingGO.GetComponent<SpriteRenderer>().enabled = false;
+      
+        }
+        else
+        {
+            buildingGO.GetComponent<SpriteRenderer>().enabled = true;
+
+            buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
+        }
     }
+
+
 }
