@@ -10,10 +10,13 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; protected set; }
     Game game;
     EventController eventController;
+    int[,] map;
+
 
 
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
+    public int[,] Map { get => map; set => map = value; }
 
 
 
@@ -32,6 +35,8 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI errorText;
 
     public GameObject errorMessage;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +47,11 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 Game = new Game(5, 5);
-                Debug.Log("5 by 5");
+                Map = TutorialLevel.Arr;
                 break;
             case 1:
                 Game = new Game(10, 10);
-                Debug.Log("10 by 10");
+                Map = PrototypeLevel.Arr;
                 break;
             case 2:
                 Game = new Game(15, 15);
@@ -72,7 +77,10 @@ public class GameController : MonoBehaviour
 
                 int random = Random.Range(0, 7);
 
-                switch (PrototypeLevel.Arr[i, j])
+                // Use a different map arrangement depending on the level
+
+
+                switch (Map[i, j])
                 {
                     case 0:
                     case 1:
@@ -91,7 +99,7 @@ public class GameController : MonoBehaviour
                         break;
                 }
 
-                tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
+                tileSR.sprite = sprites[Map[i, j]];
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
 
