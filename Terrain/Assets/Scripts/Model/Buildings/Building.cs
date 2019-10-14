@@ -22,7 +22,6 @@ public abstract class Building
     float generateHappiness;
     int id = 0;
     int turnsToBuild;
-    int currentConstructionTurn = 0;
     BuildingType typeOfBuilding;
     string name;
     string blurb;
@@ -38,7 +37,7 @@ public abstract class Building
     public BuildingType TypeOfBuilding { get => typeOfBuilding; set => typeOfBuilding = value; }
     public string Name { get => name; set => name = value;  }
     public string Blurb { get => blurb; set => blurb = value; }
-    public int CurrentConstructionTurn { get => currentConstructionTurn; set => currentConstructionTurn = value; }
+
 
     // Constructor to initialise the building with their respective stats
     public Building(float initBuildMoney, float initBuildGreen,
