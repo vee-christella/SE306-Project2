@@ -2432,18 +2432,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 258957579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &258957581 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 258957579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &258957582 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -2508,7 +2496,6 @@ MonoBehaviour:
   goldCost: {fileID: 258957584}
   greenPointsCost: {fileID: 258957583}
   happinessCost: {fileID: 258957582}
-  name: {fileID: 258957581}
 --- !u!1 &287115466
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,6 +3672,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Race Track
+      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4099,18 +4091,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 439335296}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &439335298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 439335296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &439335299 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -4175,7 +4155,6 @@ MonoBehaviour:
   goldCost: {fileID: 439335301}
   greenPointsCost: {fileID: 439335300}
   happinessCost: {fileID: 439335299}
-  name: {fileID: 439335298}
 --- !u!1 &458162163
 GameObject:
   m_ObjectHideFlags: 0
@@ -9727,18 +9706,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1254765049}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1254765051 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1254765049}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1254765052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -9803,7 +9770,6 @@ MonoBehaviour:
   goldCost: {fileID: 1254765054}
   greenPointsCost: {fileID: 1254765053}
   happinessCost: {fileID: 1254765052}
-  name: {fileID: 1254765051}
 --- !u!1 &1259753237
 GameObject:
   m_ObjectHideFlags: 0
@@ -10975,18 +10941,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1387182031}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1387182033 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1387182031}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1387182034 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -11051,7 +11005,6 @@ MonoBehaviour:
   goldCost: {fileID: 1387182036}
   greenPointsCost: {fileID: 1387182035}
   happinessCost: {fileID: 1387182034}
-  name: {fileID: 1387182033}
 --- !u!1 &1390501181
 GameObject:
   m_ObjectHideFlags: 0
@@ -11820,6 +11773,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Movie Theatre
+      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12229,18 +12187,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1454186582}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1454186584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1454186582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1454186585 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -12305,7 +12251,6 @@ MonoBehaviour:
   goldCost: {fileID: 1454186587}
   greenPointsCost: {fileID: 1454186586}
   happinessCost: {fileID: 1454186585}
-  name: {fileID: 1454186584}
 --- !u!1 &1470306596
 GameObject:
   m_ObjectHideFlags: 0
@@ -14145,18 +14090,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1651197784}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1651197786 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1651197784}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1651197787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -14221,7 +14154,6 @@ MonoBehaviour:
   goldCost: {fileID: 1651197789}
   greenPointsCost: {fileID: 1651197788}
   happinessCost: {fileID: 1651197787}
-  name: {fileID: 1651197786}
 --- !u!1 &1651259669
 GameObject:
   m_ObjectHideFlags: 0
@@ -14582,6 +14514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: National Park
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -14992,18 +14929,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1706057227}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1706057229 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1706057227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1706057230 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -15068,7 +14993,6 @@ MonoBehaviour:
   goldCost: {fileID: 1706057232}
   greenPointsCost: {fileID: 1706057231}
   happinessCost: {fileID: 1706057230}
-  name: {fileID: 1706057229}
 --- !u!1 &1706320618
 GameObject:
   m_ObjectHideFlags: 0
@@ -16336,18 +16260,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1817924771}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1817924773 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1817924771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1817924774 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -16412,7 +16324,6 @@ MonoBehaviour:
   goldCost: {fileID: 1817924776}
   greenPointsCost: {fileID: 1817924775}
   happinessCost: {fileID: 1817924774}
-  name: {fileID: 1817924773}
 --- !u!1 &1821013692
 GameObject:
   m_ObjectHideFlags: 0

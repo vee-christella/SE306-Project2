@@ -19,7 +19,6 @@ public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Text goldCost;
     public Text greenPointsCost;
     public Text happinessCost;
-    public Text name;
     
     // Start is called before the first frame update
     void Start()

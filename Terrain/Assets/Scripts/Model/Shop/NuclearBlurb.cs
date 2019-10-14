@@ -19,7 +19,6 @@ public class NuclearBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public Text goldCost;
     public Text greenPointsCost;
     public Text happinessCost;
-    public Text name;
     
     // Start is called before the first frame update
     void Start()
