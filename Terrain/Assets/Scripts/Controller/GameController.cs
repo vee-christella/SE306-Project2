@@ -169,6 +169,14 @@ public class GameController : MonoBehaviour
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
+        
+        if (float.Parse(currentTurn.text)  == 17){
+            currentTurn.color = new Color32(255,150,0,255);
+        }
+
+        if (float.Parse(currentTurn.text) == 33){
+            currentTurn.color = new Color32(255,0,0,255);
+        }
     }
 
     public void CheckMetrics()
