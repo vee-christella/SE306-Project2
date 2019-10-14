@@ -23,6 +23,7 @@ public class BuildingController : MonoBehaviour
     public GameObject model_VegetableFarm;
     public GameObject model_WindTurbine;
     public GameObject model_Zoo;
+    private GameObject previewBuilding;
 
     public static BuildingController Instance { get; protected set; }
 
@@ -110,5 +111,41 @@ public class BuildingController : MonoBehaviour
         Destroy(building);
 
         return newBuilding;
+    }
+
+    public void ShowBuildingPreview(string buildingType, Vector3 mousePoint)
+    {
+        Destroy(previewBuilding);
+
+        string buildingName = resolveBuildingName(buildingType);
+
+        if (buildingName == null) return;
+
+        // Show the building preview
+        previewBuilding = Instantiate(modelDictionary[buildingName]);
+        previewBuilding.name = "PreviewBuilding";
+        previewBuilding.transform.position = mousePoint;
+    }
+
+    private string resolveBuildingName(string s)
+    {
+        if (s == "Animal Farm") return "AnimalFarm";
+        if (s == "Bee Farm") return "BeeFarm";
+        if (s == "Coal Mine") return "CoalMine";
+        if (s == "Forest") return "Forest";
+        if (s == "Hydro Plant") return "Hydro";
+        if (s == "Movie Theatre") return "MovieTheatre";
+        if (s == "National park") return "NationalPark";
+        if (s == "Nuclear Plant") return "Nuclear";
+        if (s == "Oil Refinery") return "OilRefinery";
+        if (s == "Race Track") return "RaceTrack";
+        if (s == "Recycling Plant") return "RecyclingPlant";
+        if (s == "Solar Farm") return "SolarFarm";
+        if (s == "Town Hall") return "TownHall";
+        if (s == "Vegetable Farm") return "VegetableFarm";
+        if (s == "Wind Turbine") return "WindTurbine";
+        if (s == "Zoo") return "Zoo";
+
+        return null;
     }
 }

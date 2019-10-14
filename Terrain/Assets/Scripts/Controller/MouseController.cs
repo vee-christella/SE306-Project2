@@ -42,38 +42,50 @@ public class MouseController : MonoBehaviour
         {
             if (GameController.Instance.Game.HasStarted)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (buildingForCreating != null)
                 {
                     RaycastHit hitInfo;
                     Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
                     if (Physics.Raycast(ray, out hitInfo))
                     {
-                        var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
+                        // Show a building preview where the user's cursor is on the map
+                        BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
+                    }
 
-                        Tile tileUnderMouse = getTileAtMouse(finalPosition);
+                    // Place a building at the cursor point
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        // RaycastHit hitInfo;
+                        // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-                        if (tileUnderMouse != null)
+                        if (Physics.Raycast(ray, out hitInfo))
                         {
-                            if (buildingForCreating != null)
+                            var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
+
+                            Tile tileUnderMouse = getTileAtMouse(finalPosition);
+
+                            if (tileUnderMouse != null)
                             {
-                                if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                                if (buildingForCreating != null)
                                 {
-                                    Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                                    {
+                                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.Log(".... Building is null");
                                 }
                             }
                             else
                             {
-                                Debug.Log(".... Building is null");
+                                Debug.Log(".... Tile is null");
                             }
-                        }
-                        else
-                        {
-                            Debug.Log(".... Tile is null");
                         }
                     }
                 }
-                // lastFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             }
         }
         catch
