@@ -40,6 +40,18 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    // Display the text of the dialogue slowly
+    IEnumerator GenerateSentence (string sentence)
+    {
+        dialogueText.text = "";
+
+        foreach (char digit in sentence.ToCharArray())
+        {
+            dialogueText.text += digit;
+            yield return null;
+        }
+    }
+
 
     public void DisplayNextSentence()
     {
@@ -50,7 +62,10 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = conversation.Dequeue();
-        dialogueText.text = sentence;
+        // Make sure that if the user clicks "next", the last
+        // animation terminates
+        StopAllCoroutines(); 
+        StartCoroutine(GenerateSentence(sentence));
 
     }
 
