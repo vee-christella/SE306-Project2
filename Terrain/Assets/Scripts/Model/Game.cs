@@ -254,11 +254,17 @@ public class Game
         {
             buildings[tile.X, tile.Y] = null;
             Money += CostToSell;
+            getModifier(building.InitialBuildHappiness * -1);
+            Happiness -= building.InitialBuildHappiness;
             GenerateHappiness -= building.GenerateHappiness;    
             GenerateMoney -= building.GenerateMoney;
             GenerateGreen -= building.GenerateGreen;
+
+            calculateDelta();
+            Debug.Log("Modifier: " + modifier);
+
             GameController.Instance.SetMetrics(Money, Green, Happiness);
-            GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
+            GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
 
         }
 
@@ -325,7 +331,6 @@ public class Game
             Happiness += building.InitialBuildHappiness;
             
         }
-
 
 
         GenerateMoney += building.GenerateMoney;
