@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,80 +54,71 @@ public class BuildingController : MonoBehaviour
         modelDictionary.Add("Zoo", model_Zoo);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public bool addBuildingToTile(string buildingType, Tile tile)
     {
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
-
-
-
-        if (building != null)
-        {
-            Debug.Log("==== BuildingController building not null");
-
-            //    GameObject buildingGO = new GameObject();
-            //     buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
-            //     buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-            //    SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-            //     buildingSR.sortingLayerName="Building";
-            //    buildingSR.sprite = buildingSprites[building.Id];
-            return true;
-        }
-        else
-        {
-            Debug.Log("==== BuildingController building is null");
-            return false;
-        }
+        return (building != null);
     }
 
-    public void ChangeBuildingSprite(Tile tile, GameObject buildingGO)
+    public void ChangeBuildingModel(Tile tile, GameObject buildingGO)
     {
-        Debug.Log("CHANGE BUILDING SPRITE");
-        tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingSprite(tileBuildingData, buildingGO); });
+        // Remove the old building's callback method
+        tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
+
         GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
-        tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingSprite(tileBuildingData, newBuilding); });
+
+        // Add the new building's and callback method
+        tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
     }
 
 
     private GameObject PlaceCubeNear(Tile tile, GameObject building)
     {
-        Debug.Log("_______OBJECT: " + building);
-        Debug.Log("_______BUILDING CLASS: " + tile.Building.GetType().Name);
-
+        // Get the class name of the building
         string newBuildingModel = tile.Building.GetType().Name;
 
-        Debug.Log("_______NEW OBJECT: " + modelDictionary[tile.Building.GetType().Name]);
-
-        // Create new building
+        // Create new building GameObject
         GameObject newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
         newBuilding.name = building.name;
         newBuilding.transform.position = building.transform.position;
 
-        // Delete old building
+        // Delete old (possibly empty) building GameObject
         Destroy(building);
 
         return newBuilding;
     }
 
-    public void ShowBuildingPreview(string buildingType, Vector3 mousePoint)
+    public void ShowBuildingPreview(string name, Vector3 mousePoint)
     {
+        // Remove the preview building from where the cursor previously was
         Destroy(previewBuilding);
 
-        string buildingName = resolveBuildingName(buildingType);
+        string buildingName = resolveBuildingName(name);
 
-        if (buildingName == null) return;
-
-        // Show the building preview
         previewBuilding = Instantiate(modelDictionary[buildingName]);
         previewBuilding.name = "PreviewBuilding";
+
+        // Remove the preview object's box collider to prevent a hover changing its colour
+        Destroy(previewBuilding.GetComponent<Collider>());
+
+        // Show the preview building on the cursor point
         previewBuilding.transform.position = mousePoint;
+
+        if (canBuildOnPoint(buildingName, mousePoint))
+        {
+            // Set the preview building to a green colour
+            previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
+        }
+        else
+        {
+            // Set the preview building to a red colour
+            previewBuilding.GetComponent<Renderer>().material.color = new Color32(200, 0, 0, 100);
+        }
     }
 
+    /*
+    Gets the class name of a building based on the "name" of the building
+    */
     private string resolveBuildingName(string s)
     {
         if (s == "Animal Farm") return "AnimalFarm";
@@ -146,6 +138,22 @@ public class BuildingController : MonoBehaviour
         if (s == "Wind Turbine") return "WindTurbine";
         if (s == "Zoo") return "Zoo";
 
+        // Should never return null if MouseController's SetMode_x() methods are implemented correctly
         return null;
     }
+
+    /*
+    Checks whether the building can be built on the point
+    */
+    private bool canBuildOnPoint(string buildingName, Vector3 point)
+    {
+        // Create a temporary building and check if it can be built on the tile at the point
+        Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
+        Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
+
+        if (tile.IsBuildable(building)) return true;
+
+        return false;
+    }
+
 }

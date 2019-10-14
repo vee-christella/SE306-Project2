@@ -13,33 +13,33 @@ public class HighlightHoverController : MonoBehaviour
     public bool startedFlashing = false;
 
     // Update is called once per frame
-    void Update()
-    {
-        if (GameController.Instance.Game.HasStarted && hoveringOverObject)
-        {
-            selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
-        }
-    }
+    // void Update()
+    // {
+    //     if (GameController.Instance.Game.HasStarted && hoveringOverObject)
+    //     {
+    //         selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
+    //     }
+    // }
 
-    void OnMouseOver()
-    {
-        selectedObject = GameObject.Find(MouseHoverController.selectedObject);
-        hoveringOverObject = true;
+    // void OnMouseOver()
+    // {
+    //     selectedObject = GameObject.Find(MouseHoverController.selectedObject);
+    //     hoveringOverObject = true;
 
-        if (!startedFlashing)
-        {
-            startedFlashing = true;
-            StartCoroutine(FlashObject());
-        }
-    }
+    //     if (!startedFlashing)
+    //     {
+    //         startedFlashing = true;
+    //         StartCoroutine(FlashObject());
+    //     }
+    // }
 
-    void OnMouseExit()
-    {
-        startedFlashing = false;
-        hoveringOverObject = false;
-        StopCoroutine(FlashObject());
-        selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
-    }
+    // void OnMouseExit()
+    // {
+    //     startedFlashing = false;
+    //     hoveringOverObject = false;
+    //     StopCoroutine(FlashObject());
+    //     selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+    // }
 
     IEnumerator FlashObject()
     {

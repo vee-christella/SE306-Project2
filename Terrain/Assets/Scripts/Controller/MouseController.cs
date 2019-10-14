@@ -38,60 +38,60 @@ public class MouseController : MonoBehaviour
         //     Camera.main.transform.Translate(diff);
         // }
 
-        try
+        // try
+        // {
+        if (GameController.Instance.Game.HasStarted)
         {
-            if (GameController.Instance.Game.HasStarted)
+            if (buildingForCreating != null)
             {
-                if (buildingForCreating != null)
+                RaycastHit hitInfo;
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hitInfo))
                 {
-                    RaycastHit hitInfo;
-                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                    // Show a building preview where the user's cursor is on the map
+                    BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
+                }
+
+                // Place a building at the cursor point
+                if (Input.GetMouseButtonDown(0))
+                {
+                    // RaycastHit hitInfo;
+                    // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
                     if (Physics.Raycast(ray, out hitInfo))
                     {
-                        // Show a building preview where the user's cursor is on the map
-                        BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
-                    }
+                        var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
 
-                    // Place a building at the cursor point
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        // RaycastHit hitInfo;
-                        // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                        Tile tileUnderMouse = getTileAtMouse(finalPosition);
 
-                        if (Physics.Raycast(ray, out hitInfo))
+                        if (tileUnderMouse != null)
                         {
-                            var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
-
-                            Tile tileUnderMouse = getTileAtMouse(finalPosition);
-
-                            if (tileUnderMouse != null)
+                            if (buildingForCreating != null)
                             {
-                                if (buildingForCreating != null)
+                                if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                                 {
-                                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
-                                    {
-                                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-                                    }
-                                }
-                                else
-                                {
-                                    Debug.Log(".... Building is null");
+                                    Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                                 }
                             }
                             else
                             {
-                                Debug.Log(".... Tile is null");
+                                Debug.Log(".... Building is null");
                             }
+                        }
+                        else
+                        {
+                            Debug.Log(".... Tile is null");
                         }
                     }
                 }
             }
         }
-        catch
-        {
-            // Do nothing
-        }
+        // }
+        // catch
+        // {
+        //     // Do nothing
+        // }
     }
 
     public void SetMode_CoalMine()
