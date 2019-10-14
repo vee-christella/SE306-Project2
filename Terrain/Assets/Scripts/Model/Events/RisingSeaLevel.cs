@@ -8,7 +8,7 @@ public class RisingSeaLevel : Event
 
     public RisingSeaLevel(Game game) : base(-5, -1, -5)
     {
-        this.Type = EventType.Random;
+        this.Type = EventType.TileChanger;
         this.Game = game;
         this.Description = "Global sea level is projected to rise another 1 to 4 feet by 2100. This is the result of added water from melting glaciers and the expansion of seawater as it warms. Rising sea levels will increase the risk of erosion, coastal flooding and saltwater intrusion, increasing the need for coastal protection";
     }
@@ -23,94 +23,20 @@ public class RisingSeaLevel : Event
             {
                 if (i == 0)
                 {
-                    if (doDestroyBuildings)
-                    {
-                        tiles[i, j].Type = Tile.TileType.Water;
-                    }
-                    else
-                    {
-                        if (tiles[i, j].Building == null)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Water;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
+                    tiles[i, j].Type = Tile.TileType.Water;
                 }
                 else if (i == tiles.GetLength(0) - 1)
                 {
-                    if (doDestroyBuildings)
-                    {
-                        tiles[i, j].Type = Tile.TileType.Water;
-                    }
-                    else
-                    {
-                        if (tiles[i, j].Building == null)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Water;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
+                    tiles[i, j].Type = Tile.TileType.Water;
                 }
 
                 else if (j == 0)
                 {
-                    if (doDestroyBuildings)
-                    {
-                        tiles[i, j].Type = Tile.TileType.Water;
-                    }
-                    else
-                    {
-                        if (tiles[i, j].Building == null)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Water;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
+                    tiles[i, j].Type = Tile.TileType.Water;
                 }
                 else if (j == tiles.GetLength(1) - 1)
                 {
-                    if (doDestroyBuildings)
-                    {
-                        tiles[i, j].Type = Tile.TileType.Water;
-                    }
-                    else
-                    {
-                        if (tiles[i, j].Building == null)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Water;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                }
-                else
-                {
-                    if (doDestroyBuildings)
-                    {
-                        tiles[i, j].Type = Tile.TileType.Water;
-                    }
-                    else
-                    {
-                        if (tiles[i, j].Building == null)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Water;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
+                    tiles[i, j].Type = Tile.TileType.Water;
                 }
             }
         }

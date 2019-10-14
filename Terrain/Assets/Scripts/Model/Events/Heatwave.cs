@@ -8,7 +8,7 @@ public class HeatWave : Event
 
     public HeatWave(Game game) : base(-5, -1, -5)
     {
-        this.Type = EventType.Random;
+        this.Type = EventType.TileChanger;
         this.Description = "Heat waves are periods of abnormally hot weather lasting days to weeks. This is combined with a reduction of soil moisture which exacerbates heat waves.";
     }
 
@@ -27,21 +27,7 @@ public class HeatWave : Event
                     // 50% chance to change plain tiles to desert
                     if (random == 1)
                     {
-                        if (doDestroyBuildings)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Desert;
-                        }
-                        else
-                        {
-                            if (tiles[i, j].Building == null) // if no building on tile then change tile type
-                            {
-                                tiles[i, j].Type = Tile.TileType.Desert;
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
+                        tiles[i, j].Type = Tile.TileType.Desert;
                     }
                 }
             }

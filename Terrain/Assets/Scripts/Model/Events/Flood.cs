@@ -8,7 +8,7 @@ public class Flood : Event
 
     public Flood(Game game) : base(-5, -1, -5)
     {
-        this.Type = EventType.Random;
+        this.Type = EventType.TileChanger;
         this.Description = "Storm surges and high tides combined with rising sea levels is increasing flooding in many regions. Furthermore, frequent intense rainfalls increases the likelihood of rivers flooding, and flash flooding when urban drainage systems become overwhelmed.";
 
         this.Game = game;
@@ -30,21 +30,7 @@ public class Flood : Event
                     // 50% chance to change desert tile to water tile
                     if (random == 1)
                     {
-                        if (doDestroyBuildings)
-                        {
-                            tiles[i, j].Type = Tile.TileType.Water;
-                        }
-                        else
-                        {
-                            if (tiles[i, j].Building == null) // if no building on tile then change tile type
-                            {
-                                tiles[i, j].Type = Tile.TileType.Desert;
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
+                        tiles[i, j].Type = Tile.TileType.Water;
                     }
                 }
             }

@@ -8,7 +8,7 @@ public class ForestSpawn : Event
 
     public ForestSpawn(Game game) : base(2, 2, 2)
     {
-        this.Type = EventType.Random;
+        this.Type = EventType.Good;
         this.Game = game;
     }
 

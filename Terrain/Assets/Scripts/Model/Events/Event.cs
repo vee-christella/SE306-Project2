@@ -7,7 +7,7 @@ public abstract class Event
 
     public enum EventType
     {
-        Random, Transition
+        Good, BuildingDestoryer, TileChanger
     };
 
     private int greenPointDelta;

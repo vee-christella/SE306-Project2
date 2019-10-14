@@ -28,6 +28,7 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+    List<Event> randomEventList = new List<Event>();
   
 
     GameObject errorMessage;
@@ -60,8 +61,12 @@ public class Game
         this.currentTurn = 0;
         this.rows = rows;
         this.columns = columns;
+        
         Tiles = new Tile[rows, columns];
         buildings = new Building[rows, columns];
+
+        InitaliseRandomEventList();
+
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < columns; j++)
@@ -131,12 +136,17 @@ public class Game
 
         GameEvent = EventForNextTurn();
 
+        if (GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
+        {
+            randomEventList.Remove(GameEvent);
+        }
+
+
         if (GameEvent != null)
         {
             Money = Money + GameEvent.MoneyDelta;
             Happiness = Happiness + GameEvent.HappinessDelta;
             Green = Green + GameEvent.GreenPointDelta;
-         //   GameEvent.TileDelta(Tiles);       
         }
 
 
@@ -250,20 +260,21 @@ public class Game
     public Event EventForNextTurn()
     {
     
-        List<Event> randomEventList = InitaliseRandomEventList();
         int probability = 10;
 
-   //     switch (gameDifficulty) {
-    //        case GameDifficulty.Easy:
-     //           probability = 0;
-     //           break;
-      //      case GameDifficulty.Medium:
-     //           probability = 5;
-     //           break;
-     //       case GameDifficulty.Hard:
-      //          probability = 15;
-       //         break;
-       // }
+        //     switch (gameDifficulty) {
+        //        case GameDifficulty.Easy:
+        //           probability = 0;
+        //           break;
+        //      case GameDifficulty.Medium:
+        //           probability = 5;
+        //           break;
+        //       case GameDifficulty.Hard:
+        //          probability = 15;
+        //         break;
+        // }
+
+      //  probability = (GenerateGreen + GenerateHappiness + GenerateMoney);
 
         if (Random.Range(1, 101) < probability)
         {
@@ -274,9 +285,8 @@ public class Game
     }
 
     // method to create list of all random events
-    public List<Event> InitaliseRandomEventList()
+    public void InitaliseRandomEventList()
     {
-        List<Event> randomEventList = new List<Event>();
 
         randomEventList.Add(new AcidRain(this));
         randomEventList.Add(new Drought(this));
@@ -287,7 +297,6 @@ public class Game
         randomEventList.Add(new Wildfire(this));
         randomEventList.Add(new HeatWave(this));
 
-        return randomEventList;
     }
 
     // Change the metrics with regards to the effects of the building

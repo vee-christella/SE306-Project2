@@ -8,7 +8,7 @@ public class Hurricane : Event
 
     public Hurricane(Game game) :base (-5,-1,-5)
     {
-        this.Type = EventType.Random;
+        this.Type = EventType.BuildingDestoryer;
         this.Game = game;
         this.Description = "The intensity, frequency and duration of the strongest hurricanes, have all increased since the early 1980s. Hurricane-associated storm intensity and rainfall rates are projected to increase as the climate continues to warm.";
     }
@@ -17,6 +17,12 @@ public class Hurricane : Event
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
+
+        if (!doDestroyBuildings)
+        {
+            return;
+        }
+
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
