@@ -3,19 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 public class MouseController : MonoBehaviour
 {
+    public static MouseController Instance { get; protected set; }
+
+    public GameObject toolTip;
+
+    private TextMeshProUGUI toolTipText;
 
     private string buildingForCreating = null;
 
+    private bool buildingIsSelected = false;
+
+    public Button sellButton;
+
+    private TextMeshProUGUI sellText;
+
     public Text cancelButtonString;
 
+
+
     Vector3 lastFramePosition;
+
+    private Tile tileSelected;
     // Start is called before the first frame update
     void Start()
     {
-        
+        toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
+        sellText = sellButton.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -33,18 +50,47 @@ public class MouseController : MonoBehaviour
         {
             Vector3 diff = lastFramePosition - currFramePosition;
             Camera.main.transform.Translate(diff);
+
+            //Remove tooltip
+            RemoveTooltip();
         }
         if (Input.GetMouseButtonUp(0))
         {
             Tile tileUnderMouse = getTileAtMouse(currFramePosition);
+            tileSelected = getTileAtMouse(currFramePosition);
             if (tileUnderMouse != null)
             {
-                if (buildingForCreating != null)
+                if (buildingIsSelected) 
                 {
-                    if(BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                    if (tileUnderMouse.Building != null)
                     {
+                        SetToolTip(tileUnderMouse.Building);
+                    }
+                    else
+                    {
+                        //Remove tooltip
+                        RemoveTooltip();
+                    }
+             
+                }
+                else
+                {
+                    if (buildingForCreating != null) //Building has been selected to build
+                    {
+                        if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                        {
 
-                        Debug.Log("Building "+ buildingForCreating+ " Created at " +"(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                            Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                        }
+                    }
+                    else if (tileUnderMouse.Building != null)
+                    {
+                        buildingIsSelected = true;
+                        SetToolTip(tileUnderMouse.Building);
+
+                    } else if (tileUnderMouse.Building == null)
+                    {
+                        RemoveTooltip();
                     }
                 }
             }
@@ -109,5 +155,70 @@ public class MouseController : MonoBehaviour
 
     public void setNull(){
         buildingForCreating = null;
+    }
+
+    private void SetToolTipText(Building building)
+    {
+
+        //toolTipText.SetText("TestText");
+        string name = building.Name;
+        string money, green, happiness, sellCost;
+
+        money = DeltaToString(building.GenerateMoney);
+        green = DeltaToString(building.GenerateGreen);
+        happiness = DeltaToString(building.GenerateHappiness);
+        sellCost = getSellPrice(building).ToString();
+
+
+        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness + "\n\nSell Cost: " + sellCost);
+
+    }
+
+    private string DeltaToString(float delta) 
+    {
+        if (delta >= 0)
+        {
+            return "+ " + delta.ToString();
+
+        }
+        return delta.ToString();
+
+
+    }
+
+    private double getSellPrice(Building building)
+    {
+        return building.InitialBuildMoney * 0.25 * -1;
+    }
+
+    public void SellBuilding()
+    {
+        if (tileSelected.Building.Name != "Town Hall")
+        {
+            GameController.Instance.Game.SellBuilding(tileSelected);
+            RemoveTooltip();
+        } 
+       
+    }
+
+    public void RemoveTooltip()
+    {
+        toolTip.SetActive(false);
+        buildingIsSelected = false;
+        sellText.text = "Sell: ";
+        sellButton.interactable = false;
+        Debug.Log("Building Deselected");
+    }
+
+    public void SetToolTip(Building building) {
+        toolTip.SetActive(true);
+        toolTip.transform.position = Input.mousePosition;
+        SetToolTipText(building);
+
+        if (building.Name != "Town Hall")
+        {
+            sellText.text = "Sell: " + getSellPrice(building);
+            sellButton.interactable = true;
+        }
     }
 }

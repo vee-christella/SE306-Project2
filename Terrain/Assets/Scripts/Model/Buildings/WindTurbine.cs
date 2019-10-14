@@ -10,7 +10,7 @@ public class WindTurbine : Building
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Wind Turbine";
-        this.Blurb = "Wind Turbines are a sustainable choice of energy" +
+         this.Blurb = "Wind Turbines are a sustainable choice of energy" +
         	"generation, but are very loud. Your citizens may not appreciate" +
             "the noise if they live close by. A wind turbine converts the wind’s kinetic energy into electrical energy and" +
             " is considered a sustainable form of electricity generation. These wind turbines are more efficient in certain" +
