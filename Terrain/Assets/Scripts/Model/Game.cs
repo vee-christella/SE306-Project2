@@ -27,6 +27,11 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+    bool isUnhappy = false;
+    float moneyDelta;
+    float greenDelta;
+
+    public float modifier = 1;
     
 
     float prevMoney;
@@ -50,6 +55,8 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
 
     public Game(int rows = 30, int columns = 30)
     {
@@ -102,10 +109,39 @@ public class Game
     {
         this.currentTurn++;
 
-        // Increase the metrics
-        Money = Money + GenerateMoney;
-        Green = Green + GenerateGreen;
+
+        getModifier();
+
         Happiness = Happiness + GenerateHappiness;
+
+
+        // Increase the metrics
+        if (GenerateMoney > 0)
+        {
+            moneyDelta = GenerateMoney * modifier;
+        } else
+        {
+            moneyDelta = GenerateMoney *  (1 / modifier) ;
+        }
+
+
+        if(GenerateGreen > 0)
+        {
+            greenDelta = GenerateGreen * modifier;
+        } else
+        {
+            greenDelta = GenerateGreen * (1 / modifier);
+        }
+        moneyDelta = (float)System.Math.Round(moneyDelta, 2);
+        greenDelta = (float)System.Math.Round(greenDelta, 2);
+
+        Money = Money + moneyDelta;
+        Green = Green + greenDelta;
+
+        Debug.Log("Generate Money: " +GenerateMoney);
+        Debug.Log("MoneyDelta: " + moneyDelta);
+        Debug.Log("Modifier: " + modifier);
+
 
         // Check if the user has won the game by reaching the number of green
         // points required
@@ -302,19 +338,38 @@ public class Game
         }
         else
         {
-
             Happiness += building.InitialBuildHappiness;
             
         }
+
+        //getModifier();
 
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
         GenerateHappiness += building.GenerateHappiness;
 
+        //if (GenerateMoney > 0)
+        //{
+        //    moneyDelta = GenerateMoney * modifier;
+        //}
+        //else
+        //{
+        //    moneyDelta = GenerateMoney * (1 / modifier);
+        //}
+
+        //if (GenerateGreen > 0)
+        //{
+        //    greenDelta = GenerateGreen * modifier;
+        //}
+        //else
+        //{
+        //    greenDelta = GenerateGreen * (1 / modifier);
+        //}
+
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
-        GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
+        GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);
 
 
     }
@@ -341,6 +396,66 @@ public class Game
         } else
         {
 
+        }
+    }
+
+
+    private void getModifier()
+    {
+        if (Happiness >= 50 && Happiness + GenerateHappiness < 50)
+        {
+            Debug.Log("50 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 50 && Happiness + GenerateHappiness >= 50)
+        {
+            Debug.Log("50 up");
+
+            modifier += (float)0.1;
+
+        }
+
+        if (Happiness >= 30 && Happiness + GenerateHappiness < 30)
+        {
+            Debug.Log("30 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 30 && Happiness + GenerateHappiness >= 30)
+        {
+            Debug.Log("30 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness < 70 && Happiness + GenerateHappiness >= 70)
+        {
+            Debug.Log("70 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness >= 70 && Happiness + GenerateHappiness < 70)
+        {
+            Debug.Log("70 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 90 && Happiness + GenerateHappiness >= 90)
+        {
+            Debug.Log("90 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness >= 90 && Happiness + GenerateHappiness < 90)
+        {
+            Debug.Log("90 down");
+            modifier -= (float)0.1;
         }
     }
 }

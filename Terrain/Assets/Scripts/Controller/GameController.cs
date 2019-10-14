@@ -108,7 +108,7 @@ public class GameController : MonoBehaviour
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);
-        SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
+        SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
         SetTurn(game.CurrentTurn);
     }
 
