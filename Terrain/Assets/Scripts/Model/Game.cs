@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 using TMPro;
 
 #if UNITY_EDITOR
@@ -27,6 +29,7 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+    HashSet<Tile> creatingBuildings = new HashSet<Tile>();
 
     GameObject errorMessage;
 
@@ -48,6 +51,7 @@ public class Game
 
     public Game(int rows = 30, int columns = 30)
     {
+        AchievementManager.GetAchievementManager();
         this.isEnd = false;
         this.currentTurn = 0;
         this.rows = rows;
@@ -97,6 +101,17 @@ public class Game
     {
         this.currentTurn++;
 
+        foreach (Tile buildingTile in creatingBuildings.ToArray()){
+            buildingTile.Building.CurrentConstructionTurn = buildingTile.Building.CurrentConstructionTurn + 1;
+            if(buildingTile.Building.CurrentConstructionTurn>=buildingTile.Building.TurnsToBuild){
+                GenerateMoney += buildingTile.Building.GenerateMoney;
+                GenerateGreen += buildingTile.Building.GenerateGreen;
+                GenerateHappiness += buildingTile.Building.GenerateHappiness;
+                creatingBuildings.Remove(buildingTile);
+
+            }
+        }
+
         // Increase the metrics
         Money = Money + GenerateMoney;
         Green = Green + GenerateGreen;
@@ -110,12 +125,14 @@ public class Game
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed, or having a negative money value (as they
             // now are stuck in debt)
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
 
             return;
         }
         else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
             return;
         }
 
@@ -179,6 +196,9 @@ public class Game
             case "Town Hall":
                 building = new TownHall();
                 break;
+            case "Greenhouse":
+                building = new Greenhouse();
+                break;
             default:
                 return null;
         }
@@ -191,6 +211,15 @@ public class Game
             {
                 buildings[tile.X, tile.Y] = building;
                 UpdateMetrics(building);
+                creatingBuildings.Add(tile);
+                if(String.Equals(buildingType, "Nuclear Plant")){
+                    Debug.Log("achievement Trigger " + AchievementType.BuildNuclear);
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
+                }
+                if(String.Equals(buildingType, "Oil Refinery")){
+                    Debug.Log("achievement Trigger " + AchievementType.BuildOlilRig);
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
+                }
                 return building;
             }
             else
@@ -243,14 +272,14 @@ public class Game
     public Event EventForNextTurn()
     {
         List<Event> randomEventList = InitaliseRandomEventList();
-        Random random = new Random();
+        UnityEngine.Random random = new UnityEngine.Random();
         if (currentTurn == 5)
         {
             return new Drought(this);
         }
-        else if (Random.Range(0, 100) < 10)
+        else if (UnityEngine.Random.Range(0, 100) < 10)
         {
-            return randomEventList[Random.Range(0, randomEventList.Count)];
+            return randomEventList[UnityEngine.Random.Range(0, randomEventList.Count)];
         }
 
         return null;
@@ -296,9 +325,9 @@ public class Game
             Happiness += building.InitialBuildHappiness;
         }
 
-        GenerateMoney += building.GenerateMoney;
-        GenerateGreen += building.GenerateGreen;
-        GenerateHappiness += building.GenerateHappiness;
+        //GenerateMoney += building.GenerateMoney;
+        //GenerateGreen += building.GenerateGreen;
+        //GenerateHappiness += building.GenerateHappiness;
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
         GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
@@ -308,17 +337,16 @@ public class Game
     
     public void stillBuildable(Tile tile)
     {
-        Debug.Log("still buildable called");
+        //Debug.Log("still buildable called");
         if (tile.Building != null)
         {
             if (!tile.IsBuildable(tile.Building))
             {
-                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
-                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
-                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
-                tile.Building.GenerateGreen = 0;
-                tile.Building.GenerateHappiness = 0;
-                tile.Building.GenerateMoney = 0;
+                if(tile.Building.CurrentConstructionTurn>=tile.Building.TurnsToBuild){
+                    GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                    GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                    GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                }
             }
         }
     }
