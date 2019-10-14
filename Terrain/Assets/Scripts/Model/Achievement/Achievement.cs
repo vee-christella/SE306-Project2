@@ -24,7 +24,17 @@ public class Achievement
     public string Blurb{get => blurb; set => blurb = value;}
     public string HowToComplete{get => howToComplete; set => howToComplete = value;}
     public int CountToComplete{get => countToComplete; set => countToComplete = value;}
-    public int CurrentCount{get => currentCount; set => currentCount = value;}
+    public int CurrentCount{get => currentCount; 
+        set {
+            currentCount = value;
+            PlayerPrefs.SetInt("Count"+ Title, CurrentCount);
+                Debug.Log("Achievement count Modified: "+Title);
+            if(this.CurrentCount>=this.CountToComplete){
+                this.AchievementComplete = true;
+                Debug.Log("Achievement: "+Title + " Complete");
+            }
+        }
+    }
     public bool AchievementComplete{get => achievementComplete; set => achievementComplete = value;}
     public Achievement[] Achievements{get => achievements; set => achievements = value;}
     public Action<Achievement> CallbackAchievementCount { get => callbackAchievementCount; }
@@ -40,9 +50,7 @@ public class Achievement
 
     public bool upAchievementCounter(){
         this.CurrentCount = this.CurrentCount+1;
-        if(this.CurrentCount>=this.CountToComplete){
-            achievementComplete = true;
-        }
+                Debug.Log("Achievement: TEST TEST TEST "+Title + " Complete");
         return achievementComplete;
     }
 

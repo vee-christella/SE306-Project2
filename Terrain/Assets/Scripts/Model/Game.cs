@@ -121,12 +121,14 @@ public class Game
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed, or having a negative money value (as they
             // now are stuck in debt)
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
 
             return;
         }
         else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
             return;
         }
 
@@ -206,9 +208,13 @@ public class Game
                 buildings[tile.X, tile.Y] = building;
                 UpdateMetrics(building);
                 creatingBuildings.Add(tile);
+                if(String.Equals(buildingType, "Nuclear Plant")){
+                    Debug.Log("achievement Trigger " + AchievementType.BuildNuclear);
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
+                }
                 if(String.Equals(buildingType, "Oil Refinery")){
-                    Debug.Log("achievement Trigger " + AchievementType.Fail);
-                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
+                    Debug.Log("achievement Trigger " + AchievementType.BuildOlilRig);
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
                 }
                 return building;
             }
@@ -259,10 +265,7 @@ public class Game
         List<Event> randomEventList = new List<Event>();
 
         randomEventList.Add(new AcidRain(this));
-        randomEventList.Add(new Earthquake(this));
         randomEventList.Add(new ForestSpawn(this));
-        randomEventList.Add(new Tsunami(this));
-        randomEventList.Add(new Heatwave(this));
         randomEventList.Add(new Wildfire(this));
         randomEventList.Add(new Flood(this));
 
