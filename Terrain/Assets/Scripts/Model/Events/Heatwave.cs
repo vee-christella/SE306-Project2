@@ -16,6 +16,35 @@ public class HeatWave : Event
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
-        throw new System.NotImplementedException();
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if (tiles[i, j].Type == Tile.TileType.Plain)
+                {
+                    Debug.Log("Found a plain tile");
+                    int random = Random.Range(0, 2);
+                    // 50% chance to change plain tiles to desert
+                    if (random == 1)
+                    {
+                        if (doDestroyBuildings)
+                        {
+                            tiles[i, j].Type = Tile.TileType.Desert;
+                        }
+                        else
+                        {
+                            if (tiles[i, j].Building == null) // if no building on tile then change tile type
+                            {
+                                tiles[i, j].Type = Tile.TileType.Desert;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

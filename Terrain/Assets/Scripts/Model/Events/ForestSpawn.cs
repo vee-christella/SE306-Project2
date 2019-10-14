@@ -24,7 +24,7 @@ public class ForestSpawn : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Plain)
                 {
-                    int random = Random.Range(0, 9);
+                    int random = Random.Range(0,15);
                     // 50% chance to change tiles to desert
                     if (random == 1)
                     {
