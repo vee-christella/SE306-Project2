@@ -91,6 +91,11 @@ public class Tile
         callbackBuildingChange += method;
     }
 
+    public void unregisterMethodCallbackBuildingCreated(Action<Tile> method)
+    {
+        callbackBuildingChange -= method;
+    }
+
 
     public bool IsBuildable(Building building)
     {

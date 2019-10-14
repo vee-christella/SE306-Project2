@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
                 SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
                 buildingSR.sortingLayerName = "Building";
 
-                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
+                tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingSprite(tileBuildingData, buildingGO); });
 
                 // Place the TownHall
                 if (x == 5 && z == 4)
@@ -207,9 +207,4 @@ public class GameController : MonoBehaviour
         errorMessage.SetActive(true);
     }
 
-
-    public void OnBuildingChange(Tile tile, GameObject buildingGO)
-    {
-        BuildingController.Instance.ChangeBuildingSprite(tile, buildingGO);
-    }
 }

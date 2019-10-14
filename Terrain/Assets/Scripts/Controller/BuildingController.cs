@@ -49,8 +49,12 @@ public class BuildingController : MonoBehaviour
     {
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
 
+
+
         if (building != null)
         {
+            Debug.Log("==== BuildingController building not null");
+
             //    GameObject buildingGO = new GameObject();
             //     buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
             //     buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
@@ -61,6 +65,7 @@ public class BuildingController : MonoBehaviour
         }
         else
         {
+            Debug.Log("==== BuildingController building is null");
             return false;
         }
     }
@@ -69,23 +74,28 @@ public class BuildingController : MonoBehaviour
     {
         // buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
         Debug.Log("CHANGE BUILDING SPRITE");
-        PlaceCubeNear(tile, buildingGO);
+        tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingSprite(tileBuildingData, buildingGO); });
+        GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
+        tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingSprite(tileBuildingData, newBuilding); });
     }
 
 
-    private void PlaceCubeNear(Tile tile, GameObject building)
+    private GameObject PlaceCubeNear(Tile tile, GameObject building)
     {
         Debug.Log("PLACING CUBE");
-        // GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
 
         string buildingName = "Building(" + building.transform.position.x + ", " + building.transform.position.y + ", " + building.transform.position.z + ")";
         Debug.Log("_______NAME: " + buildingName);
         Debug.Log("_______OBJECT: " + building);
 
-        building = Instantiate(cube);
+        // Create new building
+        GameObject newBuilding = Instantiate(cube);
+        newBuilding.name = building.name;
+        newBuilding.transform.position = building.transform.position;
 
-        // Instantiate(cube).transform.position = finalPosition;
+        // Delete old building
+        Destroy(building);
 
-        //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = nearPoint;
+        return newBuilding;
     }
 }

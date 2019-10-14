@@ -52,7 +52,7 @@ public class Game
     {
         this.isEnd = false;
         this.currentTurn = 0;
-        
+
         this.rows = rows;
         this.columns = columns;
 
@@ -78,7 +78,7 @@ public class Game
         {
             return null;
         }
-        
+
         return tiles[x, z];
     }
 
@@ -190,13 +190,13 @@ public class Game
                 return null;
         }
 
-
         // Check if funds are sufficient
         if (Money + building.InitialBuildMoney >= 0)
         {
             if (tile.placeBuilding(building))
             {
-                buildings[tile.X, tile.Y] = building;
+                Debug.Log("==== Game not null = " + building != null);
+                buildings[tile.X, tile.Z] = building;
                 UpdateMetrics(building);
                 return building;
             }
@@ -217,15 +217,11 @@ public class Game
         }
         else
         {
-
             // Show error message
             GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
             return null;
-
         }
-
-
     }
 
 
