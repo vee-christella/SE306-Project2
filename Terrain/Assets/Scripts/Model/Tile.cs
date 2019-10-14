@@ -69,20 +69,19 @@ public class Tile
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
-        if (this.building == null)
+        
+        if ((this.building == null) && IsBuildable(building))
         {
-            if (IsBuildable(building))
+            this.building = building;
+
+            if (CallbackBuildingChange != null)
             {
-                this.building = building;
-
-                if (CallbackBuildingChange != null)
-                {
-                    CallbackBuildingChange(this);
-                }
-
-                return true;
+                CallbackBuildingChange(this);
             }
+
+            return true;
         }
+
         return false;
     }
 

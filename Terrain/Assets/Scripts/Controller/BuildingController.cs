@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BuildingController : MonoBehaviour
 {
+    private Dictionary<string, GameObject> modelDictionary = new Dictionary<string, GameObject>();
     public GameObject model_AnimalFarm;
-    public GameObject model_BeeFarmModel;
-    public GameObject model_CoalMineModel;
+    public GameObject model_BeeFarm;
+    public GameObject model_CoalMine;
     public GameObject model_Factory;
     public GameObject model_Forest;
     public GameObject model_Greenhouse;
@@ -23,20 +24,32 @@ public class BuildingController : MonoBehaviour
     public GameObject model_WindTurbine;
     public GameObject model_Zoo;
 
-
-
-    public GameObject cube;
-
-
-
-
     public static BuildingController Instance { get; protected set; }
 
-    public Sprite[] buildingSprites = new Sprite[12];
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+
+        // Add models to dictionary for easy access when building
+        modelDictionary.Add("AnimalFarm", model_AnimalFarm);
+        modelDictionary.Add("BeeFarm", model_BeeFarm);
+        modelDictionary.Add("CoalMine", model_CoalMine);
+        modelDictionary.Add("Factory", model_Factory);
+        modelDictionary.Add("Forest", model_Forest);
+        modelDictionary.Add("Greenhouse", model_Greenhouse);
+        modelDictionary.Add("Hydro", model_Hydro);
+        modelDictionary.Add("MovieTheatre", model_MovieTheatre);
+        modelDictionary.Add("NationalPark", model_NationalPark);
+        modelDictionary.Add("Nuclear", model_Nuclear);
+        modelDictionary.Add("OilRefinery", model_OilRefinery);
+        modelDictionary.Add("RaceTrack", model_RaceTrack);
+        modelDictionary.Add("RecyclingPlant", model_RecyclingPlant);
+        modelDictionary.Add("SolarFarm", model_SolarFarm);
+        modelDictionary.Add("TownHall", model_TownHall);
+        modelDictionary.Add("VegetableFarm", model_VegetableFarm);
+        modelDictionary.Add("WindTurbine", model_WindTurbine);
+        modelDictionary.Add("Zoo", model_Zoo);
     }
 
     // Update is called once per frame
@@ -72,7 +85,6 @@ public class BuildingController : MonoBehaviour
 
     public void ChangeBuildingSprite(Tile tile, GameObject buildingGO)
     {
-        // buildingGO.GetComponent<SpriteRenderer>().sprite = buildingSprites[tile.Building.Id];
         Debug.Log("CHANGE BUILDING SPRITE");
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingSprite(tileBuildingData, buildingGO); });
         GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
@@ -82,14 +94,15 @@ public class BuildingController : MonoBehaviour
 
     private GameObject PlaceCubeNear(Tile tile, GameObject building)
     {
-        Debug.Log("PLACING CUBE");
-
-        string buildingName = "Building(" + building.transform.position.x + ", " + building.transform.position.y + ", " + building.transform.position.z + ")";
-        Debug.Log("_______NAME: " + buildingName);
         Debug.Log("_______OBJECT: " + building);
+        Debug.Log("_______BUILDING CLASS: " + tile.Building.GetType().Name);
+
+        string newBuildingModel = tile.Building.GetType().Name;
+
+        Debug.Log("_______NEW OBJECT: " + modelDictionary[tile.Building.GetType().Name]);
 
         // Create new building
-        GameObject newBuilding = Instantiate(cube);
+        GameObject newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
         newBuilding.name = building.name;
         newBuilding.transform.position = building.transform.position;
 

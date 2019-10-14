@@ -3070,7 +3070,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -3797,7 +3797,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -5752,7 +5752,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -10126,38 +10126,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ab058acda11f419034f95ebdf4483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model_AnimalFarm: {fileID: 0}
-  model_BeeFarmModel: {fileID: 0}
-  model_CoalMineModel: {fileID: 0}
-  model_Factory: {fileID: 0}
-  model_Forest: {fileID: 0}
-  model_Greenhouse: {fileID: 0}
-  model_Hydro: {fileID: 0}
-  model_MovieTheatre: {fileID: 0}
-  model_NationalPark: {fileID: 0}
-  model_Nuclear: {fileID: 0}
-  model_OilRefinery: {fileID: 0}
-  model_RaceTrack: {fileID: 0}
-  model_RecyclingPlant: {fileID: 0}
-  model_SolarFarm: {fileID: 0}
-  model_TownHall: {fileID: 0}
-  model_VegetableFarm: {fileID: 0}
-  model_WindTurbine: {fileID: 0}
-  model_Zoo: {fileID: 0}
+  model_AnimalFarm: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_BeeFarm: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_CoalMine: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_Factory: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_Forest: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_Greenhouse: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_Hydro: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_MovieTheatre: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_NationalPark: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_Nuclear: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_OilRefinery: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_RaceTrack: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_RecyclingPlant: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_SolarFarm: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_TownHall: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_VegetableFarm: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_WindTurbine: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
+  model_Zoo: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
   cube: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e, type: 3}
-  buildingSprites:
-  - {fileID: 21300000, guid: 55c56a9f2f0f76c4cb318d4e866668d9, type: 3}
-  - {fileID: 21300000, guid: 05b55a3b11a805146b3536080e15f4b7, type: 3}
-  - {fileID: 21300000, guid: d8ac49e386d85c044a0c7f7d405fa63d, type: 3}
-  - {fileID: 21300000, guid: b4d0b8d7a7655ac44802a7f444611219, type: 3}
-  - {fileID: 21300000, guid: e26970eac0781e84896b42c3981e621c, type: 3}
-  - {fileID: 21300000, guid: 4540bddc231c9cf449cefceee3a412ef, type: 3}
-  - {fileID: 21300000, guid: d88a2fc749f01ca4a8c4dcc6d2d700a0, type: 3}
-  - {fileID: 21300000, guid: 6ba62cbb7ca91404b9efd30e3f987fba, type: 3}
-  - {fileID: 21300000, guid: 2ae40d930084b1d4082c0a873eddc04c, type: 3}
-  - {fileID: 21300000, guid: 469245a30d830d644b90b44b687250fe, type: 3}
-  - {fileID: 21300000, guid: f1271bd6f37c2094fb2c7890b845569d, type: 3}
-  - {fileID: 21300000, guid: 3aea3929fb064054eb3acf8ed8879407, type: 3}
 --- !u!4 &1083359872
 Transform:
   m_ObjectHideFlags: 0
@@ -10724,7 +10729,7 @@ PrefabInstance:
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -10735,11 +10740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1663199098}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: SetMode_Nuclear
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -15366,7 +15371,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -16262,7 +16267,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -17181,7 +17186,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127397727}
     - target: {fileID: 3214827380932725394, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
