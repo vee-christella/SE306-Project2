@@ -54,12 +54,12 @@ public class Tile
         this.z = z;
     }
 
-    public Tile(Game game, int x, int y)
+    public Tile(Game game, int x, int z)
     {
         this.game = game;
         this.x = x;
-        this.y = y;
-        this.z = 0;
+        this.y = 0;
+        this.z = z;
     }
 
     public void setType(TileType type)
@@ -69,28 +69,25 @@ public class Tile
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
-        if (this.building == null)
+        
+        if ((this.building == null) && IsBuildable(building))
         {
-            if (IsBuildable(building))
+            this.building = building;
+
+            if (CallbackBuildingChange != null)
             {
-                this.building = building;
-
-                if (CallbackBuildingChange != null)
-                {
-                    CallbackBuildingChange(this);
-                }
-
-                return true;
+                CallbackBuildingChange(this);
             }
+
+            return true;
         }
 
-        Debug.Log(building.Name);
         return false;
     }
 
     public bool removeBuilding()
     {
-        Debug.Log("Building Removed");
+        //Debug.Log("Building Removed");
         if (this.building != null)
         {
             this.building = null;
@@ -108,6 +105,11 @@ public class Tile
     public void registerMethodCallbackBuildingCreated(Action<Tile> method)
     {
         callbackBuildingChange += method;
+    }
+
+    public void unregisterMethodCallbackBuildingCreated(Action<Tile> method)
+    {
+        callbackBuildingChange -= method;
     }
 
 

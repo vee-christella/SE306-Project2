@@ -6,29 +6,23 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-
     public static GameController Instance { get; protected set; }
     Game game;
     EventController eventController;
+    private GameGrid gameGrid;
     int[,] map;
-
-
-
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
     public int[,] Map { get => map; set => map = value; }
 
+    // public Sprite[] sprites = new Sprite[7];
 
-
-
-    public Sprite[] sprites = new Sprite[7];
-
+    public GameObject[] tileGameObjs = new GameObject[4];
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
     public TextMeshProUGUI happinessCount;
     public TextMeshProUGUI currentTurn;
     public TextMeshProUGUI maxTurn;
-
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
@@ -40,7 +34,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Game Controller Started");
+        gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
+    
 
         // Change the map generation depending on the game mode/difficulty
         switch (PlayerPrefs.GetInt("Level"))
@@ -60,72 +57,72 @@ public class GameController : MonoBehaviour
                 Game = new Game(20, 20);
                 break;
         }
+        
+        Game.IsEnd = false;
+        Game.HasStarted = false;
 
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
-        for (int i = 0; i < Game.Rows; i++)
+
+        // Populate the map with game tiles
+        for (int x = 0; x < Game.Rows; x++)
         {
-            for (int j = 0; j < Game.Columns; j++)
+            for (int z = 0; z < Game.Columns; z++)
             {
-                Tile tile = Game.getTileAt(i, j);
+                Tile tile = Game.getTileAt(x, z);
 
-                GameObject tileGO = new GameObject();
-                tileGO.name = "Tile(" + i + ", " + j + ")";
-                tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-
-                SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                tileSR.sortingLayerName = "Tile";
-
-                int random = Random.Range(0, 7);
-
-                // Use a different map arrangement depending on the level
-
+                int rand = Random.Range(0, 4);
+                GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
 
                 switch (Map[i, j])
                 {
                     case 0:
-                    case 1:
                         tile.setType(Tile.TileType.Desert);
                         break;
-                    case 2:
-                    case 3:
+                    case 1:
                         tile.setType(Tile.TileType.Mountain);
                         break;
-                    case 4:
-                    case 5:
+                    case 2:
                         tile.setType(Tile.TileType.Plain);
                         break;
-                    case 6:
+                    case 3:
                         tile.setType(Tile.TileType.Water);
                         break;
                 }
 
-                tileSR.sprite = sprites[Map[i, j]];
+                tileGO.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
+                tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
+                Vector3 tileLocation = new Vector3(x, tile.Y, z);
+                var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
+                tileGO.transform.position = finalPosition;
+
+                // tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
+                //Debug.Log("i = " + i + ", j = " + j);
+                //Debug.Log(i == 5 && j == 4);
+
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
-
-                Debug.Log("i = " + i + ", j = " + j);
-                Debug.Log(i == 5 && j == 4);
-
+                // Create empty building game objects
                 GameObject buildingGO = new GameObject();
-                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
+                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
                 SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
                 buildingSR.sortingLayerName = "Building";
-                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
+
+                Debug.Log("TESTSET");
+                tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
 
                 // Place the TownHall
-                if (i == 5 && j == 4)
+                if (x == 4 && z == 5)
                 {
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
-
-                
             }
         }
 
         StartingMetrics();
-        Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
-
+        Game.HasStarted = true;
     }
 
     public void callNextTurn()
@@ -138,14 +135,14 @@ public class GameController : MonoBehaviour
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);
-        SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
+        SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
         SetTurn(game.CurrentTurn);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        CheckMetrics();
     }
 
     // Initialise the starting metrics on the screen
@@ -169,7 +166,7 @@ public class GameController : MonoBehaviour
 
     public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
     {
-        if(coinDelta < 0)
+        if (coinDelta < 0)
         {
             coinDeltaText.text = coinDelta.ToString();
         }
@@ -178,11 +175,12 @@ public class GameController : MonoBehaviour
             coinDeltaText.text = "+ " + coinDelta.ToString();
         }
 
-        if(greenDelta < 0)
+        if (greenDelta < 0)
         {
             greenDeltaText.text = greenDelta.ToString();
 
-        } else
+        }
+        else
         {
             greenDeltaText.text = "+ " + greenDelta.ToString();
         }
@@ -190,7 +188,8 @@ public class GameController : MonoBehaviour
         if (happinessDelta < 0)
         {
             happinessDeltaText.text = happinessDelta.ToString();
-        } else
+        }
+        else
         {
             happinessDeltaText.text = "+ " + happinessDelta.ToString();
         }
@@ -199,11 +198,56 @@ public class GameController : MonoBehaviour
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
+        
+        if (float.Parse(currentTurn.text)  == 17){
+            currentTurn.color = new Color32(255,150,0,255);
+        }
+
+        if (float.Parse(currentTurn.text) == 33){
+            currentTurn.color = new Color32(255,0,0,255);
+        }
+    }
+
+    public void CheckMetrics()
+    {
+        if (float.Parse(coinCount.text) <= 100){
+            coinCount.color = new Color32(255,0,0,255);
+        } else {
+            coinCount.color = new Color32(0,0,0,255);
+        }
+        if (float.Parse(greenCount.text) < 0){
+            greenCount.color = new Color32(255,0,0,255);
+        } else {
+            greenCount.color = new Color32(0,0,0,255);
+        }
+        if (float.Parse(happinessCount.text) <= 25){
+            happinessCount.color = new Color32(255,0,0,255);
+        } else {
+            happinessCount.color = new Color32(0,0,0,255);
+        }
+        
+        if (coinDeltaText.text[0] == '-'){
+            coinDeltaText.color = new Color32(255,0,0,255);
+        } else {
+            coinDeltaText.color = new Color32(0,0,0,255);
+        }
+
+        if (greenDeltaText.text[0] == '-'){
+            greenDeltaText.color = new Color32(255,0,0,255);
+        } else {
+            greenDeltaText.color = new Color32(0,0,0,255);
+        }
+
+        if (happinessDeltaText.text[0] == '-'){
+            happinessDeltaText.color = new Color32(255,0,0,255);
+        } else {
+            happinessDeltaText.color = new Color32(0,0,0,255);
+        }
     }
 
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
-        Debug.Log("on tile type changed");
+        //Debug.Log("on tile type changed");
         int random = 0;
         if (tile.Type == Tile.TileType.Desert)
         {
@@ -221,21 +265,16 @@ public class GameController : MonoBehaviour
         {
             random = 6;
         }
-        tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
+        // tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
 
     }
 
     public void ShowError(string textToShow)
-    { 
+    {
 
         //errorText = (TextMeshProUGUI)errorMessage.GetComponentInChildren(typeof(TextMeshProUGUI), true);
         errorText.text = textToShow;
         errorMessage.SetActive(true);
     }
 
-
-    public void OnBuildingChange(Tile tile, GameObject buildingGO)
-    {
-        BuildingController.Instance.ChangeBuildingSprite(tile, buildingGO);
-    }
 }

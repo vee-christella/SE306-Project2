@@ -23,7 +23,7 @@ public class EventController : MonoBehaviour
         happinessEffect.text = DisplayEffect(gameEvent.HappinessDelta) + gameEvent.HappinessDelta;
 
 
-        Debug.Log("pop up");
+        //Debug.Log("pop up");
         eventPopupPanel.SetActive(true);
     }
 

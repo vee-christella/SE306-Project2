@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Building
 {
-
     public enum BuildingType
     {
         Utility,
@@ -12,7 +11,6 @@ public abstract class Building
         EnergySource,
         Misc
     };
-
 
     float initialBuildMoney;
     float initialBuildGreen;
@@ -63,8 +61,6 @@ public abstract class Building
         this.generateMoney = genMoney;
         this.generateHappiness = genHappiness;
         this.turnsToBuild = buildTime;
-
-
     }
 
     public Building(int id, float initBuildMoney, float initBuildGreen,
