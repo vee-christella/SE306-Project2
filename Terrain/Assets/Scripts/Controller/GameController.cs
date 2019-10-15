@@ -115,7 +115,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        CheckMetrics();
     }
 
     // Initialise the starting metrics on the screen
@@ -169,6 +169,51 @@ public class GameController : MonoBehaviour
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
+        
+        if (float.Parse(currentTurn.text)  == 17){
+            currentTurn.color = new Color32(255,150,0,255);
+        }
+
+        if (float.Parse(currentTurn.text) == 33){
+            currentTurn.color = new Color32(255,0,0,255);
+        }
+    }
+
+    public void CheckMetrics()
+    {
+        if (float.Parse(coinCount.text) <= 100){
+            coinCount.color = new Color32(255,0,0,255);
+        } else {
+            coinCount.color = new Color32(0,0,0,255);
+        }
+        if (float.Parse(greenCount.text) < 0){
+            greenCount.color = new Color32(255,0,0,255);
+        } else {
+            greenCount.color = new Color32(0,0,0,255);
+        }
+        if (float.Parse(happinessCount.text) <= 25){
+            happinessCount.color = new Color32(255,0,0,255);
+        } else {
+            happinessCount.color = new Color32(0,0,0,255);
+        }
+        
+        if (coinDeltaText.text[0] == '-'){
+            coinDeltaText.color = new Color32(255,0,0,255);
+        } else {
+            coinDeltaText.color = new Color32(0,0,0,255);
+        }
+
+        if (greenDeltaText.text[0] == '-'){
+            greenDeltaText.color = new Color32(255,0,0,255);
+        } else {
+            greenDeltaText.color = new Color32(0,0,0,255);
+        }
+
+        if (happinessDeltaText.text[0] == '-'){
+            happinessDeltaText.color = new Color32(255,0,0,255);
+        } else {
+            happinessDeltaText.color = new Color32(0,0,0,255);
+        }
     }
 
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
