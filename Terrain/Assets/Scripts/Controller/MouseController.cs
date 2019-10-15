@@ -185,8 +185,31 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Wind Turbine";
         setCancelButton();
     }
-    public void SetMode_Zoo()
-    {
+    public void SetMode_AnimalFarm() {
+        buildingForCreating = "Animal Farm";
+        setCancelButton();
+    }
+    public void SetMode_BeeFarm() {
+        buildingForCreating = "Bee Farm";
+        setCancelButton();
+    }
+    public void SetMode_Factory() {
+        buildingForCreating = "Factory";
+        setCancelButton();
+    }
+    public void SetMode_Greenhouse() {
+        buildingForCreating = "Greenhouse";
+        setCancelButton();
+    }
+    public void SetMode_RecyclingPlant() {
+        buildingForCreating = "Recycling Plant";
+        setCancelButton();
+    }
+    public void SetMode_VegetableFarm() {
+        buildingForCreating = "Vegetable Farm";
+        setCancelButton();
+    }
+    public void SetMode_Zoo() {
         buildingForCreating = "Zoo";
         setCancelButton();
     }
