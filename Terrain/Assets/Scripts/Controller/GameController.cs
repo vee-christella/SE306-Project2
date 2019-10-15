@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
                 Tile tile = Game.getTileAt(x, z);
 
                 int rand = Random.Range(0, 4);
-                GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
+                GameObject tileGO = Instantiate(tileGameObjs[Map[x,z]]) as GameObject;
 
                 switch (Map[x, z])
                 {
