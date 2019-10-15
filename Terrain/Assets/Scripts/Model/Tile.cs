@@ -13,11 +13,11 @@ public class Tile
         Water
     };
 
-    private List<string> waterBuildable = new List<string>() { "Hydro Plant" };
-    private List<string> desertBuildable = new List<string>() { "Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
-    "Race Track", "Wind Turbine", "Solar Farm" };
-    private List<string> plainBuildable = new List<string>() { "Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall" };
+    private List<string> waterBuildable = new List<string>() { "Hydro Plant", null };
+    private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
+    "Race Track", "Wind Turbine", "Solar Farm", null};
+    private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
+    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall", null};
 
     Action<Tile> callbackTypeChanged;
     Action<Tile> callbackBuildingChange;
@@ -82,6 +82,23 @@ public class Tile
             return true;
         }
 
+        return false;
+    }
+
+    public bool removeBuilding()
+    {
+        //Debug.Log("Building Removed");
+        if (this.building != null)
+        {
+            this.building = null;
+
+            if (CallbackBuildingChange != null)
+            {
+                CallbackBuildingChange(this);
+            }
+
+            return true;
+        }
         return false;
     }
 

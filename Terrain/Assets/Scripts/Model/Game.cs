@@ -27,7 +27,17 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+    bool isUnhappy = false;
+    float moneyDelta;
+    float greenDelta;
     bool hasStarted = false;
+
+    public float modifier = 1;
+    
+
+    float prevMoney;
+    float prevHappiness;
+
 
     GameObject errorMessage;
 
@@ -46,6 +56,8 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
     public bool HasStarted { get => hasStarted; set => hasStarted = value; }
 
     public Game(int rows, int columns)
@@ -67,8 +79,7 @@ public class Game
                 tiles[x, z].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
-
-        Debug.Log("game created");
+        //Debug.Log("game created");
     }
 
 
@@ -104,10 +115,22 @@ public class Game
     {
         this.currentTurn++;
 
-        // Increase the metrics
-        Money = Money + GenerateMoney;
-        Green = Green + GenerateGreen;
+
+        getModifier(GenerateHappiness);
+
         Happiness = Happiness + GenerateHappiness;
+
+
+        // Increase the metrics
+        calculateDelta();
+
+        Money = Money + moneyDelta;
+        Green = Green + greenDelta;
+
+        Debug.Log("Generate Money: " +GenerateMoney);
+        Debug.Log("MoneyDelta: " + moneyDelta);
+        Debug.Log("Modifier: " + modifier);
+
 
         // Check if the user has won the game by reaching the number of green
         // points required
@@ -224,6 +247,33 @@ public class Game
         }
     }
 
+    public void SellBuilding(Tile tile)
+    {
+        Debug.Log("Yeet");
+        Building building = tile.Building;
+        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        if (tile.removeBuilding())
+        {
+            buildings[tile.X, tile.Y] = null;
+            Money += CostToSell;
+            getModifier(building.InitialBuildHappiness * -1);
+            Happiness -= building.InitialBuildHappiness;
+            GenerateHappiness -= building.GenerateHappiness;    
+            GenerateMoney -= building.GenerateMoney;
+            GenerateGreen -= building.GenerateGreen;
+
+            calculateDelta();
+            Debug.Log("Modifier: " + modifier);
+
+            GameController.Instance.SetMetrics(Money, Green, Happiness);
+            GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
+
+        }
+
+
+
+    }
+
 
     // get the event  for the next turn
     public Event EventForNextTurn()
@@ -269,6 +319,7 @@ public class Game
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
+        getModifier(building.InitialBuildHappiness);
         if (Happiness + building.InitialBuildHappiness < 0)
         {
             Happiness = 0;
@@ -280,14 +331,27 @@ public class Game
         else
         {
             Happiness += building.InitialBuildHappiness;
+            
         }
+
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
         GenerateHappiness += building.GenerateHappiness;
 
+        Debug.Log("Happiness: " + Happiness);
+
+        Debug.Log("Building Happ: " + building.InitialBuildHappiness);
+
+        calculateDelta();
+
+
+        Debug.Log("Modifier: " + modifier);
+
+
+
         GameController.Instance.SetMetrics(Money, Green, Happiness);
-        GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
+        GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);
 
 
     }
@@ -303,5 +367,89 @@ public class Game
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
             }
         }
+    }
+
+
+    private void getModifier(float happinessDelta)
+    {
+        if (Happiness >= 50 && Happiness + happinessDelta < 50)
+        {
+            Debug.Log("50 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 50 && Happiness + happinessDelta >= 50)
+        {
+            Debug.Log("50 up");
+
+            modifier += (float)0.1;
+
+        }
+
+        if (Happiness >= 30 && Happiness + happinessDelta < 30)
+        {
+            Debug.Log("30 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 30 && Happiness + happinessDelta >= 30)
+        {
+            Debug.Log("30 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness < 70 && Happiness + happinessDelta >= 70)
+        {
+            Debug.Log("70 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness >= 70 && Happiness + happinessDelta < 70)
+        {
+            Debug.Log("70 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 90 && Happiness + happinessDelta >= 90)
+        {
+            Debug.Log("90 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness >= 90 && Happiness + happinessDelta < 90)
+        {
+            Debug.Log("90 down");
+            modifier -= (float)0.1;
+        }
+    }
+
+    private void calculateDelta()
+    {
+        if (GenerateMoney > 0)
+        {
+            moneyDelta = GenerateMoney * modifier;
+        }
+        else
+        {
+            moneyDelta = GenerateMoney * (1 / modifier);
+        }
+
+
+        if (GenerateGreen > 0)
+        {
+            greenDelta = GenerateGreen * modifier;
+        }
+        else
+        {
+            greenDelta = GenerateGreen * (1 / modifier);
+        }
+        moneyDelta = (float)System.Math.Round(moneyDelta, 2);
+        greenDelta = (float)System.Math.Round(greenDelta, 2);
     }
 }

@@ -3,18 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
+//Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 
 /*
 Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 */
 public class MouseController : MonoBehaviour
 {
+    public static MouseController Instance { get; protected set; }
+
+    public GameObject toolTip;
+
+    private TextMeshProUGUI toolTipText;
+
     private GameGrid gameGrid;
     private Camera mainCamera;
     private string buildingForCreating = null;
+
+    private bool buildingIsSelected = false;
+
+    public Button sellButton;
+
+    private TextMeshProUGUI sellText;
+
     public Text cancelButtonString;
     Vector3 lastFramePosition;
 
+
+
+    Vector3 lastFramePosition;
+
+    private Tile tileSelected;
+    // Start is called before the first frame update
+    void Start()
     private void Awake()
     {
         gameGrid = FindObjectOfType<GameGrid>();
@@ -83,6 +105,15 @@ public class MouseController : MonoBehaviour
                         {
                             Debug.Log(".... Tile is null");
                         }
+                    }
+                    else if (tileUnderMouse.Building != null)
+                    {
+                        buildingIsSelected = true;
+                        SetToolTip(tileUnderMouse);
+
+                    } else if (tileUnderMouse.Building == null)
+                    {
+                        RemoveTooltip();
                     }
                 }
             }
@@ -163,5 +194,82 @@ public class MouseController : MonoBehaviour
     public void setNull()
     {
         buildingForCreating = null;
+    }
+
+    private void SetToolTipText(Tile tile)
+    {
+        Building building = tile.Building;
+
+        //toolTipText.SetText("TestText");
+        string name = building.Name;
+        string money, green, happiness, sellCost;
+
+        if (tile.IsBuildable(building))
+        {
+            money = DeltaToString(building.GenerateMoney);
+            green = DeltaToString(building.GenerateGreen);
+            happiness = DeltaToString(building.GenerateHappiness);
+        } else
+        {
+            money = "0";
+            green = "0";
+            happiness = "0";
+        }
+
+        sellCost = getSellPrice(building).ToString();
+
+
+
+        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness + "\n\nSell Cost: " + sellCost);
+
+    }
+
+    private string DeltaToString(float delta) 
+    {
+        if (delta >= 0)
+        {
+            return "+ " + delta.ToString();
+
+        }
+        return delta.ToString();
+
+
+    }
+
+    private double getSellPrice(Building building)
+    {
+        return building.InitialBuildMoney * 0.25 * -1;
+    }
+
+    public void SellBuilding()
+    {
+        if (tileSelected.Building.Name != "Town Hall")
+        {
+            GameController.Instance.Game.SellBuilding(tileSelected);
+            RemoveTooltip();
+        } 
+       
+    }
+
+    public void RemoveTooltip()
+    {
+        toolTip.SetActive(false);
+        buildingIsSelected = false;
+        sellText.text = "Sell: ";
+        sellButton.interactable = false;
+        //Debug.Log("Building Deselected");
+    }
+
+    public void SetToolTip(Tile tile) {
+        Building building = tile.Building;
+        toolTip.SetActive(true);
+        toolTip.transform.position = Input.mousePosition;
+        SetToolTipText(tile);
+
+        if (building.Name != "Town Hall")
+        {
+            sellText.text = "Sell: " + getSellPrice(building);
+            sellButton.interactable = true;
+        }
     }
 }
