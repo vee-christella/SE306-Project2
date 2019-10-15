@@ -28,10 +28,8 @@ public class Achievement
         set {
             currentCount = value;
             PlayerPrefs.SetInt("Count"+ Title, CurrentCount);
-                Debug.Log("Achievement count Modified: "+Title);
             if(this.CurrentCount>=this.CountToComplete){
                 this.AchievementComplete = true;
-                Debug.Log("Achievement: "+Title + " Complete");
             }
         }
     }
@@ -50,7 +48,7 @@ public class Achievement
 
     public bool upAchievementCounter(){
         this.CurrentCount = this.CurrentCount+1;
-                Debug.Log("Achievement: TEST TEST TEST "+Title + " Complete");
+                Debug.Log("Achievement Counter Increase: "+Title);
         return achievementComplete;
     }
 

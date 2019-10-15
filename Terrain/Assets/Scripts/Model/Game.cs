@@ -217,6 +217,9 @@ public class Game
                 Debug.Log("==== Game not null = " + building != null);
                 buildings[tile.X, tile.Z] = building;
                 UpdateMetrics(building);
+                if(buildingType == "Oil Refinery"){
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
+                }
                 return building;
             }
             else
