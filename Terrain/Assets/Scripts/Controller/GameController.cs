@@ -32,7 +32,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Instance = this;
-        Game = new Game(10, 10);
+        int random = 1;//Random.Range(0,2);
+        if(random == 0){
+        Game = new Game(20, 20);
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         for (int i = 0; i < Game.Rows; i++)
         {
@@ -46,8 +48,6 @@ public class GameController : MonoBehaviour
 
                 SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
                 tileSR.sortingLayerName = "Tile";
-
-                int random = Random.Range(0, 7);
 
                 switch (PrototypeLevel.Arr[i, j])
                 {
@@ -91,6 +91,38 @@ public class GameController : MonoBehaviour
 
                 
             }
+        }
+        }else if(random == 1){
+            Game = new Game(20, 20);
+        eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
+        for (int i = 0; i < Game.Rows; i++)
+        {
+            for (int j = 0; j < Game.Columns; j++)
+            {
+                Tile tile = Game.getTileAt(i, j);
+
+                GameObject tileGO = new GameObject();
+                tileGO.name = "Tile(" + i + ", " + j + ")";
+                tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
+                SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
+                tileSR.sortingLayerName = "Tile";
+
+               
+                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+
+                GameObject buildingGO = new GameObject();
+                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
+                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
+                buildingSR.sortingLayerName = "Building";
+                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
+                
+
+                
+            }
+        }
+                WorldGenerator.generateWorld( Game);
         }
 
         StartingMetrics();
