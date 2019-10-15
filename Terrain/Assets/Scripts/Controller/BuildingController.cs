@@ -68,7 +68,6 @@ public class BuildingController : MonoBehaviour
 
     public void ChangeBuildingModel(Tile tile, GameObject buildingGO)
     {
-        Debug.Log("ALADLALDSALDALSDLASDLASLDADLALDS");
         // Remove the old building's callback method
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
 

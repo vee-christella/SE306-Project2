@@ -127,10 +127,6 @@ public class Game
         Money = Money + moneyDelta;
         Green = Green + greenDelta;
 
-        Debug.Log("Generate Money: " +GenerateMoney);
-        Debug.Log("MoneyDelta: " + moneyDelta);
-        Debug.Log("Modifier: " + modifier);
-
 
         // Check if the user has won the game by reaching the number of green
         // points required

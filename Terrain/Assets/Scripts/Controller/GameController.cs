@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
 
                 int rand = Random.Range(0, 4);
                 GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
+                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
                 // THIS SHOULD PROBABLY BE DONE IN GAME.CS WHEN TILES ARE FIRST MADE
                 switch (rand)
@@ -66,20 +67,6 @@ public class GameController : MonoBehaviour
                         tile.setType(Tile.TileType.Water);
                         break;
                 }
-
-                tileGO.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
-                tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-
-                Vector3 tileLocation = new Vector3(x, tile.Y, z);
-                var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
-                tileGO.transform.position = finalPosition;
-
-                // tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
-                //Debug.Log("i = " + i + ", j = " + j);
-                //Debug.Log(i == 5 && j == 4);
-
-                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
-
                 // Create empty building game objects
                 GameObject buildingGO = new GameObject();
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
@@ -88,7 +75,6 @@ public class GameController : MonoBehaviour
                 SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
                 buildingSR.sortingLayerName = "Building";
 
-                Debug.Log("TESTSET");
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
 
                 // Place the TownHall
@@ -98,42 +84,11 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        }else if(random == 1){
-            Game = new Game(20, 20);
-        eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
-        for (int i = 0; i < Game.Rows; i++)
-        {
-            for (int j = 0; j < Game.Columns; j++)
-            {
-                Tile tile = Game.getTileAt(i, j);
-
-                GameObject tileGO = new GameObject();
-                tileGO.name = "Tile(" + i + ", " + j + ")";
-                tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-
-                SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                tileSR.sortingLayerName = "Tile";
-
-               
-                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
-
-                GameObject buildingGO = new GameObject();
-                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
-                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-                buildingSR.sortingLayerName = "Building";
-                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
-                
-
-                
-            }
-        }
-                WorldGenerator.generateWorld( Game);
-        }
-
+        WorldGenerator.generateWorld(Game);
         StartingMetrics();
         Game.HasStarted = true;
     }
+    
 
     public void callNextTurn()
     {
@@ -258,24 +213,32 @@ public class GameController : MonoBehaviour
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
         //Debug.Log("on tile type changed");
-        int random = 0;
+        tile.unregisterMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+        int typeInt=0;
         if (tile.Type == Tile.TileType.Desert)
         {
-            random = Random.Range(0, 1);
+            typeInt = 0;
         }
         else if (tile.Type == Tile.TileType.Mountain)
         {
-            random = Random.Range(2, 3);
+            typeInt = 1;
         }
         else if (tile.Type == Tile.TileType.Plain)
         {
-            random = Random.Range(4, 5);
+            typeInt = 2;
         }
         else if (tile.Type == Tile.TileType.Water)
         {
-            random = 6;
+            typeInt = 3;
         }
-        // tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
+        GameObject tileGONew = Instantiate(tileGameObjs[typeInt]) as GameObject;
+        tileGONew.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
+        tileGONew.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+        Vector3 tileLocation = new Vector3(tile.X, tile.Y, tile.Z);
+        var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
+        tileGONew.transform.position = finalPosition;
+        tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+        Destroy(tileGO);
 
     }
 

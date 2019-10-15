@@ -9,7 +9,6 @@ public class WelcomescreenController : MonoBehaviour, IPointerClickHandler
     public GameObject appearing;
 
     public void OnPointerClick(PointerEventData pointerEventData) {
-        Debug.Log("clicked");
         disappearing.SetActive(false);
         appearing.SetActive(true);
     }
