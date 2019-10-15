@@ -81,15 +81,14 @@ public class MouseController : MonoBehaviour
 
                     if (Physics.Raycast(ray, out hitInfo))
                     {
-                        var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
+                        var gridPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
 
-                        Tile tileUnderMouse = getTileAtMouse(finalPosition);
+                        Tile tileUnderMouse = getTileAtMouse(gridPosition);
 
                         if (tileUnderMouse != null)
                         {
                             if (buildingIsSelected)
                             {
-
                                 if (tileUnderMouse.Building != null)
                                 {
                                     SetToolTip(tileUnderMouse);
@@ -101,7 +100,6 @@ public class MouseController : MonoBehaviour
                             }
                             else
                             {
-
                                 if (buildingForCreating != null)
                                 {
                                     if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
@@ -114,7 +112,8 @@ public class MouseController : MonoBehaviour
 
                                     buildingIsSelected = true;
                                     SetToolTip(tileUnderMouse);
-                                } else if( tileUnderMouse.Building == null)
+                                }
+                                else if (tileUnderMouse.Building == null)
                                 {
                                     RemoveTooltip();
                                 }
@@ -126,6 +125,10 @@ public class MouseController : MonoBehaviour
                         }
                     }
                 }
+            }
+            else
+            {
+                
             }
         }
         // }
@@ -219,7 +222,8 @@ public class MouseController : MonoBehaviour
             money = DeltaToString(building.GenerateMoney);
             green = DeltaToString(building.GenerateGreen);
             happiness = DeltaToString(building.GenerateHappiness);
-        } else
+        }
+        else
         {
             money = "0";
             green = "0";
@@ -234,7 +238,7 @@ public class MouseController : MonoBehaviour
 
     }
 
-    private string DeltaToString(float delta) 
+    private string DeltaToString(float delta)
     {
         if (delta >= 0)
         {
@@ -257,8 +261,8 @@ public class MouseController : MonoBehaviour
         {
             GameController.Instance.Game.SellBuilding(tileSelected);
             RemoveTooltip();
-        } 
-       
+        }
+
     }
 
     public void RemoveTooltip()
@@ -270,7 +274,8 @@ public class MouseController : MonoBehaviour
         //Debug.Log("Building Deselected");
     }
 
-    public void SetToolTip(Tile tile) {
+    public void SetToolTip(Tile tile)
+    {
         Building building = tile.Building;
         toolTip.SetActive(true);
         toolTip.transform.position = Input.mousePosition;

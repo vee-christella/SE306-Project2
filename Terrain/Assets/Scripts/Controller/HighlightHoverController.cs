@@ -13,33 +13,46 @@ public class HighlightHoverController : MonoBehaviour
     public bool startedFlashing = false;
 
     // Update is called once per frame
-    // void Update()
-    // {
-    //     if (GameController.Instance.Game.HasStarted && hoveringOverObject)
-    //     {
-    //         selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
-    //     }
-    // }
+    void Update()
+    {
+        if (GameController.Instance.Game.HasStarted && hoveringOverObject && selectedObject.name.Contains("Building"))
+        {
+            Debug.Log("HOVER UPDATE");
+            selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
+        }
+    }
 
-    // void OnMouseOver()
-    // {
-    //     selectedObject = GameObject.Find(MouseHoverController.selectedObject);
-    //     hoveringOverObject = true;
+    void OnMouseOver()
+    {
+        selectedObject = GameObject.Find(MouseHoverController.selectedObject);
 
-    //     if (!startedFlashing)
-    //     {
-    //         startedFlashing = true;
-    //         StartCoroutine(FlashObject());
-    //     }
-    // }
+        // Only highlight buildings
+        if (selectedObject.name.Contains("Building"))
+        {
+            Debug.Log("MOUSE EXIT");
+            hoveringOverObject = true;
 
-    // void OnMouseExit()
-    // {
-    //     startedFlashing = false;
-    //     hoveringOverObject = false;
-    //     StopCoroutine(FlashObject());
-    //     selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
-    // }
+            if (!startedFlashing)
+            {
+                startedFlashing = true;
+                StartCoroutine(FlashObject());
+            }
+        }
+
+    }
+
+    void OnMouseExit()
+    {
+        // Only highlight buildings
+        if (selectedObject.name.Contains("Building"))
+        {
+            Debug.Log("MOUSE EXIT");
+            hoveringOverObject = false;
+            startedFlashing = false;
+            StopCoroutine(FlashObject());
+            selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+        }
+    }
 
     IEnumerator FlashObject()
     {
