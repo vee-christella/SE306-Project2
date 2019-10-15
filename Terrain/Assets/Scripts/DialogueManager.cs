@@ -20,6 +20,11 @@ public class DialogueManager : MonoBehaviour
     public GameObject happiArrow;
     public GameObject turnsArrow;
 
+    public GameObject plains;
+    public GameObject mountains;
+    public GameObject desert;
+    public GameObject water;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
@@ -77,25 +82,47 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (conversation.Count == 12 && tutorialStage == 2)
+        if (tutorialStage == 2)
         {
-            arrowImage.SetActive(true);
-        } else if (conversation.Count == 10 && tutorialStage == 2)
+            if (conversation.Count == 12)
+            {
+                arrowImage.SetActive(true);
+            }
+            else if (conversation.Count == 10)
+            {
+                arrowImage.SetActive(false);
+                goldArrow.SetActive(true);
+            }
+            else if (conversation.Count == 8)
+            {
+                goldArrow.SetActive(false);
+                greenArrow.SetActive(true);
+            }
+            else if (conversation.Count == 5)
+            {
+                greenArrow.SetActive(false);
+                happiArrow.SetActive(true);
+            }
+            else if (conversation.Count == 3)
+            {
+                happiArrow.SetActive(false);
+                turnsArrow.SetActive(true);
+            }
+        } else if (tutorialStage == 3)
         {
-            arrowImage.SetActive(false);
-            goldArrow.SetActive(true);
-        } else if (conversation.Count == 8 && tutorialStage == 2)
-        {
-            goldArrow.SetActive(false);
-            greenArrow.SetActive(true);
-        } else if (conversation.Count == 5 && tutorialStage == 2)
-        {
-            greenArrow.SetActive(false);
-            happiArrow.SetActive(true);
-        } else if (conversation.Count == 3 && tutorialStage == 2)
-        {
-            happiArrow.SetActive(false);
-            turnsArrow.SetActive(true);
+            if (conversation.Count == 5)
+            {
+                plains.SetActive(true);
+            } else if (conversation.Count == 4)
+            {
+                desert.SetActive(true);
+            } else if (conversation.Count == 3)
+            {
+                water.SetActive(true);
+            } else if (conversation.Count == 2)
+            {
+                mountains.SetActive(true);
+            }
         }
 
         string sentence = conversation.Dequeue();
