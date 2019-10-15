@@ -17,15 +17,19 @@ public class TutorialController : MonoBehaviour
 
     private void Update()
     {
-         for (int i = 0; i < tutorialStages.Length; i++)
-        {
+         
             //Debug.Log("Index is " + tutorialIndex + " and i is " + i);
             tutorialStages[tutorialIndex].SetActive(true);
-        }
 
-         if (tutorialIndex == 1)
-        {
-            tutorialStages[tutorialIndex - 1].SetActive(false);
-        }
+            if (tutorialIndex > 0)
+            {
+                tutorialStages[tutorialIndex - 1].SetActive(false);
+            }
+  
+
+        // if (tutorialIndex == 1)
+        //{
+        //    tutorialStages[tutorialIndex - 1].SetActive(false);
+        //}
     }
 }
