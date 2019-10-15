@@ -28,8 +28,9 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
-    List<Event> randomEventList = new List<Event>();
-  
+    List<Event> goodEventList = new List<Event>();
+    List<Event> badEventList = new List<Event>();
+
 
     GameObject errorMessage;
 
@@ -65,7 +66,7 @@ public class Game
         Tiles = new Tile[rows, columns];
         buildings = new Building[rows, columns];
 
-        InitaliseRandomEventList();
+        InitaliseRandomEventLists();
 
         for (int i = 0; i < rows; i++)
         {
@@ -138,7 +139,7 @@ public class Game
 
         if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
         {
-            randomEventList.Remove(GameEvent);
+            badEventList.Remove(GameEvent);
         }
 
 
@@ -253,7 +254,7 @@ public class Game
             GameController.Instance.SetMetrics(Money, Green, Happiness);
 
         }
-    }   
+    }
 
 
     // get the event  for the next turn
@@ -262,18 +263,28 @@ public class Game
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability
-        // happiness for some events increases probability
 
-
-        //  if (Random.Range(1, 101) < probability)
-        //  {
-        //      return randomEventList[Random.Range(0, randomEventList.Count)];
-        //  }
-
-        // probability is in terms of decimals
+        List<Event> potentionalEvents = new List<Event>();
         int badEventProbability = 0;
         float goodEventProbability;
         float difficultyOffset = 0.1f;
+
+
+        switch (gameDifficulty)
+        {
+            case GameDifficulty.Easy:
+                difficultyOffset = 0.1f;
+                break;
+            case GameDifficulty.Medium:
+                difficultyOffset = 0.2f;
+                break;
+            case GameDifficulty.Hard:
+                difficultyOffset = 0.3f;
+                break;
+            default:
+                difficultyOffset = 0.1f;
+                break;
+        }
 
 
         goodEventProbability = (green / 2000) * 100;
@@ -282,7 +293,7 @@ public class Game
         // check green points to account for negative value
         if (green < 0)
         {
-            badEventProbability = Mathf.FloorToInt(1 - 700/ (1000 - green));
+            badEventProbability = Mathf.FloorToInt(1 - 700 / (1000 - green));
         }
         else
         {
@@ -299,14 +310,13 @@ public class Game
             badEventProbability = 80;
         }
 
-
         int randomNum = Random.Range(1, 101);
 
+        // good events take priority and the chance of a good event increases the more green points the user has
         if (randomNum < goodEventProbability)
         {
 
-            return null;
-
+            potentionalEvents.Add(goodEventList[Random.Range(0, goodEventList.Count)]);
             // return random good event 
         }
         else
@@ -315,31 +325,33 @@ public class Game
 
             if (randomNum < badEventProbability)
             {
-                // return a random bad event 
-                return null;
+                potentionalEvents.Add(badEventList[Random.Range(0, badEventList.Count)]);
+
             }
         }
 
-
-
-
-
-        return null;
+        if (potentionalEvents.Count != 0)
+        {
+            return potentionalEvents[Random.Range(0, potentionalEvents.Count)];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     // method to create list of all random events
-    public void InitaliseRandomEventList()
+    public void InitaliseRandomEventLists()
     {
+        badEventList.Add(new AcidRain(this));
+        badEventList.Add(new Drought(this));
+        badEventList.Add(new Flood(this));
+        badEventList.Add(new Hurricane(this));
+        badEventList.Add(new RisingSeaLevel(this));
+        badEventList.Add(new Wildfire(this));
+        badEventList.Add(new HeatWave(this));
 
-        randomEventList.Add(new AcidRain(this));
-        randomEventList.Add(new Drought(this));
-        randomEventList.Add(new Flood(this));
-        randomEventList.Add(new Hurricane(this));
-        randomEventList.Add(new ForestSpawn(this));
-        randomEventList.Add(new RisingSeaLevel(this));
-        randomEventList.Add(new Wildfire(this));
-        randomEventList.Add(new HeatWave(this));
-
+        goodEventList.Add(new ForestSpawn(this));
     }
 
     // Change the metrics with regards to the effects of the building
