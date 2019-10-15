@@ -68,7 +68,7 @@ public class Tile
     }
     public bool placeBuilding(Building building)
     {
-        Debug.Log("Building Created");
+        //Debug.Log("Building Created");
         if (this.building == null)
         {
             if (IsBuildable(building))
@@ -90,7 +90,7 @@ public class Tile
 
     public bool removeBuilding()
     {
-        Debug.Log("Building Removed");
+        //Debug.Log("Building Removed");
         if (this.building != null)
         {
             this.building = null;
