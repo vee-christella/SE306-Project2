@@ -13,15 +13,24 @@ public class DialogueManager : MonoBehaviour
     public GameObject startButton;
     public GameObject overlay;
 
+    public int tutorialStage;
+    public GameObject arrowImage;
+    public GameObject goldArrow;
+    public GameObject greenArrow;
+    public GameObject happiArrow;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
-    public Animator animator;
+    //public Animator boxAnimator;
+    //public Animator avatarAnimator;
 
     private void Start()
     {
         conversation = new Queue<string>();
-        animator.SetBool("isOpen", true);
+        //boxAnimator.SetBool("isOpen", true);
+        //avatarAnimator.SetBool("isOpen", true);
+
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -37,7 +46,6 @@ public class DialogueManager : MonoBehaviour
         {
             conversation.Enqueue(sentence);
         }
-
 
 
         DisplayNextSentence();
@@ -68,6 +76,23 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        if (conversation.Count == 9 && tutorialStage == 2)
+        {
+            arrowImage.SetActive(true);
+        } else if (conversation.Count == 7 && tutorialStage == 2)
+        {
+            arrowImage.SetActive(false);
+            goldArrow.SetActive(true);
+        } else if (conversation.Count == 5 && tutorialStage == 2)
+        {
+            goldArrow.SetActive(false);
+            greenArrow.SetActive(true);
+        } else if (conversation.Count == 2 && tutorialStage == 2)
+        {
+            greenArrow.SetActive(false);
+            happiArrow.SetActive(true);
+        }
+
         string sentence = conversation.Dequeue();
         // Make sure that if the user clicks "next", the last
         // animation terminates
@@ -76,12 +101,24 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    private IEnumerator WaitForAnimation (Animator animator)
+    {
+        do
+        {
+            yield return null;
+        } while (animator.isActiveAndEnabled);
+    }
+
     public void EndDialogue()
     {
         Debug.Log("Ended convo");
-        animator.SetBool("isOpen", false);
+        //boxAnimator.SetBool("isOpen", false);
+        //avatarAnimator.SetBool("isOpen", false);
 
-        //overlay.SetActive(false);
+
+        TutorialController.Instance.tutorialIndex++;
+
+        overlay.SetActive(false);
     }
 
 
