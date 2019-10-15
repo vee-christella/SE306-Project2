@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
 using TMPro;
 
 #if UNITY_EDITOR
@@ -29,7 +27,17 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
-    HashSet<Tile> creatingBuildings = new HashSet<Tile>();
+    bool isUnhappy = false;
+    float moneyDelta;
+    float greenDelta;
+    bool hasStarted = false;
+
+    public float modifier = 1;
+    
+
+    float prevMoney;
+    float prevHappiness;
+
 
     GameObject errorMessage;
 
@@ -48,35 +56,41 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
+    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
 
-    public Game(int rows = 30, int columns = 30)
+    public Game(int rows, int columns)
     {
-        AchievementManager.GetAchievementManager();
         this.isEnd = false;
         this.currentTurn = 0;
+
         this.rows = rows;
         this.columns = columns;
-        tiles = new Tile[rows, columns];
-        buildings = new Building[rows, columns];
-        for (int i = 0; i < rows; i++)
+
+        this.tiles = new Tile[rows, columns];
+        this.buildings = new Building[rows, columns];
+
+        for (int x = 0; x < rows; x++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int z = 0; z < columns; z++)
             {
-                tiles[i, j] = new Tile(this, i, j);
-                tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
+                tiles[x, z] = new Tile(this, x, z);
+                tiles[x, z].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
-        Debug.Log("game created");
+        //Debug.Log("game created");
     }
 
 
-    public Tile getTileAt(int x, int y)
+    public Tile getTileAt(int x, int z)
     {
-        if (x >= rows || x < 0 || y >= columns || y < 0)
+        if (x >= rows || x < 0 || z >= columns || z < 0)
         {
             return null;
         }
-        return tiles[x, y];
+
+        return tiles[x, z];
     }
 
     public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
@@ -101,21 +115,22 @@ public class Game
     {
         this.currentTurn++;
 
-        foreach (Tile buildingTile in creatingBuildings.ToArray()){
-            buildingTile.Building.CurrentConstructionTurn = buildingTile.Building.CurrentConstructionTurn + 1;
-            if(buildingTile.Building.CurrentConstructionTurn>=buildingTile.Building.TurnsToBuild){
-                GenerateMoney += buildingTile.Building.GenerateMoney;
-                GenerateGreen += buildingTile.Building.GenerateGreen;
-                GenerateHappiness += buildingTile.Building.GenerateHappiness;
-                creatingBuildings.Remove(buildingTile);
 
-            }
-        }
+        getModifier(GenerateHappiness);
+
+        Happiness = Happiness + GenerateHappiness;
+
 
         // Increase the metrics
-        Money = Money + GenerateMoney;
-        Green = Green + GenerateGreen;
-        Happiness = Happiness + GenerateHappiness;
+        calculateDelta();
+
+        Money = Money + moneyDelta;
+        Green = Green + greenDelta;
+
+        Debug.Log("Generate Money: " +GenerateMoney);
+        Debug.Log("MoneyDelta: " + moneyDelta);
+        Debug.Log("Modifier: " + modifier);
+
 
         // Check if the user has won the game by reaching the number of green
         // points required
@@ -125,14 +140,12 @@ public class Game
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed, or having a negative money value (as they
             // now are stuck in debt)
-            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
 
             return;
         }
         else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
-            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
             return;
         }
 
@@ -143,7 +156,7 @@ public class Game
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
-            GameEvent.TileDelta(tiles);       
+            GameEvent.TileDelta(tiles);
         }
 
 
@@ -196,30 +209,18 @@ public class Game
             case "Town Hall":
                 building = new TownHall();
                 break;
-            case "Greenhouse":
-                building = new Greenhouse();
-                break;
             default:
                 return null;
         }
-
 
         // Check if funds are sufficient
         if (Money + building.InitialBuildMoney >= 0)
         {
             if (tile.placeBuilding(building))
             {
-                buildings[tile.X, tile.Y] = building;
+                Debug.Log("==== Game not null = " + building != null);
+                buildings[tile.X, tile.Z] = building;
                 UpdateMetrics(building);
-                creatingBuildings.Add(tile);
-                if(String.Equals(buildingType, "Nuclear Plant")){
-                    Debug.Log("achievement Trigger " + AchievementType.BuildNuclear);
-                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
-                }
-                if(String.Equals(buildingType, "Oil Refinery")){
-                    Debug.Log("achievement Trigger " + AchievementType.BuildOlilRig);
-                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
-                }
                 return building;
             }
             else
@@ -239,15 +240,11 @@ public class Game
         }
         else
         {
-
             // Show error message
             GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
             return null;
-
         }
-
-
     }
 
     public void SellBuilding(Tile tile)
@@ -259,7 +256,17 @@ public class Game
         {
             buildings[tile.X, tile.Y] = null;
             Money += CostToSell;
+            getModifier(building.InitialBuildHappiness * -1);
+            Happiness -= building.InitialBuildHappiness;
+            GenerateHappiness -= building.GenerateHappiness;    
+            GenerateMoney -= building.GenerateMoney;
+            GenerateGreen -= building.GenerateGreen;
+
+            calculateDelta();
+            Debug.Log("Modifier: " + modifier);
+
             GameController.Instance.SetMetrics(Money, Green, Happiness);
+            GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
 
         }
 
@@ -272,14 +279,14 @@ public class Game
     public Event EventForNextTurn()
     {
         List<Event> randomEventList = InitaliseRandomEventList();
-        UnityEngine.Random random = new UnityEngine.Random();
+        Random random = new Random();
         if (currentTurn == 5)
         {
             return new Drought(this);
         }
-        else if (UnityEngine.Random.Range(0, 100) < 10)
+        else if (Random.Range(0, 100) < 10)
         {
-            return randomEventList[UnityEngine.Random.Range(0, randomEventList.Count)];
+            return randomEventList[Random.Range(0, randomEventList.Count)];
         }
 
         return null;
@@ -312,6 +319,7 @@ public class Game
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
+        getModifier(building.InitialBuildHappiness);
         if (Happiness + building.InitialBuildHappiness < 0)
         {
             Happiness = 0;
@@ -323,31 +331,125 @@ public class Game
         else
         {
             Happiness += building.InitialBuildHappiness;
+            
         }
 
-        //GenerateMoney += building.GenerateMoney;
-        //GenerateGreen += building.GenerateGreen;
-        //GenerateHappiness += building.GenerateHappiness;
+
+        GenerateMoney += building.GenerateMoney;
+        GenerateGreen += building.GenerateGreen;
+        GenerateHappiness += building.GenerateHappiness;
+
+        Debug.Log("Happiness: " + Happiness);
+
+        Debug.Log("Building Happ: " + building.InitialBuildHappiness);
+
+        calculateDelta();
+
+
+        Debug.Log("Modifier: " + modifier);
+
+
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
-        GameController.Instance.SetDelta(GenerateMoney, GenerateGreen, GenerateHappiness);
+        GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);
 
 
     }
-    
+
     public void stillBuildable(Tile tile)
     {
-        //Debug.Log("still buildable called");
         if (tile.Building != null)
         {
             if (!tile.IsBuildable(tile.Building))
             {
-                if(tile.Building.CurrentConstructionTurn>=tile.Building.TurnsToBuild){
-                    GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
-                    GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
-                    GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
-                }
+                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
             }
         }
+    }
+
+
+    private void getModifier(float happinessDelta)
+    {
+        if (Happiness >= 50 && Happiness + happinessDelta < 50)
+        {
+            Debug.Log("50 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 50 && Happiness + happinessDelta >= 50)
+        {
+            Debug.Log("50 up");
+
+            modifier += (float)0.1;
+
+        }
+
+        if (Happiness >= 30 && Happiness + happinessDelta < 30)
+        {
+            Debug.Log("30 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 30 && Happiness + happinessDelta >= 30)
+        {
+            Debug.Log("30 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness < 70 && Happiness + happinessDelta >= 70)
+        {
+            Debug.Log("70 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness >= 70 && Happiness + happinessDelta < 70)
+        {
+            Debug.Log("70 down");
+
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness < 90 && Happiness + happinessDelta >= 90)
+        {
+            Debug.Log("90 up");
+
+            modifier += (float)0.1;
+        }
+
+        if (Happiness >= 90 && Happiness + happinessDelta < 90)
+        {
+            Debug.Log("90 down");
+            modifier -= (float)0.1;
+        }
+    }
+
+    private void calculateDelta()
+    {
+        if (GenerateMoney > 0)
+        {
+            moneyDelta = GenerateMoney * modifier;
+        }
+        else
+        {
+            moneyDelta = GenerateMoney * (1 / modifier);
+        }
+
+
+        if (GenerateGreen > 0)
+        {
+            greenDelta = GenerateGreen * modifier;
+        }
+        else
+        {
+            greenDelta = GenerateGreen * (1 / modifier);
+        }
+        moneyDelta = (float)System.Math.Round(moneyDelta, 2);
+        greenDelta = (float)System.Math.Round(greenDelta, 2);
     }
 }
