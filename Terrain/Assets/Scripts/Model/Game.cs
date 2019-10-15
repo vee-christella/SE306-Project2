@@ -136,7 +136,7 @@ public class Game
 
         GameEvent = EventForNextTurn();
 
-        if (GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
+        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
         {
             randomEventList.Remove(GameEvent);
         }
@@ -259,27 +259,70 @@ public class Game
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
-    
-        int probability = 10;
+        // current turn increase increases probability
+        // green point decreases per turn probability
+        // game difficultly increases or decreases probability
+        // happiness for some events increases probability
 
-        //     switch (gameDifficulty) {
-        //        case GameDifficulty.Easy:
-        //           probability = 0;
-        //           break;
-        //      case GameDifficulty.Medium:
-        //           probability = 5;
-        //           break;
-        //       case GameDifficulty.Hard:
-        //          probability = 15;
-        //         break;
-        // }
 
-      //  probability = (GenerateGreen + GenerateHappiness + GenerateMoney);
+        //  if (Random.Range(1, 101) < probability)
+        //  {
+        //      return randomEventList[Random.Range(0, randomEventList.Count)];
+        //  }
 
-        if (Random.Range(1, 101) < probability)
+        // probability is in terms of decimals
+        int badEventProbability = 0;
+        float goodEventProbability;
+        float difficultyOffset = 0.1f;
+
+
+        goodEventProbability = (green / 2000) * 100;
+
+
+        // check green points to account for negative value
+        if (green < 0)
         {
-            return randomEventList[Random.Range(0, randomEventList.Count)];
+            badEventProbability = Mathf.FloorToInt(1 - 700/ (1000 - green));
         }
+        else
+        {
+            badEventProbability = Mathf.FloorToInt(300 / (1000 + green));
+        }
+
+        // calculate probability so no. of random events increases as progress through the game increases
+        // max probability of random events occuring is 80%
+        badEventProbability = Mathf.FloorToInt((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns));
+
+        if (badEventProbability > 100)
+        {
+            goodEventProbability = 0;
+            badEventProbability = 80;
+        }
+
+
+        int randomNum = Random.Range(1, 101);
+
+        if (randomNum < goodEventProbability)
+        {
+
+            return null;
+
+            // return random good event 
+        }
+        else
+        {
+            randomNum = Random.Range(1, 101);
+
+            if (randomNum < badEventProbability)
+            {
+                // return a random bad event 
+                return null;
+            }
+        }
+
+
+
+
 
         return null;
     }

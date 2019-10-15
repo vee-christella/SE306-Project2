@@ -105,7 +105,6 @@ public class GameController : MonoBehaviour
         {
            EventController.DisplayPopup(game.GameEvent);
            game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
-
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);

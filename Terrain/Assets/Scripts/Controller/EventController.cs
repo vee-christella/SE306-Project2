@@ -28,12 +28,10 @@ public class EventController : MonoBehaviour
     {
         doDestroyBuildings = true;
 
-        if (gameEvent.Type.Equals(Event.EventType.BuildingDestoryer))
+        if (gameEvent.Type == Event.EventType.BuildingDestoryer)
         {
             //display extra info and give user option to pay gold to avoid building destruction
         }
-
-
 
         eventInfo.text = "A  " + gameEvent.GetType().Name.ToString() + " has occurred! \n";
 
@@ -61,9 +59,6 @@ public class EventController : MonoBehaviour
             return "+ ";
         }
     }
-
-
-
     
 }
 
