@@ -152,4 +152,9 @@ public class Tile
     {
         callbackTypeChanged += method;
     }
+
+    public void unregisterMethodCallbackTypeChanged(Action<Tile> method)
+    {
+        callbackTypeChanged -= method;
+    }
 }
