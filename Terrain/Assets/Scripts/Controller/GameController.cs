@@ -116,7 +116,6 @@ public class GameController : MonoBehaviour
                 // Place the TownHall
                 if (i == 5 && j == 4)
                 {
-                    Debug.Log("BANANA");
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
 
