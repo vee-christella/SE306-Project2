@@ -29,10 +29,10 @@ public class BuildingController : MonoBehaviour
     public static BuildingController Instance { get; protected set; }
 
     // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         Instance = this;
-
         // Add models to dictionary for easy access when building
         modelDictionary.Add("AnimalFarm", model_AnimalFarm);
         modelDictionary.Add("BeeFarm", model_BeeFarm);
@@ -52,6 +52,12 @@ public class BuildingController : MonoBehaviour
         modelDictionary.Add("VegetableFarm", model_VegetableFarm);
         modelDictionary.Add("WindTurbine", model_WindTurbine);
         modelDictionary.Add("Zoo", model_Zoo);
+
+    }
+    void Start()
+    {
+
+
     }
 
     public bool addBuildingToTile(string buildingType, Tile tile)
@@ -62,6 +68,7 @@ public class BuildingController : MonoBehaviour
 
     public void ChangeBuildingModel(Tile tile, GameObject buildingGO)
     {
+        Debug.Log("ALADLALDSALDALSDLASDLASLDADLALDS");
         // Remove the old building's callback method
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
 

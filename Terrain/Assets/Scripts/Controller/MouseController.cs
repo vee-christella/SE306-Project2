@@ -87,16 +87,37 @@ public class MouseController : MonoBehaviour
 
                         if (tileUnderMouse != null)
                         {
-                            if (buildingForCreating != null)
+                            if (buildingIsSelected)
                             {
-                                if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+
+                                if (tileUnderMouse.Building != null)
                                 {
-                                    Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                    SetToolTip(tileUnderMouse);
+                                }
+                                else
+                                {
+                                    RemoveTooltip();
                                 }
                             }
                             else
                             {
-                                Debug.Log(".... Building is null");
+
+                                if (buildingForCreating != null)
+                                {
+                                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                                    {
+                                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                    }
+                                }
+                                else if (tileUnderMouse.Building != null)
+                                {
+
+                                    buildingIsSelected = true;
+                                    SetToolTip(tileUnderMouse);
+                                } else if( tileUnderMouse.Building == null)
+                                {
+                                    RemoveTooltip();
+                                }
                             }
                         }
                         else

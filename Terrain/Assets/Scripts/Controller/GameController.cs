@@ -88,10 +88,11 @@ public class GameController : MonoBehaviour
                 SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
                 buildingSR.sortingLayerName = "Building";
 
+                Debug.Log("TESTSET");
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
 
                 // Place the TownHall
-                if (x == 5 && z == 4)
+                if (x == 4 && z == 5)
                 {
                     BuildingController.Instance.addBuildingToTile("Town Hall", tile);
                 }
