@@ -56,6 +56,11 @@ public class GameController : MonoBehaviour
             case 3:
                 Game = new Game(20, 20);
                 break;
+            default:
+                Game = new Game(5, 5);
+                Map = TutorialLevel.Arr;
+                break;
+
         }
         
         Game.IsEnd = false;
@@ -73,7 +78,7 @@ public class GameController : MonoBehaviour
                 int rand = Random.Range(0, 4);
                 GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
 
-                switch (Map[i, j])
+                switch (Map[x, z])
                 {
                     case 0:
                         tile.setType(Tile.TileType.Desert);

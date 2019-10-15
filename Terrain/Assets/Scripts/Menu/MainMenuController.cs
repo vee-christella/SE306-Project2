@@ -11,7 +11,7 @@ public class MainMenuController : MonoBehaviour
         // Set the game map to generate level 1
         PlayerPrefs.SetInt("Level", 1);
 
-        SceneManager.LoadScene("IntroScene");
+        SceneManager.LoadScene("3D-GameScene");
 
     }
 

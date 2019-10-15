@@ -2321,11 +2321,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Coal Mine
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2626,6 +2621,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -2762,10 +2762,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 55c56a9f2f0f76c4cb318d4e866668d9,
         type: 3}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
+      propertyPath: m_Text
+      value: Coal Mine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
@@ -3361,11 +3361,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Oil Refinery
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3777,6 +3772,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d88a2fc749f01ca4a8c4dcc6d2d700a0,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Oil Refinery
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &234733938 stripped
@@ -4143,11 +4143,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Nuclear Plant
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -4570,6 +4565,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4540bddc231c9cf449cefceee3a412ef,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Nuclear Plant
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &272249970 stripped
@@ -6039,11 +6039,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Recycling Plant
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6344,6 +6339,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -6480,10 +6480,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b3b09497cc899764897ab8367f156ab6,
         type: 3}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
+      propertyPath: m_Text
+      value: Recycling Plant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
@@ -7176,11 +7176,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Greenhouse
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7481,6 +7476,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -7617,10 +7617,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 9e198b556fd81834fa2b55359bc4bc4f,
         type: 3}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
+      propertyPath: m_Text
+      value: Greenhouse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
@@ -9116,11 +9116,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Hydro Plant
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9532,6 +9527,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 05b55a3b11a805146b3536080e15f4b7,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Hydro Plant
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &701380220 stripped
@@ -9930,11 +9930,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Hydro Plant
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -10347,6 +10342,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 05b55a3b11a805146b3536080e15f4b7,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Hydro Plant
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &731521858 stripped
@@ -10411,11 +10411,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: National Park
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -10818,6 +10813,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e26970eac0781e84896b42c3981e621c,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: National Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &739342938 stripped
@@ -11290,11 +11290,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Race Track
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11701,6 +11696,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 6ba62cbb7ca91404b9efd30e3f987fba,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Race Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &787616727 stripped
@@ -11957,11 +11957,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Nuclear Plant
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -12384,6 +12379,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4540bddc231c9cf449cefceee3a412ef,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Nuclear Plant
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &803162808 stripped
@@ -12510,11 +12510,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Zoo
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -12917,6 +12912,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: f1271bd6f37c2094fb2c7890b845569d,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Zoo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &807000298 stripped
@@ -13476,11 +13476,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Vegetable Farm
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13882,6 +13877,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: f028ef29f7b233b4e96bea54b1d43361,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Vegetable Farm
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &838306212 stripped
@@ -13970,11 +13970,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Oil Refinery
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -14387,6 +14382,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d88a2fc749f01ca4a8c4dcc6d2d700a0,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Oil Refinery
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &838738734 stripped
@@ -14475,11 +14475,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Movie Theatre
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -14882,6 +14877,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b4d0b8d7a7655ac44802a7f444611219,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Movie Theatre
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &867030922 stripped
@@ -16191,11 +16191,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Bee Farm
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16597,6 +16592,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5dd384adcc8ec374bafad1616a566386,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Bee Farm
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &976655550 stripped
@@ -18228,13 +18228,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: 'Animal Farm
-
-'
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18535,6 +18528,21 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725395, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725395, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -18671,20 +18679,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 69791a9266803c746a1e3fde8bbd0b05,
         type: 3}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3214827380932725395, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3214827380932725395, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
+      propertyPath: m_Text
+      value: 'Animal Farm
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
@@ -18902,11 +18902,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Solar Farm
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -19319,6 +19314,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2ae40d930084b1d4082c0a873eddc04c,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Solar Farm
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &1167706350 stripped
@@ -20941,11 +20941,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: National Park
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21347,6 +21342,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e26970eac0781e84896b42c3981e621c,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: National Park
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &1376783933 stripped
@@ -22300,11 +22300,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Forest
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22721,6 +22716,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d8ac49e386d85c044a0c7f7d405fa63d,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Forest
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &1439369968 stripped
@@ -24344,11 +24344,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Coal Mine
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24649,6 +24644,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -24785,10 +24785,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 55c56a9f2f0f76c4cb318d4e866668d9,
         type: 3}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
+      propertyPath: m_Text
+      value: Coal Mine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
@@ -26452,11 +26452,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Factory
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26757,6 +26752,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -26893,10 +26893,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 42c66abf5dbdc73479ff4c39c53d793e,
         type: 3}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
+      propertyPath: m_Text
+      value: Factory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
@@ -27319,11 +27319,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Wind Turbine
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27735,6 +27730,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 469245a30d830d644b90b44b687250fe,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Wind Turbine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &1926479561 stripped
@@ -28183,11 +28183,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Race Track
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28594,6 +28589,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 6ba62cbb7ca91404b9efd30e3f987fba,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Race Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &1962589914 stripped
@@ -28802,11 +28802,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Movie Theatre
       objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
@@ -29209,6 +29204,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b4d0b8d7a7655ac44802a7f444611219,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Movie Theatre
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &2004311269 stripped
@@ -30368,11 +30368,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_Text
-      value: Forest
-      objectReference: {fileID: 0}
     - target: {fileID: 3214827380932725393, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30789,6 +30784,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d8ac49e386d85c044a0c7f7d405fa63d,
         type: 3}
+    - target: {fileID: 1700706060507876267, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_Text
+      value: Forest
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
 --- !u!224 &2062126816 stripped
@@ -31176,7 +31176,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1462315829}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.8684211
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
