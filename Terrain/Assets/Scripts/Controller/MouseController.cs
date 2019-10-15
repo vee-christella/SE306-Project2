@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
+
 public class MouseController : MonoBehaviour
 {
     public static MouseController Instance { get; protected set; }
@@ -13,6 +14,8 @@ public class MouseController : MonoBehaviour
 
     private TextMeshProUGUI toolTipText;
 
+    private GameGrid gameGrid;
+    private Camera mainCamera;
     private string buildingForCreating = null;
 
     private bool buildingIsSelected = false;
@@ -22,10 +25,8 @@ public class MouseController : MonoBehaviour
     private TextMeshProUGUI sellText;
 
     public Text cancelButtonString;
-
-
-
     Vector3 lastFramePosition;
+
 
     private Tile tileSelected;
     // Start is called before the first frame update
@@ -34,127 +35,174 @@ public class MouseController : MonoBehaviour
         toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
         sellText = sellButton.GetComponentInChildren<TextMeshProUGUI>();
     }
+    private void Awake()
+    {
+        gameGrid = FindObjectOfType<GameGrid>();
+        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 currFramePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Vector3 currFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         //If mouse over a UI element, bail out
-        if ( EventSystem.current.IsPointerOverGameObject() ){
-            return;
-        }
+        // if (EventSystem.current.IsPointerOverGameObject())
+        // {
+        //     return;
+        // }
 
+        // if (Input.GetMouseButton(1))
+        // {
+        //     Vector3 diff = lastFramePosition - currFramePosition;
+        //     Camera.main.transform.Translate(diff);
+        // }
 
-        if (Input.GetMouseButton(1))
+        // try
+        // {
+        if (GameController.Instance.Game.HasStarted)
         {
-            Vector3 diff = lastFramePosition - currFramePosition;
-            Camera.main.transform.Translate(diff);
-
-            //Remove tooltip
-            RemoveTooltip();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Tile tileUnderMouse = getTileAtMouse(currFramePosition);
-            tileSelected = getTileAtMouse(currFramePosition);
-            if (tileUnderMouse != null)
+            if (buildingForCreating != null)
             {
-                if (buildingIsSelected) 
-                {
-                    if (tileUnderMouse.Building != null)
-                    { 
+                RaycastHit hitInfo;
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-                        SetToolTip(tileUnderMouse);
-                    }
-                    else
-                    {
-                        //Remove tooltip
-                        RemoveTooltip();
-                    }
-             
+                if (Physics.Raycast(ray, out hitInfo))
+                {
+                    // Show a building preview where the user's cursor is on the map
+                    BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
                 }
-                else
+
+                // Place a building at the cursor point
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (buildingForCreating != null) //Building has been selected to build
+                    // RaycastHit hitInfo;
+                    // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out hitInfo))
                     {
-                        if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                        var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
+
+                        Tile tileUnderMouse = getTileAtMouse(finalPosition);
+
+                        if (tileUnderMouse != null)
                         {
+                            if (buildingIsSelected)
+                            {
 
-                            //Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                if (tileUnderMouse.Building != null)
+                                {
+                                    SetToolTip(tileUnderMouse);
+                                }
+                                else
+                                {
+                                    RemoveTooltip();
+                                }
+                            }
+                            else
+                            {
+
+                                if (buildingForCreating != null)
+                                {
+                                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
+                                    {
+                                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
+                                    }
+                                }
+                                else if (tileUnderMouse.Building != null)
+                                {
+
+                                    buildingIsSelected = true;
+                                    SetToolTip(tileUnderMouse);
+                                } else if( tileUnderMouse.Building == null)
+                                {
+                                    RemoveTooltip();
+                                }
+                            }
                         }
-                    }
-                    else if (tileUnderMouse.Building != null)
-                    {
-                        buildingIsSelected = true;
-                        SetToolTip(tileUnderMouse);
-
-                    } else if (tileUnderMouse.Building == null)
-                    {
-                        RemoveTooltip();
+                        else
+                        {
+                            Debug.Log(".... Tile is null");
+                        }
                     }
                 }
             }
-
         }
-        lastFramePosition= Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // }
+        // catch
+        // {
+        //     // Do nothing
+        // }
     }
 
-    public void SetMode_CoalMine() {
+    public void SetMode_CoalMine()
+    {
         buildingForCreating = "Coal Mine";
         setCancelButton();
     }
-    public void SetMode_Forest() {
+    public void SetMode_Forest()
+    {
         buildingForCreating = "Forest";
         setCancelButton();
     }
-    public void SetMode_Hydro() {
+    public void SetMode_Hydro()
+    {
         buildingForCreating = "Hydro Plant";
         setCancelButton();
     }
-    public void SetMode_MovieTheatre() {
+    public void SetMode_MovieTheatre()
+    {
         buildingForCreating = "Movie Theatre";
         setCancelButton();
     }
-    public void SetMode_NationalPark() {
+    public void SetMode_NationalPark()
+    {
         buildingForCreating = "National Park";
         setCancelButton();
     }
-    public void SetMode_Nuclear() {
+    public void SetMode_Nuclear()
+    {
         buildingForCreating = "Nuclear Plant";
         setCancelButton();
     }
-    public void SetMode_OilRefinery() {
+    public void SetMode_OilRefinery()
+    {
         buildingForCreating = "Oil Refinery";
         setCancelButton();
     }
-    public void SetMode_RaceTrack() {
+    public void SetMode_RaceTrack()
+    {
         buildingForCreating = "Race Track";
         setCancelButton();
     }
-    public void SetMode_SolarFarm(){
+    public void SetMode_SolarFarm()
+    {
         buildingForCreating = "Solar Farm";
         setCancelButton();
     }
-    public void SetMode_WindTurbine() {
+    public void SetMode_WindTurbine()
+    {
         buildingForCreating = "Wind Turbine";
         setCancelButton();
     }
-    public void SetMode_Zoo() {
+    public void SetMode_Zoo()
+    {
         buildingForCreating = "Zoo";
         setCancelButton();
     }
 
     Tile getTileAtMouse(Vector3 coord)
     {
-        return GameController.Instance.Game.getTileAt(Mathf.FloorToInt(coord.x), Mathf.FloorToInt(coord.y));
+        return GameController.Instance.Game.getTileAt((int)coord.x, (int)coord.z);
     }
 
-    private void setCancelButton(){
+    private void setCancelButton()
+    {
         cancelButtonString.text = "Build Tool:\n" + buildingForCreating + "\nCancel build mode";
     }
 
-    public void setNull(){
+    public void setNull()
+    {
         buildingForCreating = null;
     }
 

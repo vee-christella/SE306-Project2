@@ -30,6 +30,7 @@ public class Game
     bool isUnhappy = false;
     float moneyDelta;
     float greenDelta;
+    bool hasStarted = false;
 
     public float modifier = 1;
     
@@ -57,34 +58,39 @@ public class Game
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
     public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
     public float GreenDelta { get => greenDelta; set => greenDelta = value; }
+    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
 
-    public Game(int rows = 30, int columns = 30)
+    public Game(int rows, int columns)
     {
         this.isEnd = false;
         this.currentTurn = 0;
+
         this.rows = rows;
         this.columns = columns;
-        tiles = new Tile[rows, columns];
-        buildings = new Building[rows, columns];
-        for (int i = 0; i < rows; i++)
+
+        this.tiles = new Tile[rows, columns];
+        this.buildings = new Building[rows, columns];
+
+        for (int x = 0; x < rows; x++)
         {
-            for (int j = 0; j < columns; j++)
+            for (int z = 0; z < columns; z++)
             {
-                tiles[i, j] = new Tile(this, i, j);
-                tiles[i, j].registerMethodCallbackTypeChanged(stillBuildable);
+                tiles[x, z] = new Tile(this, x, z);
+                tiles[x, z].registerMethodCallbackTypeChanged(stillBuildable);
             }
         }
         //Debug.Log("game created");
     }
 
 
-    public Tile getTileAt(int x, int y)
+    public Tile getTileAt(int x, int z)
     {
-        if (x >= rows || x < 0 || y >= columns || y < 0)
+        if (x >= rows || x < 0 || z >= columns || z < 0)
         {
             return null;
         }
-        return tiles[x, y];
+
+        return tiles[x, z];
     }
 
     public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
@@ -150,7 +156,7 @@ public class Game
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
-            GameEvent.TileDelta(tiles);       
+            GameEvent.TileDelta(tiles);
         }
 
 
@@ -207,13 +213,13 @@ public class Game
                 return null;
         }
 
-
         // Check if funds are sufficient
         if (Money + building.InitialBuildMoney >= 0)
         {
             if (tile.placeBuilding(building))
             {
-                buildings[tile.X, tile.Y] = building;
+                Debug.Log("==== Game not null = " + building != null);
+                buildings[tile.X, tile.Z] = building;
                 UpdateMetrics(building);
                 return building;
             }
@@ -234,15 +240,11 @@ public class Game
         }
         else
         {
-
             // Show error message
             GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
             return null;
-
         }
-
-
     }
 
     public void SellBuilding(Tile tile)
@@ -353,10 +355,9 @@ public class Game
 
 
     }
-    
+
     public void stillBuildable(Tile tile)
     {
-        //Debug.Log("still buildable called");
         if (tile.Building != null)
         {
             if (!tile.IsBuildable(tile.Building))
