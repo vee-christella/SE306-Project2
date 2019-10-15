@@ -894,8 +894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fc64aa4b796704a98070232d254583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolTip: {fileID: 1999815815}
-  sellButton: {fileID: 190038259}
+  toolTip: {fileID: 0}
+  sellButton: {fileID: 0}
   cancelButtonString: {fileID: 417305509}
 --- !u!4 &127397728
 Transform:
@@ -2432,42 +2432,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 258957579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &258957582 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 258957579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &258957583 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 258957579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &258957584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 258957579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &258957585 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -2487,15 +2451,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 258957584}
-  greenPointsCost: {fileID: 258957583}
-  happinessCost: {fileID: 258957582}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &287115466
 GameObject:
   m_ObjectHideFlags: 0
@@ -4091,42 +4055,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 439335296}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &439335299 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 439335296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &439335300 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 439335296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &439335301 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 439335296}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &439335302 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -4146,15 +4074,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 439335301}
-  greenPointsCost: {fileID: 439335300}
-  happinessCost: {fileID: 439335299}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &458162163
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,19 +8015,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ab058acda11f419034f95ebdf4483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSprites:
-  - {fileID: 21300000, guid: 55c56a9f2f0f76c4cb318d4e866668d9, type: 3}
-  - {fileID: 21300000, guid: 05b55a3b11a805146b3536080e15f4b7, type: 3}
-  - {fileID: 21300000, guid: d8ac49e386d85c044a0c7f7d405fa63d, type: 3}
-  - {fileID: 21300000, guid: b4d0b8d7a7655ac44802a7f444611219, type: 3}
-  - {fileID: 21300000, guid: e26970eac0781e84896b42c3981e621c, type: 3}
-  - {fileID: 21300000, guid: 4540bddc231c9cf449cefceee3a412ef, type: 3}
-  - {fileID: 21300000, guid: d88a2fc749f01ca4a8c4dcc6d2d700a0, type: 3}
-  - {fileID: 21300000, guid: 6ba62cbb7ca91404b9efd30e3f987fba, type: 3}
-  - {fileID: 21300000, guid: 2ae40d930084b1d4082c0a873eddc04c, type: 3}
-  - {fileID: 21300000, guid: 469245a30d830d644b90b44b687250fe, type: 3}
-  - {fileID: 21300000, guid: f1271bd6f37c2094fb2c7890b845569d, type: 3}
-  - {fileID: 21300000, guid: 3aea3929fb064054eb3acf8ed8879407, type: 3}
+  model_AnimalFarm: {fileID: 0}
+  model_BeeFarm: {fileID: 0}
+  model_CoalMine: {fileID: 0}
+  model_Factory: {fileID: 0}
+  model_Forest: {fileID: 0}
+  model_Greenhouse: {fileID: 0}
+  model_Hydro: {fileID: 0}
+  model_MovieTheatre: {fileID: 0}
+  model_NationalPark: {fileID: 0}
+  model_Nuclear: {fileID: 0}
+  model_OilRefinery: {fileID: 0}
+  model_RaceTrack: {fileID: 0}
+  model_RecyclingPlant: {fileID: 0}
+  model_SolarFarm: {fileID: 0}
+  model_TownHall: {fileID: 0}
+  model_VegetableFarm: {fileID: 0}
+  model_WindTurbine: {fileID: 0}
+  model_Zoo: {fileID: 0}
 --- !u!4 &1083359872
 Transform:
   m_ObjectHideFlags: 0
@@ -9706,42 +9639,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1254765049}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1254765052 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1254765049}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1254765053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1254765049}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1254765054 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1254765049}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1254765055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -9761,15 +9658,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 1254765054}
-  greenPointsCost: {fileID: 1254765053}
-  happinessCost: {fileID: 1254765052}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &1259753237
 GameObject:
   m_ObjectHideFlags: 0
@@ -10941,42 +10838,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1387182031}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1387182034 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1387182031}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1387182035 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1387182031}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1387182036 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1387182031}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1387182037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -10996,15 +10857,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 1387182036}
-  greenPointsCost: {fileID: 1387182035}
-  happinessCost: {fileID: 1387182034}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &1390501181
 GameObject:
   m_ObjectHideFlags: 0
@@ -12187,42 +12048,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1454186582}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1454186585 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1454186582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1454186586 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1454186582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1454186587 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1454186582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1454186588 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -12242,15 +12067,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 1454186587}
-  greenPointsCost: {fileID: 1454186586}
-  happinessCost: {fileID: 1454186585}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &1470306596
 GameObject:
   m_ObjectHideFlags: 0
@@ -12494,14 +12319,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0aa16b267369c4abb576298b1701c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: 1970dd8b8a4714543986f1a36bec3c2c, type: 3}
-  - {fileID: 21300000, guid: cd0b99851a5dcf1409082e8cfb607366, type: 3}
-  - {fileID: 21300000, guid: 964daf34d3b42c047bf77e49f198a967, type: 3}
-  - {fileID: 21300000, guid: 7d674573618a58047b086c6fe32774bc, type: 3}
-  - {fileID: 21300000, guid: df728368a7ff8e748a17bb317617ef0d, type: 3}
-  - {fileID: 21300000, guid: 206e658bf00fc124ea898f83ec746e9a, type: 3}
-  - {fileID: 21300000, guid: 62d9e1ca7ab14b1408d9b26382c3e5f7, type: 3}
+  tileGameObjs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   coinCount: {fileID: 242664062}
   greenCount: {fileID: 1574919876}
   happinessCount: {fileID: 331269673}
@@ -14090,42 +13912,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1651197784}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1651197787 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1651197784}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1651197788 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1651197784}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1651197789 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1651197784}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1651197790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -14145,15 +13931,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 1651197789}
-  greenPointsCost: {fileID: 1651197788}
-  happinessCost: {fileID: 1651197787}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &1651259669
 GameObject:
   m_ObjectHideFlags: 0
@@ -14197,15 +13983,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0aa16b267369c4abb576298b1701c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: b3b09497cc899764897ab8367f156ab6, type: 3}
-  - {fileID: 21300000, guid: 3eaf8f2140628144188de5658f347f44, type: 3}
-  - {fileID: 21300000, guid: d4e108c1b515f1d4d9e237a0972d6158, type: 3}
-  - {fileID: 21300000, guid: 0e210ef5ed9726c4c82ae5e8e1159dde, type: 3}
-  - {fileID: 21300000, guid: 1a3135a0a98d6fb4ca784931d515a28e, type: 3}
-  - {fileID: 21300000, guid: 2d886eda765a2f0438c9c47c5ab16a8f, type: 3}
-  - {fileID: 21300000, guid: 9e198b556fd81834fa2b55359bc4bc4f, type: 3}
-  - {fileID: 21300000, guid: 2f3ae43eed0eca34d93f92eafbd82e0c, type: 3}
+  tileGameObjs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   coinCount: {fileID: 0}
   greenCount: {fileID: 0}
   happinessCount: {fileID: 0}
@@ -14929,42 +14711,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1706057227}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1706057230 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1706057227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1706057231 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1706057227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1706057232 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1706057227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1706057233 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -14984,15 +14730,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 1706057232}
-  greenPointsCost: {fileID: 1706057231}
-  happinessCost: {fileID: 1706057230}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &1706320618
 GameObject:
   m_ObjectHideFlags: 0
@@ -15336,7 +15082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0aa16b267369c4abb576298b1701c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
+  tileGameObjs:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -16260,42 +16006,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1817924771}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1817924774 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4412125396127563518, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1817924771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1817924775 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225157655322316449, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1817924771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1817924776 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812514520747458171, guid: 0b373dbbdb2086846a22c40900005a61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1817924771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1817924777 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3214827380932725392, guid: 0b373dbbdb2086846a22c40900005a61,
@@ -16315,15 +16025,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurb: {fileID: 618882268}
-  buildingName: {fileID: 1641033618}
-  coinMetric: {fileID: 311727162}
-  greenMetric: {fileID: 540132779}
-  happinessMetric: {fileID: 316635333}
+  buildingName: {fileID: 0}
+  coinMetric: {fileID: 0}
+  greenMetric: {fileID: 0}
+  happinessMetric: {fileID: 0}
   panel: {fileID: 550411300}
   endTurn: {fileID: 1743342084}
-  goldCost: {fileID: 1817924776}
-  greenPointsCost: {fileID: 1817924775}
-  happinessCost: {fileID: 1817924774}
+  goldCost: {fileID: 0}
+  greenPointsCost: {fileID: 0}
+  happinessCost: {fileID: 0}
 --- !u!1 &1821013692
 GameObject:
   m_ObjectHideFlags: 0
@@ -16800,10 +16510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0aa16b267369c4abb576298b1701c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  tileGameObjs:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

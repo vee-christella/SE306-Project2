@@ -6,9 +6,6 @@ using UnityEngine.EventSystems;
 using TMPro;
 //Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
 
-/*
-Code is from quill18creates youtube Channel, "Unity Base-Building Game Tutorial - Episode 4!"
-*/
 public class MouseController : MonoBehaviour
 {
     public static MouseController Instance { get; protected set; }
@@ -31,12 +28,13 @@ public class MouseController : MonoBehaviour
     Vector3 lastFramePosition;
 
 
-
-    Vector3 lastFramePosition;
-
     private Tile tileSelected;
     // Start is called before the first frame update
     void Start()
+    {
+        toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
+        sellText = sellButton.GetComponentInChildren<TextMeshProUGUI>();
+    }
     private void Awake()
     {
         gameGrid = FindObjectOfType<GameGrid>();
@@ -105,15 +103,6 @@ public class MouseController : MonoBehaviour
                         {
                             Debug.Log(".... Tile is null");
                         }
-                    }
-                    else if (tileUnderMouse.Building != null)
-                    {
-                        buildingIsSelected = true;
-                        SetToolTip(tileUnderMouse);
-
-                    } else if (tileUnderMouse.Building == null)
-                    {
-                        RemoveTooltip();
                     }
                 }
             }
