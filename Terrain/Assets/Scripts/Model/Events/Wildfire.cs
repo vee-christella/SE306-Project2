@@ -8,7 +8,7 @@ public class Wildfire : Event
 
     public Wildfire(Game game) : base(-5, -1, -5)
     {
-        this.Type = EventType.BuildingDestoryer;
+        this.Type = EventType.BuildingDestroyer;
         this.Description = "Severe heat and drought fuel wildfires, conditions scientists have linked to climate change. The hotter weather makes forests drier and more susceptible to burning with the average wildfire season three and a half months longer than it was a few decades back.";
         this.Game = game;
     }
