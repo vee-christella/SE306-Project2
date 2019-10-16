@@ -29,8 +29,6 @@ public class MouseController : MonoBehaviour
     private Camera mainCamera;
     private string buildingForCreating = null;
 
-    private bool buildingIsSelected = false;
-
     public Button sellButton;
 
     private TextMeshProUGUI sellText;
@@ -38,11 +36,14 @@ public class MouseController : MonoBehaviour
     public Text cancelButtonString;
     Vector3 lastFramePosition;
 
+    private float mouseScrollPosition;
+
 
     private Tile tileSelected;
     // Start is called before the first frame update
     void Start()
     {
+        mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
         toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
         sellText = sellButton.GetComponentInChildren<TextMeshProUGUI>();
     }
@@ -55,6 +56,13 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        if (Input.GetMouseButton(1) || Input.GetMouseButton(2) || Input.GetAxis("Mouse ScrollWheel") != mouseScrollPosition)
+        {
+            RemoveTooltip();
+            mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
+
+        }
         if (GameController.Instance.Game.HasStarted)
         {
             RaycastHit hitInfo;
@@ -266,7 +274,7 @@ public class MouseController : MonoBehaviour
 
         //toolTipText.SetText("TestText");
         string name = building.Name;
-        string money, green, happiness, sellCost;
+        string money, green, happiness;
 
         if (tile.IsBuildable(building))
         {
@@ -281,11 +289,7 @@ public class MouseController : MonoBehaviour
             happiness = "0";
         }
 
-        sellCost = getSellPrice(building).ToString();
-
-
-
-        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness + "\n\nSell Cost: " + sellCost);
+        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness);
 
     }
 
@@ -319,7 +323,6 @@ public class MouseController : MonoBehaviour
     public void RemoveTooltip()
     {
         toolTip.SetActive(false);
-        buildingIsSelected = false;
         sellText.text = "Sell: ";
         sellButton.interactable = false;
         //Debug.Log("Building Deselected");
@@ -329,7 +332,6 @@ public class MouseController : MonoBehaviour
     {
         Building building = tile.Building;
         toolTip.SetActive(true);
-        toolTip.transform.position = Input.mousePosition;
         SetToolTipText(tile);
 
         if (building.Name != "Town Hall")
