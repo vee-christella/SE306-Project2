@@ -265,44 +265,43 @@ public class Game
         // game difficultly increases or decreases probability
 
         List<Event> potentionalEvents = new List<Event>();
-        int badEventProbability = 0;
+        float badEventProbability = 0;
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
 
-        switch (gameDifficulty)
-        {
-            case GameDifficulty.Easy:
-                difficultyOffset = 0.1f;
-                break;
-            case GameDifficulty.Medium:
-                difficultyOffset = 0.2f;
-                break;
-            case GameDifficulty.Hard:
-                difficultyOffset = 0.3f;
-                break;
-            default:
-                difficultyOffset = 0.1f;
-                break;
-        }
+ //       switch (gameDifficulty)
+ //       {
+ //           case GameDifficulty.Easy:
+ //               difficultyOffset = 0.1f;
+ //               break;
+ //           case GameDifficulty.Medium:
+//                difficultyOffset = 0.2f;
+ //               break;
+//            case GameDifficulty.Hard:
+ //               difficultyOffset = 0.3f;
+ //               break;
+ //           default:
+ //               difficultyOffset = 0.1f;
+ //               break;
+ //       }
 
 
         goodEventProbability = (green / 2000) * 100;
 
-
         // check green points to account for negative value
         if (green < 0)
         {
-            badEventProbability = Mathf.FloorToInt(1 - 700 / (1000 - green));
+            badEventProbability = (1 - 700 / (1000 - green));
         }
         else
         {
-            badEventProbability = Mathf.FloorToInt(300 / (1000 + green));
+            badEventProbability = (300 / (1000 + green));
         }
 
         // calculate probability so no. of random events increases as progress through the game increases
         // max probability of random events occuring is 80%
-        badEventProbability = Mathf.FloorToInt((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns));
+        badEventProbability = Mathf.FloorToInt(((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns)) * 100);
 
         if (badEventProbability > 100)
         {
@@ -329,6 +328,9 @@ public class Game
 
             }
         }
+
+        Debug.Log("Goodevent probability " + goodEventProbability);
+        Debug.Log("BadEvent probability " + badEventProbability);
 
         if (potentionalEvents.Count != 0)
         {
