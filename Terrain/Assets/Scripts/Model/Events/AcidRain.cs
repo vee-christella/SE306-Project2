@@ -18,6 +18,7 @@ public class AcidRain : Event
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
+        Debug.Log("booolean is " + doDestroyBuildings);
 
         if (!doDestroyBuildings)
         {
@@ -32,20 +33,22 @@ public class AcidRain : Event
                 {
                     Debug.Log("Found a tile with a building");
                     int random = Random.Range(0, 100);
-                    // 5% chance to destory building on tile
-                    if (random <= 5)
+                    // 10% chance to destory building on tile
+                    if (random <= 10)
                     {
                         float buildingGreenGen = tiles[i, j].Building.GenerateGreen;
                         float buildingMoneyGen = tiles[i, j].Building.GenerateMoney;
                         float buildingHappinessGen = tiles[i, j].Building.GenerateHappiness;
-
+                        
                         if (tiles[i,j].removeBuilding())
                         {
                             Game.GenerateGreen = Game.GenerateGreen - buildingGreenGen;
                             Game.GenerateMoney = Game.GenerateMoney - buildingMoneyGen;
                             Game.GenerateHappiness = Game.GenerateHappiness - buildingHappinessGen;
                         }
+                        
                     }
+                    
                 }
             }
         }
