@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
@@ -92,11 +93,13 @@ public class GameController : MonoBehaviour
 
     public void callNextTurn()
     {
-        game.nextTurn();
+        Debug.Log("Next turn button clicked");
+        game.NextTurn();
 
         if (game.GameEvent != null)
         {
-            EventController.DisplayPopup(game.GameEvent);
+           EventController.DisplayPopup(game.GameEvent);
+           game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);

@@ -70,25 +70,37 @@ public class BuildingController : MonoBehaviour
     public void ChangeBuildingModel(Tile tile, GameObject buildingGO)
     {
         // Remove the old building's callback method
+        Debug.Log("callback 3");
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
-
+        Debug.Log("callback 4");
         GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
-
+        Debug.Log("callback 5");
         // Add the new building's and callback method
         tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
+        Debug.Log("callback 6");
     }
 
 
     private GameObject PlaceCubeNear(Tile tile, GameObject building)
     {
-        // Get the class name of the building
-        string newBuildingModel = tile.Building.GetType().Name;
+        GameObject newBuilding;
+        Debug.Log("callback 7");
+        if (tile.Building != null)
+        {
+            // Get the class name of the building
+            string newBuildingModel = tile.Building.GetType().Name;
 
-        // Create new building GameObject
-        GameObject newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
-        newBuilding.name = building.name;
-        newBuilding.transform.position = building.transform.position;
-
+            // Create new building GameObject
+            newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
+        }
+        else
+        {
+            newBuilding = new GameObject();
+        }
+        Debug.Log("callback 8");
+        newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
+        newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+        Debug.Log("callback placecubwear called");
         // Delete old (possibly empty) building GameObject
         Destroy(building);
 
