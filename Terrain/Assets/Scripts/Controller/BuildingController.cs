@@ -163,10 +163,12 @@ public class BuildingController : MonoBehaviour
     private bool canBuildOnPoint(string buildingName, Vector3 point)
     {
         // Create a temporary building and check if it can be built on the tile at the point
-        Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
-        Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
+        if ((GameController.Instance.Game.getTileAt((int)point.x, (int)point.z)) != null){
+            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
+            Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
 
-        if (tile.IsBuildable(building)) return true;
+            if (tile.IsBuildable(building)) return true;
+        }
 
         return false;
     }

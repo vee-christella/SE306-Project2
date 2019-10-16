@@ -55,81 +55,55 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameController.Instance.Game.HasStarted && hoveringOverObject /*&& selectedObject.name.Contains("Building")*/)
-        {
-            Debug.Log("HOVER UPDATE");
-            selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
-        }
-
-
         if (GameController.Instance.Game.HasStarted)
         {
-            if (buildingForCreating != null)
+            RaycastHit hitInfo;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hitInfo))
             {
-                RaycastHit hitInfo;
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                var gridPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
 
-                if (Physics.Raycast(ray, out hitInfo))
-                {
-                    // Show a building preview where the user's cursor is on the map
-                    BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
-                }
-                else
-                {
-                    // If the mouse isn't over a tile, remove the preview building
-                    BuildingController.Instance.HideBuildingPreview();
-                }
+                Tile tileUnderMouse = getTileAtMouse(gridPosition);
 
-                // Place a building at the cursor point
-                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                if (tileUnderMouse != null)
                 {
-                    // RaycastHit hitInfo;
-                    // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-                    if (Physics.Raycast(ray, out hitInfo))
+                    if (buildingForCreating != null)
                     {
-                        var gridPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
-
-                        Tile tileUnderMouse = getTileAtMouse(gridPosition);
-
-                        if (tileUnderMouse != null)
+                        if (Physics.Raycast(ray, out hitInfo))
                         {
-                            if (buildingIsSelected)
+                            // Show a building preview where the user's cursor is on the map
+                            BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
+                        }
+
+                        // Place a building at the cursor point
+                        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                        {
+                            if (buildingForCreating != null)
                             {
-                                if (tileUnderMouse.Building != null)
+                                if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                                 {
-                                    SetToolTip(tileUnderMouse);
+                                    Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                                 }
-                                else
-                                {
-                                    RemoveTooltip();
-                                }
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            tileSelected = tileUnderMouse;
+
+                            if (tileUnderMouse.Building != null)
+                            {
+                                SetToolTip(tileUnderMouse);
                             }
                             else
                             {
-                                if (buildingForCreating != null)
-                                {
-                                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
-                                    {
-                                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-                                    }
-                                }
-                                else if (tileUnderMouse.Building != null)
-                                {
-                                    Debug.Log("yahat");
-
-                                    buildingIsSelected = true;
-                                    SetToolTip(tileUnderMouse);
-                                }
-                                else if (tileUnderMouse.Building == null)
-                                {
-                                    RemoveTooltip();
-                                }
+                                RemoveTooltip();
                             }
-                        }
-                        else
-                        {
-                            Debug.Log(".... Tile is null");
                         }
                     }
                 }
