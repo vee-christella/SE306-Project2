@@ -7610,7 +7610,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801925482}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -14004,11 +14004,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
-        type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6114339842842579098, guid: 0b373dbbdb2086846a22c40900005a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -14149,6 +14144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Coal Mine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214827380932725396, guid: 0b373dbbdb2086846a22c40900005a61,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b373dbbdb2086846a22c40900005a61, type: 3}
