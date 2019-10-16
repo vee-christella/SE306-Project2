@@ -8,6 +8,17 @@ using TMPro;
 
 public class MouseController : MonoBehaviour
 {
+
+    // ====================
+    public GameObject selectedObject;
+    public int red;
+    public int green;
+    public int blue;
+    public bool hoveringOverObject = false;
+    public bool flashingIn = true;
+    public bool startedFlashing = false;
+    // ====================
+
     public static MouseController Instance { get; protected set; }
 
     public GameObject toolTip;
@@ -18,8 +29,6 @@ public class MouseController : MonoBehaviour
     private Camera mainCamera;
     private string buildingForCreating = null;
 
-    private bool buildingIsSelected = false;
-
     public Button sellButton;
 
     private TextMeshProUGUI sellText;
@@ -27,11 +36,14 @@ public class MouseController : MonoBehaviour
     public Text cancelButtonString;
     Vector3 lastFramePosition;
 
+    private float mouseScrollPosition;
+
 
     private Tile tileSelected;
     // Start is called before the first frame update
     void Start()
     {
+        mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
         toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
         sellText = sellButton.GetComponentInChildren<TextMeshProUGUI>();
     }
@@ -44,88 +56,69 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // Vector3 currFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-        //If mouse over a UI element, bail out
-        // if (EventSystem.current.IsPointerOverGameObject())
-        // {
-        //     return;
-        // }
+        if (Input.GetMouseButton(1) || Input.GetMouseButton(2) || Input.GetAxis("Mouse ScrollWheel") != mouseScrollPosition)
+        {
+            RemoveTooltip();
+            mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
 
-        // if (Input.GetMouseButton(1))
-        // {
-        //     Vector3 diff = lastFramePosition - currFramePosition;
-        //     Camera.main.transform.Translate(diff);
-        // }
-
-        // try
-        // {
+        }
         if (GameController.Instance.Game.HasStarted)
         {
-            if (buildingForCreating != null)
+            RaycastHit hitInfo;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hitInfo))
             {
-                RaycastHit hitInfo;
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                var gridPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
 
-                if (Physics.Raycast(ray, out hitInfo))
+                Tile tileUnderMouse = getTileAtMouse(gridPosition);
+
+                if (tileUnderMouse != null)
                 {
-                    // Show a building preview where the user's cursor is on the map
-                    BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
-                }
-
-                // Place a building at the cursor point
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // RaycastHit hitInfo;
-                    // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-                    if (Physics.Raycast(ray, out hitInfo))
+                    if (buildingForCreating != null)
                     {
-                        var finalPosition = gameGrid.GetNearestPointOnGrid(hitInfo.point);
-
-                        Tile tileUnderMouse = getTileAtMouse(finalPosition);
-
-                        if (tileUnderMouse != null)
+                        if (Physics.Raycast(ray, out hitInfo))
                         {
-                            if (buildingIsSelected)
-                            {
+                            // Show a building preview where the user's cursor is on the map
+                            BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
+                        }
 
-                                if (tileUnderMouse.Building != null)
+                        // Place a building at the cursor point
+                        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                        {
+                            if (buildingForCreating != null)
+                            {
+                                if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                                 {
-                                    SetToolTip(tileUnderMouse);
+                                    Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                                 }
-                                else
-                                {
-                                    RemoveTooltip();
-                                }
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            tileSelected = tileUnderMouse;
+
+                            if (tileUnderMouse.Building != null)
+                            {
+                                SetToolTip(tileUnderMouse);
                             }
                             else
                             {
-
-                                if (buildingForCreating != null)
-                                {
-                                    if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
-                                    {
-                                        Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-                                    }
-                                }
-                                else if (tileUnderMouse.Building != null)
-                                {
-
-                                    buildingIsSelected = true;
-                                    SetToolTip(tileUnderMouse);
-                                } else if( tileUnderMouse.Building == null)
-                                {
-                                    RemoveTooltip();
-                                }
+                                RemoveTooltip();
                             }
-                        }
-                        else
-                        {
-                            Debug.Log(".... Tile is null");
                         }
                     }
                 }
+            }
+            else
+            {
+
             }
         }
         // }
@@ -133,6 +126,75 @@ public class MouseController : MonoBehaviour
         // {
         //     // Do nothing
         // }
+    }
+
+
+    void OnMouseOver()
+    {
+        Debug.Log("MOUSE OVER");
+
+        selectedObject = GameObject.Find(MouseHoverController.selectedObject);
+
+        // Only highlight buildings
+        // if (selectedObject.name.Contains("Building"))
+        // {
+        Debug.Log("MOUSE OVER");
+        hoveringOverObject = true;
+
+        if (!startedFlashing)
+        {
+            startedFlashing = true;
+            StartCoroutine(FlashObject());
+        }
+        // }
+
+    }
+
+    void OnMouseExit()
+    {
+        // Only highlight buildings
+        // if (selectedObject.name.Contains("Building"))
+        // {
+        Debug.Log("MOUSE EXIT");
+        hoveringOverObject = false;
+        startedFlashing = false;
+        StopCoroutine(FlashObject());
+        selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+        // }
+    }
+
+    IEnumerator FlashObject()
+    {
+        while (hoveringOverObject)
+        {
+            yield return new WaitForSeconds(0.05f);
+
+            if (flashingIn)
+            {
+                if (blue <= 30)
+                {
+                    flashingIn = false;
+                }
+                else
+                {
+                    blue -= 25;
+                    green -= 1;
+                }
+            }
+
+            if (!flashingIn)
+            {
+                if (blue >= 250)
+                {
+                    flashingIn = true;
+                }
+                else
+                {
+                    blue += 25;
+                    green += 1;
+                }
+            }
+        }
     }
 
     public void SetMode_CoalMine()
@@ -212,29 +274,26 @@ public class MouseController : MonoBehaviour
 
         //toolTipText.SetText("TestText");
         string name = building.Name;
-        string money, green, happiness, sellCost;
+        string money, green, happiness;
 
         if (tile.IsBuildable(building))
         {
             money = DeltaToString(building.GenerateMoney);
             green = DeltaToString(building.GenerateGreen);
             happiness = DeltaToString(building.GenerateHappiness);
-        } else
+        }
+        else
         {
             money = "0";
             green = "0";
             happiness = "0";
         }
 
-        sellCost = getSellPrice(building).ToString();
-
-
-
-        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness + "\n\nSell Cost: " + sellCost);
+        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness);
 
     }
 
-    private string DeltaToString(float delta) 
+    private string DeltaToString(float delta)
     {
         if (delta >= 0)
         {
@@ -257,23 +316,22 @@ public class MouseController : MonoBehaviour
         {
             GameController.Instance.Game.SellBuilding(tileSelected);
             RemoveTooltip();
-        } 
-       
+        }
+
     }
 
     public void RemoveTooltip()
     {
         toolTip.SetActive(false);
-        buildingIsSelected = false;
         sellText.text = "Sell: ";
         sellButton.interactable = false;
         //Debug.Log("Building Deselected");
     }
 
-    public void SetToolTip(Tile tile) {
+    public void SetToolTip(Tile tile)
+    {
         Building building = tile.Building;
         toolTip.SetActive(true);
-        toolTip.transform.position = Input.mousePosition;
         SetToolTipText(tile);
 
         if (building.Name != "Town Hall")
