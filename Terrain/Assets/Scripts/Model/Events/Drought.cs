@@ -16,7 +16,7 @@ public class Drought : Event
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
-        Debug.Log("tile delta called");
+        //Debug.Log("tile delta called");
 
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
@@ -24,7 +24,7 @@ public class Drought : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Water)
                 {
-                    Debug.Log("Found a tile with water");
+                    //Debug.Log("Found a tile with water");
                     int random = Random.Range(0, 2);
                     // 50% chance to change tiles to desert
                     if (random == 1)

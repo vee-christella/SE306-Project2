@@ -7,8 +7,14 @@ public class MainMenuController : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("IntroScene");
 
+    }
+
+    public void Help()
+    {
+        // TODO: change to a tutorial screen
+        SceneManager.LoadScene("IntroScene");
     }
 
     public void QuitGame()
