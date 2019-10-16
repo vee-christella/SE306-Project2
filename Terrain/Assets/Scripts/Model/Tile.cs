@@ -66,6 +66,7 @@ public class Tile
     {
         Type = type;
     }
+
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
@@ -87,14 +88,16 @@ public class Tile
 
     public bool removeBuilding()
     {
-        //Debug.Log("Building Removed");
+        Debug.Log("Building Removed");
         if (this.building != null)
         {
             this.building = null;
 
             if (CallbackBuildingChange != null)
             {
+                Debug.Log("callback 1");
                 CallbackBuildingChange(this);
+                Debug.Log("callback 2");
             }
 
             return true;
