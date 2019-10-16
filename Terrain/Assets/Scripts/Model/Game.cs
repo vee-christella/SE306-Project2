@@ -287,8 +287,6 @@ public class Game
     public Event EventForNextTurn()
     {
 
-        return new AcidRain(this);
-
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability
