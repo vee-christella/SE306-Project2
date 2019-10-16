@@ -6,7 +6,7 @@ using System.Linq;
 
 public class AchievementManager
 {
-    Achievement[] achievements;
+    public Achievement[] achievements;
     public static AchievementManager Instance { get; protected set; }
 
     public AchievementManager(){
@@ -55,6 +55,7 @@ public class AchievementManager
             if(achievements[(int) type].upAchievementCounter()){
                 Debug.Log("Achievement Complete: " + achievements[(int) type].Title);
                 if(achievements[(int) type].CallbackAchievementCount!= null){
+                    Debug.Log("Achievement callback being called");
                     achievements[(int) type].CallbackAchievementCount(achievements[(int) type]);
                 }
             }
