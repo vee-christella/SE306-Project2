@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour
         if (game.GameEvent != null)
         {
 
-            if (game.GameEvent.Type == Event.EventType.BuildingDestoryer)
+            if (game.GameEvent.Type == Event.EventType.BuildingDestroyer)
             {
                 EventController.DisplayBuildingDestroyerPopup();                    
             }
