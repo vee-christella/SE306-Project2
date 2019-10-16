@@ -8,6 +8,17 @@ using TMPro;
 
 public class MouseController : MonoBehaviour
 {
+
+    // ====================
+    public GameObject selectedObject;
+    public int red;
+    public int green;
+    public int blue;
+    public bool hoveringOverObject = false;
+    public bool flashingIn = true;
+    public bool startedFlashing = false;
+    // ====================
+
     public static MouseController Instance { get; protected set; }
 
     public GameObject toolTip;
@@ -44,22 +55,13 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // Vector3 currFramePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        if (GameController.Instance.Game.HasStarted && hoveringOverObject /*&& selectedObject.name.Contains("Building")*/)
+        {
+            Debug.Log("HOVER UPDATE");
+            selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)red, (byte)green, (byte)blue, 255);
+        }
 
-        //If mouse over a UI element, bail out
-        // if (EventSystem.current.IsPointerOverGameObject())
-        // {
-        //     return;
-        // }
 
-        // if (Input.GetMouseButton(1))
-        // {
-        //     Vector3 diff = lastFramePosition - currFramePosition;
-        //     Camera.main.transform.Translate(diff);
-        // }
-
-        // try
-        // {
         if (GameController.Instance.Game.HasStarted)
         {
             if (buildingForCreating != null)
@@ -72,9 +74,14 @@ public class MouseController : MonoBehaviour
                     // Show a building preview where the user's cursor is on the map
                     BuildingController.Instance.ShowBuildingPreview(buildingForCreating, gameGrid.GetNearestPointOnGrid(hitInfo.point));
                 }
+                else
+                {
+                    // If the mouse isn't over a tile, remove the preview building
+                    BuildingController.Instance.HideBuildingPreview();
+                }
 
                 // Place a building at the cursor point
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     // RaycastHit hitInfo;
                     // Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -109,6 +116,7 @@ public class MouseController : MonoBehaviour
                                 }
                                 else if (tileUnderMouse.Building != null)
                                 {
+                                    Debug.Log("yahat");
 
                                     buildingIsSelected = true;
                                     SetToolTip(tileUnderMouse);
@@ -128,7 +136,7 @@ public class MouseController : MonoBehaviour
             }
             else
             {
-                
+
             }
         }
         // }
@@ -136,6 +144,75 @@ public class MouseController : MonoBehaviour
         // {
         //     // Do nothing
         // }
+    }
+
+
+    void OnMouseOver()
+    {
+        Debug.Log("MOUSE OVER");
+
+        selectedObject = GameObject.Find(MouseHoverController.selectedObject);
+
+        // Only highlight buildings
+        // if (selectedObject.name.Contains("Building"))
+        // {
+        Debug.Log("MOUSE OVER");
+        hoveringOverObject = true;
+
+        if (!startedFlashing)
+        {
+            startedFlashing = true;
+            StartCoroutine(FlashObject());
+        }
+        // }
+
+    }
+
+    void OnMouseExit()
+    {
+        // Only highlight buildings
+        // if (selectedObject.name.Contains("Building"))
+        // {
+        Debug.Log("MOUSE EXIT");
+        hoveringOverObject = false;
+        startedFlashing = false;
+        StopCoroutine(FlashObject());
+        selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
+        // }
+    }
+
+    IEnumerator FlashObject()
+    {
+        while (hoveringOverObject)
+        {
+            yield return new WaitForSeconds(0.05f);
+
+            if (flashingIn)
+            {
+                if (blue <= 30)
+                {
+                    flashingIn = false;
+                }
+                else
+                {
+                    blue -= 25;
+                    green -= 1;
+                }
+            }
+
+            if (!flashingIn)
+            {
+                if (blue >= 250)
+                {
+                    flashingIn = true;
+                }
+                else
+                {
+                    blue += 25;
+                    green += 1;
+                }
+            }
+        }
     }
 
     public void SetMode_CoalMine()

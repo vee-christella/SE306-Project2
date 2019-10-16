@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildingController : MonoBehaviour
 {
@@ -99,27 +100,35 @@ public class BuildingController : MonoBehaviour
         // Remove the preview building from where the cursor previously was
         Destroy(previewBuilding);
 
-        string buildingName = resolveBuildingName(name);
-
-        previewBuilding = Instantiate(modelDictionary[buildingName]);
-        previewBuilding.name = "PreviewBuilding";
-
-        // Remove the preview object's box collider to prevent a hover changing its colour
-        Destroy(previewBuilding.GetComponent<Collider>());
-
-        // Show the preview building on the cursor point
-        previewBuilding.transform.position = mousePoint;
-
-        if (canBuildOnPoint(buildingName, mousePoint))
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            // Set the preview building to a green colour
-            previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
+            string buildingName = resolveBuildingName(name);
+
+            previewBuilding = Instantiate(modelDictionary[buildingName]);
+            previewBuilding.name = "PreviewBuilding";
+
+            // Remove the preview object's box collider to prevent a hover changing its colour
+            Destroy(previewBuilding.GetComponent<Collider>());
+
+            // Show the preview building on the cursor point
+            previewBuilding.transform.position = mousePoint;
+
+            if (canBuildOnPoint(buildingName, mousePoint))
+            {
+                // Set the preview building to a green colour
+                previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
+            }
+            else
+            {
+                // Set the preview building to a red colour
+                previewBuilding.GetComponent<Renderer>().material.color = new Color32(200, 0, 0, 100);
+            }
         }
-        else
-        {
-            // Set the preview building to a red colour
-            previewBuilding.GetComponent<Renderer>().material.color = new Color32(200, 0, 0, 100);
-        }
+    }
+
+    public void HideBuildingPreview()
+    {
+        Destroy(previewBuilding);
     }
 
     /*
