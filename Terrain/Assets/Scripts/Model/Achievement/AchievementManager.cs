@@ -28,12 +28,12 @@ public class AchievementManager
         achievements[1].CountToComplete = 5;
         achievements[1].CurrentCount= PlayerPrefs.GetInt("Count"+ achievements[1].Title, 0);
         achievements[2].Title = "Build Nuclear Plant";
-        achievements[2].Blurb = "Be careful with your nuclear power plants, thats a lot of nuclear waste you're making";
+        achievements[2].Blurb = "Be careful with your nuclear power plants, thats a lot of nuclear waste you're making.";
         achievements[2].HowToComplete = "Build 5 Nuclear Power plants";
         achievements[2].CountToComplete = 5;
         achievements[2].CurrentCount= PlayerPrefs.GetInt("Count"+ achievements[2].Title, 0);
         achievements[3].Title = "Build Oil Rig";
-        achievements[3].Blurb = "Thats a lot of Oil you're digging up. Its not very sustainable";
+        achievements[3].Blurb = "Thats a lot of Oil you're digging up. Its not very sustainable.";
         achievements[3].HowToComplete = "Build 5 Oil Rigs";
         achievements[3].CountToComplete = 5;
         achievements[3].CurrentCount= PlayerPrefs.GetInt("Count"+ achievements[3].Title, 0);

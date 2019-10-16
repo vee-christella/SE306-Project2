@@ -14,11 +14,9 @@ public class AchievementController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("AchievementController Created");
 
         new AchievementManager();
         Achievement[] listOfAchievements = AchievementManager.Instance.achievements;
-        Debug.Log("AchievementController 2 ");
         foreach(Achievement achievement in AchievementManager.Instance.achievements) {
             achievement.registerMethodCallbackAchievementCount(ActivatePopUp);
         }
