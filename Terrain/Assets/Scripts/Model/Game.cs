@@ -167,9 +167,9 @@ public class Game
 
         if (GameEvent != null)
         {
-            GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
-            GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
-            GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
+            Money = Money + GameEvent.MoneyDelta;
+            Happiness = Happiness + GameEvent.HappinessDelta;
+            Green = Green + GameEvent.GreenPointDelta;
         }
     }
 
@@ -287,6 +287,7 @@ public class Game
     public Event EventForNextTurn()
     {
 
+        return new AcidRain(this);
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability

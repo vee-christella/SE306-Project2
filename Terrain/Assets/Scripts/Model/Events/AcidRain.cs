@@ -34,18 +34,21 @@ public class AcidRain : Event
                     Debug.Log("Found a tile with a building");
                     int random = Random.Range(0, 100);
                     // 10% chance to destory building on tile
-                    if (random <= 10)
+                    if (random <= 100)
                     {
                         float buildingGreenGen = tiles[i, j].Building.GenerateGreen;
                         float buildingMoneyGen = tiles[i, j].Building.GenerateMoney;
                         float buildingHappinessGen = tiles[i, j].Building.GenerateHappiness;
-                        
-                        if (tiles[i,j].removeBuilding())
+
+                        Game.SellBuilding(tiles[i, j]);
+
+                       /* if (tiles[i,j].removeBuilding())
                         {
                             Game.GenerateGreen = Game.GenerateGreen - buildingGreenGen;
                             Game.GenerateMoney = Game.GenerateMoney - buildingMoneyGen;
                             Game.GenerateHappiness = Game.GenerateHappiness - buildingHappinessGen;
                         }
+                        */
                         
                     }
                     

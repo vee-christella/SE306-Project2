@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour
         Game.HasStarted = false;
 
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
+        eventController.Game = Game;
 
         // Populate the map with game tiles
         for (int x = 0; x < Game.Rows; x++)
@@ -98,8 +99,15 @@ public class GameController : MonoBehaviour
 
         if (game.GameEvent != null)
         {
-           EventController.DisplayPopup(game.GameEvent);
-           game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
+
+            if (game.GameEvent.Type == Event.EventType.BuildingDestoryer)
+            {
+                EventController.DisplayBuildingDestroyerPopup();                    
+            }
+            else
+            {
+                EventController.DisplayPopup();
+            }
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);
