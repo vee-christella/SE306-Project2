@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     public int[,] Map { get => map; set => map = value; }
 
     // public Sprite[] sprites = new Sprite[7];
-
+    public GameObject tutorialOverlay;
     public GameObject[] tileGameObjs = new GameObject[4];
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
                 break;
             case 1:
@@ -58,6 +59,7 @@ public class GameController : MonoBehaviour
                 break;
             default:
                 Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
                 break;
 

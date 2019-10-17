@@ -17,7 +17,8 @@ public class TutorialController : MonoBehaviour
 
     private void Update()
     {
-         
+
+        Debug.Log("Tutorial Index: " + tutorialIndex);
             //Debug.Log("Index is " + tutorialIndex + " and i is " + i);
             tutorialStages[tutorialIndex].SetActive(true);
 

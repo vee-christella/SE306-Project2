@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
 
+
     public void PlayGame()
     {
 
@@ -21,8 +22,7 @@ public class MainMenuController : MonoBehaviour
 
         // Set the game map to generate the tutorial
         PlayerPrefs.SetInt("Level", 0);
-
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene("3D-GameScene");
     }
 
     public void QuitGame()
