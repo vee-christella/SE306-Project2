@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
 
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         eventController.Game = Game;
+        eventController.GameController = this;
 
         // Populate the map with game tiles
         for (int x = 0; x < Game.Rows; x++)
@@ -99,15 +100,7 @@ public class GameController : MonoBehaviour
 
         if (game.GameEvent != null)
         {
-
-            if (game.GameEvent.Type == Event.EventType.BuildingDestroyer)
-            {
-                EventController.DisplayBuildingDestroyerPopup();                    
-            }
-            else
-            {
-                EventController.DisplayPopup();
-            }
+            EventController.DisplayEventPopup();
         }
 
         SetMetrics(game.Money, game.Green, game.Happiness);

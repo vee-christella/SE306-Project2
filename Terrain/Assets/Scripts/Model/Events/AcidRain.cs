@@ -34,7 +34,7 @@ public class AcidRain : Event
                     Debug.Log("Found a tile with a building");
                     int random = Random.Range(0, 100);
                     // 10% chance to destory building on tile
-                    if (random <= 10)
+                    if (random <= 100)
                     {
                         float buildingGreenGen = tiles[i, j].Building.GenerateGreen;
                         float buildingMoneyGen = tiles[i, j].Building.GenerateMoney;
