@@ -82,47 +82,65 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (tutorialStage == 2)
+
+        switch (tutorialStage)
         {
-            if (conversation.Count == 12)
-            {
-                arrowImage.SetActive(true);
-            }
-            else if (conversation.Count == 10)
-            {
-                arrowImage.SetActive(false);
-                goldArrow.SetActive(true);
-            }
-            else if (conversation.Count == 8)
-            {
-                goldArrow.SetActive(false);
-                greenArrow.SetActive(true);
-            }
-            else if (conversation.Count == 5)
-            {
-                greenArrow.SetActive(false);
-                happiArrow.SetActive(true);
-            }
-            else if (conversation.Count == 3)
-            {
-                happiArrow.SetActive(false);
-                turnsArrow.SetActive(true);
-            }
-        } else if (tutorialStage == 3)
-        {
-            if (conversation.Count == 5)
-            {
-                plains.SetActive(true);
-            } else if (conversation.Count == 4)
-            {
-                desert.SetActive(true);
-            } else if (conversation.Count == 3)
-            {
-                water.SetActive(true);
-            } else if (conversation.Count == 2)
-            {
-                mountains.SetActive(true);
-            }
+            case 2:
+                switch (conversation.Count)
+                {
+                    case 12:
+                        arrowImage.SetActive(true);
+                        break;
+
+                    case 10:
+                        arrowImage.SetActive(false);
+                        goldArrow.SetActive(true);
+                        break;
+
+                    case 8:
+                        goldArrow.SetActive(false);
+                        greenArrow.SetActive(true);
+                        break;
+
+                    case 5:
+                        greenArrow.SetActive(false);
+                        happiArrow.SetActive(true);
+                        break;
+
+                    case 3:
+                        happiArrow.SetActive(false);
+                        turnsArrow.SetActive(true);
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
+            case 3:
+                switch (conversation.Count)
+                {
+                    case 5:
+                        plains.SetActive(true);
+                        break;
+
+                    case 4:
+                        desert.SetActive(true);
+                        break;
+
+                    case 3:
+                        water.SetActive(true);
+                        break;
+
+                    case 2:
+                        mountains.SetActive(true);
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
         }
 
         string sentence = conversation.Dequeue();

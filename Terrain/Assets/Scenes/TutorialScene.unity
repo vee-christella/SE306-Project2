@@ -1778,26 +1778,9 @@ MonoBehaviour:
   dialogue:
     npcName: Honk Shi
     sentences:
-    - There are a total of 4 different tiles that make up the land that you'll build
-      your city on.
-    - "The first tile is the Plains tile. \n\nPlains are a neutral tile that lets
-      you build almost anything on top of it due to its flat, even nature."
-    - 'The second tile is the Desert tile.
-
-
-      Deserts are dry and hot, and allow good sun exposure. However, buildings that
-      require water will not be able to be built on these!'
-    - 'The third tile is the Water tile.
-
-
-      The only building that can be built in water is the Hydro Plant. It doesn''t
-      make much sense for any other building to be built on water!'
-    - 'Lastly, the final tile is the Mountain tile.
-
-
-      Mountain tiles do not allow ANY buildings to be built on top of it.'
-    - With these 4 tiles, you can experiment and build whatever you choose to increase
-      your metrics and make your city the best it can be!
+    - The main aim of the game is to build strategically while you balance your gold,
+      green points and happiness.
+    - "Let's try it out! \n\nOpen up the shop."
 --- !u!114 &144225106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20621,7 +20604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1722875427
 RectTransform:
   m_ObjectHideFlags: 0
