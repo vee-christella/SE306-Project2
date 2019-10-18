@@ -40,9 +40,9 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = raceTrack.Blurb;
         buildingName.text = raceTrack.Name;
-        coinMetric.text = raceTrack.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = raceTrack.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = raceTrack.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = raceTrack.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = raceTrack.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = raceTrack.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 
