@@ -1876,7 +1876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &115505206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5063,6 +5063,7 @@ MonoBehaviour:
   mountains: {fileID: 0}
   desert: {fileID: 0}
   water: {fileID: 0}
+  continueText: {fileID: 0}
   shop: {fileID: 0}
   nameText: {fileID: 1031541413}
   dialogueText: {fileID: 275554789}
@@ -8610,6 +8611,7 @@ MonoBehaviour:
   mountains: {fileID: 0}
   desert: {fileID: 0}
   water: {fileID: 0}
+  continueText: {fileID: 296235855}
   shop: {fileID: 665120659}
   nameText: {fileID: 136515547}
   dialogueText: {fileID: 486343321}
@@ -9150,6 +9152,7 @@ MonoBehaviour:
   mountains: {fileID: 0}
   desert: {fileID: 0}
   water: {fileID: 0}
+  continueText: {fileID: 0}
   shop: {fileID: 665120659}
   nameText: {fileID: 1067171307}
   dialogueText: {fileID: 548006112}
@@ -17119,6 +17122,7 @@ MonoBehaviour:
   mountains: {fileID: 0}
   desert: {fileID: 0}
   water: {fileID: 0}
+  continueText: {fileID: 0}
   shop: {fileID: 0}
   nameText: {fileID: 1020203987}
   dialogueText: {fileID: 1048771477}
@@ -18634,6 +18638,7 @@ MonoBehaviour:
   mountains: {fileID: 1755943596}
   desert: {fileID: 1809515619}
   water: {fileID: 99408578}
+  continueText: {fileID: 0}
   shop: {fileID: 0}
   nameText: {fileID: 588252744}
   dialogueText: {fileID: 1171012187}
@@ -28694,6 +28699,7 @@ MonoBehaviour:
   mountains: {fileID: 0}
   desert: {fileID: 0}
   water: {fileID: 0}
+  continueText: {fileID: 0}
   shop: {fileID: 0}
   nameText: {fileID: 293707145}
   dialogueText: {fileID: 1956093173}
@@ -32518,6 +32524,7 @@ MonoBehaviour:
   mountains: {fileID: 0}
   desert: {fileID: 0}
   water: {fileID: 0}
+  continueText: {fileID: 0}
   shop: {fileID: 0}
   nameText: {fileID: 1710905793}
   dialogueText: {fileID: 2139693749}

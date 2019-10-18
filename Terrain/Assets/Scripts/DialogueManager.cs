@@ -32,6 +32,7 @@ public class DialogueManager : MonoBehaviour
 
     public static bool finishTutorial = false;
 
+    public TextMeshProUGUI continueText;
     public GameObject shop;
 
     public TextMeshProUGUI nameText;
@@ -183,6 +184,10 @@ public class DialogueManager : MonoBehaviour
             case 6: 
                 switch(conversation.Count)
                 {
+                    case 1:
+                        continueText.text = "End Tutorial";
+                        break;
+
                     case 0:
                         finishTutorial = true;
                         break;
