@@ -16,6 +16,8 @@ public class EventController : MonoBehaviour
     public Button yesButton;
     public Button closeButton;
 
+    public float costToRepair;
+
     private Game game;
 
     public TextMeshProUGUI eventInfo;
@@ -33,13 +35,13 @@ public class EventController : MonoBehaviour
 
     public void DisplayEventPopup()
     {
-
         // cost to repair is 20%  of building costs 
         Event gameEvent = Game.GameEvent;
 
         if (gameEvent.Type == Event.EventType.BuildingDestroyer)
         {
-            if (game.Money < gameEvent.CostToRepair || (game.Money + game.MoneyDelta < 0))
+            costToRepair = Mathf.Abs(Game.GameEvent.CalculateCostToRepair(game.Tiles));
+            if (game.Money < costToRepair || (game.Money + game.MoneyDelta < 0))
             {
                 yesButton.interactable = false;
             }
@@ -61,7 +63,7 @@ public class EventController : MonoBehaviour
         moneyEffect.text = DisplayEffect(gameEvent.MoneyDelta) + gameEvent.MoneyDelta;
         greenPointsEffect.text = DisplayEffect(gameEvent.GreenPointDelta) + gameEvent.GreenPointDelta;
         happinessEffect.text = DisplayEffect(gameEvent.HappinessDelta) + gameEvent.HappinessDelta;
-        costToRepairEffect.text = gameEvent.CostToRepair.ToString();
+        costToRepairEffect.text = costToRepair.ToString();
 
         eventPopupPanel.SetActive(true);
     }
@@ -82,7 +84,7 @@ public class EventController : MonoBehaviour
 
     public void FixBuildings()
     {
-        game.Money = game.Money - game.GameEvent.CostToRepair;
+        game.Money = game.Money - costToRepair;
         game.GameEvent.TileDelta(game.Tiles, false);
         gameController.SetMetrics(game.Money, game.Green, game.Happiness);
         eventPopupPanel.SetActive(false);

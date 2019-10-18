@@ -15,6 +15,11 @@ public class Wildfire : Event
 
     public double Probability { get => probability; set => probability = value; }
 
+    public override float CalculateCostToRepair(Tile[,] tiles)
+    {
+        return 0;
+    }
+
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
 

@@ -16,9 +16,37 @@ public class AcidRain : Event
 
     public double Probability { get => probability; set => probability = value; }
 
+    public override float CalculateCostToRepair(Tile[,] tiles)
+    {
+        float costToRepair = 0;
+
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if (tiles[i, j].Building != null)
+                {
+                    if (tiles[i, j].Building.GetType().Name.ToString() == "TownHall")
+                    {
+                        continue;
+                    }
+                    Debug.Log("Found a tile with a building");
+                    int random = Random.Range(0, 100);
+                    // 10% chance to destory building on tile
+                    if (random <= 10)
+                    {
+                        costToRepair = costToRepair + tiles[i,j].Building.InitialBuildMoney;
+                        Debug.Log(costToRepair + " cost to repair");
+                    }
+                }
+            }
+        }
+
+        return costToRepair;
+    }
+
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
-        CostToRepair = 0;
 
         if (!doDestroyBuildings)
         {
@@ -44,16 +72,13 @@ public class AcidRain : Event
                         float buildingMoneyGen = tiles[i, j].Building.GenerateMoney;
                         float buildingHappinessGen = tiles[i, j].Building.GenerateHappiness;
                   
-                  if (tiles[i, j].removeBuilding())
+                    if (tiles[i, j].removeBuilding())
                         {
-                            CostToRepair = CostToRepair + Mathf.Floor((tiles[i, j].Building.InitialBuildMoney/5));
-
                             Game.GenerateGreen = Game.GenerateGreen - buildingGreenGen;
                             Game.GenerateMoney = Game.GenerateMoney - buildingMoneyGen;
                             Game.GenerateHappiness = Game.GenerateHappiness - buildingHappinessGen;
                         }
-                    }
-                    
+                    }     
                 }
             }
         }

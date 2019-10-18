@@ -14,6 +14,11 @@ public class Drought : Event
 
     public int TurnToOccur { get => turnToOccur; set => turnToOccur = value; }
 
+    public override float CalculateCostToRepair(Tile[,] tiles)
+    {
+        return 0;
+    }
+
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
         //Debug.Log("tile delta called");

@@ -103,6 +103,8 @@ public class GameController : MonoBehaviour
             EventController.DisplayEventPopup();
         }
 
+        Debug.Log("Finished event logic");
+
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
         SetTurn(game.CurrentTurn);
