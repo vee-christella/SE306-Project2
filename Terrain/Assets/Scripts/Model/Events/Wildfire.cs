@@ -11,23 +11,39 @@ public class Wildfire : Event
         this.Type = EventType.BuildingDestroyer;
         this.Description = "Severe heat and drought fuel wildfires, conditions scientists have linked to climate change. The hotter weather makes forests drier and more susceptible to burning with the average wildfire season three and a half months longer than it was a few decades back.";
         this.Game = game;
+        this.DestroysBuildings = true;
     }
 
     public double Probability { get => probability; set => probability = value; }
 
-    public override float CalculateCostToRepair(Tile[,] tiles)
-    {
-        return 0;
+
+//Overwritten method to say only forrests are destroyed
+    public override bool typeToDestroy(Tile tile){
+        if(tile.Building.GetType().Name.ToString() == "Forest"){
+            return true;
+        }
+        return false;
+    }
+
+//Overwritten method to increase chance of destroying Forrests
+    public override bool chanceToDestroy(){
+        Debug.Log("wildFire Destroy Chance");
+        int random = Random.Range(0, 100);
+        if (random <= 30){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
 
-        if (!doDestroyBuildings)
+        if (doDestroyBuildings)
         {
-            return;
+            DestroyBuildings();
         }
-
+/* 
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
@@ -52,6 +68,6 @@ public class Wildfire : Event
                     }
                 }
             }
-        }
+        }*/
     }
 }

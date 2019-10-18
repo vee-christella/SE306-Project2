@@ -11,10 +11,6 @@ public class Circus : Event
         this.Game = game;
     }
 
-    public override float CalculateCostToRepair(Tile[,] tiles)
-    {
-        return 0;
-    }
 
     public override void TileDelta(Tile[,] tiles, bool doDestoryBuildings)
     {

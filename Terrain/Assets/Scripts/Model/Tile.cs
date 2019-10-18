@@ -95,9 +95,7 @@ public class Tile
 
             if (CallbackBuildingChange != null)
             {
-                Debug.Log("callback 1");
                 CallbackBuildingChange(this);
-                Debug.Log("callback 2");
             }
 
             return true;

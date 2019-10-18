@@ -12,11 +12,12 @@ public class AcidRain : Event
         this.Type = EventType.BuildingDestroyer;
         this.Description = "Acid rain contains high levels of nitric and sulfuric acids and comes in the form of snow, fog, and tiny bits of dry material that settles to Earth. The biggest sources are coal-burning power plants, factories, and automobiles. When humans burn fossil fuels, sulfur dioxide (SO2) and nitrogen oxides (NOx) are released into the atmosphere and when it reaches Earth, it flows across the surface in runoff water, enters water systems, and sinks into the soil";
         this.Game = game;
+        this.DestroysBuildings = true;
     }
 
     public double Probability { get => probability; set => probability = value; }
 
-    public override float CalculateCostToRepair(Tile[,] tiles)
+    /*public override float CalculateCostToRepair(Tile[,] tiles)
     {
         float costToRepair = 0;
 
@@ -43,16 +44,16 @@ public class AcidRain : Event
         }
 
         return costToRepair;
-    }
+    }*/
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
 
-        if (!doDestroyBuildings)
+        if (doDestroyBuildings)
         {
-            return;
+            DestroyBuildings();
         }
-
+/*
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
@@ -81,7 +82,7 @@ public class AcidRain : Event
                     }     
                 }
             }
-        }
+        }*/
 
     }
 

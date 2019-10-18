@@ -11,12 +11,13 @@ public class Hurricane : Event
     {
         this.Type = EventType.BuildingDestroyer;
         this.Game = game;
+        this.DestroysBuildings = true;
         this.Description = "The intensity, frequency and duration of the strongest hurricanes, have all increased since the early 1980s. Hurricane-associated storm intensity and rainfall rates are projected to increase as the climate continues to warm.";
     }
 
     public double Probability { get => probability; set => probability = value; }
 
-    public override float CalculateCostToRepair(Tile[,] tiles)
+    /*public override float CalculateCostToRepair(Tile[,] tiles)
     {
         float costToRepair = 0;
 
@@ -42,16 +43,16 @@ public class Hurricane : Event
         }
 
         return costToRepair;
-    }
+    }*/
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
-        if (!doDestroyBuildings)
+        if (doDestroyBuildings)
         {
-            return;
+            DestroyBuildings();
         }
 
-        for (int i = 0; i < tiles.GetLength(0); i++)
+        /*for (int i = 0; i < tiles.GetLength(0); i++)
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
@@ -80,6 +81,6 @@ public class Hurricane : Event
                     }
                 }
             }
-        }
+        }*/
     }
 }
