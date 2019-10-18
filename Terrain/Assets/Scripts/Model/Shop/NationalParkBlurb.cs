@@ -40,9 +40,9 @@ public class NationalParkBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = nationalPark.Blurb;
         buildingName.text = nationalPark.Name;
-        coinMetric.text = nationalPark.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = nationalPark.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = nationalPark.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = nationalPark.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = nationalPark.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = nationalPark.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 
