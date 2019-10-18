@@ -30,14 +30,20 @@ public class TutorialController : MonoBehaviour
             }
   
 
-         if (tutorialIndex == 3)
+        switch (tutorialIndex)
         {
+            case 3:
+                Debug.Log(shop.activeSelf);
 
-            Debug.Log(shop.activeSelf);
-            if (shop.activeSelf)
-            {
-                Debug.Log("Tutorial 4 - complete!!");
-            }
+                if (shop.activeSelf)
+                {
+                    tutorialIndex++;
+                    Debug.Log("Tutorial 4 - complete!!");
+                }
+                break;
+
+            
+        }
+
         }
     }
-}

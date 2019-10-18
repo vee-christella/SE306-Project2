@@ -141,6 +141,15 @@ public class DialogueManager : MonoBehaviour
                 }
                 break;
 
+            case 4: 
+                switch(conversation.Count)
+                {
+                    case 1:
+                    continueButton.SetActive(false);
+                    break;
+                }
+                break;
+
         }
 
         string sentence = conversation.Dequeue();
