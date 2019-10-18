@@ -1876,7 +1876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &115505206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6045,7 +6045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.8039216}
+  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0.8039216}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -12971,7 +12971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.010009766}
+  m_AnchoredPosition: {x: 0, y: 0.010009766}
   m_SizeDelta: {x: 0, y: -0.02002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &761927901
@@ -17108,7 +17108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueButton: {fileID: 490450261}
   startButton: {fileID: 1960508015}
-  overlay: {fileID: 1633087352}
+  overlay: {fileID: 338993510}
   tutorialStage: 2
   arrowImage: {fileID: 1157770526}
   goldArrow: {fileID: 1088385693}
@@ -17919,17 +17919,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088385693}
   m_LocalRotation: {x: 0.021078167, y: -0.24092457, z: -0.7623278, w: 0.6003061}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -80.60328}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 398158759}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -20, y: -20, z: -100}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -801, y: 402}
-  m_SizeDelta: {x: 178.6, y: 159.2}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -600, y: -150}
+  m_SizeDelta: {x: 178.59998, y: 159.20001}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1088385695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18624,7 +18624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueButton: {fileID: 102181160}
   startButton: {fileID: 1940004060}
-  overlay: {fileID: 1008770421}
+  overlay: {fileID: 0}
   tutorialStage: 3
   arrowImage: {fileID: 0}
   goldArrow: {fileID: 0}
@@ -20734,7 +20734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -500, y: -188}
+  m_AnchoredPosition: {x: -100, y: -150}
   m_SizeDelta: {x: 178.59998, y: 159.20001}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1351924239
@@ -23129,7 +23129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -611, y: -188}
+  m_AnchoredPosition: {x: -350, y: -150}
   m_SizeDelta: {x: 178.6, y: 159.2}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1491032404
@@ -24388,7 +24388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.8039216}
+  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0.8039216}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -24426,8 +24426,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24.300049}
-  m_SizeDelta: {x: 0, y: -48.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1638315439
 PrefabInstance:
@@ -25455,11 +25455,11 @@ RectTransform:
   m_Father: {fileID: 398158759}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -565, y: 309.4}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 800, y: -150}
   m_SizeDelta: {x: 178.59998, y: 159.20001}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1694157237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28685,7 +28685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueButton: {fileID: 20412488}
   startButton: {fileID: 1219133284}
-  overlay: {fileID: 0}
+  overlay: {fileID: 338993510}
   tutorialStage: 4
   arrowImage: {fileID: 0}
   goldArrow: {fileID: 0}
@@ -32510,7 +32510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueButton: {fileID: 798437564}
   startButton: {fileID: 1336718782}
-  overlay: {fileID: 338993510}
+  overlay: {fileID: 0}
   tutorialStage: 0
   arrowImage: {fileID: 0}
   goldArrow: {fileID: 0}
