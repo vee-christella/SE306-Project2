@@ -252,6 +252,36 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Zoo";
         setCancelButton();
     }
+    public void SetMode_BeeFarm()
+    {
+        buildingForCreating = "Bee Farm";
+        setCancelButton();
+    }
+    public void SetMode_Greenhouse()
+    {
+        buildingForCreating = "Greenhouse";
+        setCancelButton();
+    }
+    public void SetMode_Factory()
+    {
+        buildingForCreating = "Factory";
+        setCancelButton();
+    }
+    public void SetMode_RecyclingPlant()
+    {
+        buildingForCreating = "Reycling Plant";
+        setCancelButton();
+    }
+    public void SetMode_AnimalFarm()
+    {
+        buildingForCreating = "Animal Farm";
+        setCancelButton();
+    }
+    public void SetMode_VegetableFarm()
+    {
+        buildingForCreating = "Vegetable Farm";
+        setCancelButton();
+    }
 
     Tile getTileAtMouse(Vector3 coord)
     {
