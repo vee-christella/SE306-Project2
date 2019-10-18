@@ -7,7 +7,8 @@ public class TutorialController : MonoBehaviour
     public GameObject[] tutorialStages;
     public int tutorialIndex;
     public TutorialController instance;
-    
+
+    public bool coalMineBuilt = false;
     public GameObject shop;
 
     public static TutorialController Instance { get; protected set; }
@@ -33,7 +34,6 @@ public class TutorialController : MonoBehaviour
         switch (tutorialIndex)
         {
             case 3:
-                Debug.Log(shop.activeSelf);
 
                 if (shop.activeSelf)
                 {
@@ -41,8 +41,14 @@ public class TutorialController : MonoBehaviour
                     Debug.Log("Tutorial 4 - complete!!");
                 }
                 break;
+            case 4: 
+                if (coalMineBuilt)
+                {
+                    tutorialIndex++;
+                    Debug.Log("Tutorial 5 - complete!!");
+                }
+                break;
 
-            
         }
 
         }
