@@ -40,9 +40,9 @@ public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = forest.Blurb;
         buildingName.text = forest.Name;
-        coinMetric.text = forest.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = forest.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = forest.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = forest.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = forest.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = forest.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

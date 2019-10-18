@@ -7,7 +7,7 @@ public abstract class Event
 
     public enum EventType
     {
-        Random, Transition
+        Good, BuildingDestoryer, TileChanger
     };
 
     private int greenPointDelta;
@@ -31,6 +31,6 @@ public abstract class Event
     public EventType Type { get => type; set => type = value; }
     public Game Game { get => game; set => game = value; }
 
-    public abstract void TileDelta(Tile[,] tiles);
+    public abstract void TileDelta(Tile[,] tiles, bool doDestoryBuildings);
 
 }

@@ -40,9 +40,9 @@ public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = oilRefinery.Blurb;
         buildingName.text = oilRefinery.Name;
-        coinMetric.text = oilRefinery.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = oilRefinery.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = oilRefinery.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = oilRefinery.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = oilRefinery.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = oilRefinery.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

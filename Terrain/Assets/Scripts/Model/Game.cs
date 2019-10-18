@@ -21,24 +21,24 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
+    GameDifficulty gameDifficulty;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
+
+    List<Event> goodEventList = new List<Event>();
+    List<Event> badEventList = new List<Event>();
     bool isUnhappy = false;
     float moneyDelta;
     float greenDelta;
     bool hasStarted = false;
 
     public float modifier = 1;
-    
-
     float prevMoney;
     float prevHappiness;
-
-
     GameObject errorMessage;
 
 
@@ -56,6 +56,13 @@ public class Game
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
+    public Tile[,] Tiles { get => tiles; set => tiles = value; }
+
+    public enum GameDifficulty
+    {
+        Easy, Medium, Hard
+    };
+
     public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
     public float GreenDelta { get => greenDelta; set => greenDelta = value; }
     public bool HasStarted { get => hasStarted; set => hasStarted = value; }
@@ -67,19 +74,23 @@ public class Game
 
         this.rows = rows;
         this.columns = columns;
+        
+        Tiles = new Tile[rows, columns];
+        buildings = new Building[rows, columns];
 
-        this.tiles = new Tile[rows, columns];
-        this.buildings = new Building[rows, columns];
+        InitaliseRandomEventLists();
+
 
         for (int x = 0; x < rows; x++)
         {
             for (int z = 0; z < columns; z++)
             {
+            
+                Debug.Log("game created");
                 tiles[x, z] = new Tile(this, x, z);
-                tiles[x, z].registerMethodCallbackTypeChanged(stillBuildable);
+                tiles[x, z].registerMethodCallbackTypeChanged(StillBuildable);
             }
         }
-        //Debug.Log("game created");
     }
 
 
@@ -111,9 +122,10 @@ public class Game
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
      */
-    public void nextTurn()
+    public void NextTurn()
     {
         this.currentTurn++;
+        Debug.Log("turn " + this.currentTurn);
 
 
         getModifier(GenerateHappiness);
@@ -126,10 +138,6 @@ public class Game
 
         Money = Money + moneyDelta;
         Green = Green + greenDelta;
-
-        Debug.Log("Generate Money: " +GenerateMoney);
-        Debug.Log("MoneyDelta: " + moneyDelta);
-        Debug.Log("Modifier: " + modifier);
 
 
         // Check if the user has won the game by reaching the number of green
@@ -151,15 +159,18 @@ public class Game
 
         GameEvent = EventForNextTurn();
 
+        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
+        {
+            badEventList.Remove(GameEvent);
+        }
+
+
         if (GameEvent != null)
         {
             GenerateMoney = GenerateMoney + GameEvent.MoneyDelta;
             GenerateHappiness = GenerateHappiness + GameEvent.HappinessDelta;
             GenerateGreen = GenerateGreen + GameEvent.GreenPointDelta;
-            GameEvent.TileDelta(tiles);
         }
-
-
     }
 
     public void endGame(bool isVictory)
@@ -269,52 +280,113 @@ public class Game
             GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
 
         }
-
-
-
     }
 
 
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
-        List<Event> randomEventList = InitaliseRandomEventList();
-        Random random = new Random();
-        if (currentTurn == 5)
+
+        // current turn increase increases probability
+        // green point decreases per turn probability
+        // game difficultly increases or decreases probability
+
+        List<Event> potentionalEvents = new List<Event>();
+        float badEventProbability = 0;
+        float goodEventProbability;
+        float difficultyOffset = 0.1f;
+
+
+ //       switch (gameDifficulty)
+ //       {
+ //           case GameDifficulty.Easy:
+ //               difficultyOffset = 0.1f;
+ //               break;
+ //           case GameDifficulty.Medium:
+//                difficultyOffset = 0.2f;
+ //               break;
+//            case GameDifficulty.Hard:
+ //               difficultyOffset = 0.3f;
+ //               break;
+ //           default:
+ //               difficultyOffset = 0.1f;
+ //               break;
+ //       }
+
+
+        goodEventProbability = (green / 2000) * 100;
+
+        // check green points to account for negative value
+        if (green < 0)
         {
-            return new Drought(this);
+            badEventProbability = (1 - 700 / (1000 - green));
         }
-        else if (Random.Range(0, 100) < 10)
+        else
         {
-            return randomEventList[Random.Range(0, randomEventList.Count)];
+            badEventProbability = (300 / (1000 + green));
         }
 
-        return null;
+        // calculate probability so no. of random events increases as progress through the game increases
+        // max probability of random events occuring is 80%
+        badEventProbability = Mathf.FloorToInt(((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns)) * 100);
+
+        if (badEventProbability > 100)
+        {
+            goodEventProbability = 0;
+            badEventProbability = 80;
+        }
+
+        int randomNum = Random.Range(1, 101);
+
+        // good events take priority and the chance of a good event increases the more green points the user has
+        if (randomNum < goodEventProbability)
+        {
+
+            potentionalEvents.Add(goodEventList[Random.Range(0, goodEventList.Count)]);
+            // return random good event 
+        }
+        else
+        {
+            randomNum = Random.Range(1, 101);
+
+            if (randomNum < badEventProbability)
+            {
+                potentionalEvents.Add(badEventList[Random.Range(0, badEventList.Count)]);
+
+            }
+        }
+
+        Debug.Log("Goodevent probability " + goodEventProbability);
+        Debug.Log("BadEvent probability " + badEventProbability);
+
+        if (potentionalEvents.Count != 0)
+        {
+            return potentionalEvents[Random.Range(0, potentionalEvents.Count)];
+        }
+        else
+        {
+            return null;
+        }
     }
 
-
     // method to create list of all random events
-    public List<Event> InitaliseRandomEventList()
+    public void InitaliseRandomEventLists()
     {
-        List<Event> randomEventList = new List<Event>();
+        badEventList.Add(new AcidRain(this));
+        badEventList.Add(new Drought(this));
+        badEventList.Add(new Flood(this));
+        badEventList.Add(new Hurricane(this));
+        badEventList.Add(new RisingSeaLevel(this));
+        badEventList.Add(new Wildfire(this));
+        badEventList.Add(new HeatWave(this));
 
-        randomEventList.Add(new AcidRain(this));
-        randomEventList.Add(new Drought(this));
-        randomEventList.Add(new Flood(this));
-        randomEventList.Add(new Hurricane(this));
-        randomEventList.Add(new ForestSpawn(this));
-        randomEventList.Add(new RisingSeaLevel(this));
-        randomEventList.Add(new Wildfire(this));
-        randomEventList.Add(new HeatWave(this));
-
-        return randomEventList;
+        goodEventList.Add(new ForestSpawn(this));
     }
 
     // Change the metrics with regards to the effects of the building
     // that has just been placed.
     public void UpdateMetrics(Building building)
     {
-
 
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
@@ -355,8 +427,8 @@ public class Game
 
 
     }
-
-    public void stillBuildable(Tile tile)
+    
+    public void StillBuildable(Tile tile)
     {
         if (tile.Building != null)
         {
@@ -365,6 +437,13 @@ public class Game
                 GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+            }
+            else
+            {
+                GenerateGreen = GenerateGreen + tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney + tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness + tile.Building.GenerateHappiness;
+
             }
         }
     }

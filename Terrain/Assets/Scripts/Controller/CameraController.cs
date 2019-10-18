@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
     {
         // Look around with Right Mouse
         if (Input.GetMouseButton(1))
-        {
+        {     
             yaw += lookSpeedH * Input.GetAxis("Mouse X");
             pitch -= lookSpeedV * Input.GetAxis("Mouse Y");
 

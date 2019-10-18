@@ -15,9 +15,11 @@ public class Tile
 
     private List<string> waterBuildable = new List<string>() { "Hydro Plant", null };
     private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
-    "Race Track", "Wind Turbine", "Solar Farm", null};
+    "Race Track", "Wind Turbine", "Solar Farm", "Factory", "Recycling Plant", null};
     private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall", null};
+    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recyling Plant",
+    "Vegetable Farm", null};
+    private List<string> mountainBuildable = new List<string>() { null };
 
     Action<Tile> callbackTypeChanged;
     Action<Tile> callbackBuildingChange;
@@ -66,6 +68,7 @@ public class Tile
     {
         Type = type;
     }
+
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
@@ -96,14 +99,16 @@ public class Tile
 
     public bool removeBuilding()
     {
-        //Debug.Log("Building Removed");
+        Debug.Log("Building Removed");
         if (this.building != null)
         {
             this.building = null;
 
             if (CallbackBuildingChange != null)
             {
+                Debug.Log("callback 1");
                 CallbackBuildingChange(this);
+                Debug.Log("callback 2");
             }
 
             return true;
@@ -127,7 +132,10 @@ public class Tile
         // No buildings can be built on mountain tiles
         if (this.type == Tile.TileType.Mountain)
         {
-            return false;
+            if (!mountainBuildable.Contains(building.Name))
+            {
+                return false;
+            }
         }
 
         else if (this.type == Tile.TileType.Water)
@@ -160,5 +168,10 @@ public class Tile
     public void registerMethodCallbackTypeChanged(Action<Tile> method)
     {
         callbackTypeChanged += method;
+    }
+
+    public void unregisterMethodCallbackTypeChanged(Action<Tile> method)
+    {
+        callbackTypeChanged -= method;
     }
 }
