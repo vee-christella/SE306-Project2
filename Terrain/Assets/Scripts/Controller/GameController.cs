@@ -27,6 +27,14 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI errorText;
 
     public GameObject errorMessage;
+
+    public string[] greenMetricCheatCode = {"i","l","o","v","e","e","a","r","t","h"};
+    public string[] loseCheatCode = {"p","l","a","s","t","i","c","b","a","g","s"};
+    public string[] happinessCheatCode = {"h","a","p","p","y"};
+    public int greenCheatIndex = 0;
+    public int loseCheatIndex = 0;
+    public int happinessCheatIndex = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +97,57 @@ public class GameController : MonoBehaviour
         StartingMetrics();
         Game.HasStarted = true;
     }
+
+    public void greenCheat()
+    {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(greenMetricCheatCode[greenCheatIndex])) {
+                greenCheatIndex++;
+            }
+            else {
+                greenCheatIndex = 0;    
+            }
+        }
+        if (greenCheatIndex == greenMetricCheatCode.Length) {
+            game.greenCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            greenCheatIndex = 0;
+        }
+    }
+
+    public void loseCheat()
+    {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(loseCheatCode[loseCheatIndex])) {
+                loseCheatIndex++;
+            }
+            else {
+                loseCheatIndex = 0;    
+            }
+        }
+        if (loseCheatIndex == loseCheatCode.Length) {
+            game.loseCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            loseCheatIndex = 0;
+        }
+    }
+
+    public void happinessCheat()
+    {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(happinessCheatCode[happinessCheatIndex])) {
+                happinessCheatIndex++;
+            }
+            else {
+                happinessCheatIndex = 0;    
+            }
+        }
+        if (happinessCheatIndex == happinessCheatCode.Length) {
+            game.happinessCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            happinessCheatIndex = 0;
+        }
+    }
     
 
     public void callNextTurn()
@@ -111,6 +170,9 @@ public class GameController : MonoBehaviour
     void Update()
     {
         CheckMetrics();
+        greenCheat();
+        loseCheat();
+        happinessCheat();
     }
 
     // Initialise the starting metrics on the screen
@@ -134,6 +196,7 @@ public class GameController : MonoBehaviour
 
     public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
     {
+
         if (coinDelta < 0)
         {
             coinDeltaText.text = coinDelta.ToString();

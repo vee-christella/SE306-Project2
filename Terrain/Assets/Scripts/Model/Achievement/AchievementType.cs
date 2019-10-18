@@ -6,5 +6,11 @@ public enum AchievementType {
     Fail,
     Win,
     BuildNuclear,
-    BuildOlilRig
+    BuildOilRig,
+    WinAllLevels,
+    Happiness,
+    FixBuilding,
+    Win20Turns,
+    Win30Turns,
+    Win40Turns
 };
