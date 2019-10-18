@@ -32510,7 +32510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   continueButton: {fileID: 798437564}
   startButton: {fileID: 1336718782}
-  overlay: {fileID: 0}
+  overlay: {fileID: 338993510}
   tutorialStage: 0
   arrowImage: {fileID: 0}
   goldArrow: {fileID: 0}
