@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject startButton;
     public GameObject overlay;
 
-    public int tutorialStage;
+    public int tutorialStage = 0;
     public GameObject arrowImage;
     public GameObject goldArrow;
     public GameObject greenArrow;
@@ -181,9 +181,22 @@ public class DialogueManager : MonoBehaviour
                 }
                 break;
 
-            case 6: 
+            case 6:
+                overlay.SetActive(true);
                 switch(conversation.Count)
                 {
+                    case 3:
+                        goldArrow.SetActive(true);
+                        happiArrow.SetActive(true);
+                        greenArrow.SetActive(true);
+                        break;
+
+                    case 2:
+                        goldArrow.SetActive(false);
+                        happiArrow.SetActive(false);
+                        greenArrow.SetActive(false);
+                        break;
+
                     case 1:
                         continueText.text = "End Tutorial";
                         break;
