@@ -79,7 +79,6 @@ public class Tile
             // If in tutorial, check if the coal mine is being built to progress
             if (PlayerPrefs.GetInt("Level") == 0 && building.GetType().Name.ToString() == "CoalMine")
             {
-                Debug.Log("HENLODINSISTHECOOLEST: " + building.GetType().Name.ToString());
                 TutorialController.Instance.coalMineBuilt = true;
             }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class TutorialController : MonoBehaviour
             case 4: 
                 if (coalMineBuilt)
                 {
+                    shop.SetActive(false);
                     tutorialIndex++;
                     Debug.Log("Tutorial 5 - complete!!");
                 }
@@ -56,6 +58,14 @@ public class TutorialController : MonoBehaviour
                     Debug.Log("Tutorial 6 - complete!");
                 }
                 break;
+
+            case 6: 
+                if (DialogueManager.finishTutorial)
+                {
+                    SceneManager.LoadScene("MenuScene");
+                }
+                break;
+
 
 
         }

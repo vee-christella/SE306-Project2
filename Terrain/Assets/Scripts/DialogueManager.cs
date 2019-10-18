@@ -30,6 +30,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject desert;
     public GameObject water;
 
+    public static bool finishTutorial = false;
+
+    public GameObject shop;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
@@ -81,7 +85,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (conversation.Count == 0)
+        if (conversation.Count == 0 && tutorialStage != 6)
         {
             EndDialogue();
             return;
@@ -160,6 +164,7 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case 5:
+                shop.SetActive(false);
                 endTurnButton.GetComponent<Button>().interactable = true;
                 switch(conversation.Count)
                 {
@@ -172,6 +177,16 @@ public class DialogueManager : MonoBehaviour
                         endTurnsArrow.SetActive(true);
                         continueButton.SetActive(false);
                         break;
+                }
+                break;
+
+            case 6: 
+                switch(conversation.Count)
+                {
+                    case 0:
+                        finishTutorial = true;
+                        break;
+
                 }
                 break;
 
