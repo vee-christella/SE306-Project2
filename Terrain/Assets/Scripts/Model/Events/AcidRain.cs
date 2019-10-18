@@ -31,25 +31,27 @@ public class AcidRain : Event
             {
                 if (tiles[i, j].Building != null)
                 {
+                    if (tiles[i, j].Building.GetType().Name.ToString() == "TownHall")
+                    {
+                        continue;
+                    }
                     Debug.Log("Found a tile with a building");
                     int random = Random.Range(0, 100);
                     // 10% chance to destory building on tile
-                    if (random <= 100)
+                    if (random <= 10)
                     {
                         float buildingGreenGen = tiles[i, j].Building.GenerateGreen;
                         float buildingMoneyGen = tiles[i, j].Building.GenerateMoney;
                         float buildingHappinessGen = tiles[i, j].Building.GenerateHappiness;
 
-                        Game.SellBuilding(tiles[i, j]);
+                        // Game.SellBuilding(tiles[i, j]);
 
-                       /* if (tiles[i,j].removeBuilding())
+                        if (tiles[i, j].removeBuilding())
                         {
                             Game.GenerateGreen = Game.GenerateGreen - buildingGreenGen;
                             Game.GenerateMoney = Game.GenerateMoney - buildingMoneyGen;
                             Game.GenerateHappiness = Game.GenerateHappiness - buildingHappinessGen;
                         }
-                        */
-                        
                     }
                     
                 }

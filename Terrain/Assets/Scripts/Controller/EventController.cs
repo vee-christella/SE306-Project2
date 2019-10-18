@@ -34,7 +34,7 @@ public class EventController : MonoBehaviour
 
         if (gameEvent.Type == Event.EventType.BuildingDestroyer)
         {
-            if (game.Money < 200 || (game.Money + game.MoneyDelta < 200))
+            if (game.Money < 200 || (game.Money + game.MoneyDelta < 0))
             {
                 yesButton.interactable = false;
             }
@@ -51,7 +51,7 @@ public class EventController : MonoBehaviour
             buildingDestroyedPanel.SetActive(false);
         }
 
-        eventInfo.text = "A  " + gameEvent.GetType().Name.ToString() + " has occurred! \n";
+        eventInfo.text = "A  " + gameEvent.GetType().Name.ToString() + " has occurred! \n" + gameEvent.Description;
 
         moneyEffect.text = DisplayEffect(gameEvent.MoneyDelta) + gameEvent.MoneyDelta;
         greenPointsEffect.text = DisplayEffect(gameEvent.GreenPointDelta) + gameEvent.GreenPointDelta;
@@ -69,7 +69,8 @@ public class EventController : MonoBehaviour
 
     public void RemoveDestroyerPopup()
     {
-        Game.GameEvent.TileDelta(Game.Tiles, true);
+        game.GameEvent.TileDelta(Game.Tiles, true);
+        GameController.SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
         eventPopupPanel.SetActive(false);
     }
 

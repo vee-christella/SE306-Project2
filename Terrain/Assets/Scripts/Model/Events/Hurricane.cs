@@ -29,10 +29,15 @@ public class Hurricane : Event
             {
                 if (tiles[i, j].Building != null)
                 {
+                    if (tiles[i, j].Building.GetType().Name.ToString() == "TownHall")
+                    {
+                        continue;
+                    }
+
                     Debug.Log("Found a tile with a building");
                     int random = Random.Range(0, 100);
                     // 5% chance to destory building on tile
-                    if (random <= 5)
+                    if (random <= 10)
                     {
                         float buildingGreenGen = tiles[i, j].Building.GenerateGreen;
                         float buildingMoneyGen = tiles[i, j].Building.GenerateMoney;

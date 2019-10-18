@@ -286,20 +286,6 @@ public class Game
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
-
-        if (currentTurn == 1)
-        {
-            return new AcidRain(this);
-        }
-        else if (currentTurn == 2)
-        {
-            return new Flood(this);
-        }
-        else
-        {
-            return new AcidRain(this);
-        }
-
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability
