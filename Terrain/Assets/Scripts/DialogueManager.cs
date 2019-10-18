@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 
@@ -19,6 +20,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject greenArrow;
     public GameObject happiArrow;
     public GameObject turnsArrow;
+
+    public GameObject endTurnButton;
+    public GameObject turnGenerationArrow;
+    public GameObject endTurnsArrow;
 
     public GameObject plains;
     public GameObject mountains;
@@ -85,7 +90,9 @@ public class DialogueManager : MonoBehaviour
 
         switch (tutorialStage)
         {
+
             case 2:
+                endTurnButton.GetComponent<Button>().interactable = false;
                 switch (conversation.Count)
                 {
                     case 12:
@@ -118,6 +125,7 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case 3:
+                endTurnButton.GetComponent<Button>().interactable = false;
                 switch (conversation.Count)
                 {
                     case 5:
@@ -141,12 +149,29 @@ public class DialogueManager : MonoBehaviour
                 }
                 break;
 
-            case 4: 
-                switch(conversation.Count)
+            case 4:
+                endTurnButton.GetComponent<Button>().interactable = false;
+                switch (conversation.Count)
                 {
                     case 1:
                     continueButton.SetActive(false);
                     break;
+                }
+                break;
+
+            case 5:
+                endTurnButton.GetComponent<Button>().interactable = true;
+                switch(conversation.Count)
+                {
+                    case 2:
+                        turnGenerationArrow.SetActive(true);
+                        break;
+
+                    case 1:
+                        turnGenerationArrow.SetActive(false);
+                        endTurnsArrow.SetActive(true);
+                        continueButton.SetActive(false);
+                        break;
                 }
                 break;
 

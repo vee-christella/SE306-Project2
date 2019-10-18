@@ -49,6 +49,15 @@ public class TutorialController : MonoBehaviour
                 }
                 break;
 
+            case 5: 
+                if(GameController.Instance.Game.CurrentTurn == 1)
+                {
+                    tutorialIndex++;
+                    Debug.Log("Tutorial 6 - complete!");
+                }
+                break;
+
+
         }
 
         }
