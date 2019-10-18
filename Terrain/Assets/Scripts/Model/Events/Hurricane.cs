@@ -6,6 +6,7 @@ public class Hurricane : Event
 {
     private double probability;
 
+
     public Hurricane(Game game) :base (-5,-1,-5)
     {
         this.Type = EventType.BuildingDestroyer;
@@ -17,7 +18,7 @@ public class Hurricane : Event
 
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
-
+        CostToRepair = 0;
         if (!doDestroyBuildings)
         {
             return;
@@ -36,7 +37,7 @@ public class Hurricane : Event
 
                     Debug.Log("Found a tile with a building");
                     int random = Random.Range(0, 100);
-                    // 5% chance to destory building on tile
+                    // 10% chance to destory building on tile
                     if (random <= 10)
                     {
                         float buildingGreenGen = tiles[i, j].Building.GenerateGreen;
@@ -45,6 +46,8 @@ public class Hurricane : Event
 
                         if (tiles[i, j].removeBuilding())
                         {
+                            CostToRepair = CostToRepair + Mathf.Floor((tiles[i, j].Building.InitialBuildMoney / 5));
+
                             Game.GenerateGreen = Game.GenerateGreen - buildingGreenGen;
                             Game.GenerateMoney = Game.GenerateMoney - buildingMoneyGen;
                             Game.GenerateHappiness = Game.GenerateHappiness - buildingHappinessGen;

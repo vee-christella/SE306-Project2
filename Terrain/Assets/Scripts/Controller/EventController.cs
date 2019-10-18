@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class EventController : MonoBehaviour
 {
@@ -14,27 +15,31 @@ public class EventController : MonoBehaviour
 
     public Button yesButton;
     public Button closeButton;
+
     private Game game;
 
     public TextMeshProUGUI eventInfo;
     public TextMeshProUGUI moneyEffect;
     public TextMeshProUGUI greenPointsEffect;
     public TextMeshProUGUI happinessEffect;
+    public TextMeshProUGUI costToRepairEffect;
 
     public Game Game { get => game; set => game = value; }
     public GameController GameController { get => gameController; set => gameController = value; }
 
     public EventController() {
-    }
 
+    }
 
     public void DisplayEventPopup()
     {
+
+        // cost to repair is 20%  of building costs 
         Event gameEvent = Game.GameEvent;
 
         if (gameEvent.Type == Event.EventType.BuildingDestroyer)
         {
-            if (game.Money < 200 || (game.Money + game.MoneyDelta < 0))
+            if (game.Money < gameEvent.CostToRepair || (game.Money + game.MoneyDelta < 0))
             {
                 yesButton.interactable = false;
             }
@@ -56,6 +61,7 @@ public class EventController : MonoBehaviour
         moneyEffect.text = DisplayEffect(gameEvent.MoneyDelta) + gameEvent.MoneyDelta;
         greenPointsEffect.text = DisplayEffect(gameEvent.GreenPointDelta) + gameEvent.GreenPointDelta;
         happinessEffect.text = DisplayEffect(gameEvent.HappinessDelta) + gameEvent.HappinessDelta;
+        costToRepairEffect.text = gameEvent.CostToRepair.ToString();
 
         eventPopupPanel.SetActive(true);
     }
@@ -76,7 +82,7 @@ public class EventController : MonoBehaviour
 
     public void FixBuildings()
     {
-        game.Money = game.Money - 200;
+        game.Money = game.Money - game.GameEvent.CostToRepair;
         game.GameEvent.TileDelta(game.Tiles, false);
         gameController.SetMetrics(game.Money, game.Green, game.Happiness);
         eventPopupPanel.SetActive(false);

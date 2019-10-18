@@ -12,6 +12,7 @@ public abstract class Event
 
     private int greenPointDelta;
     private int happinessDelta;
+    private float costToRepair;
     private int moneyDelta;
     private EventType type;
     private string description;
@@ -30,6 +31,7 @@ public abstract class Event
     public string Description { get => description; set => description = value; }
     public EventType Type { get => type; set => type = value; }
     public Game Game { get => game; set => game = value; }
+    public float CostToRepair { get => costToRepair; set => costToRepair = value; }
 
     public abstract void TileDelta(Tile[,] tiles, bool doDestoryBuildings);
 

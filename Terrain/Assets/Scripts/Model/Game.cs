@@ -286,15 +286,15 @@ public class Game
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
+        return new AcidRain(this);
+
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability
-
         List<Event> potentionalEvents = new List<Event>();
         float badEventProbability = 0;
         float goodEventProbability;
         float difficultyOffset = 0.1f;
-
 
  //       switch (gameDifficulty)
  //       {
@@ -311,9 +311,8 @@ public class Game
  //               difficultyOffset = 0.1f;
  //               break;
  //       }
-
-
-        goodEventProbability = (green / 2000) * 100;
+        
+        goodEventProbability = Mathf.Floor((green / 2000 * 100)/2f);
 
         // check green points to account for negative value
         if (green < 0)
@@ -340,9 +339,7 @@ public class Game
         // good events take priority and the chance of a good event increases the more green points the user has
         if (randomNum < goodEventProbability)
         {
-
             potentionalEvents.Add(goodEventList[Random.Range(0, goodEventList.Count)]);
-            // return random good event 
         }
         else
         {
@@ -380,6 +377,7 @@ public class Game
         badEventList.Add(new HeatWave(this));
 
         goodEventList.Add(new ForestSpawn(this));
+        goodEventList.Add(new Circus(this));
     }
 
     // Change the metrics with regards to the effects of the building
@@ -420,11 +418,8 @@ public class Game
         Debug.Log("Modifier: " + modifier);
 
 
-
         GameController.Instance.SetMetrics(Money, Green, Happiness);
         GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);
-
-
     }
     
     public void StillBuildable(Tile tile)
