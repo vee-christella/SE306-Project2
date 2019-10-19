@@ -71,4 +71,10 @@ public class TutorialController : MonoBehaviour
         }
 
         }
+
+        public void BackToMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
+
+}

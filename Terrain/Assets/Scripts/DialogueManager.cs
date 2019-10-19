@@ -202,6 +202,7 @@ public class DialogueManager : MonoBehaviour
                         break;
 
                     case 0:
+                        Debug.Log("GONNA FINISH");
                         finishTutorial = true;
                         break;
 
@@ -209,6 +210,7 @@ public class DialogueManager : MonoBehaviour
                 break;
 
         }
+
 
         string sentence = conversation.Dequeue();
         // Make sure that if the user clicks "next", the last
