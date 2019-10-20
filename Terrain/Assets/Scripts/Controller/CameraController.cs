@@ -13,8 +13,9 @@ public class CameraController : MonoBehaviour
 
     public float lookSpeedH = 2f;
     public float lookSpeedV = 2f;
-    public float zoomSpeed = 2f;
+    public float zoomSpeed = 1f;
     public float dragSpeed = 6f;
+    public float wasdSpeed = 0.5f;
 
     private float yaw = 10f;
     private float pitch = 25f;
@@ -47,26 +48,54 @@ public class CameraController : MonoBehaviour
         // w to move camera forward
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            // transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            transform.TransformDirection(Vector3.forward);
+            Vector3 Forward = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
+            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
+            Forward.y = 0;
+            transform.position += Forward + Right;
         }
         // s to move camera backwards
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            transform.TransformDirection(Vector3.back);
+            Vector3 Backward = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
+            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
+            Backward.y = 0;
+            transform.position += Backward + Right;
         }
         // a to move camera left
         else if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            // transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            transform.TransformDirection(Vector3.left);
+            Vector3 Left = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
+            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
+            Left.y = 0;
+            transform.position += Left + Right;
         }
         // d to move camera right
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            // transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            transform.TransformDirection(Vector3.right);
+            Vector3 Rite = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
+            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
+            Rite.y = 0;
+            transform.position += Rite + Right;
         }
 
         // Zoom in and out with Mouse Wheel
-        transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
+        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
+        if ((transform.position.y > 1 && Input.GetAxis("Mouse ScrollWheel") > 0) || (transform.position.y < 15 && Input.GetAxis("Mouse ScrollWheel") < 0))
+        {
+            transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
+
+            if (transform.position.y < 1)
+            {
+                transform.position = new Vector3(transform.position.x, 1, transform.position.y);
+            }
+        }
     }
 
 }
