@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
         Instance = this;
 
         Game = new Game(15, 15);
+        game.Difficulty = Game.GameDifficulty.Medium;
         Game.IsEnd = false;
         Game.HasStarted = false;
 
@@ -185,7 +186,7 @@ public class GameController : MonoBehaviour
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetDelta(0, 0, 0);
 
-        game.InitialiseTurns(0, 50);
+        game.InitialiseTurns(0, 100);
         maxTurn.text = game.MaxTurns.ToString();
         SetTurn(0);
     }

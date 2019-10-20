@@ -15,9 +15,9 @@ public class Tile
 
     private List<string> waterBuildable = new List<string>() { "Hydro Plant", null };
     private List<string> desertBuildable = new List<string>(){"National Park", "Nuclear Plant", "Oil Refinery",
-    "Race Track", "Wind Turbine", "Solar Farm", "Factory", "Recycling Plant", null};
+    "Race Track", "Solar Farm", "Factory", "Recycling Plant", null};
     private List<string> plainBuildable = new List<string>(){"Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recyling Plant",
+    "Race Track", "Wind Turbine", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recyling Plant",
     "Vegetable Farm", null};
     private List<string> mountainBuildable = new List<string>() {"Coal Mine" };
 

@@ -6,7 +6,7 @@ public class BeeFarm : Building
 {
     // Initialise stats for each Bee Farm building
 
-    public BeeFarm() : base(14, -80, 0, 0, 5, -1, 0, 3)
+    public BeeFarm() : base(14, -80, 0, 0, 7, -1, 0, 3)
     {   
         this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "Bee Farm";

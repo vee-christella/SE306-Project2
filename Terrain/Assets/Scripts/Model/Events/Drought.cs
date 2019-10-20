@@ -26,12 +26,15 @@ public class Drought : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Water)
                 {
-                    //Debug.Log("Found a tile with water");
-                    int random = Random.Range(0, 2);
+                    int random = Random.Range(0, 4);
                     // 50% chance to change tiles to desert
                     if (random == 1)
                     {
                         tiles[i, j].Type = Tile.TileType.Desert;
+                    }
+                    else if (random == 0)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Plain;
                     }
                 }
             }

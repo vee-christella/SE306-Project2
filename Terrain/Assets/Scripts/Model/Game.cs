@@ -21,7 +21,7 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
-    GameDifficulty gameDifficulty;
+    GameDifficulty difficulty;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
@@ -58,14 +58,15 @@ public class Game
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
     public Tile[,] Tiles { get => tiles; set => tiles = value; }
 
+    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
+    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
+    public GameDifficulty Difficulty { get => difficulty; set => difficulty = value; }
+
     public enum GameDifficulty
     {
         Easy, Medium, Hard
     };
-
-    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
-    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
-    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
 
     public Game(int rows, int columns)
     {
@@ -205,6 +206,15 @@ public class Game
             case "Hydro Plant":
                 building = new Hydro();
                 break;
+            case "Factory":
+                building = new Factory();
+                break;
+            case "Greenhouse":
+                building = new Greenhouse();
+                break;
+            case "Vegetable Farm":
+                building = new VegetableFarm();
+                break;
             case "Coal Mine":
                 building = new CoalMine();
                 break;
@@ -304,6 +314,7 @@ public class Game
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
+
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability
@@ -312,7 +323,7 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
-        switch (gameDifficulty)
+        switch (Difficulty)
        {
             case GameDifficulty.Easy:
                 difficultyOffset = 0.1f;
@@ -344,12 +355,30 @@ public class Game
         // max probability of random events occuring is 80%
         badEventProbability = Mathf.FloorToInt(((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns)) * 100);
 
+        switch (Difficulty)
+        {
+            case GameDifficulty.Easy:
+                break;
+            case GameDifficulty.Medium:
+                if (badEventProbability <= 5) {
+                    badEventProbability = 5;
+                }
+                difficultyOffset = 0.2f;
+                break;
+            case GameDifficulty.Hard:
+                if (badEventProbability <= 10)
+                {
+                    badEventProbability = 10;
+                }
+                break;
+        }
+
         if (badEventProbability > 100)
         {
             goodEventProbability = 0;
             badEventProbability = 80;
         }
-
+       
         int randomNum = Random.Range(1, 101);
 
         // good events take priority and the chance of a good event increases the more green points the user has
@@ -403,7 +432,6 @@ public class Game
     // that has just been placed.
     public void UpdateMetrics(Building building)
     {
-
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
@@ -421,7 +449,6 @@ public class Game
             Happiness += building.InitialBuildHappiness;
             
         }
-
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;

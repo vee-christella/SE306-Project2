@@ -5,7 +5,7 @@ using UnityEngine;
 public class CoalMine : Building
 {
     // Initialise stats for each Coal Mine building
-    public CoalMine() : base(20, -100, -10, 0, 12, -10, 0, 3)
+    public CoalMine() : base(20, -100, -10, 0, 17, -10, 0, 3)
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Coal Mine";
