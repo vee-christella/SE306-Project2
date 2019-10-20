@@ -247,7 +247,6 @@ public class Game
         {
             if (tile.placeBuilding(building))
             {
-                Debug.Log("==== Game not null = " + building != null);
                 buildings[tile.X, tile.Z] = building;
                 UpdateMetrics(building);
                 if(buildingType == "Oil Refinery"){

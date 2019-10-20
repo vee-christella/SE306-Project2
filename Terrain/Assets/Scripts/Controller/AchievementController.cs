@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class AchievementController : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class AchievementController : MonoBehaviour
     public TextMeshProUGUI achievementDesc;
     public GameObject achievementPrefab;
     private System.Action popup;
+    public GameObject achievementsPanel;
 
     private void Start()
     {
-        // PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         new AchievementManager();
         Achievement[] listOfAchievements = AchievementManager.Instance.achievements;
         foreach(Achievement achievement in AchievementManager.Instance.achievements) {
@@ -22,7 +24,7 @@ public class AchievementController : MonoBehaviour
             CreateAchievement(achievement.AchievementRef, achievement.Title, achievement.HowToComplete, achievement.CurrentCount + " out of " +
             achievement.CountToComplete);
         }
-
+        achievementsPanel.SetActive(false);
     }
     public void CreateAchievement(GameObject achievement, string title, string description, string progress)
     {
@@ -38,12 +40,12 @@ public class AchievementController : MonoBehaviour
     }
     void ActivatePopUp(Achievement achievement)
     {
+        achievement.AchievementRef.transform.GetChild(3).GetComponent<Image>().enabled = true;
         Debug.Log("Achievement!!!");
         achievementTitle.text = "Achievement complete: " + achievement.Title;
         achievementDesc.text = achievement.Blurb;
         achievementPopup.SetActive(true);
     }
-
     public void ClosePopUp()
     {
         achievementPopup.SetActive(false);
