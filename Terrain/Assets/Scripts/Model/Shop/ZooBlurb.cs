@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ZooBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    Forest forest = new Forest();
+    Zoo zoo = new Zoo();
     public Text blurb;
     public TextMeshProUGUI buildingName;
     public TextMeshProUGUI coinMetric;
@@ -23,26 +23,26 @@ public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+forest.InitialBuildMoney.ToString();
-        if(forest.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+forest.InitialBuildGreen.ToString();
+        goldCost.text = " "+zoo.InitialBuildMoney.ToString();
+        if(zoo.InitialBuildGreen > 0){
+            greenPointsCost.text = " +"+zoo.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+forest.InitialBuildGreen.ToString();
+            greenPointsCost.text = " "+zoo.InitialBuildGreen.ToString();
         }
-        if(forest.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+forest.InitialBuildHappiness.ToString()+"%";
+        if(zoo.InitialBuildHappiness > 0){
+            happinessCost.text = " +"+zoo.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+forest.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = " "+zoo.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }
     
     public void OnPointerEnter(PointerEventData pointerEventData){
-        blurb.text = forest.Blurb;
-        buildingName.text = forest.Name;
-        coinMetric.text = forest.GenerateMoney.ToString() + " / turn";
-        greenMetric.text = forest.GenerateGreen.ToString() + " / turn";
-        happinessMetric.text = forest.GenerateHappiness.ToString() + " / turn";
+        blurb.text = zoo.Blurb;
+        buildingName.text = zoo.Name;
+        coinMetric.text = zoo.GenerateMoney.ToString() + " per turn";
+        greenMetric.text = zoo.GenerateGreen.ToString() + " per turn";
+        happinessMetric.text = zoo.GenerateHappiness.ToString() + " per turn";
         panel.SetActive(true);
     }
 

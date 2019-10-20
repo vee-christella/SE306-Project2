@@ -118,6 +118,23 @@ public class Game
         MaxTurns = maxTurn;
     }
 
+    public void greenCheat()
+    {
+        GreenDelta = 1000;
+        GenerateGreen = 1000;
+    }
+
+    public void loseCheat()
+    {
+        MoneyDelta = -1000;
+        GenerateMoney = -1000;
+    }
+
+    public void happinessCheat()
+    {
+        GenerateHappiness = 100;
+    }
+
     /* This method proceeds with the next turn after the user clicks the 
      * end turn button. It increments the accumulated points and shows it on 
      * the metrics
@@ -138,6 +155,7 @@ public class Game
 
         Money = Money + moneyDelta;
         Green = Green + greenDelta;
+        Debug.Log(greenDelta);
 
 
         // Check if the user has won the game by reaching the number of green
@@ -512,7 +530,6 @@ public class Game
             moneyDelta = GenerateMoney * (1 / modifier);
         }
 
-
         if (GenerateGreen > 0)
         {
             greenDelta = GenerateGreen * modifier;
@@ -520,6 +537,7 @@ public class Game
         else
         {
             greenDelta = GenerateGreen * (1 / modifier);
+            Debug.Log("greendelta middle: " + greenDelta);
         }
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);

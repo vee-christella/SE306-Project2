@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class FactoryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    Forest forest = new Forest();
+    Factory factory = new Factory();
     public Text blurb;
     public TextMeshProUGUI buildingName;
     public TextMeshProUGUI coinMetric;
@@ -23,26 +23,26 @@ public class ForestBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+forest.InitialBuildMoney.ToString();
-        if(forest.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+forest.InitialBuildGreen.ToString();
+        goldCost.text = " "+factory.InitialBuildMoney.ToString();
+        if(factory.InitialBuildGreen > 0){
+            greenPointsCost.text = " +"+factory.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+forest.InitialBuildGreen.ToString();
+            greenPointsCost.text = " "+factory.InitialBuildGreen.ToString();
         }
-        if(forest.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+forest.InitialBuildHappiness.ToString()+"%";
+        if(factory.InitialBuildHappiness > 0){
+            happinessCost.text = " +"+factory.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+forest.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = " "+factory.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }
     
     public void OnPointerEnter(PointerEventData pointerEventData){
-        blurb.text = forest.Blurb;
-        buildingName.text = forest.Name;
-        coinMetric.text = forest.GenerateMoney.ToString() + " / turn";
-        greenMetric.text = forest.GenerateGreen.ToString() + " / turn";
-        happinessMetric.text = forest.GenerateHappiness.ToString() + " / turn";
+        blurb.text = factory.Blurb;
+        buildingName.text = factory.Name;
+        coinMetric.text = factory.GenerateMoney.ToString() + " per turn";
+        greenMetric.text = factory.GenerateGreen.ToString() + " per turn";
+        happinessMetric.text = factory.GenerateHappiness.ToString() + " per turn";
         panel.SetActive(true);
     }
 

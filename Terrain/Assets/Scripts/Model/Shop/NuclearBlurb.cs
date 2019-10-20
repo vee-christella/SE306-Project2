@@ -40,9 +40,9 @@ public class NuclearBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = nuclear.Blurb;
         buildingName.text = nuclear.Name;
-        coinMetric.text = nuclear.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = nuclear.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = nuclear.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = nuclear.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = nuclear.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = nuclear.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

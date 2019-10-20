@@ -40,9 +40,9 @@ public class MovieTheatreBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = movieTheatre.Blurb;
         buildingName.text = movieTheatre.Name;
-        coinMetric.text = movieTheatre.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = movieTheatre.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = movieTheatre.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = movieTheatre.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = movieTheatre.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = movieTheatre.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 
