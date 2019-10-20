@@ -70,6 +70,34 @@ public class Game
 
     public Game(int rows, int columns)
     {
+        /*
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 0:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                Map = PrototypeLevel.Arr;
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                break;
+            default:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+
+        }
+        */
+
+
         this.isEnd = false;
         this.currentTurn = 0;
 
@@ -302,7 +330,24 @@ public class Game
     {
         Debug.Log("Yeet");
         Building building = tile.Building;
-        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        float CostToSell;
+
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 1:
+                CostToSell = building.InitialBuildMoney * (float)0.25 * -1;//
+                break;
+            case 2:
+                CostToSell = building.InitialBuildMoney * (float)0.2 * -1;//
+                break;
+            case 3:
+                CostToSell = building.InitialBuildMoney * (float)0.1 * -1;//
+                break;
+            default:
+                CostToSell = building.InitialBuildMoney * (float)0.1 * -1;//
+                break;
+        }
+
         if (tile.removeBuilding())
         {
             buildings[tile.X, tile.Y] = null;
