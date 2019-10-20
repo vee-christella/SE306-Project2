@@ -14,11 +14,10 @@ public class CameraController : MonoBehaviour
     public float lookSpeedH = 2f;
     public float lookSpeedV = 2f;
     public float zoomSpeed = 1f;
-    public float dragSpeed = 6f;
-    public float wasdSpeed = 0.5f;
-
-    private float yaw = 10f;
+    public float rotateSpeed = 80f;
+    public float wasdSpeed = 0.1f;
     private float pitch = 25f;
+    private float yaw = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,68 +32,62 @@ public class CameraController : MonoBehaviour
         // Look around with Right Mouse
         if (Input.GetMouseButton(1))
         {
-            yaw += lookSpeedH * Input.GetAxis("Mouse X");
-            pitch -= lookSpeedV * Input.GetAxis("Mouse Y");
+            Vector3 rotation = transform.eulerAngles;
+            pitch = rotation.x - lookSpeedV * Input.GetAxis("Mouse Y");
+            yaw = rotation.y + lookSpeedH * Input.GetAxis("Mouse X");
 
-            transform.eulerAngles = new Vector3(pitch, yaw, 0f);
-        }
-
-        // Drag camera around with Middle Mouse
-        if (Input.GetMouseButton(2))
-        {
-            transform.Translate(-Input.GetAxisRaw("Mouse X") * Time.deltaTime * dragSpeed, -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * dragSpeed, 0);
+            transform.eulerAngles = new Vector3(pitch, yaw, rotation.z);
         }
 
-        // w to move camera forward
-        if (Input.GetKey(KeyCode.W))
+        // Move camera forward/back/left/right with wasd respectively
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            // transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            transform.TransformDirection(Vector3.forward);
-            Vector3 Forward = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
-            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
-            Forward.y = 0;
-            transform.position += Forward + Right;
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.TransformDirection(Vector3.forward);
+
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                transform.TransformDirection(Vector3.back);
+
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                transform.TransformDirection(Vector3.left);
+
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                transform.TransformDirection(Vector3.right);
+
+            }
+
+            Vector3 forwardback = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
+            Vector3 leftright = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
+            forwardback.y = 0;
+            transform.position += forwardback + leftright;
         }
-        // s to move camera backwards
-        else if (Input.GetKey(KeyCode.S))
+
+        // q to rotate camera left
+        if (Input.GetKey(KeyCode.Q))
         {
-            transform.TransformDirection(Vector3.back);
-            Vector3 Backward = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
-            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
-            Backward.y = 0;
-            transform.position += Backward + Right;
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y -= rotateSpeed * Time.deltaTime;
+            transform.eulerAngles = rotation;
         }
-        // a to move camera left
-        else if (Input.GetKey(KeyCode.A))
+        // e to rotate camera right
+        else if (Input.GetKey(KeyCode.E))
         {
-            // transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            transform.TransformDirection(Vector3.left);
-            Vector3 Left = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
-            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
-            Left.y = 0;
-            transform.position += Left + Right;
-        }
-        // d to move camera right
-        else if (Input.GetKey(KeyCode.D))
-        {
-            // transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            transform.TransformDirection(Vector3.right);
-            Vector3 Rite = transform.forward * Input.GetAxis("Vertical") * wasdSpeed;
-            Vector3 Right = transform.right * Input.GetAxis("Horizontal") * wasdSpeed;
-            Rite.y = 0;
-            transform.position += Rite + Right;
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y += rotateSpeed * Time.deltaTime;
+            transform.eulerAngles = rotation;
         }
 
         // Zoom in and out with Mouse Wheel
-        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         if ((transform.position.y > 1 && Input.GetAxis("Mouse ScrollWheel") > 0) || (transform.position.y < 15 && Input.GetAxis("Mouse ScrollWheel") < 0))
         {
             transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
-
-            if (transform.position.y < 1)
-            {
-                transform.position = new Vector3(transform.position.x, 1, transform.position.y);
-            }
         }
     }
 
