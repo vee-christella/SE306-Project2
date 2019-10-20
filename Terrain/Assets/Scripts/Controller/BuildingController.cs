@@ -34,6 +34,7 @@ public class BuildingController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
         // Add models to dictionary for easy access when building
         modelDictionary.Add("AnimalFarm", model_AnimalFarm);
         modelDictionary.Add("BeeFarm", model_BeeFarm);
@@ -53,7 +54,6 @@ public class BuildingController : MonoBehaviour
         modelDictionary.Add("VegetableFarm", model_VegetableFarm);
         modelDictionary.Add("WindTurbine", model_WindTurbine);
         modelDictionary.Add("Zoo", model_Zoo);
-
     }
     void Start()
     {
@@ -71,13 +71,13 @@ public class BuildingController : MonoBehaviour
     {
         // Remove the old building's callback method
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
-        GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
+        GameObject newBuilding = PlaceBuildingOnMap(tile, buildingGO);
         // Add the new building's and callback method
         tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
     }
 
 
-    private GameObject PlaceCubeNear(Tile tile, GameObject building)
+    private GameObject PlaceBuildingOnMap(Tile tile, GameObject building)
     {
         GameObject newBuilding;
         if (tile.Building != null)
@@ -92,24 +92,31 @@ public class BuildingController : MonoBehaviour
         {
             newBuilding = new GameObject();
         }
+
+        // Set the building GameObject's name and position
         newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
         Debug.Log("callback placecubwear called");
+
         // Delete old (possibly empty) building GameObject
         Destroy(building);
 
         return newBuilding;
     }
 
+    /*
+    Shows a preview of the building that the player has selected from the shop at the cursor point.
+    The preview will be green if the building can be built on the tile, and red otherwise.
+    */
     public void ShowBuildingPreview(string name, Vector3 mousePoint)
     {
         // Remove the preview building from where the cursor previously was
-        Destroy(previewBuilding);
+        HideBuildingPreview();
 
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            // Instantiate the preview building GameObject in the world
             string buildingName = resolveBuildingName(name);
-
             previewBuilding = Instantiate(modelDictionary[buildingName]);
             previewBuilding.name = "PreviewBuilding";
 
@@ -132,6 +139,9 @@ public class BuildingController : MonoBehaviour
         }
     }
 
+    /*
+    Remove the preview of the building
+    */
     public void HideBuildingPreview()
     {
         Destroy(previewBuilding);
@@ -164,21 +174,23 @@ public class BuildingController : MonoBehaviour
     }
 
     /*
-    Checks whether the building can be built on the point
+    Returns true if the building can be built on the point, false otherwise.
     */
     private bool canBuildOnPoint(string buildingName, Vector3 point)
     {
-        // Create a temporary building and check if it can be built on the tile at the point
-        if ((GameController.Instance.Game.getTileAt((int)point.x, (int)point.z)) != null){
-            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
-            Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
+        // Get the tile at the specified point
+        Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
 
+        if (tile != null)
+        {
+            // Create a temporary building for the specified building name
+            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
+
+            // Check the building can be built on the tile
             if (tile.IsBuildable(building)) return true;
         }
 
         return false;
     }
-
-
 
 }

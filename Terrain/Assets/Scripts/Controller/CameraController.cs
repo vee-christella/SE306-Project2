@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /*
-Retrieved from https://answers.unity.com/questions/666905/in-game-camera-movement-like-editor.html
+Adapted from https://answers.unity.com/questions/666905/in-game-camera-movement-like-editor.html
 
 Controller for the main camera
 */
@@ -20,9 +20,9 @@ public class CameraController : MonoBehaviour
     private float pitch = 25f;
     private float yaw = 10f;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Set the starting camera position/angle
         transform.position = new Vector3(6, 4, -2);
         transform.eulerAngles = new Vector3(pitch, yaw, 0);
     }
