@@ -58,7 +58,7 @@ public class EventController : MonoBehaviour
             buildingDestroyedPanel.SetActive(false);
         }
 
-        eventInfo.text = "A  " + gameEvent.GetType().Name.ToString() + " has occurred! \n" + gameEvent.Description;
+        eventInfo.text = gameEvent.Description;
 
         moneyEffect.text = DisplayEffect(gameEvent.MoneyDelta) + gameEvent.MoneyDelta;
         greenPointsEffect.text = DisplayEffect(gameEvent.GreenPointDelta) + gameEvent.GreenPointDelta;
