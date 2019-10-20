@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour
     {
         // Look around with Right Mouse
         if (Input.GetMouseButton(1))
-        {     
+        {
             yaw += lookSpeedH * Input.GetAxis("Mouse X");
             pitch -= lookSpeedV * Input.GetAxis("Mouse Y");
 
@@ -42,6 +42,27 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButton(2))
         {
             transform.Translate(-Input.GetAxisRaw("Mouse X") * Time.deltaTime * dragSpeed, -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * dragSpeed, 0);
+        }
+
+        // w to move camera forward
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        }
+        // s to move camera backwards
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        }
+        // a to move camera left
+        else if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        }
+        // d to move camera right
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         }
 
         // Zoom in and out with Mouse Wheel
