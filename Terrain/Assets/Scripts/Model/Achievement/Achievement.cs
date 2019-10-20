@@ -14,6 +14,7 @@ public class Achievement
     bool achievementComplete = false;
     static Achievement[] achievements;
     Action<Achievement> callbackAchievementCount;
+    public GameObject achievementRef;
 
     public Achievement(AchievementType type) {
         this.type = type;
@@ -36,6 +37,7 @@ public class Achievement
     public bool AchievementComplete { get => achievementComplete; set => achievementComplete = value; }
     public Achievement[] Achievements { get => achievements; set => achievements = value; }
     public Action<Achievement> CallbackAchievementCount { get => callbackAchievementCount; }
+    public GameObject AchievementRef {get => achievementRef; set=> achievementRef = value; }
 
     public static Achievement getThis(AchievementType type) {
         return achievements[(int)type];
