@@ -7,8 +7,9 @@ using TMPro;
 using UnityEditor;
 #endif
 
-
-
+/*
+This class controls the logic and data related to the game.
+*/
 public class Game
 {
     int rows;
@@ -21,6 +22,10 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
+    public enum GameDifficulty
+    {
+        Easy, Medium, Hard
+    };
     GameDifficulty gameDifficulty;
     Event gameEvent;
     float currentTurn;
@@ -28,19 +33,16 @@ public class Game
     float maxGreen;
     bool isEnd = false;
     bool isVictory;
-
     List<Event> goodEventList = new List<Event>();
     List<Event> badEventList = new List<Event>();
     bool isUnhappy = false;
     float moneyDelta;
     float greenDelta;
     bool hasStarted = false;
-
     public float modifier = 1;
     float prevMoney;
     float prevHappiness;
     GameObject errorMessage;
-
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
@@ -57,12 +59,6 @@ public class Game
     public bool IsVictory { get => isVictory; set => isVictory = value; }
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
     public Tile[,] Tiles { get => tiles; set => tiles = value; }
-
-    public enum GameDifficulty
-    {
-        Easy, Medium, Hard
-    };
-
     public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
     public float GreenDelta { get => greenDelta; set => greenDelta = value; }
     public bool HasStarted { get => hasStarted; set => hasStarted = value; }
@@ -74,7 +70,7 @@ public class Game
 
         this.rows = rows;
         this.columns = columns;
-        
+
         Tiles = new Tile[rows, columns];
         buildings = new Building[rows, columns];
 
@@ -85,7 +81,7 @@ public class Game
         {
             for (int z = 0; z < columns; z++)
             {
-            
+
                 Debug.Log("game created");
                 tiles[x, z] = new Tile(this, x, z);
                 tiles[x, z].registerMethodCallbackTypeChanged(StillBuildable);
@@ -197,50 +193,54 @@ public class Game
         this.IsVictory = isVictory;
     }
 
-    public Building addBuildingToTile(string buildingType, Tile tile)
+    public Building addBuildingToTile(string buildingName, Tile tile)
     {
-        Building building = null;
-        switch (buildingType)
-        {
-            case "Hydro Plant":
-                building = new Hydro();
-                break;
-            case "Coal Mine":
-                building = new CoalMine();
-                break;
-            case "Zoo":
-                building = new Zoo();
-                break;
-            case "Wind Turbine":
-                building = new WindTurbine();
-                break;
-            case "Solar Farm":
-                building = new SolarFarm();
-                break;
-            case "Race Track":
-                building = new RaceTrack();
-                break;
-            case "Oil Refinery":
-                building = new OilRefinery();
-                break;
-            case "Nuclear Plant":
-                building = new Nuclear();
-                break;
-            case "National Park":
-                building = new NationalPark();
-                break;
-            case "Movie Theatre":
-                building = new MovieTheatre();
-                break;
-            case "Forest":
-                building = new Forest();
-                break;
-            case "Town Hall":
-                building = new TownHall();
-                break;
-            default:
-                return null;
-        }
+        string buildingClassName = Building.resolveBuildingClassName(buildingName);
+
+        // Create the building object for the specified building class name
+        Building building = (Building)System.Activator.CreateInstance(System.Type.GetType(buildingClassName));
+        
+        // switch (buildingType)
+        // {
+        //     case "Hydro Plant":
+        //         building = new Hydro();
+        //         break;
+        //     case "Coal Mine":
+        //         building = new CoalMine();
+        //         break;
+        //     case "Zoo":
+        //         building = new Zoo();
+        //         break;
+        //     case "Wind Turbine":
+        //         building = new WindTurbine();
+        //         break;
+        //     case "Solar Farm":
+        //         building = new SolarFarm();
+        //         break;
+        //     case "Race Track":
+        //         building = new RaceTrack();
+        //         break;
+        //     case "Oil Refinery":
+        //         building = new OilRefinery();
+        //         break;
+        //     case "Nuclear Plant":
+        //         building = new Nuclear();
+        //         break;
+        //     case "National Park":
+        //         building = new NationalPark();
+        //         break;
+        //     case "Movie Theatre":
+        //         building = new MovieTheatre();
+        //         break;
+        //     case "Forest":
+        //         building = new Forest();
+        //         break;
+        //     case "Town Hall":
+        //         building = new TownHall();
+        //         break;
+        //     default:
+        //         return null;
+        // }
 
         // Check if funds are sufficient
         if (Money + building.InitialBuildMoney >= 0)
@@ -287,7 +287,7 @@ public class Game
             Money += CostToSell;
             getModifier(building.InitialBuildHappiness * -1);
             Happiness -= building.InitialBuildHappiness;
-            GenerateHappiness -= building.GenerateHappiness;    
+            GenerateHappiness -= building.GenerateHappiness;
             GenerateMoney -= building.GenerateMoney;
             GenerateGreen -= building.GenerateGreen;
 
@@ -313,23 +313,23 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
- //       switch (gameDifficulty)
- //       {
- //           case GameDifficulty.Easy:
- //               difficultyOffset = 0.1f;
- //               break;
- //           case GameDifficulty.Medium:
-//                difficultyOffset = 0.2f;
- //               break;
-//            case GameDifficulty.Hard:
- //               difficultyOffset = 0.3f;
- //               break;
- //           default:
- //               difficultyOffset = 0.1f;
- //               break;
- //       }
-        
-        goodEventProbability = Mathf.Floor((green / 2000 * 100)/2f);
+        //       switch (gameDifficulty)
+        //       {
+        //           case GameDifficulty.Easy:
+        //               difficultyOffset = 0.1f;
+        //               break;
+        //           case GameDifficulty.Medium:
+        //                difficultyOffset = 0.2f;
+        //               break;
+        //            case GameDifficulty.Hard:
+        //               difficultyOffset = 0.3f;
+        //               break;
+        //           default:
+        //               difficultyOffset = 0.1f;
+        //               break;
+        //       }
+
+        goodEventProbability = Mathf.Floor((green / 2000 * 100) / 2f);
 
         // check green points to account for negative value
         if (green < 0)
@@ -417,7 +417,7 @@ public class Game
         else
         {
             Happiness += building.InitialBuildHappiness;
-            
+
         }
 
 
@@ -436,7 +436,7 @@ public class Game
         GameController.Instance.SetMetrics(Money, Green, Happiness);
         GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);
     }
-    
+
     public void StillBuildable(Tile tile)
     {
         if (tile.Building != null)

@@ -83,7 +83,6 @@ public class BuildingController : MonoBehaviour
         tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
     }
 
-
     /*
     Places the building on the tile in the game world
     */
@@ -125,8 +124,8 @@ public class BuildingController : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             // Instantiate the preview building GameObject in the world
-            string buildingName = resolveBuildingName(name);
-            previewBuilding = Instantiate(modelDictionary[buildingName]);
+            string buildingClassName = Building.resolveBuildingClassName(name);
+            previewBuilding = Instantiate(modelDictionary[buildingClassName]);
             previewBuilding.name = "PreviewBuilding";
 
             // Remove the preview object's box collider to prevent a hover changing its colour
@@ -135,7 +134,7 @@ public class BuildingController : MonoBehaviour
             // Show the preview building on the cursor point
             previewBuilding.transform.position = mousePoint;
 
-            if (canBuildOnPoint(buildingName, mousePoint))
+            if (canBuildOnPoint(buildingClassName, mousePoint))
             {
                 // Set the preview building to a green colour
                 previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
@@ -157,35 +156,9 @@ public class BuildingController : MonoBehaviour
     }
 
     /*
-    Gets the class name of a building based on the "name" of the building
-    */
-    private string resolveBuildingName(string s)
-    {
-        if (s == "Animal Farm") return "AnimalFarm";
-        if (s == "Bee Farm") return "BeeFarm";
-        if (s == "Coal Mine") return "CoalMine";
-        if (s == "Forest") return "Forest";
-        if (s == "Hydro Plant") return "Hydro";
-        if (s == "Movie Theatre") return "MovieTheatre";
-        if (s == "National park") return "NationalPark";
-        if (s == "Nuclear Plant") return "Nuclear";
-        if (s == "Oil Refinery") return "OilRefinery";
-        if (s == "Race Track") return "RaceTrack";
-        if (s == "Recycling Plant") return "RecyclingPlant";
-        if (s == "Solar Farm") return "SolarFarm";
-        if (s == "Town Hall") return "TownHall";
-        if (s == "Vegetable Farm") return "VegetableFarm";
-        if (s == "Wind Turbine") return "WindTurbine";
-        if (s == "Zoo") return "Zoo";
-
-        // Should never return null if MouseController's SetMode_x() methods are implemented correctly
-        return null;
-    }
-
-    /*
     Returns true if the building can be built on the point, false otherwise.
     */
-    private bool canBuildOnPoint(string buildingName, Vector3 point)
+    private bool canBuildOnPoint(string buildingClassName, Vector3 point)
     {
         // Get the tile at the specified point
         Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
@@ -193,7 +166,7 @@ public class BuildingController : MonoBehaviour
         if (tile != null)
         {
             // Create a temporary building for the specified building name
-            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
+            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingClassName));
 
             // Check if the tile already has a building on it
             if (tile.Building != null) return false;

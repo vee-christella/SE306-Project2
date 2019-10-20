@@ -33,7 +33,7 @@ public abstract class Building
     public int Id { get => id; set => id = value; }
     public int TurnsToBuild { get => turnsToBuild; set => turnsToBuild = value; }
     public BuildingType TypeOfBuilding { get => typeOfBuilding; set => typeOfBuilding = value; }
-    public string Name { get => name; set => name = value;  }
+    public string Name { get => name; set => name = value; }
     public string Blurb { get => blurb; set => blurb = value; }
 
 
@@ -77,6 +77,32 @@ public abstract class Building
         this.generateHappiness = genHappiness;
         this.turnsToBuild = buildTime;
 
+    }
+
+    /*
+    Gets the class name of a building based on the "name" of the building
+    */
+    public static string resolveBuildingClassName(string s)
+    {
+        if (s == "Animal Farm") return "AnimalFarm";
+        if (s == "Bee Farm") return "BeeFarm";
+        if (s == "Coal Mine") return "CoalMine";
+        if (s == "Forest") return "Forest";
+        if (s == "Hydro Plant") return "Hydro";
+        if (s == "Movie Theatre") return "MovieTheatre";
+        if (s == "National park") return "NationalPark";
+        if (s == "Nuclear Plant") return "Nuclear";
+        if (s == "Oil Refinery") return "OilRefinery";
+        if (s == "Race Track") return "RaceTrack";
+        if (s == "Recycling Plant") return "RecyclingPlant";
+        if (s == "Solar Farm") return "SolarFarm";
+        if (s == "Town Hall") return "TownHall";
+        if (s == "Vegetable Farm") return "VegetableFarm";
+        if (s == "Wind Turbine") return "WindTurbine";
+        if (s == "Zoo") return "Zoo";
+
+        // Should never return null if MouseController's SetMode_x() methods are implemented correctly
+        return null;
     }
 
     /* This method is called each time a building is to be built on a tile. 
