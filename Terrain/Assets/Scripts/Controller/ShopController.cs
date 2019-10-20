@@ -14,17 +14,21 @@ public class ShopController : MonoBehaviour
     public GameObject RecreationalShop;
     public Button OtherTab;
     public GameObject OtherShop;
-    public void OpenShop()
+    public void OpenShop() 
     {
-        Shop.SetActive(true);
-        Debug.Log("clicked");
-        Time.timeScale = 1;
+        Animator animator = Shop.GetComponent<Animator>();
+        bool isOpen = animator.GetBool("open");
+
+        animator.SetBool("open", true);
     }
 
-    public void CloseShop()
+    public void CloseShop() 
     {
-        Shop.SetActive(false);
-        Time.timeScale = 1;
+        Animator animator = Shop.GetComponent<Animator>();
+        bool isOpen = animator.GetBool("open");
+        
+        animator.SetBool("open", false);
+
     }
 
     public void OpenEnergyGeneratorTab()
