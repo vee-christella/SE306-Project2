@@ -196,7 +196,10 @@ public class BuildingController : MonoBehaviour
             // Create a temporary building for the specified building name
             Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
 
-            // Check the building can be built on the tile
+            // Check if the tile already has a building on it
+            if (tile.Building != null) return false;
+
+            // Check the building can be built on the tile type
             if (tile.IsBuildable(building)) return true;
         }
 
