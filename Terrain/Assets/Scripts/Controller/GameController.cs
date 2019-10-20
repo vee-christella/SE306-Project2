@@ -367,7 +367,6 @@ public class GameController : MonoBehaviour
 
     public void ShowError(string textToShow)
     {
-
         //errorText = (TextMeshProUGUI)errorMessage.GetComponentInChildren(typeof(TextMeshProUGUI), true);
         errorText.text = textToShow;
         errorMessage.SetActive(true);

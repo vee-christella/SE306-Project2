@@ -12,62 +12,60 @@ This class controls the logic and data related to the game.
 */
 public class Game
 {
+    public enum GameDifficulty { Easy, Medium, Hard };
+    GameDifficulty gameDifficulty;
     int rows;
     int columns;
     Tile[,] tiles;
+    Building[,] buildings;
     float money;
     float green;
     float happiness;
+    float prevMoney;
+    float prevHappiness;
+    bool isUnhappy = false;
+    // generateX is the amount generated per turn before happiness modifiers
     float generateMoney;
     float generateGreen;
     float generateHappiness;
-    Building[,] buildings;
-    public enum GameDifficulty
-    {
-        Easy, Medium, Hard
-    };
-    GameDifficulty gameDifficulty;
+    // xDelta is the amount generated per turn after happiness modifiers
+    float moneyDelta;
+    float greenDelta;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
     float maxGreen;
-    bool isEnd = false;
+    bool isEnd;
     bool isVictory;
     List<Event> goodEventList = new List<Event>();
     List<Event> badEventList = new List<Event>();
-    bool isUnhappy = false;
-    float moneyDelta;
-    float greenDelta;
     bool hasStarted = false;
     public float modifier = 1;
-    float prevMoney;
-    float prevHappiness;
     GameObject errorMessage;
 
     public int Rows { get => rows; }
     public int Columns { get => columns; }
+    public Tile[,] Tiles { get => tiles; set => tiles = value; }
     public float Money { get => money; set => money = value; }
     public float Green { get => green; set => green = value; }
     public float Happiness { get => happiness; set => happiness = value; }
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
     public float GenerateHappiness { get => generateHappiness; set => generateHappiness = value; }
+    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
+    public Event GameEvent { get => gameEvent; set => gameEvent = value; }
     public float CurrentTurn { get => currentTurn; set => currentTurn = value; }
     public float MaxTurns { get => maxTurns; set => maxTurns = value; }
     public float MaxGreen { get => maxGreen; set => maxGreen = value; }
     public bool IsEnd { get => isEnd; set => isEnd = value; }
     public bool IsVictory { get => isVictory; set => isVictory = value; }
-    public Event GameEvent { get => gameEvent; set => gameEvent = value; }
-    public Tile[,] Tiles { get => tiles; set => tiles = value; }
-    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
-    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
     public bool HasStarted { get => hasStarted; set => hasStarted = value; }
 
     public Game(int rows, int columns)
     {
         this.isEnd = false;
         this.currentTurn = 0;
-
         this.rows = rows;
         this.columns = columns;
 
@@ -76,20 +74,23 @@ public class Game
 
         InitaliseRandomEventLists();
 
-
+        // Create the game tiles
         for (int x = 0; x < rows; x++)
         {
             for (int z = 0; z < columns; z++)
             {
-
-                Debug.Log("game created");
                 tiles[x, z] = new Tile(this, x, z);
+                // Register a callback method for each tile so that it can be changed dynamically
                 tiles[x, z].registerMethodCallbackTypeChanged(StillBuildable);
             }
         }
+
+        Debug.Log("game created");
     }
 
-
+    /*
+    Gets the tile at the specified (x, z) coordinates on the game map
+    */
     public Tile getTileAt(int x, int z)
     {
         if (x >= rows || x < 0 || z >= columns || z < 0)
@@ -100,6 +101,9 @@ public class Game
         return tiles[x, z];
     }
 
+    /*
+    Sets the inital metrics for money, green points, happiness and the green point goal for winning the game.
+    */
     public void InitialiseMetrics(float money, float green, float happiness, float maxGreen)
     {
         Money = money;
@@ -108,24 +112,36 @@ public class Game
         MaxGreen = maxGreen;
     }
 
+    /*
+    Sets the inital turn number and the maximum number of turns for the game
+    */
     public void InitialiseTurns(float currentTurn, float maxTurn)
     {
         CurrentTurn = currentTurn;
         MaxTurns = maxTurn;
     }
 
+    /*
+    Cheat for getting more green points and a 1000 green point delta
+    */
     public void greenCheat()
     {
         GreenDelta = 1000;
         GenerateGreen = 1000;
     }
 
+    /*
+    Cheat for losing the game
+    */
     public void loseCheat()
     {
         MoneyDelta = -1000;
         GenerateMoney = -1000;
     }
 
+    /*
+    Cheat for getting maximum happiness
+    */
     public void happinessCheat()
     {
         GenerateHappiness = 100;
@@ -140,11 +156,9 @@ public class Game
         this.currentTurn++;
         Debug.Log("turn " + this.currentTurn);
 
-
         getModifier(GenerateHappiness);
 
         Happiness = Happiness + GenerateHappiness;
-
 
         // Increase the metrics
         calculateDelta();
@@ -199,48 +213,6 @@ public class Game
 
         // Create the building object for the specified building class name
         Building building = (Building)System.Activator.CreateInstance(System.Type.GetType(buildingClassName));
-        
-        // switch (buildingType)
-        // {
-        //     case "Hydro Plant":
-        //         building = new Hydro();
-        //         break;
-        //     case "Coal Mine":
-        //         building = new CoalMine();
-        //         break;
-        //     case "Zoo":
-        //         building = new Zoo();
-        //         break;
-        //     case "Wind Turbine":
-        //         building = new WindTurbine();
-        //         break;
-        //     case "Solar Farm":
-        //         building = new SolarFarm();
-        //         break;
-        //     case "Race Track":
-        //         building = new RaceTrack();
-        //         break;
-        //     case "Oil Refinery":
-        //         building = new OilRefinery();
-        //         break;
-        //     case "Nuclear Plant":
-        //         building = new Nuclear();
-        //         break;
-        //     case "National Park":
-        //         building = new NationalPark();
-        //         break;
-        //     case "Movie Theatre":
-        //         building = new MovieTheatre();
-        //         break;
-        //     case "Forest":
-        //         building = new Forest();
-        //         break;
-        //     case "Town Hall":
-        //         building = new TownHall();
-        //         break;
-        //     default:
-        //         return null;
-        // }
 
         // Check if funds are sufficient
         if (Money + building.InitialBuildMoney >= 0)
@@ -382,7 +354,9 @@ public class Game
         }
     }
 
-    // method to create list of all random events
+    /*
+    Creates a list of all random events
+    */
     public void InitaliseRandomEventLists()
     {
         badEventList.Add(new AcidRain(this));
@@ -397,8 +371,10 @@ public class Game
         goodEventList.Add(new Circus(this));
     }
 
-    // Change the metrics with regards to the effects of the building
-    // that has just been placed.
+    /*
+    Changes the metrics with regards to the effects of the building
+    that has just been placed.
+    */
     public void UpdateMetrics(Building building)
     {
 
@@ -417,7 +393,6 @@ public class Game
         else
         {
             Happiness += building.InitialBuildHappiness;
-
         }
 
 
@@ -452,12 +427,13 @@ public class Game
                 GenerateGreen = GenerateGreen + tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney + tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness + tile.Building.GenerateHappiness;
-
             }
         }
     }
 
+    /*
 
+    */
     private void getModifier(float happinessDelta)
     {
         if (Happiness >= 50 && Happiness + happinessDelta < 50)
@@ -537,6 +513,7 @@ public class Game
             greenDelta = GenerateGreen * (1 / modifier);
             Debug.Log("greendelta middle: " + greenDelta);
         }
+
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
     }

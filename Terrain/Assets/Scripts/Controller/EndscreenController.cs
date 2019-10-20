@@ -14,6 +14,7 @@ points when the last turn is ended.
 public class EndscreenController : MonoBehaviour
 {
     public GameObject endScreenUI;
+    public TextMeshProUGUI endTitle;
     public TextMeshProUGUI endText;
 
     void Update()
