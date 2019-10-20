@@ -17,7 +17,7 @@ public class Wildfire : Event
     public double Probability { get => probability; set => probability = value; }
 
 
-//Overwritten method to say only forrests are destroyed
+    //Overwritten method to say only forrests are destroyed
     public override bool typeToDestroy(Tile tile){
         if(tile.Building.GetType().Name.ToString() == "Forest"){
             return true;

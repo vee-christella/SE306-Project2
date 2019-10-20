@@ -49,7 +49,6 @@ public class EventController : MonoBehaviour
             {
                 yesButton.interactable = true;
             }
-
             buildingDestroyedPanel.SetActive(true);
         }
         else

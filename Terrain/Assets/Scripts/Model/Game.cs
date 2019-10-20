@@ -431,9 +431,7 @@ public class Game
 
         calculateDelta();
 
-
         Debug.Log("Modifier: " + modifier);
-
 
         GameController.Instance.SetMetrics(Money, Green, Happiness);
         GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);

@@ -86,8 +86,8 @@ public abstract class Event
     public void DestroyBuildings(){
         foreach (Tile tile in this.DestroyingBuildings){
             float cost = tile.Building.InitialBuildMoney * 0.25f;
-            Game.SellBuilding(tile);
-            Game.Money+=cost;
+            tile.removeBuilding();
+           // Game.Money+=cost;
         }
         DestroyingBuildings.Clear();
     }
