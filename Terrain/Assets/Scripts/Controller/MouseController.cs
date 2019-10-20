@@ -131,7 +131,6 @@ public class MouseController : MonoBehaviour
 
     void OnMouseOver()
     {
-        Debug.Log("MOUSE OVER");
 
         selectedObject = GameObject.Find(MouseHoverController.selectedObject);
 

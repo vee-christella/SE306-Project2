@@ -14,6 +14,7 @@ public class HeatWave : Event
 
     public double Probability { get => probability; set => probability = value; }
 
+
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
         for (int i = 0; i < tiles.GetLength(0); i++)
@@ -22,7 +23,6 @@ public class HeatWave : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Plain)
                 {
-                    Debug.Log("Found a plain tile");
                     int random = Random.Range(0, 2);
                     // 50% chance to change plain tiles to desert
                     if (random == 1)

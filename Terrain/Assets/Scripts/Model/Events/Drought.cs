@@ -14,6 +14,8 @@ public class Drought : Event
 
     public int TurnToOccur { get => turnToOccur; set => turnToOccur = value; }
 
+
+
     public override void TileDelta(Tile[,] tiles, bool doDestroyBuildings)
     {
         //Debug.Log("tile delta called");
