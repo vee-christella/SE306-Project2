@@ -13,10 +13,13 @@ public class TutorialController : MonoBehaviour
     public GameObject shop;
 
     public static TutorialController Instance { get; protected set; }
+    Animator animator;
+
 
     private void Start()
     {
         Instance = this;
+        animator = shop.GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,13 +33,16 @@ public class TutorialController : MonoBehaviour
             {
                 tutorialStages[tutorialIndex - 1].SetActive(false);
             }
-  
+
+
+       
+       
 
         switch (tutorialIndex)
         {
             case 3:
 
-                if (shop.activeSelf)
+                if (animator.GetBool("open"))
                 {
                     tutorialIndex++;
                     Debug.Log("Tutorial 4 - complete!!");
