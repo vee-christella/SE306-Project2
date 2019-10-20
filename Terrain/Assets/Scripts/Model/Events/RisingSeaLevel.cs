@@ -10,7 +10,7 @@ public class RisingSeaLevel : Event
     {
         this.Type = EventType.TileChanger;
         this.Game = game;
-        this.Description = "Global sea level is projected to rise another 1 to 4 feet by 2100. This is the result of added water from melting glaciers and the expansion of seawater as it warms. Rising sea levels will increase the risk of erosion, coastal flooding and saltwater intrusion, increasing the need for coastal protection";
+        this.Description = "Global sea levels are expected to rise another 1 to 4 feet in the next 80 years. This is the result of extra water from melting glaciers and increasing sea levels from global warming. Rising sea levels is extremely worrying and harmful for the environment and future.";
     }
 
     public double Probability { get => probability; set => probability = value; }

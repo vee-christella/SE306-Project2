@@ -10,7 +10,7 @@ public class AcidRain : Event
     public AcidRain(Game game) :base (-5,-1,-5)
     {
         this.Type = EventType.BuildingDestroyer;
-        this.Description = "Acid rain contains high levels of nitric and sulfuric acids and comes in the form of snow, fog, and tiny bits of dry material that settles to Earth. The biggest sources are coal-burning power plants, factories, and automobiles. When humans burn fossil fuels, sulfur dioxide (SO2) and nitrogen oxides (NOx) are released into the atmosphere and when it reaches Earth, it flows across the surface in runoff water, enters water systems, and sinks into the soil";
+        this.Description = "Acid rain contains lots of acid and is very destructive for buildings and the environment. They come from the bad effects of coal-burning power plants, factories, and cars. When humans burn fossil fuels, toxic fumes are released into the atmosphere, and when it reaches Earth, it makes rain turn into acid rain which enters water systems and sinks into the soil";
         this.Game = game;
         this.DestroysBuildings = true;
     }

@@ -12,7 +12,7 @@ public class Hurricane : Event
         this.Type = EventType.BuildingDestroyer;
         this.Game = game;
         this.DestroysBuildings = true;
-        this.Description = "The intensity, frequency and duration of the strongest hurricanes, have all increased since the early 1980s. Hurricane-associated storm intensity and rainfall rates are projected to increase as the climate continues to warm.";
+        this.Description = "The intensity, frequency and duration of the strongest hurricanes have all increased since the early 1980s. Hurricane-associated storms and rainfall rates will increase as the climate becomes warmer.";
     }
 
     public double Probability { get => probability; set => probability = value; }
