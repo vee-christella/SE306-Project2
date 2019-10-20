@@ -148,7 +148,7 @@ public class BuildingController : MonoBehaviour
         if (s == "Forest") return "Forest";
         if (s == "Hydro Plant") return "Hydro";
         if (s == "Movie Theatre") return "MovieTheatre";
-        if (s == "National park") return "NationalPark";
+        if (s == "National Park") return "NationalPark";
         if (s == "Nuclear Plant") return "Nuclear";
         if (s == "Oil Refinery") return "OilRefinery";
         if (s == "Race Track") return "RaceTrack";
