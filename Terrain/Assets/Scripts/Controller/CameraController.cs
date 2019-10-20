@@ -22,9 +22,17 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        // Set the starting camera position/angle
-        transform.position = new Vector3(6, 4, -2);
-        transform.eulerAngles = new Vector3(pitch, yaw, 0);
+        // Tutorial Scene
+        if (PlayerPrefs.GetInt("Level") == 0)
+        {
+            transform.position = new Vector3(2, 2, -2);
+            transform.eulerAngles = new Vector3(30f, 0, 0);
+        }
+        else
+        {
+            transform.position = new Vector3(6, 4, -2);
+            transform.eulerAngles = new Vector3(pitch, yaw, 0);
+        }
     }
 
 
