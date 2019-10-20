@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/*
+This class controls the placement of buildings on the map. This includes
+permanantly placing buildings on the map, and temporarily placing a preview
+of a building at the player's cursor point.
+*/
 public class BuildingController : MonoBehaviour
 {
     private Dictionary<string, GameObject> modelDictionary = new Dictionary<string, GameObject>();
@@ -29,8 +34,6 @@ public class BuildingController : MonoBehaviour
 
     public static BuildingController Instance { get; protected set; }
 
-    // Start is called before the first frame update
-
     void Awake()
     {
         Instance = this;
@@ -55,28 +58,36 @@ public class BuildingController : MonoBehaviour
         modelDictionary.Add("WindTurbine", model_WindTurbine);
         modelDictionary.Add("Zoo", model_Zoo);
     }
-    void Start()
-    {
 
-
-    }
-
+    /*
+    Adds the specified building to a specific tile. Returns true if the building
+    has been successfully built, and false otherwise.
+    */
     public bool addBuildingToTile(string buildingType, Tile tile)
     {
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
         return (building != null);
     }
 
+    /*
+    Updates the tile with the speicifed building
+    */
     public void ChangeBuildingModel(Tile tile, GameObject buildingGO)
     {
         // Remove the old building's callback method
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
+
+        // Place the new building
         GameObject newBuilding = PlaceBuildingOnMap(tile, buildingGO);
-        // Add the new building's and callback method
+
+        // Add the new building's callback method
         tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
     }
 
 
+    /*
+    Places the building on the tile in the game world
+    */
     private GameObject PlaceBuildingOnMap(Tile tile, GameObject building)
     {
         GameObject newBuilding;
@@ -96,7 +107,6 @@ public class BuildingController : MonoBehaviour
         // Set the building GameObject's name and position
         newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-        Debug.Log("callback placecubwear called");
 
         // Delete old (possibly empty) building GameObject
         Destroy(building);
