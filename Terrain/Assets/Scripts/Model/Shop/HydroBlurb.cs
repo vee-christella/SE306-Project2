@@ -40,9 +40,9 @@ public class HydroBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = hydro.Blurb;
         buildingName.text = hydro.Name;
-        coinMetric.text = hydro.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = hydro.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = hydro.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = hydro.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = hydro.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = hydro.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

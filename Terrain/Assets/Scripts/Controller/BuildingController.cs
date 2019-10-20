@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildingController : MonoBehaviour
 {
@@ -70,9 +71,7 @@ public class BuildingController : MonoBehaviour
     {
         // Remove the old building's callback method
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
-
         GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
-
         // Add the new building's and callback method
         tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
     }
@@ -80,14 +79,22 @@ public class BuildingController : MonoBehaviour
 
     private GameObject PlaceCubeNear(Tile tile, GameObject building)
     {
-        // Get the class name of the building
-        string newBuildingModel = tile.Building.GetType().Name;
+        GameObject newBuilding;
+        if (tile.Building != null)
+        {
+            // Get the class name of the building
+            string newBuildingModel = tile.Building.GetType().Name;
 
-        // Create new building GameObject
-        GameObject newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
-        newBuilding.name = building.name;
-        newBuilding.transform.position = building.transform.position;
-
+            // Create new building GameObject
+            newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
+        }
+        else
+        {
+            newBuilding = new GameObject();
+        }
+        newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
+        newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+        Debug.Log("callback placecubwear called");
         // Delete old (possibly empty) building GameObject
         Destroy(building);
 
@@ -99,27 +106,35 @@ public class BuildingController : MonoBehaviour
         // Remove the preview building from where the cursor previously was
         Destroy(previewBuilding);
 
-        string buildingName = resolveBuildingName(name);
-
-        previewBuilding = Instantiate(modelDictionary[buildingName]);
-        previewBuilding.name = "PreviewBuilding";
-
-        // Remove the preview object's box collider to prevent a hover changing its colour
-        Destroy(previewBuilding.GetComponent<Collider>());
-
-        // Show the preview building on the cursor point
-        previewBuilding.transform.position = mousePoint;
-
-        if (canBuildOnPoint(buildingName, mousePoint))
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            // Set the preview building to a green colour
-            previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
+            string buildingName = resolveBuildingName(name);
+
+            previewBuilding = Instantiate(modelDictionary[buildingName]);
+            previewBuilding.name = "PreviewBuilding";
+
+            // Remove the preview object's box collider to prevent a hover changing its colour
+            Destroy(previewBuilding.GetComponent<Collider>());
+
+            // Show the preview building on the cursor point
+            previewBuilding.transform.position = mousePoint;
+
+            if (canBuildOnPoint(buildingName, mousePoint))
+            {
+                // Set the preview building to a green colour
+                previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
+            }
+            else
+            {
+                // Set the preview building to a red colour
+                previewBuilding.GetComponent<Renderer>().material.color = new Color32(200, 0, 0, 100);
+            }
         }
-        else
-        {
-            // Set the preview building to a red colour
-            previewBuilding.GetComponent<Renderer>().material.color = new Color32(200, 0, 0, 100);
-        }
+    }
+
+    public void HideBuildingPreview()
+    {
+        Destroy(previewBuilding);
     }
 
     /*
@@ -154,10 +169,12 @@ public class BuildingController : MonoBehaviour
     private bool canBuildOnPoint(string buildingName, Vector3 point)
     {
         // Create a temporary building and check if it can be built on the tile at the point
-        Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
-        Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
+        if ((GameController.Instance.Game.getTileAt((int)point.x, (int)point.z)) != null){
+            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
+            Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
 
-        if (tile.IsBuildable(building)) return true;
+            if (tile.IsBuildable(building)) return true;
+        }
 
         return false;
     }

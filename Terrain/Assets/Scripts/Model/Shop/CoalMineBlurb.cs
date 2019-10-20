@@ -40,9 +40,9 @@ public class CoalMineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = coalMine.Blurb;
         buildingName.text = coalMine.Name;
-        coinMetric.text = coalMine.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = coalMine.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = coalMine.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = coalMine.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = coalMine.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = coalMine.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 
