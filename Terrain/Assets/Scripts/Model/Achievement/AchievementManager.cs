@@ -44,9 +44,9 @@ public class AchievementManager
         achievements[4].CountToComplete = 3;
         achievements[4].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[4].Title, 0);
         achievements[5].Title = "Happiness";
-        achievements[5].Blurb = "Wow! You sure know how to make your city happy!";
-        achievements[5].HowToComplete = "Get 100% happiness for your city";
-        achievements[5].CountToComplete = 100;
+        achievements[5].Blurb = "Wow! You sure know how to keep your city happy!";
+        achievements[5].HowToComplete = "Win without letting your city reach negative happiness";
+        achievements[5].CountToComplete = 1;
         achievements[5].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[5].Title, 0);
         achievements[6].Title = "We will rebuild!";
         achievements[6].Blurb = "Don't give up! Bad things happen, the important thing is to stay strong!";

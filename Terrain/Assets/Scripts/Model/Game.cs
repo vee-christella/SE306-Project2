@@ -20,6 +20,7 @@ public class Game
     float generateMoney;
     float generateGreen;
     float generateHappiness;
+    bool postiveHappiness = true;
     Building[,] buildings;
     GameDifficulty gameDifficulty;
     Event gameEvent;
@@ -162,6 +163,11 @@ public class Game
         // points required
         if (this.green >= maxGreen)
         {
+            if (postiveHappiness)
+            {
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Happiness);
+            }
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
             this.endGame(true);
             // Check if the user has lost the game by exceeding the max number
             // of turns allowed, or having a negative money value (as they
@@ -171,6 +177,7 @@ public class Game
         }
         else if (currentTurn >= maxTurns || Money < 0)
         {
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
             this.endGame(false);
             return;
         }
@@ -251,6 +258,9 @@ public class Game
                 UpdateMetrics(building);
                 if(buildingType == "Oil Refinery"){
                     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOilRig);
+                }
+                if(buildingType == "Nuclear Plant"){
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
                 }
                 return building;
             }
@@ -426,6 +436,10 @@ public class Game
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
         GenerateHappiness += building.GenerateHappiness;
+        if (GenerateHappiness < 0)
+        {
+            postiveHappiness = false;
+        }
 
         Debug.Log("Happiness: " + Happiness);
 
