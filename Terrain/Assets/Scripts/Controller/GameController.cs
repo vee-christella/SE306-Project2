@@ -10,11 +10,13 @@ public class GameController : MonoBehaviour
     Game game;
     EventController eventController;
     private GameGrid gameGrid;
+    int[,] map;
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
+    public int[,] Map { get => map; set => map = value; }
 
     // public Sprite[] sprites = new Sprite[7];
-
+    public GameObject tutorialOverlay;
     public GameObject[] tileGameObjs = new GameObject[4];
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
@@ -42,8 +44,34 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
+    
 
-        Game = new Game(20, 20);
+        // Change the map generation depending on the game mode/difficulty
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 0:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                Map = PrototypeLevel.Arr;
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                break;
+            default:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+
+        }
+        
         Game.IsEnd = false;
         Game.HasStarted = false;
 
@@ -58,12 +86,10 @@ public class GameController : MonoBehaviour
             {
                 Tile tile = Game.getTileAt(x, z);
 
-                int rand = Random.Range(0, 4);
-                GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
+                GameObject tileGO = Instantiate(tileGameObjs[Map[x,z]]) as GameObject;
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
-                // THIS SHOULD PROBABLY BE DONE IN GAME.CS WHEN TILES ARE FIRST MADE
-                switch (rand)
+                switch (Map[x, z])
                 {
                     case 0:
                         tile.setType(Tile.TileType.Desert);
@@ -83,9 +109,6 @@ public class GameController : MonoBehaviour
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-                buildingSR.sortingLayerName = "Building";
-
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
 
                 // Place the TownHall
@@ -95,7 +118,12 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        WorldGenerator.generateWorld(Game);
+
+        // Don't generate world on tutorial
+        if (PlayerPrefs.GetInt("Level") != 0) {
+            WorldGenerator.generateWorld(Game);
+        }
+
         StartingMetrics();
         Game.HasStarted = true;
     }

@@ -75,6 +75,14 @@ public class Tile
         
         if ((this.building == null) && IsBuildable(building))
         {
+
+            // If in tutorial, check if the coal mine is being built to progress
+            if (PlayerPrefs.GetInt("Level") == 0 && building.GetType().Name.ToString() == "CoalMine")
+            {
+                TutorialController.Instance.coalMineBuilt = true;
+            }
+
+            // Success
             this.building = building;
 
             if (CallbackBuildingChange != null)
