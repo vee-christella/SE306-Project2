@@ -539,5 +539,7 @@ public class Game
         }
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
+
+        GameController.Instance.ChangeImageSprite(modifier);
     }
 }
