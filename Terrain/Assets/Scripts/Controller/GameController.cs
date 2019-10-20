@@ -48,6 +48,8 @@ public class GameController : MonoBehaviour
         Game.HasStarted = false;
 
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
+        eventController.Game = Game;
+        eventController.GameController = this;
 
         // Populate the map with game tiles
         for (int x = 0; x < Game.Rows; x++)
@@ -157,9 +159,10 @@ public class GameController : MonoBehaviour
 
         if (game.GameEvent != null)
         {
-           EventController.DisplayPopup(game.GameEvent);
-           game.GameEvent.TileDelta(game.Tiles, EventController.DoDestroyBuildings);
+            EventController.DisplayEventPopup();
         }
+
+        Debug.Log("Finished event logic");
 
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);

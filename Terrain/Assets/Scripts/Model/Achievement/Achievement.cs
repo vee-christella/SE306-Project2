@@ -50,7 +50,6 @@ public class Achievement
 
     public bool upAchievementCounter(){
         this.CurrentCount = this.CurrentCount+1;
-                Debug.Log("Achievement: TEST TEST TEST "+Title + " Complete");
         return achievementComplete;
     }
 
