@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 /*
 Adapted from https://answers.unity.com/questions/666905/in-game-camera-movement-like-editor.html
 
-Controller for the main camera
+Controller for the main camera.
 */
 public class CameraController : MonoBehaviour
 {
-
-
     public float lookSpeedH = 2f;
     public float lookSpeedV = 2f;
     public float zoomSpeed = 1f;
@@ -22,7 +20,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        // Tutorial Scene
+        // Set the camera in a different position for the tutorial
         if (PlayerPrefs.GetInt("Level") == 0)
         {
             transform.position = new Vector3(2, 2, -2);

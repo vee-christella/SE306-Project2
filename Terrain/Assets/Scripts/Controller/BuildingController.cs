@@ -31,7 +31,6 @@ public class BuildingController : MonoBehaviour
     public GameObject model_WindTurbine;
     public GameObject model_Zoo;
     private GameObject previewBuilding;
-
     public static BuildingController Instance { get; protected set; }
 
     void Awake()
