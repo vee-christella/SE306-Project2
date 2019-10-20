@@ -5,7 +5,7 @@ using UnityEngine;
 public class NationalPark : Building
 {
     // Initialise stats for each National Park building
-    public NationalPark() : base(4, -150, 50, 5, -60, 15, 1, 5)
+    public NationalPark() : base(4, -150, 25, 5, -10, 10, 2, 5)
     {
        this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "National Park";

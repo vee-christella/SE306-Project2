@@ -6,7 +6,7 @@ public class HeatWave : Event
 {
     private double probability;
 
-    public HeatWave(Game game) : base(-5, -1, -5)
+    public HeatWave(Game game) : base(-50, -5, 0)
     {
         this.Type = EventType.TileChanger;
         this.Description = "Heat waves are periods of abnormally hot weather lasting days to weeks. This is combined with a reduction of soil moisture which exacerbates heat waves.";

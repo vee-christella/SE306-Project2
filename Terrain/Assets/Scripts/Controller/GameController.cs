@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
 
-        Game = new Game(20, 20);
+        Game = new Game(15, 15);
         Game.IsEnd = false;
         Game.HasStarted = false;
 

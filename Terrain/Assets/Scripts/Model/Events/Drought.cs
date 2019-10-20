@@ -5,7 +5,7 @@ using UnityEngine;
 public class Drought : Event
 {
     private int turnToOccur;
-    public Drought(Game game) :base(-5,-1,-5)
+    public Drought(Game game) :base(-100,-2,-50)
     {
         this.Type = EventType.TileChanger;
         this.Description = "Droughts everywhere are projected to become more intense, and summer temperatures are projected to continue rising.";

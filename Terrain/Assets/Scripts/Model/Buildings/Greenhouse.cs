@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Greenhouse : Building
 {
-    public Greenhouse() : base(8, -80, 30, 0, 20, -10, 0, 3)
+    public Greenhouse() : base(8, -100, -10, 0, 4, 0, 0, 3)
     {
         this.Name = "Greenhouse";
         this.TypeOfBuilding = BuildingType.Utility;

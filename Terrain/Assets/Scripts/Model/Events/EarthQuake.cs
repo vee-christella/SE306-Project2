@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rejuevnation : Event
+public class EarthQuake : Event
 {
 
-    public Rejuevnation(Game game):base(50,5,0)
+    public EarthQuake(Game game):base(-20,-5,-50)
     {
-        this.Type = EventType.Good;
+        this.Type = EventType.TileChanger;
         this.Game = game;
     }
 
     public override void TileDelta(Tile[,] tiles, bool doDestoryBuildings)
     {
+
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                if (tiles[i, j].Type == Tile.TileType.Desert)
+                if (tiles[i, j].Type == Tile.TileType.Mountain)
                 {
-                    int random = Random.Range(0, 1);
-
-                    // 50% chance to change desert tile to water tile
+                    //Debug.Log("Found a tile with water");
+                    int random = Random.Range(0, 5);
+                    // 50% chance to change tiles to desert
                     if (random == 1)
                     {
                         tiles[i, j].Type = Tile.TileType.Plain;

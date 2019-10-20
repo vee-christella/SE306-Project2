@@ -5,7 +5,7 @@ using UnityEngine;
 public class Factory : Building
 {
     // Initialise stats for each Factory building
-    public Factory() : base(16, -100, 20, 0, 7, 8, 0, 3)
+    public Factory() : base(16, -200, -50, -5, 15, -7, -2, 3)
     {   
         this.TypeOfBuilding = BuildingType.Utility;
         this.Name = "Factory";

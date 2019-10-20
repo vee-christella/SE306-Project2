@@ -6,7 +6,7 @@ public class RecyclingPlant : Building
 {
     // Initialise stats for each Recycling Plant building
 
-    public RecyclingPlant() : base(13, -50, 20, 0, 7, 8, 0, 3)
+    public RecyclingPlant() : base(13, -50, -6, 0, -5, 3, -1, 3)
     {   
         this.TypeOfBuilding = BuildingType.Utility;
         this.Name = "Recycling Plant";

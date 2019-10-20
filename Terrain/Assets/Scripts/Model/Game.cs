@@ -177,7 +177,7 @@ public class Game
 
         GameEvent = EventForNextTurn();
 
-        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
+        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel" || GameEvent != null && GameEvent.GetType().Name.ToString() == "EarthQuake")
         {
             badEventList.Remove(GameEvent);
         }
@@ -304,7 +304,6 @@ public class Game
     // get the event  for the next turn
     public Event EventForNextTurn()
     {
-
         // current turn increase increases probability
         // green point decreases per turn probability
         // game difficultly increases or decreases probability
@@ -313,21 +312,21 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
- //       switch (gameDifficulty)
- //       {
- //           case GameDifficulty.Easy:
- //               difficultyOffset = 0.1f;
- //               break;
- //           case GameDifficulty.Medium:
-//                difficultyOffset = 0.2f;
- //               break;
-//            case GameDifficulty.Hard:
- //               difficultyOffset = 0.3f;
- //               break;
- //           default:
- //               difficultyOffset = 0.1f;
- //               break;
- //       }
+        switch (gameDifficulty)
+       {
+            case GameDifficulty.Easy:
+                difficultyOffset = 0.1f;
+                break;
+           case GameDifficulty.Medium:
+                difficultyOffset = 0.2f;
+                break;
+            case GameDifficulty.Hard:
+                difficultyOffset = 0.3f;
+                break;
+            default:
+               difficultyOffset = 0.1f;
+                break;
+        }
         
         goodEventProbability = Mathf.Floor((green / 2000 * 100)/2f);
 
@@ -392,9 +391,12 @@ public class Game
         badEventList.Add(new RisingSeaLevel(this));
         badEventList.Add(new Wildfire(this));
         badEventList.Add(new HeatWave(this));
+        badEventList.Add(new EarthQuake(this));
 
         goodEventList.Add(new ForestSpawn(this));
         goodEventList.Add(new Circus(this));
+        goodEventList.Add(new Rejuevnation(this));
+        
     }
 
     // Change the metrics with regards to the effects of the building
