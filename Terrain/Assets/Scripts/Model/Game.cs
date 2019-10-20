@@ -203,50 +203,62 @@ public class Game
         Building building = null;
         switch (buildingType)
         {
-            case "Hydro Plant":
-                building = new Hydro();
+            case "Animal Farm":
+                building = new AnimalFarm();
                 break;
-            case "Factory":
-                building = new Factory();
-                break;
-            case "Greenhouse":
-                building = new Greenhouse();
-                break;
-            case "Vegetable Farm":
-                building = new VegetableFarm();
+            case "Bee Farm":
+                building = new BeeFarm();
                 break;
             case "Coal Mine":
                 building = new CoalMine();
                 break;
-            case "Zoo":
-                building = new Zoo();
-                break;
-            case "Wind Turbine":
-                building = new WindTurbine();
-                break;
-            case "Solar Farm":
-                building = new SolarFarm();
-                break;
-            case "Race Track":
-                building = new RaceTrack();
-                break;
-            case "Oil Refinery":
-                building = new OilRefinery();
-                break;
-            case "Nuclear Plant":
-                building = new Nuclear();
-                break;
-            case "National Park":
-                building = new NationalPark();
-                break;
-            case "Movie Theatre":
-                building = new MovieTheatre();
+            case "Factory":
+                building = new Factory();
                 break;
             case "Forest":
                 building = new Forest();
                 break;
+            case "Greenhouse":
+                building = new Greenhouse();
+                break;
+            case "Hydro Plant":
+                building = new Hydro();
+                break;
+            case "Movie Theatre":
+                building = new MovieTheatre();
+                break;
+            case "National Park":
+                building = new NationalPark();
+                break;
+            case "Nuclear Plant":
+                building = new Nuclear();
+                break;
+            case "Oil Refinery":
+                building = new OilRefinery();
+                break;
+            case "Pollutant":
+                building = new Pollutant();
+                break;
+            case "Race Track":
+                building = new RaceTrack();
+                break;
+            case "Recycling Plant":
+                building = new RecyclingPlant();
+                break;
+            case "Solar Farm":
+                building = new SolarFarm();
+                break;
             case "Town Hall":
                 building = new TownHall();
+                break;
+            case "Vegetable Farm":
+                building = new VegetableFarm();
+                break;
+            case "Wind Turbine":
+                building = new WindTurbine();
+                break;
+            case "Zoo":
+                building = new Zoo();
                 break;
             default:
                 return null;

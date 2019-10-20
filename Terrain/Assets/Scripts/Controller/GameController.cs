@@ -177,9 +177,8 @@ public class GameController : MonoBehaviour
     // Initialise the starting metrics on the screen
     public void StartingMetrics()
     {
-        game.InitialiseMetrics(200, 0, 50, 1000);
         SetMetrics(game.Money, game.Green, game.Happiness);
-        SetDelta(0, 0, 0);
+        SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
 
         game.InitialiseTurns(0, 100);
         maxTurn.text = game.MaxTurns.ToString();
