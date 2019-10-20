@@ -6,7 +6,7 @@ public class WindTurbine : Building
 {
 
     // Initialise stats for each Wind Turbine building
-   public WindTurbine() :  base(9, -150, -20, 0, 10, 3, 0, 1)
+   public WindTurbine() :  base(9, -150, -10, 0, 10, 3, 0, 1)
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Wind Turbine";

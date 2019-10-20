@@ -18,6 +18,7 @@ public class BuildingController : MonoBehaviour
     public GameObject model_NationalPark;
     public GameObject model_Nuclear;
     public GameObject model_OilRefinery;
+    public GameObject model_Pollutant;
     public GameObject model_RaceTrack;
     public GameObject model_RecyclingPlant;
     public GameObject model_SolarFarm;
@@ -46,6 +47,7 @@ public class BuildingController : MonoBehaviour
         modelDictionary.Add("NationalPark", model_NationalPark);
         modelDictionary.Add("Nuclear", model_Nuclear);
         modelDictionary.Add("OilRefinery", model_OilRefinery);
+        modelDictionary.Add("Pollutant", model_Pollutant);
         modelDictionary.Add("RaceTrack", model_RaceTrack);
         modelDictionary.Add("RecyclingPlant", model_RecyclingPlant);
         modelDictionary.Add("SolarFarm", model_SolarFarm);
@@ -153,6 +155,7 @@ public class BuildingController : MonoBehaviour
         if (s == "National Park") return "NationalPark";
         if (s == "Nuclear Plant") return "Nuclear";
         if (s == "Oil Refinery") return "OilRefinery";
+        if (s == "Pollutant") return "Pollutant";
         if (s == "Race Track") return "RaceTrack";
         if (s == "Recycling Plant") return "RecyclingPlant";
         if (s == "Solar Farm") return "SolarFarm";

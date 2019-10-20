@@ -5,7 +5,7 @@ using UnityEngine;
 public class Zoo : Building
 {
     // Initialise stats for each Zoo building
-    public Zoo() : base(10, -30, -15, 2, -7, 1, 2, 6)
+    public Zoo() : base(10, -30, -5, 2, -10, 1, 2, 6)
     {
         this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "Zoo";

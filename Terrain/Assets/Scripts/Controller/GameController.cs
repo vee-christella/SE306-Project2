@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
 
-        Game = new Game(15, 15);
+        Game = new Game(20, 20);
         game.Difficulty = Game.GameDifficulty.Medium;
         Game.IsEnd = false;
         Game.HasStarted = false;
@@ -88,15 +88,10 @@ public class GameController : MonoBehaviour
                 buildingSR.sortingLayerName = "Building";
 
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
-
-                // Place the TownHall
-                if (x == 4 && z == 5)
-                {
-                    BuildingController.Instance.addBuildingToTile("Town Hall", tile);
-                }
             }
         }
         WorldGenerator.generateWorld(Game);
+        WorldGenerator.addBuildingsToWorld(Game);
         StartingMetrics();
         Game.HasStarted = true;
     }

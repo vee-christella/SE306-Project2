@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaceTrack : Building
 {
     // Initialise stats for each Race Track
-    public RaceTrack() : base(7, -100, -50, 5, -8, -4, 3, 7)
+    public RaceTrack() : base(7, -100, -30, 5, -12, -4, 3, 7)
     {
        this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "Race Track";

@@ -231,6 +231,11 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Oil Refinery";
         setCancelButton();
     }
+    public void SetMode_Pollutant()
+    {
+        buildingForCreating = "Pollutant";
+        setCancelButton();
+    }
     public void SetMode_RaceTrack()
     {
         buildingForCreating = "Race Track";
