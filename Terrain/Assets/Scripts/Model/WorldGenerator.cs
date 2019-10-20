@@ -121,7 +121,9 @@ public class WorldGenerator
         foreach(var coord in coords)
         {
             bool replaceBuilding = false;
-            Tile tile = game.getTileAt(coord.x, coord.y);
+            int x = coord.x;
+            int y = coord.y;
+            Tile tile = game.getTileAt(x, y);
             var building = new { name = "temp", num = 0 };
             //pick building to create based on tile
             if (tile.Type == Tile.TileType.Desert)
