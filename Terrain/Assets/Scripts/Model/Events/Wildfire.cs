@@ -11,6 +11,7 @@ public class Wildfire : Event
         this.Type = EventType.BuildingDestroyer;
         this.Description = "Wildfires occur when fires are naturally started, burning large areas of the environment. Severe heat and drought make forests drier which fuel wildfires. As a result, some of your forests have been destroyed.";
         this.Game = game;
+        this.Title = "Wildfire";
         this.DestroysBuildings = true;
     }
 

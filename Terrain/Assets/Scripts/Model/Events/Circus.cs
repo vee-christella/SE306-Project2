@@ -9,6 +9,7 @@ public class Circus : Event
         this.Type = EventType.Good;
         this.Description = "The Circus is in town! /n The people of your town feel extremely happy about this.";
         this.Game = game;
+        this.Title = "Circus";
     }
 
 

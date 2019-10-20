@@ -10,6 +10,7 @@ public class Drought : Event
         this.Type = EventType.TileChanger;
         this.Description = "Droughts occur when there is less rain than expected, which means that your town is running out of water! Your water supply is lacking and some of your water tiles have dried up into desert tiles. All your buildings that are built on dried up water tiles have been disabled.";
         Game = game;
+        this.Title = "Drought";
     }
 
     public int TurnToOccur { get => turnToOccur; set => turnToOccur = value; }

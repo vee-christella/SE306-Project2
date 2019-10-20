@@ -25,6 +25,7 @@ public class EventController : MonoBehaviour
     public TextMeshProUGUI greenPointsEffect;
     public TextMeshProUGUI happinessEffect;
     public TextMeshProUGUI costToRepairEffect;
+    public TextMeshProUGUI eventTitle;
 
     public Game Game { get => game; set => game = value; }
     public GameController GameController { get => gameController; set => gameController = value; }
@@ -63,6 +64,7 @@ public class EventController : MonoBehaviour
         greenPointsEffect.text = DisplayEffect(gameEvent.GreenPointDelta) + gameEvent.GreenPointDelta;
         happinessEffect.text = DisplayEffect(gameEvent.HappinessDelta) + gameEvent.HappinessDelta;
         costToRepairEffect.text = costToRepair.ToString();
+        eventTitle.text = gameEvent.Title + " has occurred!";
 
         eventPopupPanel.SetActive(true);
     }

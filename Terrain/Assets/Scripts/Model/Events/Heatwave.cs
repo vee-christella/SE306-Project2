@@ -9,6 +9,7 @@ public class HeatWave : Event
     public HeatWave(Game game) : base(-5, -1, -5)
     {
         this.Type = EventType.TileChanger;
+        this.Title = "Heat Wave";
         this.Description = "Heat waves are periods of extremely hot weather lasting days to weeks. When soil moisture is low, heat waves become more prone to occurring. Due to drying up, your water tiles have turned into plains, and your plain tiles have turned into deserts.";
     }
 

@@ -11,6 +11,7 @@ public class ForestSpawn : Event
         this.Type = EventType.Good;
         this.Description = "Seedlings from trees, flowers and plants have been blown to different parts of the map, starting more plant growth. More forests have naturally grown in your town!";
         this.Game = game;
+        this.Title = "Forest Spawn";
     }
 
     public double Probability { get => probability; set => probability = value; }

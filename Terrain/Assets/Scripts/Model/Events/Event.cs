@@ -18,6 +18,7 @@ public abstract class Event
     private Game game;
     private List<Tile> destroyingBuildings = new List<Tile>();
     private bool destroysBuildings = false;
+    private string title;
 
     public Event(int greenPointDelta, int happinessDelta, int moneyDelta)
     {
@@ -35,6 +36,7 @@ public abstract class Event
     public List<Tile> DestroyingBuildings{get => destroyingBuildings;}
     public bool DestroysBuildings { get => destroysBuildings; set => destroysBuildings = value; }
     public abstract void TileDelta(Tile[,] tiles, bool doDestoryBuildings);
+    public string Title { get => title; set => title = value; }
 
     public float CalculateCostToRepair(Tile[,] tiles){
         float costToRepair = 0;

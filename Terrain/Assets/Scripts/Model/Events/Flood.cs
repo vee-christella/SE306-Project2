@@ -10,7 +10,7 @@ public class Flood : Event
     {
         this.Type = EventType.TileChanger;
         this.Description = "Flooding means that excess water is destroying your city. Some of your plains and desert tiles have turned to water tiles. Storms, high tides and rising sea levels increase the risk of flooding. Flooding can also occur from rivers not being able to hold the amount of water they receive, as well as flash flooding which occurs randomly when heavy rain occurs and your town's drainage is too weak.";
-
+        this.Title = "Flood";
         this.Game = game;
     }
 
