@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
 
-public class AchievementManager
+public class AchievementManager : MonoBehaviour
 {
+    public GameObject achievementPrefab;
     public Achievement[] achievements;
     public static AchievementManager Instance { get; protected set; }
 
     public AchievementManager(){
+        //AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
+    }
+
+    public void Start()
+    {
         PlayerPrefs.DeleteAll();
         Instance = this;
         achievements = new Achievement[Enum.GetNames(typeof(AchievementType)).Length];
@@ -67,10 +75,31 @@ public class AchievementManager
         achievements[9].HowToComplete = "Win the game within 40 turns in any level";
         achievements[9].CountToComplete = 40;
         achievements[9].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[9].Title, 0);
-        
-        
 
-        //AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
+        for (int i = 0; i < achievements.Length; i++){
+            CreateAchievement(achievements[i].Title, achievements[i].HowToComplete, achievements[i].CurrentCount + " out of " +
+            achievements[i].CountToComplete);
+        }
+    }
+
+    public void Update()
+    {
+
+    }
+
+    public void CreateAchievement(string title, string description, string progress)
+    {
+        GameObject achievement = (GameObject)Instantiate(achievementPrefab);
+        SetAchievementInfo(achievement, title, description, progress);
+    }
+
+    public void SetAchievementInfo(GameObject achievement, string title, string description, string progress)
+    {
+        achievement.transform.SetParent(GameObject.Find("AchievementsContent").transform);
+        achievement.transform.localScale = new Vector3(1, 1, 1);
+        achievement.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = title;
+        achievement.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = description;
+        achievement.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = progress;
     }
 
     public static AchievementManager GetAchievementManager(){
@@ -92,4 +121,6 @@ public class AchievementManager
             }
         }
     }
+
+
 }
