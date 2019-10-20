@@ -2058,7 +2058,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 279.87, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &110503642
 MonoBehaviour:
@@ -8548,7 +8548,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &457488209
 MonoBehaviour:
@@ -8722,6 +8722,9 @@ MonoBehaviour:
   greenDeltaText: {fileID: 0}
   happinessDeltaText: {fileID: 0}
   errorText: {fileID: 0}
+  happinessImage: {fileID: 0}
+  happyImage: {fileID: 0}
+  sadImage: {fileID: 0}
   errorMessage: {fileID: 0}
   greenMetricCheatCode:
   - i
@@ -13243,7 +13246,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 240.04, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &724108027
 MonoBehaviour:
@@ -14870,6 +14873,9 @@ MonoBehaviour:
   greenDeltaText: {fileID: 71564547}
   happinessDeltaText: {fileID: 967482030}
   errorText: {fileID: 420207498}
+  happinessImage: {fileID: 724108025}
+  happyImage: {fileID: 21300000, guid: 8d5f997e73f454b88804c5c735f370f5, type: 3}
+  sadImage: {fileID: 21300000, guid: 539e6953896ed489898e66cd4e1cbe18, type: 3}
   errorMessage: {fileID: 1372066692}
   greenMetricCheatCode:
   - i
@@ -15511,7 +15517,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 130.01, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &806259298
 MonoBehaviour:
@@ -22023,7 +22029,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1675714898}
   m_HandleRect: {fileID: 1675714897}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 0.00000017951523
   m_Size: 0.70175445
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -22506,6 +22512,9 @@ MonoBehaviour:
   greenDeltaText: {fileID: 0}
   happinessDeltaText: {fileID: 0}
   errorText: {fileID: 0}
+  happinessImage: {fileID: 0}
+  happyImage: {fileID: 0}
+  sadImage: {fileID: 0}
   errorMessage: {fileID: 1372066692}
   greenMetricCheatCode:
   - i
