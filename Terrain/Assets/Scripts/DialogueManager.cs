@@ -216,7 +216,7 @@ public class DialogueManager : MonoBehaviour
             case 8:
                 Debug.Log(tutorialStage);
                 shop.SetActive(false);
-                endTurnButton.GetComponent<Button>().interactable = true;
+                endTurnButton.GetComponent<Button>().interactable = false;
                 switch (conversation.Count)
                 {
                     case 2:

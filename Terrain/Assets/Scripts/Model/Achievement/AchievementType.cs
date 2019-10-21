@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum AchievementType {
-    Fail,
     Win,
+    Win5,
     BuildNuclear,
     BuildOilRig,
+    BuildHydro,
     WinAllLevels,
     Happiness,
-    FixBuilding,
     Win80Turns,
     Win90Turns,
-
+    Lose5
 };
