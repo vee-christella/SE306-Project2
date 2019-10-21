@@ -556,16 +556,16 @@ public class Game
             modifier += 0.1f;
         }
 
-        if (Happiness < 50 && Happiness + happinessDelta >= 50)
+        if (Happiness >= 70 && Happiness + happinessDelta < 70)
         {
-            Debug.Log("70 up");
-            modifier += 0.1f;
+            Debug.Log("70 down");
+            modifier -= 0.1f;
         }
 
         if (Happiness < 70 && Happiness + happinessDelta >= 70)
         {
-            Debug.Log("70 down");
-            modifier -= 0.1f;
+            Debug.Log("70 up");
+            modifier += 0.1f;
         }
 
         if (Happiness < 90 && Happiness + happinessDelta >= 90)
