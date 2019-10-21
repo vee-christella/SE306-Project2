@@ -16,23 +16,23 @@ public class WindTurbineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+windTurbine.InitialBuildMoney.ToString();
+        goldCost.text = windTurbine.InitialBuildMoney.ToString();
         if(windTurbine.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+windTurbine.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+windTurbine.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+windTurbine.InitialBuildGreen.ToString();
+            greenPointsCost.text = windTurbine.InitialBuildGreen.ToString();
         }
         if(windTurbine.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+windTurbine.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+windTurbine.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+windTurbine.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = windTurbine.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

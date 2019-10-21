@@ -16,23 +16,23 @@ public class BeeFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+beeFarm.InitialBuildMoney.ToString();
+        goldCost.text = beeFarm.InitialBuildMoney.ToString();
         if(beeFarm.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+beeFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+beeFarm.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+beeFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = beeFarm.InitialBuildGreen.ToString();
         }
         if(beeFarm.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+beeFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+beeFarm.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+beeFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = beeFarm.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

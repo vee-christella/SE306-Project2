@@ -16,23 +16,23 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+raceTrack.InitialBuildMoney.ToString();
+        goldCost.text = raceTrack.InitialBuildMoney.ToString();
         if(raceTrack.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+raceTrack.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+raceTrack.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+raceTrack.InitialBuildGreen.ToString();
+            greenPointsCost.text = raceTrack.InitialBuildGreen.ToString();
         }
         if(raceTrack.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+raceTrack.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+raceTrack.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+raceTrack.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = raceTrack.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

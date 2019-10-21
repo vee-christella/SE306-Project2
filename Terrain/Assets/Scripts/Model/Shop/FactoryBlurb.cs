@@ -16,23 +16,23 @@ public class FactoryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+factory.InitialBuildMoney.ToString();
+        goldCost.text = factory.InitialBuildMoney.ToString();
         if(factory.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+factory.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+factory.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+factory.InitialBuildGreen.ToString();
+            greenPointsCost.text = factory.InitialBuildGreen.ToString();
         }
         if(factory.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+factory.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+factory.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+factory.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = factory.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

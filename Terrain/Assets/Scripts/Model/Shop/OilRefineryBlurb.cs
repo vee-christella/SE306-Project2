@@ -16,23 +16,23 @@ public class OilRefineryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+oilRefinery.InitialBuildMoney.ToString();
+        goldCost.text = oilRefinery.InitialBuildMoney.ToString();
         if(oilRefinery.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+oilRefinery.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+oilRefinery.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+oilRefinery.InitialBuildGreen.ToString();
+            greenPointsCost.text = oilRefinery.InitialBuildGreen.ToString();
         }
         if(oilRefinery.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+oilRefinery.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+oilRefinery.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+oilRefinery.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = oilRefinery.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

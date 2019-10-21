@@ -16,23 +16,23 @@ public class NationalParkBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+nationalPark.InitialBuildMoney.ToString();
+        goldCost.text = nationalPark.InitialBuildMoney.ToString();
         if(nationalPark.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+nationalPark.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+nationalPark.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+nationalPark.InitialBuildGreen.ToString();
+            greenPointsCost.text = nationalPark.InitialBuildGreen.ToString();
         }
         if(nationalPark.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+nationalPark.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+nationalPark.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+nationalPark.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = nationalPark.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

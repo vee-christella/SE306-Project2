@@ -16,23 +16,23 @@ public class NuclearBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+nuclear.InitialBuildMoney.ToString();
+        goldCost.text = nuclear.InitialBuildMoney.ToString();
         if(nuclear.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+nuclear.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+nuclear.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+nuclear.InitialBuildGreen.ToString();
+            greenPointsCost.text = nuclear.InitialBuildGreen.ToString();
         }
         if(nuclear.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+nuclear.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+nuclear.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+nuclear.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = nuclear.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

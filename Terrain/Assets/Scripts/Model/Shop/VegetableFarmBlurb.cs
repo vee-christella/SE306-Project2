@@ -16,23 +16,23 @@ public class VegetableFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerE
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+vegetableFarm.InitialBuildMoney.ToString();
+        goldCost.text = vegetableFarm.InitialBuildMoney.ToString();
         if(vegetableFarm.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+vegetableFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+vegetableFarm.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+vegetableFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = vegetableFarm.InitialBuildGreen.ToString();
         }
         if(vegetableFarm.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+vegetableFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+vegetableFarm.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+vegetableFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = vegetableFarm.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }
