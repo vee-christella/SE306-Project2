@@ -274,10 +274,10 @@ public class Game
             {
                 // The building was successfully built
                 UpdateMetrics(building);
-                if(buildingName == "Oil Refinery"){
+                if(PlayerPrefs.GetInt("ActivateAchievement", 0) == 0 && buildingName == "Oil Refinery"){
                     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOilRig);
                 }
-                if(buildingName == "Nuclear Plant"){
+                if(PlayerPrefs.GetInt("ActivateAchievement", 0) == 0 && buildingName == "Nuclear Plant"){
                     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
                 }
                 return building;
@@ -320,9 +320,13 @@ public class Game
             // Update the metrics and metric deltas
             Money += CostToSell;
             Happiness -= building.InitialBuildHappiness;
-            GenerateMoney -= building.GenerateMoney;
-            GenerateGreen -= building.GenerateGreen;
-            GenerateHappiness -= building.GenerateHappiness;
+            if (tile.IsBuildable(building))
+            {
+                Debug.Log("Selling Building Modify Gen");
+                GenerateHappiness -= building.GenerateHappiness;
+                GenerateMoney -= building.GenerateMoney;
+                GenerateGreen -= building.GenerateGreen;
+            }
 
             calculateDeltas();
             Debug.Log("Modifier: " + modifier);
@@ -467,19 +471,22 @@ public class Game
     {
         if (tile.Building != null)
         {
-            if (!tile.IsBuildable(tile.Building))
-            {
-                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
-                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
-                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
-            }
-            else
+            Debug.Log("TIle type was: " + tile.wasBuildable(tile.Building) + " type is: " + tile.IsBuildable(tile.Building));
+            if (!tile.wasBuildable(tile.Building) && tile.IsBuildable(tile.Building))
             {
                 GenerateGreen = GenerateGreen + tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney + tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness + tile.Building.GenerateHappiness;
             }
+            else if (tile.wasBuildable(tile.Building) && !tile.IsBuildable(tile.Building))
+            {
+                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                Debug.Log("Green: " + GenerateGreen + " Mon: " + GenerateMoney + "Hap: " + GenerateHappiness);
+            }
         }
+        calculateDeltas();
     }
 
     /*

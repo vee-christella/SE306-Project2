@@ -15,20 +15,22 @@ public class Tile
         Desert,
         Mountain,
         Plain,
-        Water
+        Water,
+        Null
     };
 
     private List<string> waterBuildable = new List<string>() { "Hydro Plant", "Pollutant", null };
     private List<string> desertBuildable = new List<string>(){"National Park", "Pollutant", "Nuclear Plant", "Oil Refinery",
     "Race Track", "Solar Farm", "Factory", "Recycling Plant", null};
     private List<string> plainBuildable = new List<string>(){"Forest", "Pollutant", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recyling Plant",
+    "Race Track", "Wind Turbine", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recycling Plant",
     "Vegetable Farm", null};
     private List<string> mountainBuildable = new List<string>() { "Coal Mine", "Pollutant", null };
 
     Action<Tile> callbackTypeChanged;
     Action<Tile> callbackBuildingChange;
     TileType type;
+    TileType oldType = TileType.Null;
     private int x;
     private int y;
     private int z;
@@ -39,6 +41,7 @@ public class Tile
     {
         get => type; set
         {
+            oldType = type;
             type = value;
             if (callbackTypeChanged != null)
             {
@@ -154,6 +157,7 @@ public class Tile
         {
             if (!desertBuildable.Contains(building.Name))
             {
+                Debug.Log("Desert not buildable");
                 return false;
             }
         }
@@ -162,11 +166,56 @@ public class Tile
         {
             if (!plainBuildable.Contains(building.Name))
             {
+                Debug.Log("Plain not buildable");
                 return false;
             }
         }
 
         return true;
+    }
+
+    public bool wasBuildable(Building building)
+    {
+        if(oldType!= TileType.Null)
+        {
+            // No buildings can be built on mountain tiles
+            if (this.oldType == Tile.TileType.Mountain)
+            {
+                if (!mountainBuildable.Contains(building.Name))
+                {
+                    return false;
+                }
+            }
+
+            else if (this.oldType == Tile.TileType.Water)
+            {
+                if (!waterBuildable.Contains(building.Name))
+                {
+                    return false;
+                }
+            }
+
+            else if (this.oldType == Tile.TileType.Desert)
+            {
+                if (!desertBuildable.Contains(building.Name))
+                {
+                    return false;
+                }
+            }
+
+            else if (this.oldType == Tile.TileType.Plain)
+            {
+                if (!plainBuildable.Contains(building.Name))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void registerMethodCallbackTypeChanged(Action<Tile> method)
