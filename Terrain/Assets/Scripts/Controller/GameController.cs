@@ -310,17 +310,6 @@ public class GameController : MonoBehaviour
         SetTurn(game.CurrentTurn);
     }
 
-    private IEnumerator fadeOut(AudioSource audio)
-    {
-        float startVolume = audio.volume;
-        while (audio.volume > 0)
-        {
-            audio.volume -= startVolume * Time.deltaTime / 3;
-        }
-        goodMainMusic.Stop();
-        yield return null;
-
-    }
 
     // Update is called once per frame
     void Update()
