@@ -41,6 +41,7 @@ public class MouseController : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
         gameGrid = FindObjectOfType<GameGrid>();
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }

@@ -26,8 +26,13 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI happinessDeltaText;
     public TextMeshProUGUI errorText;
     public TextMeshProUGUI placeholder;
-    public GameObject errorMessage;
     public GameObject happinessImage;
+
+    // Set the introductions by the advisor for each level
+    public GameObject level1Intro;
+    public GameObject level2Intro;
+    public GameObject level3Intro;
+
     public Sprite happyImage;
     public Sprite sadImage;
     public string[] greenMetricCheatCode = { "i", "l", "o", "v", "e", "e", "a", "r", "t", "h" };
@@ -58,14 +63,17 @@ public class GameController : MonoBehaviour
                 Game.InitialiseMetrics(200, 0, 50, 1000);
                 Map = PrototypeLevel.Arr;
                 placeholder.text = "Level 1";
+                level1Intro.SetActive(true);
                 break;
             case 2:
                 Game = new Game(15, 15);
                 placeholder.text = "Level 2";
+                level2Intro.SetActive(true);
                 break;
             case 3:
                 Game = new Game(20, 20);
                 placeholder.text = "Level 3";
+                level3Intro.SetActive(true);
                 break;
             default:
                 Game = new Game(5, 5);
