@@ -7,8 +7,6 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
 
-    // Update game controller 
-    
     private GameGrid gameGrid;
     Game game;
     EventController eventController;
