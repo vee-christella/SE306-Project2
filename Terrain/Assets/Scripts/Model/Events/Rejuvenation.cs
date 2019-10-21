@@ -12,7 +12,8 @@ public class Rejuvenation : Event
         this.Type = EventType.Good;
         this.Game = game;
         this.Title = "Rejuvenation";
-        this.Description = "Your abundance of green points has caused the earth to heal. As a result, some desert tiles have been turned to fertile plain tiles";
+        this.Description = "Your abundance in green points has caused the earth to heal.";
+        this.TileDeltaDesc = "Some desert tiles have been turned to fertile plain tiles.";
     }
 
     public override void TileDelta(Tile[,] tiles, bool doDestoryBuildings)

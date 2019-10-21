@@ -12,6 +12,7 @@ public class RisingSeaLevel : Event
         this.Game = game;
         this.Title = "Rising Sea Level";
         this.Description = "Global sea levels are expected to rise another 1 to 4 feet in the next 80 years. This is the result of extra water from melting glaciers and increasing sea levels from global warming. Rising sea levels is extremely worrying and harmful for the environment and future.";
+        this.TileDeltaDesc = "The outer tiles of your map has been converted to water tiles.";
     }
 
     public double Probability { get => probability; set => probability = value; }

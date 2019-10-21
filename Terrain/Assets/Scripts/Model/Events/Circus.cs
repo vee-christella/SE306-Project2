@@ -10,6 +10,7 @@ public class Circus : Event
         this.Description = "The Circus is in town! /n The people of your town feel extremely happy about this.";
         this.Game = game;
         this.Title = "Circus";
+        this.TileDeltaDesc = "Your population's happiness has increased.";
     }
 
 
