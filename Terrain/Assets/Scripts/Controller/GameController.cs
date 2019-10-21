@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI happinessDeltaText;
     public TextMeshProUGUI errorText;
     public GameObject happinessImage;
+    public TextMeshProUGUI placeholder;
 
     public Sprite happyImage;
     public Sprite sadImage;
@@ -57,21 +58,26 @@ public class GameController : MonoBehaviour
                 Game = new Game(5, 5);
                 tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
+                placeholder.text = "Tutorial";
                 break;
             case 1:
                 Game = new Game(10, 10);
                 Map = PrototypeLevel.Arr;
+                placeholder.text = "Level 1";
                 break;
             case 2:
                 Game = new Game(15, 15);
+                placeholder.text = "Level 2";
                 break;
             case 3:
                 Game = new Game(20, 20);
+                placeholder.text = "Level 3";
                 break;
             default:
                 Game = new Game(5, 5);
                 tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
+                placeholder.text = "Tutorial";
                 break;
 
         }
