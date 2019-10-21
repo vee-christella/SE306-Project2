@@ -20,10 +20,14 @@ public class DialogueManager : MonoBehaviour
     public GameObject greenArrow;
     public GameObject happiArrow;
     public GameObject turnsArrow;
+    public GameObject closeShopArrow;
+
+    public GameObject conversationBubble;
 
     public GameObject endTurnButton;
     public GameObject turnGenerationArrow;
     public GameObject endTurnsArrow;
+    public GameObject sellArrow;
 
     public GameObject plains;
     public GameObject mountains;
@@ -83,10 +87,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void skipIntro()
+    {
+        conversationBubble.SetActive(false);
+    }
+
 
     public void DisplayNextSentence()
     {
-        if (conversation.Count == 0 && tutorialStage != 6)
+        if (conversation.Count == 0 && tutorialStage != 10)
         {
             EndDialogue();
             return;
@@ -155,6 +164,7 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case 4:
+                Debug.Log(tutorialStage);
                 endTurnButton.GetComponent<Button>().interactable = false;
                 switch (conversation.Count)
                 {
@@ -165,6 +175,62 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case 5:
+                Debug.Log(tutorialStage);
+                endTurnButton.GetComponent<Button>().interactable = false;
+                switch (conversation.Count)
+                {
+                    case 1:
+                        continueButton.SetActive(false);
+                        break;
+                }
+                break;
+
+            case 6:
+                Debug.Log(tutorialStage);
+                endTurnButton.GetComponent<Button>().interactable = false;
+                switch (conversation.Count)
+                {
+                    case 1:
+                        closeShopArrow.SetActive(true);
+                        continueButton.SetActive(false);
+                        break;
+                    case 0:
+                        closeShopArrow.SetActive(false);
+                        break;
+                }
+                break;
+
+            case 7:
+                Debug.Log(tutorialStage);
+                endTurnButton.GetComponent<Button>().interactable = false;
+                switch (conversation.Count)
+                {
+                    case 1:
+                        continueButton.SetActive(false);
+                        break;
+                    case 0:
+                        break;
+                }
+                break;
+
+            case 8:
+                Debug.Log(tutorialStage);
+                shop.SetActive(false);
+                endTurnButton.GetComponent<Button>().interactable = true;
+                switch (conversation.Count)
+                {
+                    case 2:
+                        sellArrow.SetActive(true);
+                        break;
+
+                    case 1:
+                        continueButton.SetActive(false);
+                        break;
+
+                }
+                break;
+
+            case 9:
                 shop.SetActive(false);
                 endTurnButton.GetComponent<Button>().interactable = true;
                 switch(conversation.Count)
@@ -181,7 +247,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 break;
 
-            case 6:
+            case 10:
                 overlay.SetActive(true);
                 switch(conversation.Count)
                 {
@@ -234,8 +300,14 @@ public class DialogueManager : MonoBehaviour
         //boxAnimator.SetBool("isOpen", false);
         //avatarAnimator.SetBool("isOpen", false);
 
-
-        TutorialController.Instance.tutorialIndex++;
+        if (PlayerPrefs.GetInt("Level") == 0)
+        {
+            TutorialController.Instance.tutorialIndex++;
+        }
+        else
+        {
+            conversationBubble.SetActive(false);
+        }
 
         overlay.SetActive(false);
     }

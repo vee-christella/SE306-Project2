@@ -4,7 +4,8 @@ using UnityEngine;
 
 /*
 Retrieved from https://www.youtube.com/watch?v=7ybz28Py0-U&t=1s
- */
+Class to get the GameObject under the player's cursor point.
+*/
 public class MouseHoverController : MonoBehaviour
 {
     public static string selectedObject;
@@ -18,13 +19,11 @@ public class MouseHoverController : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // try
-        // {
         if (GameController.Instance.Game.HasStarted)
         {
+            // Only GameObjects with box colliders will be detected under the cursor
             if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), out theObject))
             {
                 selectedObject = theObject.transform.gameObject.name;
@@ -32,10 +31,6 @@ public class MouseHoverController : MonoBehaviour
                 mousePoint = theObject.point;
             }
         }
-        // }
-        // catch
-        // {
-        //     // Do nothing
-        // }
     }
+
 }

@@ -9,6 +9,8 @@ public class TutorialController : MonoBehaviour
     public int tutorialIndex;
     public TutorialController instance;
 
+    public bool shopClosed = false;
+    public bool buildingSold = false;
     public bool coalMineBuilt = false;
     public GameObject shop;
 
@@ -42,6 +44,7 @@ public class TutorialController : MonoBehaviour
         {
             case 3:
 
+                // Check if shop is open
                 if (animator.GetBool("open"))
                 {
                     tutorialIndex++;
@@ -49,15 +52,47 @@ public class TutorialController : MonoBehaviour
                 }
                 break;
             case 4: 
+
+                // Check if coal mine is built
                 if (coalMineBuilt)
                 {
-                    shop.SetActive(false);
+                    //shop.SetActive(false);
                     tutorialIndex++;
                     Debug.Log("Tutorial 5 - complete!!");
                 }
                 break;
 
-            case 5: 
+            case 5:
+
+                // Check if shop is closed
+                if (shopClosed)
+                {
+                    tutorialIndex++;
+                    Debug.Log("Tutorial 6 - complete!!");
+                }
+                break;
+
+            case 6:
+
+                // Check if tooltip has been clicked
+                if (MouseController.Instance.toolTip.activeSelf)
+                {
+                    tutorialIndex++;
+                    Debug.Log("Tutorial 7 - complete!!");
+                }
+                break;
+
+            case 7:
+
+                // Check if building has been sold
+                if (buildingSold)
+                {
+                    tutorialIndex++;
+                    Debug.Log("Tutorial 8 - complete!!");
+                }
+                break;
+
+            case 8: 
                 if(GameController.Instance.Game.CurrentTurn == 1)
                 {
                     tutorialIndex++;
@@ -65,7 +100,7 @@ public class TutorialController : MonoBehaviour
                 }
                 break;
 
-            case 6: 
+            case 9: 
                 if (DialogueManager.finishTutorial)
                 {
                     SceneManager.LoadScene("MenuScene");
@@ -81,6 +116,16 @@ public class TutorialController : MonoBehaviour
         public void BackToMenu()
     {
         SceneManager.LoadScene("MenuScene");
+    }
+
+    public void ShopClosed()
+    {
+        shopClosed = true;
+    }
+
+    public void BuildingSold()
+    {
+        buildingSold = true;
     }
 
 }

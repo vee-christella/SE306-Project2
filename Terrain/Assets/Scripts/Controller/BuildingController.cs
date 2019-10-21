@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/*
+This class controls the placement of buildings on the map. This includes
+permanantly placing buildings on the map, and temporarily placing a preview
+of a building at the player's cursor point.
+*/
 public class BuildingController : MonoBehaviour
 {
     private Dictionary<string, GameObject> modelDictionary = new Dictionary<string, GameObject>();
@@ -27,14 +32,12 @@ public class BuildingController : MonoBehaviour
     public GameObject model_WindTurbine;
     public GameObject model_Zoo;
     private GameObject previewBuilding;
-
     public static BuildingController Instance { get; protected set; }
-
-    // Start is called before the first frame update
 
     void Awake()
     {
         Instance = this;
+
         // Add models to dictionary for easy access when building
         modelDictionary.Add("AnimalFarm", model_AnimalFarm);
         modelDictionary.Add("BeeFarm", model_BeeFarm);
@@ -55,31 +58,37 @@ public class BuildingController : MonoBehaviour
         modelDictionary.Add("VegetableFarm", model_VegetableFarm);
         modelDictionary.Add("WindTurbine", model_WindTurbine);
         modelDictionary.Add("Zoo", model_Zoo);
-
-    }
-    void Start()
-    {
-
-
     }
 
+    /*
+    Adds the specified building to a specific tile. Returns true if the building
+    has been successfully built, and false otherwise.
+    */
     public bool addBuildingToTile(string buildingType, Tile tile)
     {
         Building building = GameController.Instance.Game.addBuildingToTile(buildingType, tile);
         return (building != null);
     }
 
+    /*
+    Updates the tile with the speicifed building
+    */
     public void ChangeBuildingModel(Tile tile, GameObject buildingGO)
     {
         // Remove the old building's callback method
         tile.unregisterMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
-        GameObject newBuilding = PlaceCubeNear(tile, buildingGO);
-        // Add the new building's and callback method
+
+        // Place the new building
+        GameObject newBuilding = PlaceBuildingOnMap(tile, buildingGO);
+
+        // Add the new building's callback method
         tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, newBuilding); });
     }
 
-
-    private GameObject PlaceCubeNear(Tile tile, GameObject building)
+    /*
+    Places the building on the tile in the game world
+    */
+    private GameObject PlaceBuildingOnMap(Tile tile, GameObject building)
     {
         GameObject newBuilding;
         if (tile.Building != null)
@@ -94,25 +103,31 @@ public class BuildingController : MonoBehaviour
         {
             newBuilding = new GameObject();
         }
+
+        // Set the building GameObject's name and position
         newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-        Debug.Log("callback placecubwear called");
+
         // Delete old (possibly empty) building GameObject
         Destroy(building);
 
         return newBuilding;
     }
 
+    /*
+    Shows a preview of the building that the player has selected from the shop at the cursor point.
+    The preview will be green if the building can be built on the tile, and red otherwise.
+    */
     public void ShowBuildingPreview(string name, Vector3 mousePoint)
     {
         // Remove the preview building from where the cursor previously was
-        Destroy(previewBuilding);
+        HideBuildingPreview();
 
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            string buildingName = resolveBuildingName(name);
-
-            previewBuilding = Instantiate(modelDictionary[buildingName]);
+            // Instantiate the preview building GameObject in the world
+            string buildingClassName = Building.resolveBuildingClassName(name);
+            previewBuilding = Instantiate(modelDictionary[buildingClassName]);
             previewBuilding.name = "PreviewBuilding";
 
             // Remove the preview object's box collider to prevent a hover changing its colour
@@ -121,7 +136,7 @@ public class BuildingController : MonoBehaviour
             // Show the preview building on the cursor point
             previewBuilding.transform.position = mousePoint;
 
-            if (canBuildOnPoint(buildingName, mousePoint))
+            if (canBuildOnPoint(buildingClassName, mousePoint))
             {
                 // Set the preview building to a green colour
                 previewBuilding.GetComponent<Renderer>().material.color = new Color32(0, 200, 0, 100);
@@ -134,56 +149,35 @@ public class BuildingController : MonoBehaviour
         }
     }
 
+    /*
+    Remove the preview of the building
+    */
     public void HideBuildingPreview()
     {
         Destroy(previewBuilding);
     }
 
     /*
-    Gets the class name of a building based on the "name" of the building
+    Returns true if the building can be built on the point, false otherwise.
     */
-    private string resolveBuildingName(string s)
+    private bool canBuildOnPoint(string buildingClassName, Vector3 point)
     {
-        if (s == "Animal Farm") return "AnimalFarm";
-        if (s == "Bee Farm") return "BeeFarm";
-        if (s == "Coal Mine") return "CoalMine";
-        if (s == "Factory") return "Factory";
-        if (s == "Forest") return "Forest";
-        if (s == "Greenhouse") return "Greenhouse";
-        if (s == "Hydro Plant") return "Hydro";
-        if (s == "Movie Theatre") return "MovieTheatre";
-        if (s == "National Park") return "NationalPark";
-        if (s == "Nuclear Plant") return "Nuclear";
-        if (s == "Oil Refinery") return "OilRefinery";
-        if (s == "Pollutant") return "Pollutant";
-        if (s == "Race Track") return "RaceTrack";
-        if (s == "Recycling Plant") return "RecyclingPlant";
-        if (s == "Solar Farm") return "SolarFarm";
-        if (s == "Town Hall") return "TownHall";
-        if (s == "Vegetable Farm") return "VegetableFarm";
-        if (s == "Wind Turbine") return "WindTurbine";
-        if (s == "Zoo") return "Zoo";
+        // Get the tile at the specified point
+        Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
 
-        // Should never return null if MouseController's SetMode_x() methods are implemented correctly
-        return null;
-    }
+        if (tile != null)
+        {
+            // Create a temporary building for the specified building name
+            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingClassName));
 
-    /*
-    Checks whether the building can be built on the point
-    */
-    private bool canBuildOnPoint(string buildingName, Vector3 point)
-    {
-        // Create a temporary building and check if it can be built on the tile at the point
-        if ((GameController.Instance.Game.getTileAt((int)point.x, (int)point.z)) != null){
-            Building building = (Building)Activator.CreateInstance(Type.GetType(buildingName));
-            Tile tile = GameController.Instance.Game.getTileAt((int)point.x, (int)point.z);
+            // Check if the tile already has a building on it
+            if (tile.Building != null) return false;
 
+            // Check the building can be built on the tile type
             if (tile.IsBuildable(building)) return true;
         }
 
         return false;
     }
-
-
 
 }
