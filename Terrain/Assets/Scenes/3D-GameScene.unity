@@ -592,7 +592,7 @@ RectTransform:
   - {fileID: 965690035}
   - {fileID: 1583730819}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -3431,7 +3431,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 801925484}
         m_MethodName: MenuButton
         m_Mode: 1
         m_Arguments:
@@ -7151,18 +7151,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 937790427}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1165839872}
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
@@ -7174,7 +7163,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1284030488}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -8707,7 +8696,7 @@ RectTransform:
   - {fileID: 30142792}
   - {fileID: 1772430373}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9564,7 +9553,7 @@ RectTransform:
   - {fileID: 2139235452}
   - {fileID: 2103941980}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9936,7 +9925,7 @@ RectTransform:
   - {fileID: 754111870}
   - {fileID: 64596455}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11570,7 +11559,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 801925484}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -11824,7 +11813,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 801925489}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -16756,17 +16745,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 801925484}
-        m_MethodName: Resume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &732929141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18519,7 +18497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endScreenUI: {fileID: 365530619}
-  endTitle: {fileID: 0}
+  endTitle: {fileID: 1772430374}
   endText: {fileID: 30142790}
 --- !u!114 &801925484
 MonoBehaviour:
@@ -18533,7 +18511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805add3b20fb49b4f9ce2967f0167785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 0}
+  pauseMenuUI: {fileID: 937790427}
+  achievementPanel: {fileID: 1284030488}
+  optionPanel: {fileID: 945778699}
+  helpPanel: {fileID: 436465077}
 --- !u!114 &801925485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18546,7 +18527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0aa16b267369c4abb576298b1701c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialOverlay: {fileID: 0}
+  tutorialOverlay: {fileID: 664070825}
   tileGameObjs:
   - {fileID: 337495820829161866, guid: 4bd75631be2c85a4aa68ea8d4af43133, type: 3}
   - {fileID: 2342857596658124763, guid: 2ec8b24ee36ef5c4f809916d8b094d3c, type: 3}
@@ -18688,16 +18669,16 @@ RectTransform:
   - {fileID: 195287304}
   - {fileID: 1759686436}
   - {fileID: 664070826}
-  - {fileID: 1284030492}
   - {fileID: 44881743}
   - {fileID: 526644741}
   - {fileID: 1562713919}
   - {fileID: 1185012957}
   - {fileID: 461839751}
   - {fileID: 365530620}
-  - {fileID: 945778700}
-  - {fileID: 436465080}
   - {fileID: 937790430}
+  - {fileID: 945778700}
+  - {fileID: 1284030492}
+  - {fileID: 436465080}
   - {fileID: 1060898816}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -20093,7 +20074,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1165839872}
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
@@ -20230,7 +20211,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1165839872}
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
@@ -21111,7 +21092,7 @@ RectTransform:
   - {fileID: 892499160}
   - {fileID: 294592186}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -25055,7 +25036,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1165839872}
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
@@ -26733,7 +26714,7 @@ RectTransform:
   - {fileID: 1223732422}
   - {fileID: 1860491157}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -28284,8 +28265,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1675714898}
   m_HandleRect: {fileID: 1675714897}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.70175445
+  m_Value: 0.0000001795151
+  m_Size: 0.70175433
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -28734,7 +28715,7 @@ RectTransform:
   - {fileID: 767617133}
   - {fileID: 732929139}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 8
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -32768,7 +32749,7 @@ RectTransform:
   - {fileID: 1059592563}
   - {fileID: 1001876300}
   m_Father: {fileID: 801925489}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -36550,7 +36531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1767896610
@@ -45175,6 +45156,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1165839872}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 43eab5df48c5de34bba447f6ceebec51,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
