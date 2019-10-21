@@ -51,7 +51,6 @@ public class Achievement
 
     public bool upAchievementCounter() {
         this.CurrentCount = this.CurrentCount + 1;
-        Debug.Log("Achievement Counter Increase: " + Title);
         this.AchievementRef.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = this.CurrentCount.ToString() + " out of "
         + this.CountToComplete;
         return achievementComplete;
