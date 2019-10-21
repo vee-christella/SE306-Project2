@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
-    public TextMeshProUGUI errorText;
+    //public TextMeshProUGUI errorText;
     public TextMeshProUGUI placeholder;
     public GameObject happinessImage;
 
@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 Game = new Game(5, 5);
+                assignCallBackMethodsToGame();
                 Game.InitialiseMetrics(200, 0, 50, 1000);
                 tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
@@ -64,63 +65,81 @@ public class GameController : MonoBehaviour
                 break;
             case 1:
                 Game = new Game(10, 10);
+                assignCallBackMethodsToGame();
                 Game.InitialiseMetrics(200, 0, 50, 1000);
                 Map = PrototypeLevel.Arr;
                 placeholder.text = "Level 1";
+                for (int x = 0; x < Game.Rows; x++)
+                {
+                    for (int z = 0; z < Game.Columns; z++)
+                    {
+                        switch (Map[x, z])
+                        {
+                            case 0:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Desert);
+                                break;
+                            case 1:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Mountain);
+                                break;
+                            case 2:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Plain);
+                                break;
+                            case 3:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Water);
+                                break;
+                        }
+                    }
+                }
+                Game.addBuildingToTile("Town Hall", game.getTileAt(4, 4));
                 level1Intro.SetActive(true);
                 break;
             case 2:
                 Game = new Game(15, 15);
+                assignCallBackMethodsToGame();
+                WorldGenerator.generateWorld(Game);
+                game.InitialiseMetrics(200, 0, 50, 1000);
                 placeholder.text = "Level 2";
                 level2Intro.SetActive(true);
                 break;
             case 3:
                 Game = new Game(20, 20);
+                assignCallBackMethodsToGame();
+                WorldGenerator.generateWorld(Game);
+                WorldGenerator.addBuildingsToWorld(Game);
                 placeholder.text = "Level 3";
+                game.InitialiseMetrics(200, -500, 50, 1000);
                 level3Intro.SetActive(true);
                 break;
             default:
-                Game = new Game(5, 5);
-                Game.InitialiseMetrics(200, 0, 50, 1000);
-                tutorialOverlay.SetActive(true);
-                Map = TutorialLevel.Arr;
-                placeholder.text = "Tutorial";
+                Game = new Game(15, 15);
+                assignCallBackMethodsToGame();
+                WorldGenerator.generateWorld(Game);
+                game.InitialiseMetrics(200, 0, 50, 1000);
+                placeholder.text = "Level 2";
+                level2Intro.SetActive(true);
                 break;
         }
 
         Game.IsEnd = false;
         Game.HasStarted = false;
-
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         eventController.Game = Game;
         eventController.GameController = this;
+        
+        Game.HasStarted = true;
+        StartingMetrics();
+    }
 
+    public void assignCallBackMethodsToGame()
+    {
         // Populate the map with game tiles
         for (int x = 0; x < Game.Rows; x++)
         {
             for (int z = 0; z < Game.Columns; z++)
             {
                 Tile tile = Game.getTileAt(x, z);
-
-                GameObject tileGO = Instantiate(tileGameObjs[Map[x, z]]) as GameObject;
+                GameObject tileGO = Instantiate(tileGameObjs[0]) as GameObject;
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
-
-                switch (Map[x, z])
-                {
-                    case 0:
-                        tile.setType(Tile.TileType.Desert);
-                        break;
-                    case 1:
-                        tile.setType(Tile.TileType.Mountain);
-                        break;
-                    case 2:
-                        tile.setType(Tile.TileType.Plain);
-                        break;
-                    case 3:
-                        tile.setType(Tile.TileType.Water);
-                        break;
-                }
-
                 // Create empty building game objects
                 GameObject buildingGO = new GameObject();
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
@@ -130,15 +149,6 @@ public class GameController : MonoBehaviour
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
             }
         }
-
-        // Don't randomly generate world on the tutorial
-        if (PlayerPrefs.GetInt("Level") != 0)
-        {
-            WorldGenerator.generateWorld(Game);
-        }
-
-        StartingMetrics();
-        Game.HasStarted = true;
     }
 
     /*

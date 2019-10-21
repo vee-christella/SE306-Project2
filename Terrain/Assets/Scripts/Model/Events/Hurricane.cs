@@ -13,7 +13,10 @@ public class Hurricane : Event
         this.Game = game;
         this.DestroysBuildings = true;
         this.Title = "Hurricane";
-        this.Description = "The intensity, frequency and duration of the strongest hurricanes have all increased since the early 1980s. Hurricane-associated storms and rainfall rates will increase as the climate becomes warmer.";
+        this.Description = "The intensity, frequency and duration of the strongest hurricanes have all increased since the early 1980s. " +
+            "Hurricane-associated storms and rainfall rates will increase as the climate becomes warmer. " +
+            "Events like acid rain have a higher chance of happening the lower your green points are " +
+            "and the longer it takes you to reach 1000 green points!";
     }
 
     public double Probability { get => probability; set => probability = value; }

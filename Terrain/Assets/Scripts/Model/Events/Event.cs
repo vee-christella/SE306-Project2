@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public abstract class Event
 {
@@ -88,11 +89,14 @@ public abstract class Event
     }
 
     public void DestroyBuildings(){
-        foreach (Tile tile in this.DestroyingBuildings){
-            float cost = tile.Building.InitialBuildMoney * 0.25f;
-            tile.removeBuilding();
-           // Game.Money+=cost;
-        }
-        DestroyingBuildings.Clear();
+        if (this.DestroyingBuildings.Any())
+        {
+            foreach (Tile tile in this.DestroyingBuildings)
+            {
+                float cost = tile.Building.InitialBuildMoney * 0.25f;
+                tile.removeBuilding();
+                // Game.Money+=cost;
+            }
+        }        DestroyingBuildings.Clear();
     }
 }
