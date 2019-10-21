@@ -96,7 +96,7 @@ public class EventController : MonoBehaviour
     public void RemovePopup()
     {
         Game.GameEvent.TileDelta(Game.Tiles, true);
-        closeButton.gameObject.SetActive(false);
+        closeButton.SetActive(false);
         eventPopupPanel.SetActive(false);
     }
 
