@@ -2131,20 +2131,22 @@ MonoBehaviour:
   dialogue:
     npcName: Honk Shi
     sentences:
-    - This level is the hardest and most complex. You've been hired to rebuild a city
-      that the last mayor messed up!
-    - 'The old mayors of this city made the town unsustainable and polluted.
+    - 'You have truly proven your abilities to be one of the top experts of city developing!
 
-
-      It''s your job to clean up the city and make it better!'
-    - When you enter the map, buildings will have already been placed. Pollutants
+      Most respected of them all.'
+    - You are now approached with a massive problem in another city. The old mayor
+      was incompetent and made the town unsustainable and polluted. It is said the
+      town is unsalvagable.
+    - You take on this challenge, knowing its up to you to turn the situation around
+      to make the impossible, possible.
+    - "When you enter the map, buildings will have already been placed. Pollutants
       are also scattered over the map which decrease your metrics, so try to sell
-      them as fast as possible!
-    - Be careful though - you have to PAY to "semove these pollutants. You'll have
+      them as fast as possible!\r"
+    - Be careful though - you have to PAY to remove these pollutants. You'll have
       to balance your money and green points more than ever before!
     - The map is also much bigger and will also be random each time you play it. Random
       events will occur even MORE than before, too.
-    - I believe you can do this! Good luck, Mayor!s
+    - This level is extremely hard so, Good luck!
 --- !u!114 &110489919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44864,11 +44866,16 @@ MonoBehaviour:
   dialogue:
     npcName: Honk Shi
     sentences:
-    - This city is a little harder than the previous one.
-    - "Let's spice things up a bit! \n\nThis map is bigger, and will always be different
-      each time you play this level. "
-    - The chance to get a random event is higher, so make sure you're ready for anything
-      that comes at your city.
+    - "You've done great! \r\nThe Prime Minister has promoted you and the people appreciate
+      your efforts!"
+    - 'However, this means you have to manage a city more suited to your abilities.
+
+      You have been given a new city to build and develop.'
+    - 'This city is a little harder than the previous one.
+
+      This map is bigger, and will always be different each time you play this level. '
+    - There are random events that can happen depending on how well you're doing,
+      so make sure you're ready for anything that comes at your city.
     - 'Good luck! '
 --- !u!114 &1974343578
 MonoBehaviour:
@@ -48879,10 +48886,15 @@ MonoBehaviour:
   dialogue:
     npcName: Honk Shi
     sentences:
+    - 'The Prime Minister has assigned you to lead this town with sustainable development.
+
+      As the newbie Mayor, you are only given a small patch of land in a safe location.'
+    - "If this town gets managed well, you can get promoted to a larger plot of land
+      and become a more well renowned. \nThis will be a great start to your career!"
     - "This level's map is always the same no matter how many times you play it. \n\nYou
       have 100 turns to reach 1000 green points."
-    - 'There''s no catch here, so feel free to learn the game by trying out different
-      things! '
+    - There's no catch here, so feel free to learn the game by trying out different
+      things!
     - 'Good luck! '
 --- !u!114 &2135872414
 MonoBehaviour:

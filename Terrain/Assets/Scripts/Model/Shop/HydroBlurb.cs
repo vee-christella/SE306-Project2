@@ -51,6 +51,6 @@ public class HydroBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        endTurn.interactable = false;
+        //endTurn.interactable = false;
     }
 }

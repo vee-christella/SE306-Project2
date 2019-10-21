@@ -51,6 +51,6 @@ public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        endTurn.interactable = false;
+        //endTurn.interactable = false;
     }
 }
