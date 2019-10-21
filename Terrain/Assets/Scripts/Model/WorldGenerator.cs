@@ -112,6 +112,7 @@ public class WorldGenerator
                         if(!townHallBuilt && i > rows * 4 / 10 && i <= rows * 6 / 10 && j > cols * 4 / 10 && j <= cols * 6 / 10 )
                         {
                             game.addBuildingToTile("Town Hall", game.getTileAt(i, j));
+                            Debug.Log("TownHall Built");
                             townHallBuilt = true;
                         }
 
@@ -125,6 +126,10 @@ public class WorldGenerator
                 townHallBuilt = true;
             }
             int num = (rows * cols) / 6;
+
+            perlinList1.Clear();
+            perlinList2.Clear();
+            Debug.Log("Loop world generation");
             if (mountainCount >= num && waterCount >= num && plainCount >= num && desertCount >= num)
             {
                 mapMaking = false;
@@ -159,10 +164,12 @@ public class WorldGenerator
         List<Struct> plain = new List<Struct>() { forest, pollutant, movie, national, nuclear, race, wind, zoo, animal, bee, factory, green, recycling, vegetable };
         List<Struct> mountain = new List<Struct>() { coal, pollutant };
         List<Struct> water = new List<Struct>() { hydro, pollutant };
+        PlayerPrefs.SetInt("ActivateAchievement", 1);
         var tempCoord = new { x = 0, y = 0 };
         var coords = new[] { tempCoord }.ToList();
         //BuildingController.Instance.addBuildingToTile("Town Hall", tile);
         coords.Remove(tempCoord);
+
         //create variable for every coordinate
         for (int i = 1; i < rows - 1; i++)
         {
@@ -195,7 +202,6 @@ public class WorldGenerator
             if (tile.Type == Tile.TileType.Desert && desert.Any())
             {
                 building = desert[Random.Range(0, desert.Count)];
-
             }
             else if (tile.Type == Tile.TileType.Plain && plain.Any())
             {
@@ -223,6 +229,7 @@ public class WorldGenerator
             if (replaceBuilding)
             {
                 buildingCounter++;
+                Debug.Log("Building Generation Counter: " + buildingCounter);
                 building.Num--;
                 if (building.Num <= 0)
                 {
@@ -233,7 +240,7 @@ public class WorldGenerator
                 }
             }
         }
-        game.InitialiseMetrics(200, -500, 50, 1000);
+        PlayerPrefs.SetInt("ActivateAchievement", 0);
         Debug.Log("Buildings Generated: " + buildingCounter);
     }
 }

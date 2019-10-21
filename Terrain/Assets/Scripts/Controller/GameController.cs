@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
-    public TextMeshProUGUI errorText;
+    //public TextMeshProUGUI errorText;
     public TextMeshProUGUI placeholder;
     public GameObject happinessImage;
 
@@ -97,6 +97,7 @@ public class GameController : MonoBehaviour
                 Game = new Game(15, 15);
                 assignCallBackMethodsToGame();
                 WorldGenerator.generateWorld(Game);
+                game.InitialiseMetrics(200, 0, 50, 1000);
                 placeholder.text = "Level 2";
                 level2Intro.SetActive(true);
                 break;
@@ -106,36 +107,16 @@ public class GameController : MonoBehaviour
                 WorldGenerator.generateWorld(Game);
                 WorldGenerator.addBuildingsToWorld(Game);
                 placeholder.text = "Level 3";
+                game.InitialiseMetrics(200, -500, 50, 1000);
                 level3Intro.SetActive(true);
                 break;
             default:
-                Game = new Game(10, 10);
+                Game = new Game(15, 15);
                 assignCallBackMethodsToGame();
-                Game.InitialiseMetrics(200, 0, 50, 1000);
-                Map = PrototypeLevel.Arr;
-                placeholder.text = "Level 1";
-                for (int x = 0; x < Game.Rows; x++)
-                {
-                    for (int z = 0; z < Game.Columns; z++)
-                    {
-                        switch (Map[x, z])
-                        {
-                            case 0:
-                                Game.getTileAt(x,z).setType(Tile.TileType.Desert);
-                                break;
-                            case 1:
-                                Game.getTileAt(x, z).setType(Tile.TileType.Mountain);
-                                break;
-                            case 2:
-                                Game.getTileAt(x, z).setType(Tile.TileType.Plain);
-                                break;
-                            case 3:
-                                Game.getTileAt(x, z).setType(Tile.TileType.Water);
-                                break;
-                        }
-                    }
-                }
-                Game.addBuildingToTile("Town Hall", game.getTileAt(4, 4));
+                WorldGenerator.generateWorld(Game);
+                game.InitialiseMetrics(200, 0, 50, 1000);
+                placeholder.text = "Level 2";
+                level2Intro.SetActive(true);
                 break;
         }
 
