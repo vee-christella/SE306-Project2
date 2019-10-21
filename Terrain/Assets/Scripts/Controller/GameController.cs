@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI happinessDeltaText;
     //public TextMeshProUGUI errorText;
     public TextMeshProUGUI placeholder;
+    public GameObject errorPopup;
     public GameObject happinessImage;
 
     private bool badEventOccured;
