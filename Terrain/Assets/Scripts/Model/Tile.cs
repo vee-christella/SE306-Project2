@@ -43,8 +43,10 @@ public class Tile
         {
             oldType = type;
             type = value;
+            game.StillBuildable(this);
             if (callbackTypeChanged != null)
             {
+                Debug.Log("TIleTypeChanged");
                 callbackTypeChanged(this);
             }
         }
@@ -54,6 +56,7 @@ public class Tile
     public int Z { get => z; set => z = value; }
     public Building Building { get => building; }
     public Action<Tile> CallbackBuildingChange { get => callbackBuildingChange; }
+    public Action<Tile> CallbackTypeChanged { get => callbackTypeChanged; }
 
     public Tile(Game game, TileType type, int x, int y, int z)
     {
@@ -223,8 +226,8 @@ public class Tile
         callbackTypeChanged += method;
     }
 
-    public void unregisterMethodCallbackTypeChanged(Action<Tile> method)
+    public void unregisterMethodCallbackTypeChanged()
     {
-        callbackTypeChanged -= method;
+        callbackTypeChanged = null;
     }
 }

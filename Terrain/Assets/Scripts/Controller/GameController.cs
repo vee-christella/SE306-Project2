@@ -27,8 +27,7 @@ public class GameController : MonoBehaviour
     //public TextMeshProUGUI errorText;
     public TextMeshProUGUI placeholder;
     public GameObject happinessImage;
-
-    public int tileCounter = 0;
+    
     
     // Set the introductions by the advisor for each level
     public GameObject level1Intro;
@@ -156,7 +155,10 @@ public class GameController : MonoBehaviour
         Debug.Log("World loaded");
 
         Game.getTileAt(0, 0).Type = Tile.TileType.Desert;
-        
+        Game.getTileAt(0, 0).Type = Tile.TileType.Water;
+        Game.getTileAt(0, 0).Type = Tile.TileType.Plain;
+        Game.getTileAt(0, 0).Type = Tile.TileType.Mountain;
+        Game.getTileAt(0, 0).CallbackTypeChanged(Game.getTileAt(0, 0));
     }
 
     public void assignCallBackMethodsToGame()
@@ -442,10 +444,13 @@ public class GameController : MonoBehaviour
         Debug.Log("OnTileType Method called");
        
         // Unregeister the old tile's callback method
-        tile.unregisterMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
-        GameObject tileGONew = changeTileObject(tile, tileGO);
-        // Register the new tile's callback method
-        tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+        tile.unregisterMethodCallbackTypeChanged();
+        if(tileGO!= null)
+        {
+            GameObject tileGONew = changeTileObject(tile, tileGO);
+            // Register the new tile's callback method
+            tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+        }
 
     }
 
@@ -472,9 +477,7 @@ public class GameController : MonoBehaviour
 
         // Create the new tile GameObject and set its attributes
         GameObject tileGONew = Instantiate(tileGameObjs[typeInt]);
-        Debug.Log("tile object is  " + tileCounter);
-        tileGONew.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")" + tileCounter;
-        tileCounter++;
+        tileGONew.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         tileGONew.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
         // Set the location of the new tile GameObject
@@ -484,10 +487,8 @@ public class GameController : MonoBehaviour
         */
 
         // Remove the old tile GameObject from the game
-        Debug.Log("tile destroyed was " + tileGO.name);
         Destroy(tileGO);
         tileGO.name = tileGO.name + "_to_destroy";
-        Debug.Log("tile destroyed was2 " + tileGO.name);
         return tileGONew;
     }
     /*

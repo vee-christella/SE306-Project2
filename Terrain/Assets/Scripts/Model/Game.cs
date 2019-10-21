@@ -107,8 +107,6 @@ public class Game
             for (int z = 0; z < columns; z++)
             {
                 tiles[x, z] = new Tile(this, x, z);
-                // Register a callback method for each tile so that it can be changed dynamically
-                tiles[x, z].registerMethodCallbackTypeChanged(StillBuildable);
             }
         }
 
@@ -352,15 +350,15 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
-        switch (gameDifficulty)
+        switch (PlayerPrefs.GetInt("Level"))
         {
-            case GameDifficulty.Easy:
+            case 1:
                 difficultyOffset = 0.1f;
                 break;
-            case GameDifficulty.Medium:
+            case 2:
                 difficultyOffset = 0.2f;
                 break;
-            case GameDifficulty.Hard:
+            case 3:
                 difficultyOffset = 0.3f;
                 break;
             default:
