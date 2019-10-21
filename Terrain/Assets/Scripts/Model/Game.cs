@@ -29,7 +29,6 @@ public class Game
     // xDelta is the amount generated per turn after happiness modifiers
     float moneyDelta;
     float greenDelta;
-    GameDifficulty difficulty;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
@@ -41,8 +40,9 @@ public class Game
     bool hasStarted = false;
     public float modifier = 1;
     GameObject errorMessage;
-
-    public GameDifficulty Difficulty { get => difficulty; set => difficulty = value; }
+    bool levelOneComplete = false;
+    bool levelTwoComplete = false;
+    bool levelThreeComplete = false;
     public int Rows { get => rows; }
     public int Columns { get => columns; }
     public Tile[,] Tiles { get => tiles; set => tiles = value; }
@@ -205,6 +205,7 @@ public class Game
         // Check if the user has won the game by reaching the number of green points required
         if (this.greenPoints >= maxGreen)
         {
+            //Check Achievements
             AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
 
             if(currentTurn <= 80) 
@@ -214,6 +215,24 @@ public class Game
             if(currentTurn <= 90)
             {
                 AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win90Turns);
+            }
+            if (PlayerPrefs.GetInt("Level", 0) == 1 && !levelOneComplete)
+            {
+                Debug.Log("Complete level 1");
+                levelOneComplete = true;
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.WinAllLevels);
+            }
+            if (PlayerPrefs.GetInt("Level", 0) == 2 && !levelTwoComplete)
+            {
+                Debug.Log("Complete level 2");
+                levelTwoComplete = true;
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.WinAllLevels);
+            }
+            if (PlayerPrefs.GetInt("Level", 0) == 3 && !levelThreeComplete)
+            {
+                Debug.Log("Complete level 3");
+                levelThreeComplete = true;
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.WinAllLevels);
             }
 
             this.endGame(true);

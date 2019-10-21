@@ -40,9 +40,9 @@ public class AnimalFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = animalFarm.Blurb;
         buildingName.text = animalFarm.Name;
-        coinMetric.text = animalFarm.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = animalFarm.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = animalFarm.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = animalFarm.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = animalFarm.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = animalFarm.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

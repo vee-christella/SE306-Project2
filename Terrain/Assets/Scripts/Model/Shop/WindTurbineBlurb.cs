@@ -40,9 +40,9 @@ public class WindTurbineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = windTurbine.Blurb;
         buildingName.text = windTurbine.Name;
-        coinMetric.text = windTurbine.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = windTurbine.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = windTurbine.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = windTurbine.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = windTurbine.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = windTurbine.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

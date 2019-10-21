@@ -40,9 +40,9 @@ public class RecyclingPlantBlurb : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = recyclingPlant.Blurb;
         buildingName.text = recyclingPlant.Name;
-        coinMetric.text = recyclingPlant.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = recyclingPlant.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = recyclingPlant.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = recyclingPlant.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = recyclingPlant.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = recyclingPlant.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

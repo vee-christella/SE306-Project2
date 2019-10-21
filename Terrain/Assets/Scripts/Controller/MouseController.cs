@@ -25,7 +25,12 @@ public class MouseController : MonoBehaviour
     private float mouseScrollPosition;
     public GameObject toolTip;
     public Text cancelButtonString;
-    private TextMeshProUGUI toolTipText;
+    public TextMeshProUGUI toolTipCoin;
+    public TextMeshProUGUI toolTipGreen;
+    public TextMeshProUGUI toolTipHappiness;
+    public TextMeshProUGUI toolTipName;
+
+
     private TextMeshProUGUI sellText;
     public Button sellButton;
     public AudioSource CantBuildSound;
@@ -36,7 +41,6 @@ public class MouseController : MonoBehaviour
     void Start()
     {
         mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
-        toolTipText = toolTip.GetComponentInChildren<TextMeshProUGUI>();
         sellText = sellButton.GetComponentInChildren<TextMeshProUGUI>();
     }
     private void Awake()
@@ -316,7 +320,11 @@ public class MouseController : MonoBehaviour
             happiness = "0";
         }
 
-        toolTipText.SetText(name + "\nMoney: " + money + "\nGreen: " + green + "\nHappiness: " + happiness);
+        toolTipName.SetText(name);
+        toolTipCoin.SetText(money);
+        toolTipGreen.SetText(green);
+        toolTipHappiness.SetText(happiness);
+
 
     }
 
