@@ -28,6 +28,12 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI placeholder;
     public GameObject happinessImage;
 
+    private bool badEventOccured;
+
+
+    public AudioSource goodMainMusic;
+    public AudioSource badMainMusic;
+
     // Set the introductions by the advisor for each level
     public GameObject level1Intro;
     public GameObject level2Intro;
@@ -51,6 +57,9 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
+        badEventOccured = false;
+        goodMainMusic.Play();
+    
 
         // Change the map generation depending on the game mode/difficulty
         switch (PlayerPrefs.GetInt("Level"))
@@ -274,6 +283,24 @@ public class GameController : MonoBehaviour
         if (game.GameEvent != null)
         {
             EventController.DisplayEventPopup();
+
+            if(game.GameEvent.Type != Event.EventType.Good) // if event is bad
+            {
+                if (!badEventOccured) // if currently not bad event
+                {
+                    badMainMusic.Play();
+                    goodMainMusic.Stop();
+                    badEventOccured = true;
+                }
+            } else
+            {
+                if (badEventOccured)
+                {
+                    badMainMusic.Stop();
+                    goodMainMusic.Play();
+                    badEventOccured = false;
+                }
+            }
         }
 
         Debug.Log("Finished event logic");
@@ -283,6 +310,8 @@ public class GameController : MonoBehaviour
         SetTurn(game.CurrentTurn);
     }
 
+
+    // Update is called once per frame
     void Update()
     {
         CheckMetrics();

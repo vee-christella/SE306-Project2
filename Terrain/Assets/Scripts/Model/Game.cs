@@ -195,6 +195,7 @@ public class Game
         {
             Happiness = 0;
         }
+        GameController.Instance.ChangeImageSprite(modifier);
 
         // If Happiness is >100 or <0, set it to 100 or 0 respectively 
         Happiness = (Happiness > 100) ? 100 : Happiness;
@@ -460,6 +461,8 @@ public class Game
         {
             Happiness += building.InitialBuildHappiness;
         }
+        GameController.Instance.ChangeImageSprite(modifier);
+
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
@@ -537,13 +540,13 @@ public class Game
             modifier += 0.1f;
         }
 
-        if (Happiness < 70 && Happiness + happinessDelta >= 70)
+        if (Happiness < 50 && Happiness + happinessDelta >= 50)
         {
             Debug.Log("70 up");
             modifier += 0.1f;
         }
 
-        if (Happiness >= 70 && Happiness + happinessDelta < 70)
+        if (Happiness < 70 && Happiness + happinessDelta >= 70)
         {
             Debug.Log("70 down");
             modifier -= 0.1f;
@@ -593,7 +596,6 @@ public class Game
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
 
-        GameController.Instance.ChangeImageSprite(modifier);
     }
 
 }
