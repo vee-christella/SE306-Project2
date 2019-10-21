@@ -20,7 +20,6 @@ public class Game
     float generateMoney;
     float generateGreen;
     float generateHappiness;
-    bool postiveHappiness = true;
     Building[,] buildings;
     GameDifficulty gameDifficulty;
     Event gameEvent;
@@ -161,6 +160,7 @@ public class Game
         Happiness = Happiness + GenerateHappiness;
         if(Happiness > 100)
         {
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Happiness);
             Happiness = 100;
         } else if (Happiness < 0)
         {
@@ -179,10 +179,6 @@ public class Game
         // points required
         if (this.green >= maxGreen)
         {
-            if (postiveHappiness)
-            {
-                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Happiness);
-            }
             AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
 
             // AchievementController achievementController = new AchievementController();
