@@ -40,9 +40,9 @@ public class BeeFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = beeFarm.Blurb;
         buildingName.text = beeFarm.Name;
-        coinMetric.text = beeFarm.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = beeFarm.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = beeFarm.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = beeFarm.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = beeFarm.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = beeFarm.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

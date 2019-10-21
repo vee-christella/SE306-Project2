@@ -53,10 +53,7 @@ public class AchievementController : MonoBehaviour
     public void ResetData()
     {
         PlayerPrefs.DeleteAll();
-        Achievement[] listOfAchievements = AchievementManager.Instance.achievements;
-        foreach(Achievement achievement in listOfAchievements)
-        {
-            Debug.Log("RESETTING");
+        foreach(Achievement achievement in AchievementManager.Instance.achievements){
             achievement.AchievementRef.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text =
             PlayerPrefs.GetInt("Count"+ achievement.Title, 0).ToString() + " out of " + achievement.CountToComplete.ToString();
             achievement.AchievementRef.transform.GetChild(3).GetComponent<Image>().enabled = false;
