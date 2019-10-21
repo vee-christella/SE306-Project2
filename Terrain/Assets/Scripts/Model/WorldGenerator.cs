@@ -22,9 +22,14 @@ public class WorldGenerator
         float min = 1;
         float[,] perlinArray1 = new float[rows, cols];
         float[,] perlinArray2 = new float[rows, cols];
-        float scale = 3.5f;//rows / 5f;
+        List<float> perlinList1 = new List<float>();
+        List<float> perlinList2 = new List<float>();
+        float scale;
+        scale = 2 + rows / 10f;
         bool mapMaking = true;
-        
+        while (mapMaking)
+        {
+
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -32,6 +37,7 @@ public class WorldGenerator
                     rowCoord = (float)i / rows * scale + randomRow1;
                     colCoord = (float)j / cols * scale + randomCol1;
                     perlinArray1[i, j] = Mathf.PerlinNoise(rowCoord, colCoord);
+                    perlinList1.Add(perlinArray1[i, j]);
                     if (perlinArray1[i, j] > max)
                     {
                         max = perlinArray1[i, j];
@@ -43,7 +49,8 @@ public class WorldGenerator
                     rowCoord = (float)i / rows * scale + randomRow2;
                     colCoord = (float)j / cols * scale + randomCol2;
                     perlinArray2[i, j] = Mathf.PerlinNoise(rowCoord, colCoord);
-                if (perlinArray2[i, j] > max)
+                    perlinList2.Add(perlinArray2[i, j]);
+                    if (perlinArray2[i, j] > max)
                     {
                         max = perlinArray2[i, j];
                     }
@@ -52,6 +59,20 @@ public class WorldGenerator
                         min = perlinArray2[i, j];
                     }
                 }
+            }
+            perlinList1.Sort();
+            perlinList2.Sort();
+            float median1;
+            float median2;
+            if (perlinList1.Count % 2 == 0)
+            {
+                median1 = perlinList1[perlinList1.Count * 4 / 10];
+                median2 = (perlinList2[perlinList2.Count / 2] + perlinList2[perlinList2.Count / 2 - 1]) / 2;
+            }
+            else
+            {
+                median1 = perlinList1[perlinList1.Count * 4 / 10];
+                median2 = perlinList2[(perlinList2.Count - 1) / 2];
             }
             int mountainCount = 0;
             int waterCount = 0;
@@ -62,28 +83,28 @@ public class WorldGenerator
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (perlinArray1[i, j] < min + divider * 1 && perlinArray2[i, j] < min + divider * 3)
+                    if (perlinArray1[i, j] < median1 && perlinArray2[i, j] < median2)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Mountain);
                         mountainCount++;
 
                     }
-                    else if (perlinArray1[i, j] >= min + divider * 3 && perlinArray2[i, j] >= min + divider * 1)
+                    else if (perlinArray1[i, j] < median1 && perlinArray2[i, j] >= median2)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Water);
                         waterCount++;
 
                     }
-                    else if (perlinArray2[i, j] < min + divider * 2)
+                    else if (perlinArray1[i, j] >= median1 && perlinArray2[i, j] >= median2)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Desert);
                         desertCount++;
 
                     }
-                    else if (perlinArray2[i, j] >= min + divider * 2)
+                    else if (perlinArray1[i, j] >= median1 && perlinArray2[i, j] < median2)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Plain);
@@ -92,13 +113,15 @@ public class WorldGenerator
                     }
                 }
             }
-            int num = rows * cols / 6;
+
+            int num = (rows * cols) / 6;
             if (mountainCount >= num && waterCount >= num && plainCount >= num && desertCount >= num)
             {
                 mapMaking = false;
+                Debug.Log("Mountains: " + mountainCount + " water: " + waterCount + " plains: " + plainCount + " desert: " + desertCount);
             }
-        Debug.Log("Mountains: " + mountainCount + " water: " + waterCount + " plains: " + plainCount + " desert: " + desertCount);
-        
+        }
+
     }
 
     public static void addBuildingsToWorld(Game game)
