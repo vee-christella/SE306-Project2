@@ -157,6 +157,7 @@ public class Tile
         {
             if (!desertBuildable.Contains(building.Name))
             {
+                Debug.Log("Desert not buildable");
                 return false;
             }
         }
@@ -165,6 +166,7 @@ public class Tile
         {
             if (!plainBuildable.Contains(building.Name))
             {
+                Debug.Log("Plain not buildable");
                 return false;
             }
         }

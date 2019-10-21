@@ -4392,7 +4392,7 @@ MonoBehaviour:
   endTurnButton: {fileID: 468988701}
   turnGenerationArrow: {fileID: 0}
   endTurnsArrow: {fileID: 0}
-  sellArrow: {fileID: 555241366}
+  sellArrow: {fileID: 0}
   plains: {fileID: 0}
   mountains: {fileID: 0}
   desert: {fileID: 0}
@@ -16993,7 +16993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endScreenUI: {fileID: 365530619}
-  endTitle: {fileID: 1772430374}
+  endTitle: {fileID: 0}
   endText: {fileID: 30142790}
 --- !u!114 &801925484
 MonoBehaviour:
@@ -24779,7 +24779,7 @@ MonoBehaviour:
   greenArrow: {fileID: 0}
   happiArrow: {fileID: 0}
   turnsArrow: {fileID: 0}
-  closeShopArrow: {fileID: 998305988}
+  closeShopArrow: {fileID: 0}
   conversationBubble: {fileID: 0}
   endTurnButton: {fileID: 468988701}
   turnGenerationArrow: {fileID: 0}
@@ -26412,8 +26412,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1675714898}
   m_HandleRect: {fileID: 1675714897}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.70175445
+  m_Value: 0.0000001795152
+  m_Size: 0.7017544
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

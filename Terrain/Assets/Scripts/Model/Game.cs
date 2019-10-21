@@ -294,6 +294,7 @@ public class Game
             Happiness -= building.InitialBuildHappiness;
             if (tile.IsBuildable(building))
             {
+                Debug.Log("Selling Building Modify Gen");
                 GenerateHappiness -= building.GenerateHappiness;
                 GenerateMoney -= building.GenerateMoney;
                 GenerateGreen -= building.GenerateGreen;
@@ -457,7 +458,7 @@ public class Game
                 Debug.Log("Green: " + GenerateGreen + " Mon: " + GenerateMoney + "Hap: " + GenerateHappiness);
             }
         }
-        calculateDelta();
+        calculateDeltas();
     }
 
     /*
