@@ -109,9 +109,16 @@ public class BuildingController : MonoBehaviour
         newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-        if (newBuildingModel != null && newBuildingModel == "TownHall")
+        if (newBuildingModel != null)
         {
-            newBuilding.transform.position = new Vector3(tile.X - 0.3f, (float)tile.Y + 0.2f, tile.Z - 0.3f);
+            if (newBuildingModel == "TownHall" || newBuilding)
+            {
+                newBuilding.transform.position = new Vector3(tile.X - 0.3f, (float)tile.Y + 0.2f, tile.Z - 0.3f);
+            }
+            else if (newBuilding != "CoalMine" && newBuilding != "Hydro")
+            {
+                newBuilding.transform.position = new Vector3(tile.X, (float)tile.Y + 0.1f, tile.Z);
+            }
         }
 
         // Delete old (possibly empty) building GameObject
