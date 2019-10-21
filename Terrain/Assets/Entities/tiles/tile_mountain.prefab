@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1747921558482125537
+--- !u!1 &8318958734064121888
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1747921558482230977}
+  - component: {fileID: 8318958734063821824}
+  - component: {fileID: 65374242378980760}
   m_Layer: 0
   m_Name: tile_mountain
   m_TagString: Untagged
@@ -16,22 +17,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1747921558482230977
+--- !u!4 &8318958734063821824
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747921558482125537}
+  m_GameObject: {fileID: 8318958734064121888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3647566, y: 0.4066491, z: -2.5892992}
+  m_LocalPosition: {x: 92.68625, y: 100.971825, z: -299.47925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1747921558482230979}
+  - {fileID: 8318958734063821826}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1747921558482125539
+--- !u!65 &65374242378980760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318958734064121888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8318958734064121890
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,9 +53,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1747921558482230979}
-  - component: {fileID: 1747921558483033831}
-  - component: {fileID: 1747921558484130855}
+  - component: {fileID: 8318958734063821826}
+  - component: {fileID: 8318958734067213350}
+  - component: {fileID: 8318958734066116326}
   m_Layer: 0
   m_Name: mountain tile
   m_TagString: Untagged
@@ -49,35 +63,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1747921558482230979
+--- !u!4 &8318958734063821826
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747921558482125539}
+  m_GameObject: {fileID: 8318958734064121890}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
-  m_Father: {fileID: 1747921558482230977}
+  m_Father: {fileID: 8318958734063821824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1747921558483033831
+--- !u!33 &8318958734067213350
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747921558482125539}
+  m_GameObject: {fileID: 8318958734064121890}
   m_Mesh: {fileID: 4300000, guid: b643122166987ee41bb62406dd65d484, type: 3}
---- !u!23 &1747921558484130855
+--- !u!23 &8318958734066116326
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747921558482125539}
+  m_GameObject: {fileID: 8318958734064121890}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
