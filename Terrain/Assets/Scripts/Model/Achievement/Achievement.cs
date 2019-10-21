@@ -56,6 +56,4 @@ public class Achievement
         + this.CountToComplete;
         return achievementComplete;
     }
-
-
 }

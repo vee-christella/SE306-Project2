@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class AchievementController : MonoBehaviour
 {
     public GameObject achievementPopup;
-    public TextMeshProUGUI achievementTitle;
-    public TextMeshProUGUI achievementDesc;
     public GameObject achievementPrefab;
     private System.Action popup;
     public GameObject achievementsPanel;
@@ -38,13 +36,15 @@ public class AchievementController : MonoBehaviour
         achievement.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = description;
         achievement.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = progress;
     }
-    void ActivatePopUp(Achievement achievement)
+    public void ActivatePopUp(Achievement achievement)
     {
         achievement.AchievementRef.transform.GetChild(3).GetComponent<Image>().enabled = true;
-        Debug.Log("Achievement!!!");
-        achievementTitle.text = "Achievement complete: " + achievement.Title;
-        achievementDesc.text = achievement.Blurb;
-        achievementPopup.SetActive(true);
+
+        GameObject popup = (GameObject)Instantiate(achievementPopup);
+        popup.transform.SetParent(GameObject.Find("AchievementPopups").transform);
+        popup.transform.localScale = new Vector3(1, 1, 1);
+        popup.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Achievement complete: " + achievement.Title;
+        popup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = achievement.Blurb;
     }
     public void ClosePopUp()
     {

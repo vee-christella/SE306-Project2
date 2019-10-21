@@ -53,21 +53,16 @@ public class AchievementManager
         achievements[6].HowToComplete = "Fix a building when it is destroyed by a random event";
         achievements[6].CountToComplete = 1;
         achievements[6].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[6].Title, 0);
-        achievements[7].Title = "Win in 20 turns";
+        achievements[7].Title = "Win in 80 turns";
         achievements[7].Blurb = "Awesome job! You are a master of preventing climate change!";
-        achievements[7].HowToComplete = "Win the game within 20 turns in any level";
-        achievements[7].CountToComplete = 20;
-        achievements[7].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[7].Title, 0);
-        achievements[8].Title = "Win in 30 turns";
+        achievements[7].HowToComplete = "Win the game within 80 turns in any level";
+        achievements[7].CountToComplete = 80;
+        achievements[7].CurrentCount = 0;
+        achievements[8].Title = "Win in 90 turns";
         achievements[8].Blurb = "Great job! You are an expert in preventing climate change!";
-        achievements[8].HowToComplete = "Win the game within 30 turns in any level";
-        achievements[8].CountToComplete = 30;
-        achievements[8].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[8].Title, 0);
-        achievements[9].Title = "Win in 40 turns";
-        achievements[9].Blurb = "Nice job! You have prevented climate change with time to spare!";
-        achievements[9].HowToComplete = "Win the game within 40 turns in any level";
-        achievements[9].CountToComplete = 40;
-        achievements[9].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[9].Title, 0);
+        achievements[8].HowToComplete = "Win the game within 90 turns in any level";
+        achievements[8].CountToComplete = 90;
+        achievements[8].CurrentCount = 0;
 
         //AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
     }
