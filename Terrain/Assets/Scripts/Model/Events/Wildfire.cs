@@ -9,7 +9,9 @@ public class Wildfire : Event
     public Wildfire(Game game) : base(-100, -3, 0)
     {
         this.Type = EventType.BuildingDestroyer;
-        this.Description = "Wildfires occur when fires are naturally started, burning large areas of the environment. Severe heat and drought make forests drier which fuel wildfires.";
+        this.Description = "Wildfires occur when fires are naturally started, burning large areas of the environment." +
+            " Severe heat and drought make forests drier which fuel wildfires. " + "Events like wildfires have a higher chance of happening the lower your green points are " +
+             "and the longer it takes you to reach 1000 green points!";
         this.Game = game;
         this.Title = "Wildfire";
         this.DestroysBuildings = true;

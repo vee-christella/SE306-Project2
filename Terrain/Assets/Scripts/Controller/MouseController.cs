@@ -8,7 +8,6 @@ using TMPro;
 
 public class MouseController : MonoBehaviour
 {
-
     // ====================
     public GameObject selectedObject;
     public int red;
@@ -20,30 +19,20 @@ public class MouseController : MonoBehaviour
     // ====================
 
     public static MouseController Instance { get; protected set; }
-
-    public GameObject toolTip;
-
-    private TextMeshProUGUI toolTipText;
-
     private GameGrid gameGrid;
     private Camera mainCamera;
-    private string buildingForCreating = null;
-
-    public Button sellButton;
-
-    private TextMeshProUGUI sellText;
-
-    public Text cancelButtonString;
     Vector3 lastFramePosition;
-
     private float mouseScrollPosition;
-
+    public GameObject toolTip;
+    public Text cancelButtonString;
+    private TextMeshProUGUI toolTipText;
+    private TextMeshProUGUI sellText;
+    public Button sellButton;
     public AudioSource CantBuildSound;
     public AudioClip CantBuildClip;
-
-
     private Tile tileSelected;
-    // Start is called before the first frame update
+    private string buildingForCreating = null;
+
     void Start()
     {
         mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
@@ -52,20 +41,19 @@ public class MouseController : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
         gameGrid = FindObjectOfType<GameGrid>();
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
-
         if (Input.GetMouseButton(1) || Input.GetMouseButton(2) || Input.GetAxis("Mouse ScrollWheel") != mouseScrollPosition)
         {
             RemoveTooltip();
             mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
-
         }
+
         if (GameController.Instance.Game.HasStarted)
         {
             RaycastHit hitInfo;
@@ -95,16 +83,15 @@ public class MouseController : MonoBehaviour
                                 if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                                 {
                                     Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
-                                } else
+                                }
+                                else
                                 {
                                     //Play cant build music
                                     CantBuildSound.PlayOneShot(CantBuildClip);
 
                                 }
                             }
-
                         }
-
                     }
                     else
                     {
@@ -126,20 +113,14 @@ public class MouseController : MonoBehaviour
             }
             else
             {
-
+                // Remove the building preview when the cursor is not on a tile
+                BuildingController.Instance.HideBuildingPreview();
             }
         }
-        // }
-        // catch
-        // {
-        //     // Do nothing
-        // }
     }
-
 
     void OnMouseOver()
     {
-
         selectedObject = GameObject.Find(MouseHoverController.selectedObject);
 
         // Only highlight buildings
@@ -204,14 +185,41 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    /*
+    All of the SetMode_X() methods are used by the UI shop buttons. They tell the code which building
+    the player currently has selected from the shop.
+
+    =================================================================================================
+    */
+
+    public void SetMode_AnimalFarm()
+    {
+        buildingForCreating = "Animal Farm";
+        setCancelButton();
+    }
+    public void SetMode_BeeFarm()
+    {
+        buildingForCreating = "Bee Farm";
+        setCancelButton();
+    }
     public void SetMode_CoalMine()
     {
         buildingForCreating = "Coal Mine";
         setCancelButton();
     }
+    public void SetMode_Factory()
+    {
+        buildingForCreating = "Factory";
+        setCancelButton();
+    }
     public void SetMode_Forest()
     {
         buildingForCreating = "Forest";
+        setCancelButton();
+    }
+    public void SetMode_Greenhouse()
+    {
+        buildingForCreating = "Greenhouse";
         setCancelButton();
     }
     public void SetMode_Hydro()
@@ -249,6 +257,11 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Race Track";
         setCancelButton();
     }
+    public void SetMode_RecyclingPlant()
+    {
+        buildingForCreating = "Reycling Plant";
+        setCancelButton();
+    }
     public void SetMode_SolarFarm()
     {
         buildingForCreating = "Solar Farm";
@@ -259,43 +272,21 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Wind Turbine";
         setCancelButton();
     }
-    public void SetMode_Zoo()
-    {
-        buildingForCreating = "Zoo";
-        setCancelButton();
-    }
-    public void SetMode_BeeFarm()
-    {
-        buildingForCreating = "Bee Farm";
-        setCancelButton();
-    }
-    public void SetMode_Greenhouse()
-    {
-        buildingForCreating = "Greenhouse";
-        setCancelButton();
-    }
-    public void SetMode_Factory()
-    {
-        buildingForCreating = "Factory";
-        setCancelButton();
-    }
-    public void SetMode_RecyclingPlant()
-    {
-        buildingForCreating = "Recycling Plant";
-        setCancelButton();
-    }
-    public void SetMode_AnimalFarm()
-    {
-        buildingForCreating = "Animal Farm";
-        setCancelButton();
-    }
     public void SetMode_VegetableFarm()
     {
         buildingForCreating = "Vegetable Farm";
         setCancelButton();
     }
+    public void SetMode_Zoo()
+    {
+        buildingForCreating = "Zoo";
+        setCancelButton();
+    }
 
-    Tile getTileAtMouse(Vector3 coord)
+    /*
+
+    */
+    private Tile getTileAtMouse(Vector3 coord)
     {
         return GameController.Instance.Game.getTileAt((int)coord.x, (int)coord.z);
     }
@@ -313,8 +304,6 @@ public class MouseController : MonoBehaviour
     private void SetToolTipText(Tile tile)
     {
         Building building = tile.Building;
-
-        //toolTipText.SetText("TestText");
         string name = building.Name;
         string money, green, happiness;
 
