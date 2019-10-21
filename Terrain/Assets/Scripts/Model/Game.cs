@@ -177,7 +177,13 @@ public class Game
         getModifier(GenerateHappiness);
 
         Happiness = Happiness + GenerateHappiness;
-
+        if(Happiness > 100)
+        {
+            Happiness = 100;
+        } else if (Happiness < 0)
+        {
+            Happiness = 0;
+        }
 
         // Increase the metrics
         calculateDelta();
@@ -304,15 +310,15 @@ public class Game
             }
             else
             {
-                if (tile.Building != null)
-                {
-                    GameController.Instance.ShowError("Another building already exists on this tile.");
-                }
-                else
-                {
-                    // Show error message
-                    GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
-                }
+                //if (tile.Building != null)
+                //{
+                //    GameController.Instance.ShowError("Another building already exists on this tile.");
+                //}
+                //else
+                //{
+                //    // Show error message
+                //    GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
+                //}
 
                 return null;
             }
@@ -625,5 +631,7 @@ public class Game
         }
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
+
+        GameController.Instance.ChangeImageSprite(modifier);
     }
 }

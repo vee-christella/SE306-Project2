@@ -10,11 +10,13 @@ public class GameController : MonoBehaviour
     Game game;
     EventController eventController;
     private GameGrid gameGrid;
+    int[,] map;
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
+    public int[,] Map { get => map; set => map = value; }
 
     // public Sprite[] sprites = new Sprite[7];
-
+    public GameObject tutorialOverlay;
     public GameObject[] tileGameObjs = new GameObject[4];
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
@@ -25,6 +27,11 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
     public TextMeshProUGUI errorText;
+    public GameObject happinessImage;
+    public TextMeshProUGUI placeholder;
+
+    public Sprite happyImage;
+    public Sprite sadImage;
 
     public GameObject errorMessage;
 
@@ -42,9 +49,39 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
+    
 
-        Game = new Game(20, 20);
-        game.Difficulty = Game.GameDifficulty.Medium;
+        // Change the map generation depending on the game mode/difficulty
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 0:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                placeholder.text = "Tutorial";
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                Map = PrototypeLevel.Arr;
+                placeholder.text = "Level 1";
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                placeholder.text = "Level 2";
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                placeholder.text = "Level 3";
+                break;
+            default:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                placeholder.text = "Tutorial";
+                break;
+
+        }
+        
         Game.IsEnd = false;
         Game.HasStarted = false;
 
@@ -59,12 +96,10 @@ public class GameController : MonoBehaviour
             {
                 Tile tile = Game.getTileAt(x, z);
 
-                int rand = Random.Range(0, 4);
-                GameObject tileGO = Instantiate(tileGameObjs[rand]) as GameObject;
+                GameObject tileGO = Instantiate(tileGameObjs[Map[x,z]]) as GameObject;
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
-                // THIS SHOULD PROBABLY BE DONE IN GAME.CS WHEN TILES ARE FIRST MADE
-                switch (rand)
+                switch (Map[x, z])
                 {
                     case 0:
                         tile.setType(Tile.TileType.Desert);
@@ -84,14 +119,15 @@ public class GameController : MonoBehaviour
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-                buildingSR.sortingLayerName = "Building";
-
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
             }
         }
-        WorldGenerator.generateWorld(Game);
-        WorldGenerator.addBuildingsToWorld(Game);
+
+        // Don't generate world on tutorial
+        if (PlayerPrefs.GetInt("Level") != 0) {
+            WorldGenerator.generateWorld(Game);
+        }
+
         StartingMetrics();
         Game.HasStarted = true;
     }
@@ -187,40 +223,39 @@ public class GameController : MonoBehaviour
 
     public void SetMetrics(float coin, float green, float happiness)
     {
-        coinCount.text = coin.ToString();
-        greenCount.text = green.ToString();
-        happinessCount.text = happiness.ToString();
+        coinCount.text = System.Math.Round(coin, 2).ToString();
+        greenCount.text = System.Math.Round(green, 2).ToString();
+        happinessCount.text = System.Math.Round(happiness, 2).ToString();
     }
 
     public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
     {
-
         if (coinDelta < 0)
         {
-            coinDeltaText.text = coinDelta.ToString();
+            coinDeltaText.text = System.Math.Round(coinDelta, 2).ToString();
         }
         else
         {
-            coinDeltaText.text = "+ " + coinDelta.ToString();
+            coinDeltaText.text = "+ " + System.Math.Round(coinDelta, 2).ToString(); ;
         }
 
         if (greenDelta < 0)
         {
-            greenDeltaText.text = greenDelta.ToString();
+            greenDeltaText.text = System.Math.Round(greenDelta, 2).ToString(); ;
 
         }
         else
         {
-            greenDeltaText.text = "+ " + greenDelta.ToString();
+            greenDeltaText.text = "+ " + System.Math.Round(greenDelta, 2).ToString(); ;
         }
 
         if (happinessDelta < 0)
         {
-            happinessDeltaText.text = happinessDelta.ToString();
+            happinessDeltaText.text = System.Math.Round(happinessDelta, 2).ToString(); ;
         }
         else
         {
-            happinessDeltaText.text = "+ " + happinessDelta.ToString();
+            happinessDeltaText.text = "+ " + System.Math.Round(happinessDelta, 2).ToString(); ;
         }
     }
 
@@ -312,6 +347,19 @@ public class GameController : MonoBehaviour
         //errorText = (TextMeshProUGUI)errorMessage.GetComponentInChildren(typeof(TextMeshProUGUI), true);
         errorText.text = textToShow;
         errorMessage.SetActive(true);
+    }
+
+    public void ChangeImageSprite(float modifier)
+    {
+        if(modifier < 1)
+        {
+            happinessImage.GetComponent<Image>().sprite = sadImage;
+        
+        } else
+        {
+            happinessImage.GetComponent<Image>().sprite = happyImage;
+
+        }
     }
 
 }
