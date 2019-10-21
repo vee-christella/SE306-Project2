@@ -212,6 +212,7 @@ public class Game
         {
             //Check Achievements
             AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win5);
 
             if(currentTurn <= 80) 
             {
@@ -246,7 +247,7 @@ public class Game
         // Check if the user has lost the game by exceeding the max number of turns allowed, or having a no money left
         else if (currentTurn >= maxTurns || Money < 0)
         {
-            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Lose5);
             this.endGame(false);
             return;
         }
@@ -303,6 +304,9 @@ public class Game
                 }
                 if(PlayerPrefs.GetInt("ActivateAchievement", 0) == 0 && buildingName == "Nuclear Plant"){
                     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
+                }
+                if(PlayerPrefs.GetInt("ActivateAchievement", 0) == 0 && buildingName == "Hydro Plant"){
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildHydro);
                 }
                 return building;
             }
