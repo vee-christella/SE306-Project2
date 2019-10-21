@@ -76,9 +76,7 @@ public class AchievementManager
     public void increaseAchievementCounter(AchievementType type){
         if(!achievements[(int) type].AchievementComplete){
             if(achievements[(int) type].upAchievementCounter()){
-                Debug.Log("Achievement Complete: " + achievements[(int) type].Title);
                 if(achievements[(int) type].CallbackAchievementCount!= null){
-                    Debug.Log("Achievement callback being called");
                     achievements[(int) type].CallbackAchievementCount(achievements[(int) type]);
                 }
             }

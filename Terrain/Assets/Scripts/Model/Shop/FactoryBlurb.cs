@@ -40,9 +40,9 @@ public class FactoryBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = factory.Blurb;
         buildingName.text = factory.Name;
-        coinMetric.text = factory.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = factory.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = factory.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = factory.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = factory.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = factory.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

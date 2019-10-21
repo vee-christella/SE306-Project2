@@ -40,9 +40,9 @@ public class ZooBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = zoo.Blurb;
         buildingName.text = zoo.Name;
-        coinMetric.text = zoo.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = zoo.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = zoo.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = zoo.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = zoo.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = zoo.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

@@ -40,9 +40,9 @@ public class SolarFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = solarFarm.Blurb;
         buildingName.text = solarFarm.Name;
-        coinMetric.text = solarFarm.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = solarFarm.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = solarFarm.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = solarFarm.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = solarFarm.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = solarFarm.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

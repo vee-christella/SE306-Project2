@@ -40,9 +40,9 @@ public class VegetableFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = vegetableFarm.Blurb;
         buildingName.text = vegetableFarm.Name;
-        coinMetric.text = vegetableFarm.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = vegetableFarm.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = vegetableFarm.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = vegetableFarm.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = vegetableFarm.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = vegetableFarm.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 
