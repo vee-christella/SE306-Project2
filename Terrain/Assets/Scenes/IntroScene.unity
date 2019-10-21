@@ -2206,8 +2206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9727701b53c486b48bfe9647e0bab7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achievementPrefab: {fileID: 3479536540270225967, guid: a2d8a166c1faacb429436a2e5ed0821e,
-    type: 3}
 --- !u!4 &764633445
 Transform:
   m_ObjectHideFlags: 0
@@ -2334,7 +2332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000000622789}
+  m_AnchoredPosition: {x: 0, y: -0.000015539368}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &833212139

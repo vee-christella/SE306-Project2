@@ -13,7 +13,7 @@ public class AchievementController : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
         new AchievementManager();
         Achievement[] listOfAchievements = AchievementManager.Instance.achievements;
         foreach(Achievement achievement in AchievementManager.Instance.achievements) {
@@ -21,6 +21,10 @@ public class AchievementController : MonoBehaviour
             achievement.AchievementRef = (GameObject)Instantiate(achievementPrefab);
             CreateAchievement(achievement.AchievementRef, achievement.Title, achievement.HowToComplete, achievement.CurrentCount + " out of " +
             achievement.CountToComplete);
+            if (achievement.CurrentCount == achievement.CountToComplete)
+            {
+                achievement.AchievementRef.transform.GetChild(3).GetComponent<Image>().enabled = true;
+            }
         }
         achievementsPanel.SetActive(false);
     }
