@@ -13,13 +13,13 @@ public class Tile
         Water
     };
 
-    private List<string> waterBuildable = new List<string>() { "Hydro Plant", null };
-    private List<string> desertBuildable = new List<string>(){"Coal Mine", "National Park", "Nuclear Plant", "Oil Refinery",
-    "Race Track", "Wind Turbine", "Solar Farm", "Factory", "Recycling Plant", null};
-    private List<string> plainBuildable = new List<string>(){"Coal Mine", "Forest", "Movie Theatre", "National Park", "Nuclear Plant",
-    "Race Track", "Wind Turbine", "Solar Farm", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recyling Plant",
+    private List<string> waterBuildable = new List<string>() { "Hydro Plant", "Pollutant", null };
+    private List<string> desertBuildable = new List<string>(){"National Park", "Pollutant", "Nuclear Plant", "Oil Refinery",
+    "Race Track", "Solar Farm", "Factory", "Recycling Plant", null};
+    private List<string> plainBuildable = new List<string>(){"Forest", "Pollutant", "Movie Theatre", "National Park", "Nuclear Plant",
+    "Race Track", "Wind Turbine", "Zoo", "Town Hall", "Animal Farm", "Bee Farm", "Factory", "Greenhouse", "Recyling Plant",
     "Vegetable Farm", null};
-    private List<string> mountainBuildable = new List<string>() { null };
+    private List<string> mountainBuildable = new List<string>() { "Coal Mine", "Pollutant", null };
 
     Action<Tile> callbackTypeChanged;
     Action<Tile> callbackBuildingChange;

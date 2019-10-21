@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovieTheatre : Building
 {
     // Initialise stats for each Movie Theatre building
-    public MovieTheatre() : base(3, -50, 0, 10, -10, 0, 2, 5)
+    public MovieTheatre() : base(3, -50, 0, 3, 3, 0, 1, 5)
     {
         this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "Movie Theatre";

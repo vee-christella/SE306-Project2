@@ -54,7 +54,7 @@ public abstract class Event
                             // deafult 10% chance to destory building on tile
                             if (chanceToDestroy())
                             {
-                                costToRepair = costToRepair + tiles[i,j].Building.InitialBuildMoney;
+                                costToRepair = Mathf.FloorToInt(costToRepair + ((float)(tiles[i,j].Building.InitialBuildMoney * 0.5)));
                                 DestroyingBuildings.Add(tiles[i,j]);
                             }
                         }

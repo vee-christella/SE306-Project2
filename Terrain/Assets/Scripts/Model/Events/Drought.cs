@@ -5,7 +5,7 @@ using UnityEngine;
 public class Drought : Event
 {
     private int turnToOccur;
-    public Drought(Game game) :base(-5,-1,-5)
+    public Drought(Game game) :base(-100,-2,-50)
     {
         this.Type = EventType.TileChanger;
         this.Description = "Droughts occur when there is less rain than expected, which means that your town is running out of water! Your water supply is lacking and some of your water tiles have dried up into desert tiles.";
@@ -28,12 +28,15 @@ public class Drought : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Water)
                 {
-                    //Debug.Log("Found a tile with water");
-                    int random = Random.Range(0, 2);
+                    int random = Random.Range(0, 4);
                     // 50% chance to change tiles to desert
                     if (random == 1)
                     {
                         tiles[i, j].Type = Tile.TileType.Desert;
+                    }
+                    else if (random == 0)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Plain;
                     }
                 }
             }
