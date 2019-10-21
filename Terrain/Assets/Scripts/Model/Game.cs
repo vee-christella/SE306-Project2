@@ -21,7 +21,7 @@ public class Game
     float generateGreen;
     float generateHappiness;
     Building[,] buildings;
-    GameDifficulty gameDifficulty;
+    GameDifficulty difficulty;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
@@ -58,17 +58,46 @@ public class Game
     public Event GameEvent { get => gameEvent; set => gameEvent = value; }
     public Tile[,] Tiles { get => tiles; set => tiles = value; }
 
+    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
+    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
+    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
+    public GameDifficulty Difficulty { get => difficulty; set => difficulty = value; }
+
     public enum GameDifficulty
     {
         Easy, Medium, Hard
     };
 
-    public float MoneyDelta { get => moneyDelta; set => moneyDelta = value; }
-    public float GreenDelta { get => greenDelta; set => greenDelta = value; }
-    public bool HasStarted { get => hasStarted; set => hasStarted = value; }
-
     public Game(int rows, int columns)
     {
+        /*
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 0:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                Map = PrototypeLevel.Arr;
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                break;
+            default:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+
+        }
+        */
+
+
         this.isEnd = false;
         this.currentTurn = 0;
 
@@ -183,7 +212,7 @@ public class Game
 
         GameEvent = EventForNextTurn();
 
-        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
+        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel" || GameEvent != null && GameEvent.GetType().Name.ToString() == "EarthQuake")
         {
             badEventList.Remove(GameEvent);
         }
@@ -208,41 +237,62 @@ public class Game
         Building building = null;
         switch (buildingType)
         {
-            case "Hydro Plant":
-                building = new Hydro();
+            case "Animal Farm":
+                building = new AnimalFarm();
+                break;
+            case "Bee Farm":
+                building = new BeeFarm();
                 break;
             case "Coal Mine":
                 building = new CoalMine();
                 break;
-            case "Zoo":
-                building = new Zoo();
-                break;
-            case "Wind Turbine":
-                building = new WindTurbine();
-                break;
-            case "Solar Farm":
-                building = new SolarFarm();
-                break;
-            case "Race Track":
-                building = new RaceTrack();
-                break;
-            case "Oil Refinery":
-                building = new OilRefinery();
-                break;
-            case "Nuclear Plant":
-                building = new Nuclear();
-                break;
-            case "National Park":
-                building = new NationalPark();
-                break;
-            case "Movie Theatre":
-                building = new MovieTheatre();
+            case "Factory":
+                building = new Factory();
                 break;
             case "Forest":
                 building = new Forest();
                 break;
+            case "Greenhouse":
+                building = new Greenhouse();
+                break;
+            case "Hydro Plant":
+                building = new Hydro();
+                break;
+            case "Movie Theatre":
+                building = new MovieTheatre();
+                break;
+            case "National Park":
+                building = new NationalPark();
+                break;
+            case "Nuclear Plant":
+                building = new Nuclear();
+                break;
+            case "Oil Refinery":
+                building = new OilRefinery();
+                break;
+            case "Pollutant":
+                building = new Pollutant();
+                break;
+            case "Race Track":
+                building = new RaceTrack();
+                break;
+            case "Recycling Plant":
+                building = new RecyclingPlant();
+                break;
+            case "Solar Farm":
+                building = new SolarFarm();
+                break;
             case "Town Hall":
                 building = new TownHall();
+                break;
+            case "Vegetable Farm":
+                building = new VegetableFarm();
+                break;
+            case "Wind Turbine":
+                building = new WindTurbine();
+                break;
+            case "Zoo":
+                building = new Zoo();
                 break;
             default:
                 return null;
@@ -276,7 +326,7 @@ public class Game
         else
         {
             // Show error message
-            GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
+            //GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
             return null;
         }
@@ -286,7 +336,24 @@ public class Game
     {
         Debug.Log("Yeet");
         Building building = tile.Building;
-        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        float CostToSell;
+
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 1:
+                CostToSell = building.InitialBuildMoney * (float)0.25 * -1;//
+                break;
+            case 2:
+                CostToSell = building.InitialBuildMoney * (float)0.2 * -1;//
+                break;
+            case 3:
+                CostToSell = building.InitialBuildMoney * (float)0.1 * -1;//
+                break;
+            default:
+                CostToSell = building.InitialBuildMoney * (float)0.1 * -1;//
+                break;
+        }
+
         if (tile.removeBuilding())
         {
             buildings[tile.X, tile.Y] = null;
@@ -319,21 +386,21 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
- //       switch (gameDifficulty)
- //       {
- //           case GameDifficulty.Easy:
- //               difficultyOffset = 0.1f;
- //               break;
- //           case GameDifficulty.Medium:
-//                difficultyOffset = 0.2f;
- //               break;
-//            case GameDifficulty.Hard:
- //               difficultyOffset = 0.3f;
- //               break;
- //           default:
- //               difficultyOffset = 0.1f;
- //               break;
- //       }
+        switch (Difficulty)
+       {
+            case GameDifficulty.Easy:
+                difficultyOffset = 0.1f;
+                break;
+           case GameDifficulty.Medium:
+                difficultyOffset = 0.2f;
+                break;
+            case GameDifficulty.Hard:
+                difficultyOffset = 0.3f;
+                break;
+            default:
+               difficultyOffset = 0.1f;
+                break;
+        }
         
         goodEventProbability = Mathf.Floor((green / 2000 * 100)/2f);
 
@@ -351,12 +418,30 @@ public class Game
         // max probability of random events occuring is 80%
         badEventProbability = Mathf.FloorToInt(((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns)) * 100);
 
+        switch (Difficulty)
+        {
+            case GameDifficulty.Easy:
+                break;
+            case GameDifficulty.Medium:
+                if (badEventProbability <= 5) {
+                    badEventProbability = 5;
+                }
+                difficultyOffset = 0.2f;
+                break;
+            case GameDifficulty.Hard:
+                if (badEventProbability <= 10)
+                {
+                    badEventProbability = 10;
+                }
+                break;
+        }
+
         if (badEventProbability > 100)
         {
             goodEventProbability = 0;
             badEventProbability = 80;
         }
-
+       
         int randomNum = Random.Range(1, 101);
 
         // good events take priority and the chance of a good event increases the more green points the user has
@@ -398,16 +483,18 @@ public class Game
         badEventList.Add(new RisingSeaLevel(this));
         badEventList.Add(new Wildfire(this));
         badEventList.Add(new HeatWave(this));
+        badEventList.Add(new EarthQuake(this));
 
         goodEventList.Add(new ForestSpawn(this));
         goodEventList.Add(new Circus(this));
+        goodEventList.Add(new Rejuvenation(this));
+        
     }
 
     // Change the metrics with regards to the effects of the building
     // that has just been placed.
     public void UpdateMetrics(Building building)
     {
-
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
@@ -425,7 +512,6 @@ public class Game
             Happiness += building.InitialBuildHappiness;
             
         }
-
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;

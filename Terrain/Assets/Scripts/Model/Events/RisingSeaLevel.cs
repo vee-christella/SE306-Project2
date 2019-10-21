@@ -6,7 +6,7 @@ public class RisingSeaLevel : Event
 {
     private double probability;
 
-    public RisingSeaLevel(Game game) : base(-5, -1, -5)
+    public RisingSeaLevel(Game game) : base(-150, -5, 0)
     {
         this.Type = EventType.TileChanger;
         this.Game = game;

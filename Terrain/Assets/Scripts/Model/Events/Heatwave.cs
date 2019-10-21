@@ -6,7 +6,7 @@ public class HeatWave : Event
 {
     private double probability;
 
-    public HeatWave(Game game) : base(-5, -1, -5)
+    public HeatWave(Game game) : base(-50, -5, 0)
     {
         this.Type = EventType.TileChanger;
         this.Title = "Heat Wave";
@@ -23,6 +23,17 @@ public class HeatWave : Event
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
+
+                if (tiles[i, j].Type == Tile.TileType.Water)
+                {
+                    int random = Random.Range(0, 4);
+                    if (random == 1)
+                    {
+                        tiles[i, j].Type = Tile.TileType.Plain;
+                    }
+                    continue;
+                }
+
                 if (tiles[i, j].Type == Tile.TileType.Plain)
                 {
                     int random = Random.Range(0, 2);

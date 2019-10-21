@@ -36,7 +36,6 @@ public abstract class Building
     public string Name { get => name; set => name = value;  }
     public string Blurb { get => blurb; set => blurb = value; }
 
-
     // Constructor to initialise the building with their respective stats
     public Building(float initBuildMoney, float initBuildGreen,
     float initBuildHappiness, float genMoney, float genGreen)
