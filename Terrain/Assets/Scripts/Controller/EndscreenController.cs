@@ -35,20 +35,23 @@ public class EndscreenController : MonoBehaviour
         // WIN - Player has ended with at least 1000 green points
         if (GameController.Instance.Game.IsVictory)
         {
-            endText.text = "YOU WIN! Congratulations, Mayor! You have successfully completed the game. The choices you have made have positively affected the environment.";
+            endTitle.text = "YOU WIN!";
+            endText.text = "Congratulations, Mayor! You have successfully completed the game. The choices you have made have positively affected the environment.";
         }
         // LOSE
         else
         {
+            endTitle.text = "YOU LOSE!";
+
             // Player had ended with less than 1000 green points
             if ((GameController.Instance.Game.CurrentTurn >= GameController.Instance.Game.MaxTurns) && (GameController.Instance.Game.Green < GameController.Instance.Game.MaxGreen))
             {
-                endText.text = "YOU LOSE! Unfortunately you have not balanced profit with environmental effects. Remember that the buildings you build can negatively affect the environment.";
+                endText.text = "Unfortunately you have not balanced profit with environmental effects. Remember that the buildings you build can negatively affect the environment.";
             }
             // Player has run out of money
             else
             {
-                endText.text = "YOU LOSE! You have run out of money. A city needs money to run, and certain buildings generate money. The hard part is finding the blanace between profit and environmental effects";
+                endText.text = "You have run out of money. A city needs money to run, and certain buildings generate money. The hard part is finding the blanace between profit and environmental effects";
             }
         }
     }
