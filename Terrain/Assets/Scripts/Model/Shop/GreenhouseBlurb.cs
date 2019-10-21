@@ -16,23 +16,23 @@ public class GreenhouseBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+greenhouse.InitialBuildMoney.ToString();
+        goldCost.text = greenhouse.InitialBuildMoney.ToString();
         if(greenhouse.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+greenhouse.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+greenhouse.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+greenhouse.InitialBuildGreen.ToString();
+            greenPointsCost.text = greenhouse.InitialBuildGreen.ToString();
         }
         if(greenhouse.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+greenhouse.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+greenhouse.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+greenhouse.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = greenhouse.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

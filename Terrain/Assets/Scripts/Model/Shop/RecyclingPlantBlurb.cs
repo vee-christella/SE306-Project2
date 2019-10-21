@@ -16,23 +16,23 @@ public class RecyclingPlantBlurb : MonoBehaviour, IPointerEnterHandler, IPointer
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+recyclingPlant.InitialBuildMoney.ToString();
+        goldCost.text = recyclingPlant.InitialBuildMoney.ToString();
         if(recyclingPlant.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+recyclingPlant.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+recyclingPlant.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+recyclingPlant.InitialBuildGreen.ToString();
+            greenPointsCost.text = recyclingPlant.InitialBuildGreen.ToString();
         }
         if(recyclingPlant.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+recyclingPlant.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+recyclingPlant.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+recyclingPlant.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = recyclingPlant.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }
