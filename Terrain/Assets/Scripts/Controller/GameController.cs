@@ -61,6 +61,28 @@ public class GameController : MonoBehaviour
                 Game.InitialiseMetrics(200, 0, 50, 1000);
                 tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
+
+                for (int x = 0; x < Game.Rows; x++)
+                {
+                    for (int z = 0; z < Game.Columns; z++)
+                    {
+                        switch (Map[x, z])
+                        {
+                            case 0:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Desert);
+                                break;
+                            case 1:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Mountain);
+                                break;
+                            case 2:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Plain);
+                                break;
+                            case 3:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Water);
+                                break;
+                        }
+                    }
+                }
                 placeholder.text = "Tutorial";
                 break;
             case 1:
