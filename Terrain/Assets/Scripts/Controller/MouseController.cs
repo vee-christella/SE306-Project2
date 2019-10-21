@@ -35,6 +35,11 @@ public class MouseController : MonoBehaviour
     public Button sellButton;
     public AudioSource CantBuildSound;
     public AudioClip CantBuildClip;
+
+    public AudioSource BuildSound;
+    public AudioClip BuildClip;
+
+
     private Tile tileSelected;
     private string buildingForCreating = null;
 
@@ -81,6 +86,7 @@ public class MouseController : MonoBehaviour
                             {
                                 if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                                 {
+                                    BuildSound.PlayOneShot(BuildClip);
                                     Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                                 }
                                 else
