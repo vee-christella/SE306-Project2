@@ -243,6 +243,7 @@ public class Game
             Green = Green + GameEvent.GreenPointDelta;
             Happiness = Happiness + GameEvent.HappinessDelta;
         }
+        calculateDeltas();
     }
 
     /*
@@ -297,13 +298,13 @@ public class Game
         switch (PlayerPrefs.GetInt("Level"))
         {
             case 1:
-                CostToSell = building.InitialBuildMoney * 0.25f * -1;
+                CostToSell = building.InitialBuildMoney * 0.3f * -1;
                 break;
             case 2:
                 CostToSell = building.InitialBuildMoney * 0.2f * -1;
                 break;
             case 3:
-                CostToSell = building.InitialBuildMoney * 0.1f * -1;
+                CostToSell = building.InitialBuildMoney * 0.05f * -1;
                 break;
             default:
                 CostToSell = building.InitialBuildMoney * 0.1f * -1;
@@ -354,7 +355,7 @@ public class Game
         {
             case 1:
                 difficultyOffset = 0.1f;
-                break;
+                return null;
             case 2:
                 difficultyOffset = 0.2f;
                 break;
@@ -367,7 +368,7 @@ public class Game
         }
 
         // Calculate the green points effect on good/bad event probability
-        goodEventProbability = Mathf.Floor((greenPoints / 2000 * 100) / 2f);
+        goodEventProbability = Mathf.Floor((1.3f-difficultyOffset)*(greenPoints / 2000 * 100) / 2f);
         badEventProbability = (greenPoints < 0) ? (1 - 700 / (1000 - greenPoints)) : (300 / (1000 + greenPoints));
 
         // Calculate the game difficulty and turn number effect on bad event probability
@@ -567,6 +568,7 @@ public class Game
             greenDelta = GenerateGreen * (1 / modifier);
             Debug.Log("greendelta middle: " + greenDelta);
         }
+        Debug.Log("MonGen: " + GenerateMoney + " GreenGen: " + GenerateGreen);
 
         // Round to 2 decimal places
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
