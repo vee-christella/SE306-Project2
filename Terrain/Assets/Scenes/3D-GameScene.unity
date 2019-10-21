@@ -3176,8 +3176,8 @@ MonoBehaviour:
   flashingIn: 1
   startedFlashing: 0
   toolTip: {fileID: 195287303}
-  sellButton: {fileID: 1726821657}
   cancelButtonString: {fileID: 1102332961}
+  sellButton: {fileID: 1726821657}
   CantBuildSound: {fileID: 498495402}
   CantBuildClip: {fileID: 8300000, guid: 61ef8e00b5fe084479f2d06fbc62bf3c, type: 3}
 --- !u!4 &127397728
@@ -3967,7 +3967,8 @@ MonoBehaviour:
   lookSpeedH: 2
   lookSpeedV: 2
   zoomSpeed: 2
-  dragSpeed: 6
+  rotateSpeed: 80
+  wasdSpeed: 0.1
 --- !u!114 &142287432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10281,8 +10282,9 @@ MonoBehaviour:
   coinDeltaText: {fileID: 0}
   greenDeltaText: {fileID: 0}
   happinessDeltaText: {fileID: 0}
-  happinessImage: {fileID: 0}
+  errorText: {fileID: 0}
   placeholder: {fileID: 0}
+  happinessImage: {fileID: 0}
   level1Intro: {fileID: 0}
   level2Intro: {fileID: 0}
   level3Intro: {fileID: 0}
@@ -16991,6 +16993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endScreenUI: {fileID: 365530619}
+  endTitle: {fileID: 0}
   endText: {fileID: 30142790}
 --- !u!114 &801925484
 MonoBehaviour:
@@ -17031,8 +17034,9 @@ MonoBehaviour:
   coinDeltaText: {fileID: 1026167106}
   greenDeltaText: {fileID: 71564547}
   happinessDeltaText: {fileID: 967482030}
-  happinessImage: {fileID: 724108025}
+  errorText: {fileID: 0}
   placeholder: {fileID: 92666521}
+  happinessImage: {fileID: 724108025}
   level1Intro: {fileID: 1562713918}
   level2Intro: {fileID: 1185012956}
   level3Intro: {fileID: 461839750}
