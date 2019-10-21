@@ -26,14 +26,12 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
-    public TextMeshProUGUI errorText;
     public GameObject happinessImage;
     public TextMeshProUGUI placeholder;
 
     public Sprite happyImage;
     public Sprite sadImage;
 
-    public GameObject errorMessage;
 
     public string[] greenMetricCheatCode = {"i","l","o","v","e","e","a","r","t","h"};
     public string[] loseCheatCode = {"p","l","a","s","t","i","c","b","a","g","s"};
@@ -56,12 +54,14 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 Game = new Game(5, 5);
+                Game.InitialiseMetrics(200, 0, 50, 1000);
                 tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
                 placeholder.text = "Tutorial";
                 break;
             case 1:
                 Game = new Game(10, 10);
+                Game.InitialiseMetrics(200, 0, 50, 1000);
                 Map = PrototypeLevel.Arr;
                 placeholder.text = "Level 1";
                 break;
@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
                 break;
             default:
                 Game = new Game(5, 5);
+                Game.InitialiseMetrics(200, 0, 50, 1000);
                 tutorialOverlay.SetActive(true);
                 Map = TutorialLevel.Arr;
                 placeholder.text = "Tutorial";
@@ -341,13 +342,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void ShowError(string textToShow)
-    {
-
-        //errorText = (TextMeshProUGUI)errorMessage.GetComponentInChildren(typeof(TextMeshProUGUI), true);
-        errorText.text = textToShow;
-        errorMessage.SetActive(true);
-    }
 
     public void ChangeImageSprite(float modifier)
     {

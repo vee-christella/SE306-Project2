@@ -326,7 +326,7 @@ public class Game
         else
         {
             // Show error message
-            GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
+            //GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
             return null;
         }
