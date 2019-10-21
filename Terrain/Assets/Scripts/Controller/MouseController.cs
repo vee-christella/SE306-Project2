@@ -196,14 +196,41 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    /*
+    All of the SetMode_X() methods are used by the UI shop buttons. They tell the code which building
+    the player currently has selected from the shop.
+
+    =================================================================================================
+    */
+
+    public void SetMode_AnimalFarm()
+    {
+        buildingForCreating = "Animal Farm";
+        setCancelButton();
+    }
+    public void SetMode_BeeFarm()
+    {
+        buildingForCreating = "Bee Farm";
+        setCancelButton();
+    }
     public void SetMode_CoalMine()
     {
         buildingForCreating = "Coal Mine";
         setCancelButton();
     }
+    public void SetMode_Factory()
+    {
+        buildingForCreating = "Factory";
+        setCancelButton();
+    }
     public void SetMode_Forest()
     {
         buildingForCreating = "Forest";
+        setCancelButton();
+    }
+    public void SetMode_Greenhouse()
+    {
+        buildingForCreating = "Greenhouse";
         setCancelButton();
     }
     public void SetMode_Hydro()
@@ -236,6 +263,11 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Race Track";
         setCancelButton();
     }
+    public void SetMode_RecyclingPlant()
+    {
+        buildingForCreating = "Reycling Plant";
+        setCancelButton();
+    }
     public void SetMode_SolarFarm()
     {
         buildingForCreating = "Solar Farm";
@@ -246,39 +278,14 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Wind Turbine";
         setCancelButton();
     }
-    public void SetMode_Zoo()
-    {
-        buildingForCreating = "Zoo";
-        setCancelButton();
-    }
-    public void SetMode_BeeFarm()
-    {
-        buildingForCreating = "Bee Farm";
-        setCancelButton();
-    }
-    public void SetMode_Greenhouse()
-    {
-        buildingForCreating = "Greenhouse";
-        setCancelButton();
-    }
-    public void SetMode_Factory()
-    {
-        buildingForCreating = "Factory";
-        setCancelButton();
-    }
-    public void SetMode_RecyclingPlant()
-    {
-        buildingForCreating = "Reycling Plant";
-        setCancelButton();
-    }
-    public void SetMode_AnimalFarm()
-    {
-        buildingForCreating = "Animal Farm";
-        setCancelButton();
-    }
     public void SetMode_VegetableFarm()
     {
         buildingForCreating = "Vegetable Farm";
+        setCancelButton();
+    }
+    public void SetMode_Zoo()
+    {
+        buildingForCreating = "Zoo";
         setCancelButton();
     }
 
@@ -300,8 +307,6 @@ public class MouseController : MonoBehaviour
     private void SetToolTipText(Tile tile)
     {
         Building building = tile.Building;
-
-        //toolTipText.SetText("TestText");
         string name = building.Name;
         string money, green, happiness;
 
