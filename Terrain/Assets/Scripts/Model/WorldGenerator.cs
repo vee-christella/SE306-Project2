@@ -22,11 +22,9 @@ public class WorldGenerator
         float min = 1;
         float[,] perlinArray1 = new float[rows, cols];
         float[,] perlinArray2 = new float[rows, cols];
-        float scale = rows / 5f;
+        float scale = 3.5f;//rows / 5f;
         bool mapMaking = true;
-
-        while (mapMaking)
-        {
+        
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -45,7 +43,7 @@ public class WorldGenerator
                     rowCoord = (float)i / rows * scale + randomRow2;
                     colCoord = (float)j / cols * scale + randomCol2;
                     perlinArray2[i, j] = Mathf.PerlinNoise(rowCoord, colCoord);
-                    if (perlinArray2[i, j] > max)
+                if (perlinArray2[i, j] > max)
                     {
                         max = perlinArray2[i, j];
                     }
@@ -64,28 +62,28 @@ public class WorldGenerator
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (perlinArray1[i, j] >= min && perlinArray1[i, j] < min + divider * 2 && perlinArray2[i, j] < min + divider * 2)
+                    if (perlinArray1[i, j] < min + divider * 1 && perlinArray2[i, j] < min + divider * 3)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Mountain);
                         mountainCount++;
 
                     }
-                    else if (perlinArray1[i, j] >= min + divider * 2 && perlinArray2[i, j] < min + divider * 2)
+                    else if (perlinArray1[i, j] >= min + divider * 3 && perlinArray2[i, j] >= min + divider * 1)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Water);
                         waterCount++;
 
                     }
-                    else if (perlinArray1[i, j] >= min && perlinArray1[i, j] < min + divider * 2 && perlinArray2[i, j] >= min + divider * 2)
+                    else if (perlinArray2[i, j] < min + divider * 2)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Desert);
                         desertCount++;
 
                     }
-                    else if (perlinArray1[i, j] >= min + divider * 2 && perlinArray2[i, j] >= min + divider * 2)
+                    else if (perlinArray2[i, j] >= min + divider * 2)
                     {
 
                         game.getTileAt(i, j).setType(Tile.TileType.Plain);
@@ -94,12 +92,13 @@ public class WorldGenerator
                     }
                 }
             }
-            int num = rows * cols / 5;
+            int num = rows * cols / 6;
             if (mountainCount >= num && waterCount >= num && plainCount >= num && desertCount >= num)
             {
                 mapMaking = false;
             }
-        }
+        Debug.Log("Mountains: " + mountainCount + " water: " + waterCount + " plains: " + plainCount + " desert: " + desertCount);
+        
     }
 
     public static void addBuildingsToWorld(Game game)

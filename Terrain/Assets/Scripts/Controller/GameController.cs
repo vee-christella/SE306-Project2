@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
 
-        Game = new Game(20, 20);
+        Game = new Game(15,15);
         game.Difficulty = Game.GameDifficulty.Medium;
         Game.IsEnd = false;
         Game.HasStarted = false;
@@ -91,7 +91,7 @@ public class GameController : MonoBehaviour
             }
         }
         WorldGenerator.generateWorld(Game);
-        WorldGenerator.addBuildingsToWorld(Game);
+        //WorldGenerator.addBuildingsToWorld(Game);
         StartingMetrics();
         Game.HasStarted = true;
     }
