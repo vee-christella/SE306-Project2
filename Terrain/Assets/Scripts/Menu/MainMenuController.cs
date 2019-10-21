@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
 
+    public GameObject helpScreen;
+
+    public void PlayTutorial()
+    {
+        PlayerPrefs.SetInt("Level", 0);
+        SceneManager.LoadScene("3D-GameScene");
+    }
 
     public void PlayEasyGame()
     {
@@ -40,9 +47,13 @@ public class MainMenuController : MonoBehaviour
     public void Help()
     {
 
-        // Set the game map to generate the tutorial
-        PlayerPrefs.SetInt("Level", 0);
-        SceneManager.LoadScene("3D-GameScene");
+        // Set the game map to show help button
+        helpScreen.SetActive(true);
+    }
+
+    public void QuitHelp()
+    {
+        helpScreen.SetActive(false);
     }
 
     public void QuitGame()
