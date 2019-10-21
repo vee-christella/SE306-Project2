@@ -13,8 +13,9 @@ public class EventController : MonoBehaviour
 
     private GameController gameController;
 
-    public Button yesButton;
-    public Button closeButton;
+    public GameObject yesButton;
+    public GameObject closeButton;
+    public GameObject noButton;
 
     public float costToRepair;
 
@@ -23,8 +24,10 @@ public class EventController : MonoBehaviour
     public TextMeshProUGUI eventInfo;
     public TextMeshProUGUI moneyEffect;
     public TextMeshProUGUI greenPointsEffect;
-    public TextMeshProUGUI happinessEffect;
+    public TextMeshProUGUI happinesEffect;
     public TextMeshProUGUI costToRepairEffect;
+    public TextMeshProUGUI eventTitle;
+    public TextMeshProUGUI impact;
 
     public Game Game { get => game; set => game = value; }
     public GameController GameController { get => gameController; set => gameController = value; }
@@ -41,28 +44,51 @@ public class EventController : MonoBehaviour
         if (gameEvent.Type == Event.EventType.BuildingDestroyer)
         {
             costToRepair = Mathf.Abs(Game.GameEvent.CalculateCostToRepair(game.Tiles));
-            if (game.Money < costToRepair || (game.Money + game.MoneyDelta < 0))
+
+            if (costToRepair == 0)
             {
-                yesButton.interactable = false;
+                impact.text = "You were lucky and none of your buildings were destroyed.";
+                buildingDestroyedPanel.SetActive(false);
+                closeButton.SetActive(true);
             }
             else
             {
-                yesButton.interactable = true;
+
+                impact.text = "Some of your buildings have been destroyed by this event!";
+
+
+                if (game.Money < costToRepair || (game.Money + game.MoneyDelta < 0))
+                {
+
+                    yesButton.GetComponent<Button>().interactable = false;
+
+                }
+                else
+                {
+                    yesButton.SetActive(true);
+                    noButton.SetActive(true);
+                    yesButton.GetComponent<Button>().interactable = true;
+
+                }
+
+                closeButton.SetActive(false);
+                buildingDestroyedPanel.SetActive(true);
             }
-            buildingDestroyedPanel.SetActive(true);
         }
         else
         {
+            impact.text = gameEvent.TileDeltaDesc;
             closeButton.gameObject.SetActive(true);
             buildingDestroyedPanel.SetActive(false);
         }
 
-        eventInfo.text = "A  " + gameEvent.GetType().Name.ToString() + " has occurred! \n" + gameEvent.Description;
+        eventInfo.text = gameEvent.Description;
 
         moneyEffect.text = DisplayEffect(gameEvent.MoneyDelta) + gameEvent.MoneyDelta;
         greenPointsEffect.text = DisplayEffect(gameEvent.GreenPointDelta) + gameEvent.GreenPointDelta;
-        happinessEffect.text = DisplayEffect(gameEvent.HappinessDelta) + gameEvent.HappinessDelta;
+        happinesEffect.text = DisplayEffect(gameEvent.HappinessDelta) + gameEvent.HappinessDelta;
         costToRepairEffect.text = costToRepair.ToString();
+        eventTitle.text = gameEvent.Title + " has occurred!";
 
         eventPopupPanel.SetActive(true);
     }
