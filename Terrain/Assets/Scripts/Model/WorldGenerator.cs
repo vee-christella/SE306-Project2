@@ -12,10 +12,6 @@ public class WorldGenerator
         int cols = game.Columns;
 
 
-        float randomRow1 = Random.Range(0f, 9999f);
-        float randomCol1 = Random.Range(0f, 9999f);
-        float randomRow2 = Random.Range(0f, 9999f);
-        float randomCol2 = Random.Range(0f, 9999f);
         float rowCoord;
         float colCoord;
         float max = 0;
@@ -27,8 +23,14 @@ public class WorldGenerator
         float scale;
         scale = 2 + rows / 10f;
         bool mapMaking = true;
+        int counter = 0;
         while (mapMaking)
         {
+
+            float randomRow1 = Random.Range(0f, 9999f);
+            float randomCol1 = Random.Range(0f, 9999f);
+            float randomRow2 = Random.Range(0f, 9999f);
+            float randomCol2 = Random.Range(0f, 9999f);
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -129,7 +131,8 @@ public class WorldGenerator
 
             perlinList1.Clear();
             perlinList2.Clear();
-            Debug.Log("Loop world generation");
+            Debug.Log("Loop world generation: " + counter);
+            counter++;
             if (mountainCount >= num && waterCount >= num && plainCount >= num && desertCount >= num)
             {
                 mapMaking = false;
