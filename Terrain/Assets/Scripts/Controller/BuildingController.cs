@@ -90,11 +90,12 @@ public class BuildingController : MonoBehaviour
     */
     private GameObject PlaceBuildingOnMap(Tile tile, GameObject building)
     {
+        string newBuildingModel = null;
         GameObject newBuilding;
         if (tile.Building != null)
         {
             // Get the class name of the building
-            string newBuildingModel = tile.Building.GetType().Name;
+            newBuildingModel = tile.Building.GetType().Name;
 
             // Create new building GameObject
             newBuilding = Instantiate(modelDictionary[tile.Building.GetType().Name]);
@@ -107,6 +108,11 @@ public class BuildingController : MonoBehaviour
         // Set the building GameObject's name and position
         newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
+        if (newBuildingModel != null && newBuildingModel == "TownHall")
+        {
+            newBuilding.transform.position = new Vector3(tile.X - 0.3f, (float)tile.Y + 0.2f, tile.Z - 0.3f);
+        }
 
         // Delete old (possibly empty) building GameObject
         Destroy(building);
