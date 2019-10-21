@@ -109,9 +109,20 @@ public class BuildingController : MonoBehaviour
         newBuilding.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         newBuilding.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
-        if (newBuildingModel != null && newBuildingModel == "TownHall")
+        if (newBuildingModel != null)
         {
-            newBuilding.transform.position = new Vector3(tile.X - 0.3f, (float)tile.Y + 0.2f, tile.Z - 0.3f);
+            if (newBuildingModel == "TownHall")
+            {
+                newBuilding.transform.position = new Vector3(tile.X - 0.3f, (float)tile.Y + 0.2f, tile.Z - 0.3f);
+            }
+            else if (newBuildingModel == "NuclearPlant")
+            {
+                newBuilding.transform.position = new Vector3(tile.X + 0.2f, (float)tile.Y + 0.2f, tile.Z + 0.2f);
+            }
+            else if (newBuildingModel != "CoalMine" && newBuildingModel != "Hydro")
+            {
+                newBuilding.transform.position = new Vector3(tile.X, (float)tile.Y + 0.1f, tile.Z);
+            }
         }
 
         // Delete old (possibly empty) building GameObject
@@ -141,6 +152,22 @@ public class BuildingController : MonoBehaviour
 
             // Show the preview building on the cursor point
             previewBuilding.transform.position = mousePoint;
+
+            if (buildingClassName != null)
+            {
+                if (buildingClassName == "TownHall")
+                {
+                    previewBuilding.transform.position = new Vector3(mousePoint.x - 0.3f, (float)mousePoint.y + 0.2f, mousePoint.z - 0.3f);
+                }
+                else if (buildingClassName == "NuclearPlant")
+                {
+                    previewBuilding.transform.position = new Vector3(mousePoint.x + 0.2f, (float)mousePoint.y + 0.2f, mousePoint.z + 0.2f);
+                }
+                else if (buildingClassName != "CoalMine" && buildingClassName != "Hydro")
+                {
+                    previewBuilding.transform.position = new Vector3(mousePoint.x, (float)mousePoint.y + 0.1f, mousePoint.z);
+                }
+            }
 
             if (canBuildOnPoint(buildingClassName, mousePoint))
             {

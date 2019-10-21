@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7275487147563007865
+--- !u!1 &7588658676845621848
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7275487147563295577}
-  - component: {fileID: 7275487147562001273}
-  - component: {fileID: 7275487147561001401}
-  - component: {fileID: 65067249828982440}
+  - component: {fileID: 7588658676845915768}
+  - component: {fileID: 7588658676846718556}
+  - component: {fileID: 7588658676847815836}
   m_Layer: 0
-  m_Name: building_vegefarm
+  m_Name: grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7275487147563295577
+--- !u!4 &7588658676845915768
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275487147563007865}
+  m_GameObject: {fileID: 7588658676845621848}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 18.555862, y: -110.780304, z: -462.6075}
+  m_LocalPosition: {x: -0.0003419552, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 2.5}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7588658676845915772}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7275487147562001273
+--- !u!33 &7588658676846718556
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275487147563007865}
-  m_Mesh: {fileID: 4300000, guid: c5741b9606b1aed49bf9f2c3033886f5, type: 3}
---- !u!23 &7275487147561001401
+  m_GameObject: {fileID: 7588658676845621848}
+  m_Mesh: {fileID: 4300000, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+--- !u!23 &7588658676847815836
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275487147563007865}
+  m_GameObject: {fileID: 7588658676845621848}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +57,14 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a00b3d9e5883ca345a639574b3a0e5c3, type: 2}
+  - {fileID: 2100000, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100002, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100004, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100006, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100008, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100010, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100012, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
+  - {fileID: 2100014, guid: ccb01d0d638ae004b8c4d432ce2390a8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,16 +84,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &65067249828982440
-BoxCollider:
+--- !u!1 &7588658676845621852
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275487147563007865}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.00516023, y: 0.0052209278, z: 0.0033738853}
-  m_Center: {x: -0.0000034195837, y: -0.00010979802, z: 0.0014369427}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7588658676845915772}
+  m_Layer: 0
+  m_Name: building_vegefarm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7588658676845915772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588658676845621852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5020661, y: -5.4229164, z: 11.174745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7588658676845915768}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
