@@ -18,13 +18,13 @@ public class AchievementManager
             achievements[(int)achievementType]= new Achievement(achievementType);
             Debug.Log(achievementType);
         }
-        achievements[0].Title = "Fail";
-        achievements[0].Blurb = "You have lost the Game many times";
-        achievements[0].HowToComplete = "Lose the game 5 times";
-        achievements[0].CountToComplete = 5;
+        achievements[0].Title = "Winner";
+        achievements[0].Blurb = "Congratulations on winning the game.";
+        achievements[0].HowToComplete = "Win the game";
+        achievements[0].CountToComplete = 1;
         achievements[0].CurrentCount = PlayerPrefs.GetInt("Count"+ achievements[0].Title, 0);
-        achievements[1].Title = "Win";
-        achievements[1].Blurb = "You have won the game many times";
+        achievements[1].Title = "Climate Change Combater";
+        achievements[1].Blurb = "Congratulations on sucessfully combatting climate change!";
         achievements[1].HowToComplete = "Win the game 5 times";
         achievements[1].CountToComplete = 5;
         achievements[1].CurrentCount = PlayerPrefs.GetInt("Count"+ achievements[1].Title, 0);
@@ -38,19 +38,19 @@ public class AchievementManager
         achievements[3].HowToComplete = "Build 5 Oil Rigs";
         achievements[3].CountToComplete = 5;
         achievements[3].CurrentCount = PlayerPrefs.GetInt("Count"+ achievements[3].Title, 0);
-        achievements[4].Title = "Win all levels";
-        achievements[4].Blurb = "Congratulations, you truly are a climate change master! You will become a great mayor one day :)";
-        achievements[4].HowToComplete = "Win all levels";
-        achievements[4].CountToComplete = 3;
-        achievements[4].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[4].Title, 0);
-        achievements[5].Title = "Happiness";
-        achievements[5].Blurb = "Wow! You sure know how to keep your city happy!";
-        achievements[5].HowToComplete = "Reach 100% happiness";
-        achievements[5].CountToComplete = 1;
+        achievements[4].Title = "Build Hydro Plant";
+        achievements[4].Blurb = "Hydro plants are an eco friendly and sustainable source of energy.";
+        achievements[4].HowToComplete = "Build 10 hydro plants";
+        achievements[4].CountToComplete = 10;
+        achievements[4].CurrentCount = PlayerPrefs.GetInt("Count"+ achievements[4].Title, 0);
+        achievements[5].Title = "Win all levels";
+        achievements[5].Blurb = "Congratulations, you truly are a climate change master! You will become a great mayor one day :)";
+        achievements[5].HowToComplete = "Win all levels";
+        achievements[5].CountToComplete = 3;
         achievements[5].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[5].Title, 0);
-        achievements[6].Title = "We will rebuild!";
-        achievements[6].Blurb = "Don't give up! Bad things happen, the important thing is to stay strong!";
-        achievements[6].HowToComplete = "Fix a building when it is destroyed by a random event";
+        achievements[6].Title = "Happiness";
+        achievements[6].Blurb = "Wow! You sure know how to keep your city happy!";
+        achievements[6].HowToComplete = "Reach 100% happiness";
         achievements[6].CountToComplete = 1;
         achievements[6].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[6].Title, 0);
         achievements[7].Title = "Win in 80 turns";
@@ -63,6 +63,11 @@ public class AchievementManager
         achievements[8].HowToComplete = "Win the game within 90 turns in any level";
         achievements[8].CountToComplete = 1;
         achievements[8].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[8].Title, 0);
+        achievements[9].Title = "Lose5";
+        achievements[9].Blurb = "You have lost the Game many times. Don't let climate change win!";
+        achievements[9].HowToComplete = "Lose the game 5 times";
+        achievements[9].CountToComplete = 5;
+        achievements[9].CurrentCount = PlayerPrefs.GetInt("Count"+ achievements[9].Title, 0);
     }
 
     public static AchievementManager GetAchievementManager(){
