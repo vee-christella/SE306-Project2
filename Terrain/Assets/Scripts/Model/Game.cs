@@ -337,7 +337,7 @@ public class Game
         }
 
         // Calculate the green points effect on good/bad event probability
-        goodEventProbability = Mathf.Floor((greenPoints / 2000 * 100) / 2f);
+        goodEventProbability = Mathf.Floor(((greenPoints / 2000 * 100) / 2f) + (30 - (difficultyOffset * 100)));
         badEventProbability = (greenPoints < 0) ? (1 - 700 / (1000 - greenPoints)) : (300 / (1000 + greenPoints));
 
         // Calculate the game difficulty and turn number effect on bad event probability
