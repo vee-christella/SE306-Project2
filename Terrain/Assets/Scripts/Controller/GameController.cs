@@ -29,6 +29,10 @@ public class GameController : MonoBehaviour
     public GameObject errorPopup;
     public GameObject happinessImage;
 
+    public AudioSource EndMusic;
+    public AudioClip victoryClip;
+    public AudioClip loseClip;
+
     private bool badEventOccured;
 
 
@@ -44,10 +48,10 @@ public class GameController : MonoBehaviour
     public Sprite sadImage;
 
 
-    public string[] greenMetricCheatCode = {"i","l","o","v","e","e","a","r","t","h"};
-    public string[] loseCheatCode = {"p","l","a","s","t","i","c","b","a","g","s"};
-    public string[] happinessCheatCode = {"h","a","p","p","y"};
-    public string[] moneyCheatCode = {"r","i","c","h","b","o","y"};
+    public string[] greenMetricCheatCode = { "i", "l", "o", "v", "e", "e", "a", "r", "t", "h" };
+    public string[] loseCheatCode = { "p", "l", "a", "s", "t", "i", "c", "b", "a", "g", "s" };
+    public string[] happinessCheatCode = { "h", "a", "p", "p", "y" };
+    public string[] moneyCheatCode = { "r", "i", "c", "h", "b", "o", "y" };
     public int greenCheatIndex = 0;
     public int loseCheatIndex = 0;
     public int happinessCheatIndex = 0;
@@ -60,7 +64,7 @@ public class GameController : MonoBehaviour
         Instance = this;
         badEventOccured = false;
         goodMainMusic.Play();
-    
+
 
         // Change the map generation depending on the game mode/difficulty
         switch (PlayerPrefs.GetInt("Level"))
@@ -157,7 +161,7 @@ public class GameController : MonoBehaviour
         eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
         eventController.Game = Game;
         eventController.GameController = this;
-        
+
         Game.HasStarted = true;
         StartingMetrics();
 
@@ -264,7 +268,7 @@ public class GameController : MonoBehaviour
                 moneyCheatIndex++;
             }
             else {
-                moneyCheatIndex = 0;    
+                moneyCheatIndex = 0;
             }
         }
         if (moneyCheatIndex == moneyCheatCode.Length) {
@@ -273,7 +277,7 @@ public class GameController : MonoBehaviour
             moneyCheatIndex = 0;
         }
     }
-    
+
 
     /*
     Handles when the end turn button is clicked.
@@ -287,7 +291,7 @@ public class GameController : MonoBehaviour
         {
             EventController.DisplayEventPopup();
 
-            if(game.GameEvent.Type != Event.EventType.Good) // if event is bad
+            if (game.GameEvent.Type != Event.EventType.Good) // if event is bad
             {
                 if (!badEventOccured) // if currently not bad event
                 {
@@ -465,10 +469,10 @@ public class GameController : MonoBehaviour
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
         Debug.Log("OnTileType Method called");
-       
+
         // Unregeister the old tile's callback method
         tile.unregisterMethodCallbackTypeChanged();
-        if(tileGO!= null)
+        if (tileGO != null)
         {
             GameObject tileGONew = changeTileObject(tile, tileGO);
             // Register the new tile's callback method
@@ -529,4 +533,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void PlayEndSound(bool victory)
+    {
+        if (victory)
+        {
+            EndMusic.PlayOneShot(victoryClip);
+        } else
+        {
+            EndMusic.PlayOneShot(loseClip);
+        }
+    }
 }
