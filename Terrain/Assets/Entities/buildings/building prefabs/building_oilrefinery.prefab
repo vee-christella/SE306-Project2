@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7178197188757138712
+--- !u!1 &5318542376091054683
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7178197188757172536}
-  - component: {fileID: 65483665514080210}
-  - component: {fileID: 23362057580037582}
+  - component: {fileID: 5318542376090955387}
+  - component: {fileID: 5318542376094346845}
+  - component: {fileID: 5318542376093248669}
   m_Layer: 0
-  m_Name: building_oilrefinery
+  m_Name: oil refinery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7178197188757172536
+--- !u!4 &5318542376090955387
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178197188757138712}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.620967, y: -124.991806, z: -442.22986}
+  m_GameObject: {fileID: 5318542376091054683}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7178197188757172542}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 5318542376090955389}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65483665514080210
-BoxCollider:
+--- !u!33 &5318542376094346845
+MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178197188757138712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.00516023, y: 0.0052209278, z: 0.0033738853}
-  m_Center: {x: -0.0000034195837, y: -0.00010979802, z: 0.0014369427}
---- !u!23 &23362057580037582
+  m_GameObject: {fileID: 5318542376091054683}
+  m_Mesh: {fileID: 4300000, guid: 27a99e5a3ac7a6f46881f41148016937, type: 3}
+--- !u!23 &5318542376093248669
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178197188757138712}
+  m_GameObject: {fileID: 5318542376091054683}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +57,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7a47225222e916d4d965dd0a34129e35, type: 2}
+  - {fileID: 2100000, guid: 27a99e5a3ac7a6f46881f41148016937, type: 3}
+  - {fileID: 2100002, guid: 27a99e5a3ac7a6f46881f41148016937, type: 3}
+  - {fileID: 2100004, guid: 27a99e5a3ac7a6f46881f41148016937, type: 3}
+  - {fileID: 2100006, guid: 27a99e5a3ac7a6f46881f41148016937, type: 3}
+  - {fileID: 2100008, guid: 27a99e5a3ac7a6f46881f41148016937, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &7178197188757138718
+--- !u!1 &5318542376091054685
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,45 +89,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7178197188757172542}
-  - component: {fileID: 7178197188757975320}
-  - component: {fileID: 7178197188759073752}
+  - component: {fileID: 5318542376090955389}
+  - component: {fileID: 65020091604496670}
+  - component: {fileID: 23144332248639710}
   m_Layer: 0
-  m_Name: oil refinery
+  m_Name: building_oilrefinery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7178197188757172542
+--- !u!4 &5318542376090955389
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178197188757138718}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.17580111, y: -0.0038292697, z: -0.065353185}
-  m_LocalScale: {x: 13.181207, y: 13.181207, z: 1.7574942}
-  m_Children: []
-  m_Father: {fileID: 7178197188757172536}
+  m_GameObject: {fileID: 5318542376091054685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 97.27658, y: 105.378624, z: -312.30124}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5318542376090955387}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7178197188757975320
-MeshFilter:
+--- !u!65 &65020091604496670
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178197188757138718}
-  m_Mesh: {fileID: 4300000, guid: 39889165b4aa6e445804fd39f2ffd3f8, type: 3}
---- !u!23 &7178197188759073752
+  m_GameObject: {fileID: 5318542376091054685}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.00516023, y: 0.0052209278, z: 0.0033738853}
+  m_Center: {x: -0.0000034195837, y: -0.00010979802, z: 0.0014369427}
+--- !u!23 &23144332248639710
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178197188757138718}
+  m_GameObject: {fileID: 5318542376091054685}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -140,11 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 39889165b4aa6e445804fd39f2ffd3f8, type: 3}
-  - {fileID: 2100002, guid: 39889165b4aa6e445804fd39f2ffd3f8, type: 3}
-  - {fileID: 2100004, guid: 39889165b4aa6e445804fd39f2ffd3f8, type: 3}
-  - {fileID: 2100006, guid: 39889165b4aa6e445804fd39f2ffd3f8, type: 3}
-  - {fileID: 2100008, guid: 39889165b4aa6e445804fd39f2ffd3f8, type: 3}
+  - {fileID: 2100000, guid: 7a47225222e916d4d965dd0a34129e35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
