@@ -14,6 +14,7 @@ public class AchievementController : MonoBehaviour
     private void Start()
     {
         // PlayerPrefs.DeleteAll();
+        achievementsPanel.SetActive(true);
         new AchievementManager();
         Achievement[] listOfAchievements = AchievementManager.Instance.achievements;
         foreach(Achievement achievement in AchievementManager.Instance.achievements) {
