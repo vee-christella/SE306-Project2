@@ -148,7 +148,13 @@ public class Game
         getModifier(GenerateHappiness);
 
         Happiness = Happiness + GenerateHappiness;
-
+        if(Happiness > 100)
+        {
+            Happiness = 100;
+        } else if (Happiness < 0)
+        {
+            Happiness = 0;
+        }
 
         // Increase the metrics
         calculateDelta();
