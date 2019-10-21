@@ -278,6 +278,7 @@ public class Game
     {
         this.isEnd = true;
         this.IsVictory = isVictory;
+        GameController.Instance.PlayEndSound(isVictory);
     }
 
     /*
