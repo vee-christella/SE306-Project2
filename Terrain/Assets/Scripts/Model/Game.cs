@@ -22,7 +22,6 @@ public class Game
     float happiness;
     float prevMoney;
     float prevHappiness;
-    bool isUnhappy = false;
     // generateX is the amount generated per turn before happiness modifiers
     float generateMoney;
     float generateGreen;
@@ -145,10 +144,9 @@ public class Game
         GenerateHappiness = 100;
     }
 
-    /* This method proceeds with the next turn after the user clicks the 
-     * end turn button. It increments the accumulated points and shows it on 
-     * the metrics
-     */
+    /* Proceeds with the next turn after the user clicks the end turn button. The acumulated money, green
+    points and happiness are shown, and the corresponding values on the UI are updated.
+    */
     public void NextTurn()
     {
         this.currentTurn++;
@@ -158,47 +156,47 @@ public class Game
 
         Happiness = Happiness + GenerateHappiness;
 
-        // Increase the metrics
-        calculateDelta();
+        calculateDeltas();
 
+        // Update the metrics
         Money = Money + moneyDelta;
         Green = Green + greenDelta;
-        Debug.Log(greenDelta);
 
-
-        // Check if the user has won the game by reaching the number of green
-        // points required
+        // Check if the user has won the game by reaching the number of green points required
         if (this.greenPoints >= maxGreen)
         {
             this.endGame(true);
-            // Check if the user has lost the game by exceeding the max number
-            // of turns allowed, or having a negative money value (as they
-            // now are stuck in debt)
-
             return;
         }
+        // Check if the user has lost the game by exceeding the max number of turns allowed, or having a no money left
         else if (currentTurn >= maxTurns || Money < 0)
         {
             this.endGame(false);
             return;
         }
 
+        // Get a random event to occur (if any)
         GameEvent = EventForNextTurn();
 
-        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel")
+        if ((GameEvent != null) && (GameEvent.GetType().Name.ToString() == "RisingSeaLevel"))
         {
+            // The bad event "RisingSeaLevel" should only occur once per game
             badEventList.Remove(GameEvent);
         }
 
-
+        // If has occured update the metrics
         if (GameEvent != null)
         {
             Money = Money + GameEvent.MoneyDelta;
-            Happiness = Happiness + GameEvent.HappinessDelta;
             Green = Green + GameEvent.GreenPointDelta;
+            Happiness = Happiness + GameEvent.HappinessDelta;
         }
     }
 
+    /*
+    Sets the booleans for the end of the game. These are used by the EndscreenController to check
+    when to show the end game popup.
+    */
     public void endGame(bool isVictory)
     {
         this.isEnd = true;
@@ -265,7 +263,7 @@ public class Game
             GenerateGreen -= building.GenerateGreen;
             GenerateHappiness -= building.GenerateHappiness;
 
-            calculateDelta();
+            calculateDeltas();
             Debug.Log("Modifier: " + modifier);
 
             // Set the metrics and metric deltas on the UI
@@ -385,7 +383,7 @@ public class Game
 
         Debug.Log("Building Happ: " + building.InitialBuildHappiness);
 
-        calculateDelta();
+        calculateDeltas();
 
         Debug.Log("Modifier: " + modifier);
 
@@ -479,7 +477,7 @@ public class Game
     Calculate the delta values for money and green points (i.e. how money and 
     green points will change per turn after happiness modifiers have been added).
     */
-    private void calculateDelta()
+    private void calculateDeltas()
     {
         // Calculate money delta
         if (GenerateMoney > 0)
