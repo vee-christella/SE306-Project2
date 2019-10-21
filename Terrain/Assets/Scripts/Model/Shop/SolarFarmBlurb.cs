@@ -16,23 +16,23 @@ public class SolarFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+solarFarm.InitialBuildMoney.ToString();
+        goldCost.text = solarFarm.InitialBuildMoney.ToString();
         if(solarFarm.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+solarFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+solarFarm.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+solarFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = solarFarm.InitialBuildGreen.ToString();
         }
         if(solarFarm.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+solarFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+solarFarm.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+solarFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = solarFarm.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

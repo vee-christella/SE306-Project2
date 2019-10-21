@@ -16,23 +16,23 @@ public class HydroBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+hydro.InitialBuildMoney.ToString();
+        goldCost.text = hydro.InitialBuildMoney.ToString();
         if(hydro.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+hydro.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+hydro.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+hydro.InitialBuildGreen.ToString();
+            greenPointsCost.text = hydro.InitialBuildGreen.ToString();
         }
         if(hydro.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+hydro.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+hydro.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+hydro.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = hydro.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

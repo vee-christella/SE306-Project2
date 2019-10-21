@@ -16,23 +16,23 @@ public class CoalMineBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+coalMine.InitialBuildMoney.ToString();
+        goldCost.text = coalMine.InitialBuildMoney.ToString();
         if(coalMine.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+coalMine.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+coalMine.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+coalMine.InitialBuildGreen.ToString();
+            greenPointsCost.text = coalMine.InitialBuildGreen.ToString();
         }
         if(coalMine.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+coalMine.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+coalMine.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+coalMine.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = coalMine.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

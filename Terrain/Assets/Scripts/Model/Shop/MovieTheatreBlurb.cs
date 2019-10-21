@@ -16,23 +16,23 @@ public class MovieTheatreBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+movieTheatre.InitialBuildMoney.ToString();
+        goldCost.text = movieTheatre.InitialBuildMoney.ToString();
         if(movieTheatre.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+movieTheatre.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+movieTheatre.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+movieTheatre.InitialBuildGreen.ToString();
+            greenPointsCost.text = movieTheatre.InitialBuildGreen.ToString();
         }
         if(movieTheatre.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+movieTheatre.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+movieTheatre.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+movieTheatre.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = movieTheatre.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

@@ -16,23 +16,23 @@ public class AnimalFarmBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+animalFarm.InitialBuildMoney.ToString();
+        goldCost.text = animalFarm.InitialBuildMoney.ToString();
         if(animalFarm.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+animalFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+animalFarm.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+animalFarm.InitialBuildGreen.ToString();
+            greenPointsCost.text = animalFarm.InitialBuildGreen.ToString();
         }
         if(animalFarm.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+animalFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+animalFarm.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+animalFarm.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = animalFarm.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }

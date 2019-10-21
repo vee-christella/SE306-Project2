@@ -16,23 +16,23 @@ public class ZooBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject panel;
     public Button endTurn;
 
-    public Text goldCost;
-    public Text greenPointsCost;
-    public Text happinessCost;
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
     
     // Start is called before the first frame update
     void Start()
     {
-        goldCost.text = " "+zoo.InitialBuildMoney.ToString();
+        goldCost.text = zoo.InitialBuildMoney.ToString();
         if(zoo.InitialBuildGreen > 0){
-            greenPointsCost.text = " +"+zoo.InitialBuildGreen.ToString();
+            greenPointsCost.text = "+"+zoo.InitialBuildGreen.ToString();
         } else {
-            greenPointsCost.text = " "+zoo.InitialBuildGreen.ToString();
+            greenPointsCost.text = zoo.InitialBuildGreen.ToString();
         }
         if(zoo.InitialBuildHappiness > 0){
-            happinessCost.text = " +"+zoo.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = "+"+zoo.InitialBuildHappiness.ToString()+"%";
         } else {
-            happinessCost.text = " "+zoo.InitialBuildHappiness.ToString()+"%";
+            happinessCost.text = zoo.InitialBuildHappiness.ToString()+"%";
         }
         panel.SetActive(false);
     }
