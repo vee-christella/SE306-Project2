@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b593005a512ea3b4782e3ce12c5334d4
+guid: 0cfacbefab73f294090de67a12ab80a7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -12,7 +12,7 @@ ModelImporter:
     400004: Light
     400006: nuclear plant
     2000000: Camera.001
-    2100000: Material
+    2100000: Material.001
     2300000: nuclear plant
     3300000: nuclear plant
     4300000: nuclear plant
