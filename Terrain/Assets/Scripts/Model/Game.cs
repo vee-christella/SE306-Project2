@@ -412,6 +412,9 @@ public class Game
         GameController.Instance.SetDelta(MoneyDelta, GreenDelta, GenerateHappiness);
     }
 
+    /*
+    
+    */
     public void StillBuildable(Tile tile)
     {
         if (tile.Building != null)
@@ -432,69 +435,67 @@ public class Game
     }
 
     /*
-
+    Changes the modifier based on the current happiness and the
+    happiness delta.
     */
     private void getModifier(float happinessDelta)
     {
-        if (Happiness >= 50 && Happiness + happinessDelta < 50)
-        {
-            Debug.Log("50 down");
-
-            modifier -= (float)0.1;
-        }
-
-        if (Happiness < 50 && Happiness + happinessDelta >= 50)
-        {
-            Debug.Log("50 up");
-
-            modifier += (float)0.1;
-
-        }
-
         if (Happiness >= 30 && Happiness + happinessDelta < 30)
         {
             Debug.Log("30 down");
-
-            modifier -= (float)0.1;
+            modifier -= 0.1f;
         }
 
         if (Happiness < 30 && Happiness + happinessDelta >= 30)
         {
             Debug.Log("30 up");
+            modifier += 0.1f;
+        }
 
-            modifier += (float)0.1;
+        if (Happiness >= 50 && Happiness + happinessDelta < 50)
+        {
+            Debug.Log("50 down");
+            modifier -= 0.1f;
+        }
+
+        if (Happiness < 50 && Happiness + happinessDelta >= 50)
+        {
+            Debug.Log("50 up");
+            modifier += 0.1f;
         }
 
         if (Happiness < 70 && Happiness + happinessDelta >= 70)
         {
             Debug.Log("70 up");
-
-            modifier += (float)0.1;
+            modifier += 0.1f;
         }
 
         if (Happiness >= 70 && Happiness + happinessDelta < 70)
         {
             Debug.Log("70 down");
-
-            modifier -= (float)0.1;
+            modifier -= 0.1f;
         }
 
         if (Happiness < 90 && Happiness + happinessDelta >= 90)
         {
             Debug.Log("90 up");
-
-            modifier += (float)0.1;
+            modifier += 0.1f;
         }
 
         if (Happiness >= 90 && Happiness + happinessDelta < 90)
         {
             Debug.Log("90 down");
-            modifier -= (float)0.1;
+            modifier -= 0.1f;
         }
     }
 
+    /*
+    Calculate the delta values for money and green points (i.e. how money and 
+    green points will change per turn after happiness modifiers have been added).
+    */
     private void calculateDelta()
     {
+        // Calculate money delta
         if (GenerateMoney > 0)
         {
             moneyDelta = GenerateMoney * modifier;
@@ -504,6 +505,7 @@ public class Game
             moneyDelta = GenerateMoney * (1 / modifier);
         }
 
+        // Calculate green points delta
         if (GenerateGreen > 0)
         {
             greenDelta = GenerateGreen * modifier;
@@ -514,7 +516,9 @@ public class Game
             Debug.Log("greendelta middle: " + greenDelta);
         }
 
+        // Round to 2 decimal places
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
     }
+
 }
