@@ -13,7 +13,7 @@ ModelImporter:
     400006: //RootNode
     2000000: Camera.001
     2100000: Material.005
-    2100002: Material.003
+    2100002: Material
     2300000: mountain tile
     3300000: mountain tile
     4300000: mountain tile
