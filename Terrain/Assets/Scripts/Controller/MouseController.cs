@@ -8,7 +8,6 @@ using TMPro;
 
 public class MouseController : MonoBehaviour
 {
-
     // ====================
     public GameObject selectedObject;
     public int red;
@@ -20,27 +19,18 @@ public class MouseController : MonoBehaviour
     // ====================
 
     public static MouseController Instance { get; protected set; }
-
-    public GameObject toolTip;
-
-    private TextMeshProUGUI toolTipText;
-
     private GameGrid gameGrid;
     private Camera mainCamera;
+    Vector3 lastFramePosition;
+    private float mouseScrollPosition;
+    public GameObject toolTip;
+    public Text cancelButtonString;
+    private TextMeshProUGUI toolTipText;
+    private TextMeshProUGUI sellText;
+    public Button sellButton;
+    private Tile tileSelected;
     private string buildingForCreating = null;
 
-    public Button sellButton;
-
-    private TextMeshProUGUI sellText;
-
-    public Text cancelButtonString;
-    Vector3 lastFramePosition;
-
-    private float mouseScrollPosition;
-
-
-    private Tile tileSelected;
-    // Start is called before the first frame update
     void Start()
     {
         mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
@@ -53,16 +43,14 @@ public class MouseController : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
-
         if (Input.GetMouseButton(1) || Input.GetMouseButton(2) || Input.GetAxis("Mouse ScrollWheel") != mouseScrollPosition)
         {
             RemoveTooltip();
             mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
-
         }
+
         if (GameController.Instance.Game.HasStarted)
         {
             RaycastHit hitInfo;
@@ -94,9 +82,7 @@ public class MouseController : MonoBehaviour
                                     Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                                 }
                             }
-
                         }
-
                     }
                     else
                     {
@@ -118,20 +104,14 @@ public class MouseController : MonoBehaviour
             }
             else
             {
-
+                // Remove the building preview when the cursor is not on a tile
+                BuildingController.Instance.HideBuildingPreview();
             }
         }
-        // }
-        // catch
-        // {
-        //     // Do nothing
-        // }
     }
-
 
     void OnMouseOver()
     {
-
         selectedObject = GameObject.Find(MouseHoverController.selectedObject);
 
         // Only highlight buildings
@@ -289,7 +269,10 @@ public class MouseController : MonoBehaviour
         setCancelButton();
     }
 
-    Tile getTileAtMouse(Vector3 coord)
+    /*
+
+    */
+    private Tile getTileAtMouse(Vector3 coord)
     {
         return GameController.Instance.Game.getTileAt((int)coord.x, (int)coord.z);
     }
