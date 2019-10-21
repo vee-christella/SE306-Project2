@@ -1,61 +1,22 @@
 fileFormatVersion: 2
-guid: 4fe11fd7d5f864d40b5218d81dbc66a1
+guid: b593005a512ea3b4782e3ce12c5334d4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: basis
-    100002: basis_Material.001_0
-    100004: //RootNode
-    100006: Camera.001
-    100008: cba15b55751f4a8b8c7ca78c94eee261.fbx
-    100010: door
-    100012: door handle
-    100014: door hinge
-    100016: door.001
-    100018: girder
-    100020: glass
-    100022: greenhouse
-    100024: Light.001
-    100026: Node
-    100028: Node.001
-    100030: RootNode
-    100032: RootNode (model correction matrix)
-    100034: Spot
-    400000: basis
-    400002: basis_Material.001_0
-    400004: //RootNode
-    400006: Camera.001
-    400008: cba15b55751f4a8b8c7ca78c94eee261.fbx
-    400010: door
-    400012: door handle
-    400014: door hinge
-    400016: door.001
-    400018: girder
-    400020: glass
-    400022: greenhouse
-    400024: Light.001
-    400026: Node
-    400028: Node.001
-    400030: RootNode
-    400032: RootNode (model correction matrix)
-    400034: Spot
+    100000: //RootNode
+    100002: Camera.001
+    100004: Light
+    100006: nuclear plant
+    400000: //RootNode
+    400002: Camera.001
+    400004: Light
+    400006: nuclear plant
     2000000: Camera.001
-    2100000: Material.001
-    2100002: Material.002
-    2100004: Material.008
-    2100006: Material.007
-    2100008: Material.006
-    2100010: Material.003
-    2100012: Material.004
-    2100014: Green_COLOR_0.000
-    2100016: wood
-    2100018: glass
-    2100020: metall2
-    2100022: metall1
-    2300000: basis_Material.001_0
-    3300000: basis_Material.001_0
-    4300000: basis_Material.001_0
-    10800000: Light.001
+    2100000: Material
+    2300000: nuclear plant
+    3300000: nuclear plant
+    4300000: nuclear plant
+    10800000: Light
   externalObjects: {}
   materials:
     importMaterials: 1
