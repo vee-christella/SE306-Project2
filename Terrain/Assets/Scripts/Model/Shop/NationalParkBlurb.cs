@@ -51,6 +51,6 @@ public class NationalParkBlurb : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        endTurn.interactable = false;
+        //endTurn.interactable = false;
     }
 }

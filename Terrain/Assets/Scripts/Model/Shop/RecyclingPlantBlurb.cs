@@ -51,6 +51,6 @@ public class RecyclingPlantBlurb : MonoBehaviour, IPointerEnterHandler, IPointer
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        endTurn.interactable = false;
+        //endTurn.interactable = false;
     }
 }

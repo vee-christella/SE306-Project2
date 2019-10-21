@@ -265,7 +265,7 @@ public class MouseController : MonoBehaviour
     }
     public void SetMode_RecyclingPlant()
     {
-        buildingForCreating = "Reycling Plant";
+        buildingForCreating = "Recycling Plant";
         setCancelButton();
     }
     public void SetMode_SolarFarm()

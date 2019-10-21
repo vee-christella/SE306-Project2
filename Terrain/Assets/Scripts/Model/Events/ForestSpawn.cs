@@ -31,7 +31,7 @@ public class ForestSpawn : Event
                 {
                     int random = Random.Range(0,20);
                     // 50% chance to change tiles to desert
-                    if (random == 1)
+                    if (random <= 1)
                     {
                         Debug.Log("spawn forest ");
                         Game.addBuildingToTile("Forest", tiles[i,j]);

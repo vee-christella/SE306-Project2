@@ -23,11 +23,11 @@ public class Rejuvenation : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Desert)
                 {
-                    int random = Random.Range(0, 1);
+                    int random = Random.Range(0, 2);
 
                     // 50% chance to change desert tile to water tile
                     if (random == 1)
-                    {
+                    { 
                         tiles[i, j].Type = Tile.TileType.Plain;
                     }
                 }

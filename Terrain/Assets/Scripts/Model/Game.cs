@@ -38,7 +38,7 @@ public class Game
     List<Event> goodEventList = new List<Event>();
     List<Event> badEventList = new List<Event>();
     bool hasStarted = false;
-    public float modifier = 1;
+    public float modifier = 1.0f;
     GameObject errorMessage;
     bool levelOneComplete = false;
     bool levelTwoComplete = false;
@@ -107,11 +107,9 @@ public class Game
             for (int z = 0; z < columns; z++)
             {
                 tiles[x, z] = new Tile(this, x, z);
-                // Register a callback method for each tile so that it can be changed dynamically
-                tiles[x, z].registerMethodCallbackTypeChanged(StillBuildable);
             }
         }
-
+        
         Debug.Log("game created");
     }
 
@@ -182,10 +180,14 @@ public class Game
     */
     public void NextTurn()
     {
+        if (currentTurn == 0)
+        {
+            modifier = 1.0f;
+        }
         this.currentTurn++;
 
         getModifier(GenerateHappiness);
-
+        Debug.Log("hapGen: " + GenerateHappiness);
         Happiness = Happiness + GenerateHappiness;
         if(Happiness > 100)
         {
@@ -265,6 +267,7 @@ public class Game
             Green = Green + GameEvent.GreenPointDelta;
             Happiness = Happiness + GameEvent.HappinessDelta;
         }
+        calculateDeltas();
     }
 
     /*
@@ -323,41 +326,43 @@ public class Game
         switch (PlayerPrefs.GetInt("Level"))
         {
             case 1:
-                CostToSell = building.InitialBuildMoney * 0.25f * -1;
+                CostToSell = building.InitialBuildMoney * 0.3f * -1;
                 break;
             case 2:
                 CostToSell = building.InitialBuildMoney * 0.2f * -1;
                 break;
             case 3:
-                CostToSell = building.InitialBuildMoney * 0.1f * -1;
+                CostToSell = building.InitialBuildMoney * 0.05f * -1;
                 break;
             default:
                 CostToSell = building.InitialBuildMoney * 0.1f * -1;
                 break;
         }
-
-        // Check that there's a building to remove/that it's been removed successfully
-        if (tile.removeBuilding())
+        if(Money + CostToSell >= 0)
         {
-            getModifier(building.InitialBuildHappiness * -1);
-
-            // Update the metrics and metric deltas
-            Money += CostToSell;
-            Happiness -= building.InitialBuildHappiness;
-            if (tile.IsBuildable(building))
+            // Check that there's a building to remove/that it's been removed successfully
+            if (tile.removeBuilding())
             {
-                Debug.Log("Selling Building Modify Gen");
-                GenerateHappiness -= building.GenerateHappiness;
-                GenerateMoney -= building.GenerateMoney;
-                GenerateGreen -= building.GenerateGreen;
+                getModifier(building.InitialBuildHappiness * -1);
+
+                // Update the metrics and metric deltas
+                Money += CostToSell;
+                Happiness -= building.InitialBuildHappiness;
+                if (tile.IsBuildable(building))
+                {
+                    Debug.Log("Selling Building Modify Gen");
+                    GenerateHappiness -= building.GenerateHappiness;
+                    GenerateMoney -= building.GenerateMoney;
+                    GenerateGreen -= building.GenerateGreen;
+                }
+
+                calculateDeltas();
+                Debug.Log("Modifier: " + modifier);
+
+                // Set the metrics and metric deltas on the UI
+                GameController.Instance.SetMetrics(Money, Green, Happiness);
+                GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
             }
-
-            calculateDeltas();
-            Debug.Log("Modifier: " + modifier);
-
-            // Set the metrics and metric deltas on the UI
-            GameController.Instance.SetMetrics(Money, Green, Happiness);
-            GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
         }
     }
 
@@ -376,15 +381,15 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
-        switch (gameDifficulty)
+        switch (PlayerPrefs.GetInt("Level"))
         {
-            case GameDifficulty.Easy:
+            case 1:
                 difficultyOffset = 0.1f;
-                break;
-            case GameDifficulty.Medium:
+                return null;
+            case 2:
                 difficultyOffset = 0.2f;
                 break;
-            case GameDifficulty.Hard:
+            case 3:
                 difficultyOffset = 0.3f;
                 break;
             default:
@@ -393,7 +398,7 @@ public class Game
         }
 
         // Calculate the green points effect on good/bad event probability
-        goodEventProbability = Mathf.Floor((greenPoints / 2000 * 100) / 2f);
+        goodEventProbability = Mathf.Floor((1.3f-difficultyOffset)*(greenPoints / 2000 * 100) / 2f);
         badEventProbability = (greenPoints < 0) ? (1 - 700 / (1000 - greenPoints)) : (300 / (1000 + greenPoints));
 
         // Calculate the game difficulty and turn number effect on bad event probability
@@ -520,6 +525,8 @@ public class Game
     */
     private void getModifier(float happinessDelta)
     {
+
+        Debug.Log("Modifier Before Hap: " + modifier);
         if (Happiness >= 30 && Happiness + happinessDelta < 30)
         {
             Debug.Log("30 down");
@@ -567,6 +574,7 @@ public class Game
             Debug.Log("90 down");
             modifier -= 0.1f;
         }
+        Debug.Log("Modifier After Hap: " + modifier);
     }
 
     /*
@@ -593,8 +601,9 @@ public class Game
         else
         {
             greenDelta = GenerateGreen * (1 / modifier);
-            Debug.Log("greendelta middle: " + greenDelta);
+            Debug.Log("greendelta middle: " + greenDelta+ " modifier: " + modifier);
         }
+        Debug.Log("MonGen: " + GenerateMoney + " GreenGen: " + GenerateGreen);
 
         // Round to 2 decimal places
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);

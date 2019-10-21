@@ -160,6 +160,8 @@ public class GameController : MonoBehaviour
         
         Game.HasStarted = true;
         StartingMetrics();
+
+        Debug.Log("World loaded");
     }
 
     public void assignCallBackMethodsToGame()
@@ -170,7 +172,7 @@ public class GameController : MonoBehaviour
             for (int z = 0; z < Game.Columns; z++)
             {
                 Tile tile = Game.getTileAt(x, z);
-                GameObject tileGO = Instantiate(tileGameObjs[0]) as GameObject;
+                GameObject tileGO = new GameObject();//Instantiate(tileGameObjs[0]) as GameObject;
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
                 // Create empty building game objects
                 GameObject buildingGO = new GameObject();
@@ -462,8 +464,21 @@ public class GameController : MonoBehaviour
     */
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
+        Debug.Log("OnTileType Method called");
+       
         // Unregeister the old tile's callback method
-        tile.unregisterMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+        tile.unregisterMethodCallbackTypeChanged();
+        if(tileGO!= null)
+        {
+            GameObject tileGONew = changeTileObject(tile, tileGO);
+            // Register the new tile's callback method
+            tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+        }
+
+    }
+
+    private GameObject changeTileObject(Tile tile, GameObject tileGO)
+    {
 
         int typeInt = 0;
         if (tile.Type == Tile.TileType.Desert)
@@ -484,22 +499,21 @@ public class GameController : MonoBehaviour
         }
 
         // Create the new tile GameObject and set its attributes
-        GameObject tileGONew = Instantiate(tileGameObjs[typeInt]) as GameObject;
+        GameObject tileGONew = Instantiate(tileGameObjs[typeInt]);
         tileGONew.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         tileGONew.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
         // Set the location of the new tile GameObject
-        Vector3 tileLocation = new Vector3(tile.X, tile.Y, tile.Z);
+        /*Vector3 tileLocation = new Vector3(tile.X, tile.Y, tile.Z);
         var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
         tileGONew.transform.position = finalPosition;
-
-        // Register the new tile's callback method
-        tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+        */
 
         // Remove the old tile GameObject from the game
         Destroy(tileGO);
+        tileGO.name = tileGO.name + "_to_destroy";
+        return tileGONew;
     }
-
     /*
     Changes the happiness image on the metrics bar.
     */
