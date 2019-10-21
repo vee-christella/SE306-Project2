@@ -29,6 +29,12 @@ public class GameController : MonoBehaviour
     public GameObject happinessImage;
     public TextMeshProUGUI placeholder;
 
+    private bool badEventOccured;
+
+
+    public AudioSource goodMainMusic;
+    public AudioSource badMainMusic;
+
     public Sprite happyImage;
     public Sprite sadImage;
 
@@ -47,6 +53,8 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
+        badEventOccured = false;
+        goodMainMusic.Play();
     
 
         // Change the map generation depending on the game mode/difficulty
@@ -193,6 +201,24 @@ public class GameController : MonoBehaviour
         if (game.GameEvent != null)
         {
             EventController.DisplayEventPopup();
+
+            if(game.GameEvent.Type != Event.EventType.Good) // if event is bad
+            {
+                if (!badEventOccured) // if currently not bad event
+                {
+                    badMainMusic.Play();
+                    goodMainMusic.Stop();
+                    badEventOccured = true;
+                }
+            } else
+            {
+                if (badEventOccured)
+                {
+                    badMainMusic.Stop();
+                    goodMainMusic.Play();
+                    badEventOccured = false;
+                }
+            }
         }
 
         Debug.Log("Finished event logic");
@@ -200,6 +226,18 @@ public class GameController : MonoBehaviour
         SetMetrics(game.Money, game.Green, game.Happiness);
         SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
         SetTurn(game.CurrentTurn);
+    }
+
+    private IEnumerator fadeOut(AudioSource audio)
+    {
+        float startVolume = audio.volume;
+        while (audio.volume > 0)
+        {
+            audio.volume -= startVolume * Time.deltaTime / 3;
+        }
+        goodMainMusic.Stop();
+        yield return null;
+
     }
 
     // Update is called once per frame

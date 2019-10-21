@@ -184,6 +184,7 @@ public class Game
         {
             Happiness = 0;
         }
+        GameController.Instance.ChangeImageSprite(modifier);
 
         // Increase the metrics
         calculateDelta();
@@ -360,6 +361,7 @@ public class Game
             Money += CostToSell;
             getModifier(building.InitialBuildHappiness * -1);
             Happiness -= building.InitialBuildHappiness;
+            GameController.Instance.ChangeImageSprite(modifier);
             GenerateHappiness -= building.GenerateHappiness;    
             GenerateMoney -= building.GenerateMoney;
             GenerateGreen -= building.GenerateGreen;
@@ -512,6 +514,8 @@ public class Game
             Happiness += building.InitialBuildHappiness;
             
         }
+        GameController.Instance.ChangeImageSprite(modifier);
+
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
@@ -632,6 +636,5 @@ public class Game
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
 
-        GameController.Instance.ChangeImageSprite(modifier);
     }
 }

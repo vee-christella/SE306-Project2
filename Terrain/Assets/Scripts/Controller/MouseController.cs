@@ -41,6 +41,9 @@ public class MouseController : MonoBehaviour
     public AudioSource CantBuildSound;
     public AudioClip CantBuildClip;
 
+    public AudioSource BuildSound;
+    public AudioClip BuildClip;
+
 
     private Tile tileSelected;
     // Start is called before the first frame update
@@ -94,6 +97,7 @@ public class MouseController : MonoBehaviour
                             {
                                 if (BuildingController.Instance.addBuildingToTile(buildingForCreating, tileUnderMouse))
                                 {
+                                    BuildSound.PlayOneShot(BuildClip);
                                     Debug.Log("Building " + buildingForCreating + " Created at " + "(" + tileUnderMouse.X + ", " + tileUnderMouse.Y + ")");
                                 } else
                                 {
