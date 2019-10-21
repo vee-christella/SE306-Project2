@@ -4,14 +4,7 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Camera
-    100004: grass
-    100006: Light
     400000: //RootNode
-    400002: Camera
-    400004: grass
-    400006: Light
-    2000000: Camera
     2100000: Material.013
     2100002: Corn2_COLOR_0.000
     2100004: Corn1_COLOR_0.000
@@ -20,10 +13,9 @@ ModelImporter:
     2100010: Corn1_COLOR_0.002
     2100012: Corn3_COLOR_0.002
     2100014: Fences_COLOR_0.002
-    2300000: grass
-    3300000: grass
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: grass
-    10800000: Light
   externalObjects: {}
   materials:
     importMaterials: 1

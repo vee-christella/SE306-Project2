@@ -26935,7 +26935,7 @@ MonoBehaviour:
     type: 3}
   model_TownHall: {fileID: 3200844595352329480, guid: 792b6664a37247645af0f7269d68527d,
     type: 3}
-  model_VegetableFarm: {fileID: 7275487147563007865, guid: ada4452c402487d4c859ea6f69e6ad41,
+  model_VegetableFarm: {fileID: 8004899315798038904, guid: ada4452c402487d4c859ea6f69e6ad41,
     type: 3}
   model_WindTurbine: {fileID: 4507078067012057080, guid: b1a0477cca2e1b54a946ede48e5ec7c9,
     type: 3}
@@ -30313,8 +30313,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1675714898}
   m_HandleRect: {fileID: 1675714897}
   m_Direction: 0
-  m_Value: 0.0000001795151
-  m_Size: 0.70175433
+  m_Value: 0
+  m_Size: 0.70175445
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
