@@ -360,9 +360,12 @@ public class Game
             Money += CostToSell;
             getModifier(building.InitialBuildHappiness * -1);
             Happiness -= building.InitialBuildHappiness;
-            GenerateHappiness -= building.GenerateHappiness;    
-            GenerateMoney -= building.GenerateMoney;
-            GenerateGreen -= building.GenerateGreen;
+            if (tile.IsBuildable(building))
+            {
+                GenerateHappiness -= building.GenerateHappiness;
+                GenerateMoney -= building.GenerateMoney;
+                GenerateGreen -= building.GenerateGreen;
+            }
 
             calculateDelta();
             Debug.Log("Modifier: " + modifier);
@@ -533,20 +536,22 @@ public class Game
     {
         if (tile.Building != null)
         {
-            if (!tile.IsBuildable(tile.Building))
-            {
-                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
-                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
-                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
-            }
-            else
+            Debug.Log("TIle type was: " + tile.wasBuildable(tile.Building) + " type is: " + tile.IsBuildable(tile.Building));
+            if (!tile.wasBuildable(tile.Building) && tile.IsBuildable(tile.Building))
             {
                 GenerateGreen = GenerateGreen + tile.Building.GenerateGreen;
                 GenerateMoney = GenerateMoney + tile.Building.GenerateMoney;
                 GenerateHappiness = GenerateHappiness + tile.Building.GenerateHappiness;
-
+            }
+            else if (tile.wasBuildable(tile.Building) && !tile.IsBuildable(tile.Building))
+            {
+                GenerateGreen = GenerateGreen - tile.Building.GenerateGreen;
+                GenerateMoney = GenerateMoney - tile.Building.GenerateMoney;
+                GenerateHappiness = GenerateHappiness - tile.Building.GenerateHappiness;
+                Debug.Log("Green: " + GenerateGreen + " Mon: " + GenerateMoney + "Hap: " + GenerateHappiness);
             }
         }
+        calculateDelta();
     }
 
 

@@ -29,7 +29,6 @@ public class WorldGenerator
         bool mapMaking = true;
         while (mapMaking)
         {
-
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -79,6 +78,7 @@ public class WorldGenerator
             int plainCount = 0;
             int desertCount = 0;
             float divider = (max - min) / 4;
+            bool townHallBuilt = false;
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -109,11 +109,21 @@ public class WorldGenerator
 
                         game.getTileAt(i, j).setType(Tile.TileType.Plain);
                         plainCount++;
+                        if(!townHallBuilt && i > rows * 4 / 10 && i <= rows * 6 / 10 && j > cols * 4 / 10 && j <= cols * 6 / 10 )
+                        {
+                            game.addBuildingToTile("Town Hall", game.getTileAt(i, j));
+                            townHallBuilt = true;
+                        }
 
                     }
                 }
             }
-
+            if (!townHallBuilt)
+            {
+                game.getTileAt(rows / 2, cols / 2).setType(Tile.TileType.Plain);
+                game.addBuildingToTile("Town Hall", game.getTileAt(rows / 2, cols / 2));
+                townHallBuilt = true;
+            }
             int num = (rows * cols) / 6;
             if (mountainCount >= num && waterCount >= num && plainCount >= num && desertCount >= num)
             {
@@ -121,14 +131,12 @@ public class WorldGenerator
                 Debug.Log("Mountains: " + mountainCount + " water: " + waterCount + " plains: " + plainCount + " desert: " + desertCount);
             }
         }
-
     }
 
     public static void addBuildingsToWorld(Game game)
     {
         int rows = game.Rows;
         int cols = game.Columns;
-        Struct town = new Struct("Town Hall", 1);
         Struct animal = new Struct("Animal Farm", 4);
         Struct bee = new Struct("Bee Farm", 4);
         Struct coal = new Struct("Coal Mine", 5);
