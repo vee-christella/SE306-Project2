@@ -35,12 +35,16 @@ public class GameController : MonoBehaviour
 
     public Sprite happyImage;
     public Sprite sadImage;
-    public string[] greenMetricCheatCode = { "i", "l", "o", "v", "e", "e", "a", "r", "t", "h" };
-    public string[] loseCheatCode = { "p", "l", "a", "s", "t", "i", "c", "b", "a", "g", "s" };
-    public string[] happinessCheatCode = { "h", "a", "p", "p", "y" };
+
+
+    public string[] greenMetricCheatCode = {"i","l","o","v","e","e","a","r","t","h"};
+    public string[] loseCheatCode = {"p","l","a","s","t","i","c","b","a","g","s"};
+    public string[] happinessCheatCode = {"h","a","p","p","y"};
+    public string[] moneyCheatCode = {"r","i","c","h","b","o","y"};
     public int greenCheatIndex = 0;
     public int loseCheatIndex = 0;
     public int happinessCheatIndex = 0;
+    public int moneyCheatIndex = 0;
 
     void Start()
     {
@@ -209,6 +213,24 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void moneyCheat()
+    {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(moneyCheatCode[moneyCheatIndex])) {
+                moneyCheatIndex++;
+            }
+            else {
+                moneyCheatIndex = 0;    
+            }
+        }
+        if (moneyCheatIndex == moneyCheatCode.Length) {
+            game.moneyCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            moneyCheatIndex = 0;
+        }
+    }
+    
+
     /*
     Handles when the end turn button is clicked.
     */
@@ -235,6 +257,7 @@ public class GameController : MonoBehaviour
         greenCheat();
         loseCheat();
         happinessCheat();
+        moneyCheat();
     }
 
     /*

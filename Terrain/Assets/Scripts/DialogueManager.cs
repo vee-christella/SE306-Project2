@@ -95,7 +95,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (conversation.Count == 0 && tutorialStage != 10)
+        if ((conversation.Count == 0 && tutorialStage != 10) || (conversation.Count == 0 && PlayerPrefs.GetInt("Level") != 0))
         {
             EndDialogue();
             return;
@@ -302,6 +302,7 @@ public class DialogueManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("Level") == 0)
         {
+            Debug.Log("WHY");
             TutorialController.Instance.tutorialIndex++;
         }
         else

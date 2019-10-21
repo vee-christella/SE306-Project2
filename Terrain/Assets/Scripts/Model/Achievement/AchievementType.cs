@@ -10,7 +10,7 @@ public enum AchievementType {
     WinAllLevels,
     Happiness,
     FixBuilding,
-    Win20Turns,
-    Win30Turns,
-    Win40Turns
+    Win80Turns,
+    Win90Turns,
+
 };

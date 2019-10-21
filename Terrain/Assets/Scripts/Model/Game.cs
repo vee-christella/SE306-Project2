@@ -157,9 +157,12 @@ public class Game
         GenerateGreen = 1000;
     }
 
-    /*
-    Cheat for losing the game
-    */
+    public void moneyCheat()
+    {
+        MoneyDelta = 1000;
+        GenerateMoney = 1000;
+    }
+
     public void loseCheat()
     {
         MoneyDelta = -1000;
@@ -180,11 +183,18 @@ public class Game
     public void NextTurn()
     {
         this.currentTurn++;
-        Debug.Log("turn " + this.currentTurn);
 
         getModifier(GenerateHappiness);
 
         Happiness = Happiness + GenerateHappiness;
+        if(Happiness > 100)
+        {
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Happiness);
+            Happiness = 100;
+        } else if (Happiness < 0)
+        {
+            Happiness = 0;
+        }
 
         // If Happiness is >100 or <0, set it to 100 or 0 respectively 
         Happiness = (Happiness > 100) ? 100 : Happiness;
@@ -197,12 +207,24 @@ public class Game
         // Check if the user has won the game by reaching the number of green points required
         if (this.greenPoints >= maxGreen)
         {
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
+
+            if(currentTurn <= 80) 
+            {
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win80Turns);
+            }
+            if(currentTurn <= 90)
+            {
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win90Turns);
+            }
+
             this.endGame(true);
             return;
         }
         // Check if the user has lost the game by exceeding the max number of turns allowed, or having a no money left
         else if (currentTurn >= maxTurns || Money < 0)
         {
+            AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Fail);
             this.endGame(false);
             return;
         }
@@ -252,6 +274,12 @@ public class Game
             {
                 // The building was successfully built
                 UpdateMetrics(building);
+                if(buildingName == "Oil Refinery"){
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOilRig);
+                }
+                if(buildingName == "Nuclear Plant"){
+                    AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
+                }
                 return building;
             }
         }
