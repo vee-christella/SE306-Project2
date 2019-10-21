@@ -72,7 +72,7 @@ public class Tile
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
-        
+
         if ((this.building == null) && IsBuildable(building))
         {
 
@@ -98,7 +98,6 @@ public class Tile
 
     public bool removeBuilding()
     {
-        Debug.Log("Building Removed");
         if (this.building != null)
         {
             this.building = null;
@@ -107,9 +106,12 @@ public class Tile
             {
                 CallbackBuildingChange(this);
             }
+            Debug.Log("Building removed");
 
             return true;
         }
+
+        Debug.Log("No building to remove");
         return false;
     }
 

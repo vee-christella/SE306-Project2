@@ -17,9 +17,8 @@ public class Game
     int rows;
     int columns;
     Tile[,] tiles;
-    Building[,] buildings;
     float money;
-    float green;
+    float greenPoints;
     float happiness;
     float prevMoney;
     float prevHappiness;
@@ -47,7 +46,7 @@ public class Game
     public int Columns { get => columns; }
     public Tile[,] Tiles { get => tiles; set => tiles = value; }
     public float Money { get => money; set => money = value; }
-    public float Green { get => green; set => green = value; }
+    public float Green { get => greenPoints; set => greenPoints = value; }
     public float Happiness { get => happiness; set => happiness = value; }
     public float GenerateMoney { get => generateMoney; set => generateMoney = value; }
     public float GenerateGreen { get => generateGreen; set => generateGreen = value; }
@@ -70,7 +69,6 @@ public class Game
         this.columns = columns;
 
         Tiles = new Tile[rows, columns];
-        buildings = new Building[rows, columns];
 
         InitaliseRandomEventLists();
 
@@ -170,7 +168,7 @@ public class Game
 
         // Check if the user has won the game by reaching the number of green
         // points required
-        if (this.green >= maxGreen)
+        if (this.greenPoints >= maxGreen)
         {
             this.endGame(true);
             // Check if the user has lost the game by exceeding the max number
@@ -220,7 +218,6 @@ public class Game
             if (tile.placeBuilding(building))
             {
                 Debug.Log("==== Game not null = " + building != null);
-                buildings[tile.X, tile.Z] = building;
                 UpdateMetrics(building);
                 return building;
             }
@@ -248,38 +245,45 @@ public class Game
         }
     }
 
+    /*
+    Sell the building on the specified tile.
+    */
     public void SellBuilding(Tile tile)
     {
-        Debug.Log("Yeet");
         Building building = tile.Building;
         float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+
+        // Check that there's a building to remove/that it's been removed successfully
         if (tile.removeBuilding())
         {
-            buildings[tile.X, tile.Y] = null;
-            Money += CostToSell;
             getModifier(building.InitialBuildHappiness * -1);
+
+            // Update the metrics and metric deltas
+            Money += CostToSell;
             Happiness -= building.InitialBuildHappiness;
-            GenerateHappiness -= building.GenerateHappiness;
             GenerateMoney -= building.GenerateMoney;
             GenerateGreen -= building.GenerateGreen;
+            GenerateHappiness -= building.GenerateHappiness;
 
             calculateDelta();
             Debug.Log("Modifier: " + modifier);
 
+            // Set the metrics and metric deltas on the UI
             GameController.Instance.SetMetrics(Money, Green, Happiness);
             GameController.Instance.SetDelta(moneyDelta, greenDelta, GenerateHappiness);
-
         }
     }
 
-
-    // get the event  for the next turn
+    /*
+    Gets the random event (either good or bad) that will occur in the next turn. Events will have a 
+    certain probability of occuring, and the probability will be affected by how far the player is into 
+    the game and how many green points the player currently has. There is also a chance no event will occur.
+    - Higher turn number        -> Increased probability
+    - More green points         -> Increased good event probability and decreased bad event probability
+    - Higher game difficulty    -> Increased probability
+    */
     public Event EventForNextTurn()
     {
-
-        // current turn increase increases probability
-        // green point decreases per turn probability
-        // game difficultly increases or decreases probability
         List<Event> potentionalEvents = new List<Event>();
         float badEventProbability = 0;
         float goodEventProbability;
@@ -301,61 +305,40 @@ public class Game
         //               break;
         //       }
 
-        goodEventProbability = Mathf.Floor((green / 2000 * 100) / 2f);
+        // Calculate the green points effect on good/bad event probability
+        goodEventProbability = Mathf.Floor((greenPoints / 2000 * 100) / 2f);
+        badEventProbability = (greenPoints < 0) ? (1 - 700 / (1000 - greenPoints)) : (300 / (1000 + greenPoints));
 
-        // check green points to account for negative value
-        if (green < 0)
-        {
-            badEventProbability = (1 - 700 / (1000 - green));
-        }
-        else
-        {
-            badEventProbability = (300 / (1000 + green));
-        }
-
-        // calculate probability so no. of random events increases as progress through the game increases
-        // max probability of random events occuring is 80%
+        // Calculate the game difficulty and turn number effect on bad event probability
         badEventProbability = Mathf.FloorToInt(((difficultyOffset + (0.7f * badEventProbability)) * (currentTurn / maxTurns)) * 100);
 
+        // If bad event probability is >80% (maximum), then a good event cannot occur
         if (badEventProbability > 100)
         {
             goodEventProbability = 0;
             badEventProbability = 80;
         }
 
-        int randomNum = Random.Range(1, 101);
+        Debug.Log("GoodEvent probability " + goodEventProbability);
+        Debug.Log("BadEvent probability " + badEventProbability);
 
-        // good events take priority and the chance of a good event increases the more green points the user has
-        if (randomNum < goodEventProbability)
+        // Good events occuring take priority over bad events
+        if (Random.Range(1, 101) < goodEventProbability)
         {
             potentionalEvents.Add(goodEventList[Random.Range(0, goodEventList.Count)]);
         }
-        else
+        else if (Random.Range(1, 101) < badEventProbability)
         {
-            randomNum = Random.Range(1, 101);
-
-            if (randomNum < badEventProbability)
-            {
-                potentionalEvents.Add(badEventList[Random.Range(0, badEventList.Count)]);
-
-            }
+            potentionalEvents.Add(badEventList[Random.Range(0, badEventList.Count)]);
         }
 
-        Debug.Log("Goodevent probability " + goodEventProbability);
-        Debug.Log("BadEvent probability " + badEventProbability);
-
-        if (potentionalEvents.Count != 0)
-        {
-            return potentionalEvents[Random.Range(0, potentionalEvents.Count)];
-        }
-        else
-        {
-            return null;
-        }
+        // If an event can occur, choose a random one to happen, otherwise no event will occur
+        return (potentionalEvents.Count != 0) ? potentionalEvents[Random.Range(0, potentionalEvents.Count)] : null;
     }
 
     /*
-    Creates a list of all random events
+    Populates the bad event list with all the bad random events, and the good event list
+    with the good random events.
     */
     public void InitaliseRandomEventLists()
     {
@@ -372,12 +355,10 @@ public class Game
     }
 
     /*
-    Changes the metrics with regards to the effects of the building
-    that has just been placed.
+    Changes the metrics with regards to the effects of the building that has just been placed.
     */
     public void UpdateMetrics(Building building)
     {
-
         Money += building.InitialBuildMoney;
         Green += building.InitialBuildGreen;
 
@@ -413,7 +394,13 @@ public class Game
     }
 
     /*
-    
+    Checks to see if a building is still supposed to be buildable on top of the tile.
+    The metrics will be update after the check based on whether the building should
+    be on the tile or not.This is required because of the random events that change the
+    tiles on the map. For example, a drought can change a water tile to a desert tile,
+    and a hydro dam built on the tile will still remain on the tile. Since a hydro dam
+    wouldn't function without water (as is not buildable on a desert tile), it makes sense 
+    to negate that building's metric effects, essentially rendering the building useless.
     */
     public void StillBuildable(Tile tile)
     {
@@ -435,8 +422,7 @@ public class Game
     }
 
     /*
-    Changes the modifier based on the current happiness and the
-    happiness delta.
+    Changes the modifier based on the current happiness and the happiness delta.
     */
     private void getModifier(float happinessDelta)
     {
