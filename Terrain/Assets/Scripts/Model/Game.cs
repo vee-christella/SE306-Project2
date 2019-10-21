@@ -303,6 +303,10 @@ public class Game
                 return building;
             }
         }
+        else
+        {
+            GameController.Instance.errorPopup.SetActive(true);
+        }
 
         // The building was not built
         return null;
