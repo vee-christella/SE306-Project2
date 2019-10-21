@@ -40,9 +40,9 @@ public class GreenhouseBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData pointerEventData){
         blurb.text = greenhouse.Blurb;
         buildingName.text = greenhouse.Name;
-        coinMetric.text = greenhouse.GenerateMoney.ToString() + " per turn";
-        greenMetric.text = greenhouse.GenerateGreen.ToString() + " per turn";
-        happinessMetric.text = greenhouse.GenerateHappiness.ToString() + " per turn";
+        coinMetric.text = greenhouse.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = greenhouse.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = greenhouse.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
     }
 

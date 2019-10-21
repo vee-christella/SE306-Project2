@@ -50,8 +50,16 @@ public class AchievementController : MonoBehaviour
         popup.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Achievement complete: " + achievement.Title;
         popup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = achievement.Blurb;
     }
-    public void ClosePopUp()
+    public void ResetData()
     {
-        achievementPopup.SetActive(false);
+        PlayerPrefs.DeleteAll();
+        Achievement[] listOfAchievements = AchievementManager.Instance.achievements;
+        foreach(Achievement achievement in listOfAchievements)
+        {
+            Debug.Log("RESETTING");
+            achievement.AchievementRef.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text =
+            PlayerPrefs.GetInt("Count"+ achievement.Title, 0).ToString() + " out of " + achievement.CountToComplete.ToString();
+            achievement.AchievementRef.transform.GetChild(3).GetComponent<Image>().enabled = false;
+        }
     }
 }
