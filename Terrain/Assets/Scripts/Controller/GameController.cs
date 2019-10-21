@@ -6,16 +6,14 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController Instance { get; protected set; }
+    private GameGrid gameGrid;
     Game game;
     EventController eventController;
-    private GameGrid gameGrid;
     int[,] map;
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
     public int[,] Map { get => map; set => map = value; }
-
-    // public Sprite[] sprites = new Sprite[7];
+    public static GameController Instance { get; protected set; }
     public GameObject tutorialOverlay;
     public GameObject[] tileGameObjs = new GameObject[4];
     public TextMeshProUGUI coinCount;
@@ -26,8 +24,9 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
-    public GameObject happinessImage;
+    public TextMeshProUGUI errorText;
     public TextMeshProUGUI placeholder;
+    public GameObject happinessImage;
 
     // Set the introductions by the advisor for each level
     public GameObject level1Intro;
@@ -36,23 +35,18 @@ public class GameController : MonoBehaviour
 
     public Sprite happyImage;
     public Sprite sadImage;
-
-
-    public string[] greenMetricCheatCode = {"i","l","o","v","e","e","a","r","t","h"};
-    public string[] loseCheatCode = {"p","l","a","s","t","i","c","b","a","g","s"};
-    public string[] happinessCheatCode = {"h","a","p","p","y"};
+    public string[] greenMetricCheatCode = { "i", "l", "o", "v", "e", "e", "a", "r", "t", "h" };
+    public string[] loseCheatCode = { "p", "l", "a", "s", "t", "i", "c", "b", "a", "g", "s" };
+    public string[] happinessCheatCode = { "h", "a", "p", "p", "y" };
     public int greenCheatIndex = 0;
     public int loseCheatIndex = 0;
     public int happinessCheatIndex = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-
         Debug.Log("Game Controller Started");
         gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
-    
 
         // Change the map generation depending on the game mode/difficulty
         switch (PlayerPrefs.GetInt("Level"))
@@ -88,9 +82,8 @@ public class GameController : MonoBehaviour
                 Map = TutorialLevel.Arr;
                 placeholder.text = "Tutorial";
                 break;
-
         }
-        
+
         Game.IsEnd = false;
         Game.HasStarted = false;
 
@@ -105,7 +98,7 @@ public class GameController : MonoBehaviour
             {
                 Tile tile = Game.getTileAt(x, z);
 
-                GameObject tileGO = Instantiate(tileGameObjs[Map[x,z]]) as GameObject;
+                GameObject tileGO = Instantiate(tileGameObjs[Map[x, z]]) as GameObject;
                 tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
 
                 switch (Map[x, z])
@@ -123,17 +116,20 @@ public class GameController : MonoBehaviour
                         tile.setType(Tile.TileType.Water);
                         break;
                 }
+
                 // Create empty building game objects
                 GameObject buildingGO = new GameObject();
                 buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
                 buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
 
+                // Register the callback method for the tile so that it can be changed dynamically
                 tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
             }
         }
 
-        // Don't generate world on tutorial
-        if (PlayerPrefs.GetInt("Level") != 0) {
+        // Don't randomly generate world on the tutorial
+        if (PlayerPrefs.GetInt("Level") != 0)
+        {
             WorldGenerator.generateWorld(Game);
         }
 
@@ -141,58 +137,81 @@ public class GameController : MonoBehaviour
         Game.HasStarted = true;
     }
 
+    /*
+    Handles the player's attempt at entering the green points cheat code.
+    */
     public void greenCheat()
     {
-        if (Input.anyKeyDown) {
-            if (Input.GetKeyDown(greenMetricCheatCode[greenCheatIndex])) {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(greenMetricCheatCode[greenCheatIndex]))
+            {
                 greenCheatIndex++;
             }
-            else {
-                greenCheatIndex = 0;    
+            else
+            {
+                greenCheatIndex = 0;
             }
         }
-        if (greenCheatIndex == greenMetricCheatCode.Length) {
+        if (greenCheatIndex == greenMetricCheatCode.Length)
+        {
             game.greenCheat();
             SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
             greenCheatIndex = 0;
         }
     }
 
-    public void loseCheat()
+    /*
+    Handles the player's attempt at entering the happiness cheat code.
+    */
+    public void happinessCheat()
     {
-        if (Input.anyKeyDown) {
-            if (Input.GetKeyDown(loseCheatCode[loseCheatIndex])) {
-                loseCheatIndex++;
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(happinessCheatCode[happinessCheatIndex]))
+            {
+                happinessCheatIndex++;
             }
-            else {
-                loseCheatIndex = 0;    
+            else
+            {
+                happinessCheatIndex = 0;
             }
         }
-        if (loseCheatIndex == loseCheatCode.Length) {
+        if (happinessCheatIndex == happinessCheatCode.Length)
+        {
+            game.happinessCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            happinessCheatIndex = 0;
+        }
+    }
+
+    /*
+    Handles the player's attempt at entering the lose game cheat code.
+    */
+    public void loseCheat()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(loseCheatCode[loseCheatIndex]))
+            {
+                loseCheatIndex++;
+            }
+            else
+            {
+                loseCheatIndex = 0;
+            }
+        }
+        if (loseCheatIndex == loseCheatCode.Length)
+        {
             game.loseCheat();
             SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
             loseCheatIndex = 0;
         }
     }
 
-    public void happinessCheat()
-    {
-        if (Input.anyKeyDown) {
-            if (Input.GetKeyDown(happinessCheatCode[happinessCheatIndex])) {
-                happinessCheatIndex++;
-            }
-            else {
-                happinessCheatIndex = 0;    
-            }
-        }
-        if (happinessCheatIndex == happinessCheatCode.Length) {
-            game.happinessCheat();
-            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
-            happinessCheatIndex = 0;
-        }
-    }
-    
-
+    /*
+    Handles when the end turn button is clicked.
+    */
     public void callNextTurn()
     {
         Debug.Log("Next turn button clicked");
@@ -210,7 +229,6 @@ public class GameController : MonoBehaviour
         SetTurn(game.CurrentTurn);
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckMetrics();
@@ -219,7 +237,9 @@ public class GameController : MonoBehaviour
         happinessCheat();
     }
 
-    // Initialise the starting metrics on the screen
+    /*
+    Initialise the starting metrics on the screen
+    */
     public void StartingMetrics()
     {
         SetMetrics(game.Money, game.Green, game.Happiness);
@@ -230,6 +250,9 @@ public class GameController : MonoBehaviour
         SetTurn(0);
     }
 
+    /*
+    Sets the metric text values on the metrics bar.
+    */
     public void SetMetrics(float coin, float green, float happiness)
     {
         coinCount.text = System.Math.Round(coin, 2).ToString();
@@ -237,6 +260,9 @@ public class GameController : MonoBehaviour
         happinessCount.text = System.Math.Round(happiness, 2).ToString();
     }
 
+    /*
+    Sets the metric delta text values on the metrics bar.
+    */
     public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
     {
         if (coinDelta < 0)
@@ -268,61 +294,93 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /*
+    Sets the current turn text and colour.
+    */
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
-        
-        if (float.Parse(currentTurn.text)  == 17){
-            currentTurn.color = new Color32(255,150,0,255);
+
+        if (float.Parse(currentTurn.text) == 17)
+        {
+            currentTurn.color = new Color32(255, 150, 0, 255);
         }
 
-        if (float.Parse(currentTurn.text) == 33){
-            currentTurn.color = new Color32(255,0,0,255);
+        if (float.Parse(currentTurn.text) == 33)
+        {
+            currentTurn.color = new Color32(255, 0, 0, 255);
         }
     }
 
+    /*
+    Changes the metrics' text colours depending on whether they're positively or 
+    negatively affecting the player's gameplay.
+    */
     public void CheckMetrics()
     {
-        if (float.Parse(coinCount.text) <= 100){
-            coinCount.color = new Color32(255,0,0,255);
-        } else {
-            coinCount.color = new Color32(0,0,0,255);
+        if (float.Parse(coinCount.text) <= 100)
+        {
+            coinCount.color = new Color32(255, 0, 0, 255);
         }
-        if (float.Parse(greenCount.text) < 0){
-            greenCount.color = new Color32(255,0,0,255);
-        } else {
-            greenCount.color = new Color32(0,0,0,255);
+        else
+        {
+            coinCount.color = new Color32(0, 0, 0, 255);
         }
-        if (float.Parse(happinessCount.text) <= 25){
-            happinessCount.color = new Color32(255,0,0,255);
-        } else {
-            happinessCount.color = new Color32(0,0,0,255);
+        if (float.Parse(greenCount.text) < 0)
+        {
+            greenCount.color = new Color32(255, 0, 0, 255);
         }
-        
-        if (coinDeltaText.text[0] == '-'){
-            coinDeltaText.color = new Color32(255,0,0,255);
-        } else {
-            coinDeltaText.color = new Color32(0,0,0,255);
+        else
+        {
+            greenCount.color = new Color32(0, 0, 0, 255);
         }
-
-        if (greenDeltaText.text[0] == '-'){
-            greenDeltaText.color = new Color32(255,0,0,255);
-        } else {
-            greenDeltaText.color = new Color32(0,0,0,255);
+        if (float.Parse(happinessCount.text) <= 25)
+        {
+            happinessCount.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            happinessCount.color = new Color32(0, 0, 0, 255);
         }
 
-        if (happinessDeltaText.text[0] == '-'){
-            happinessDeltaText.color = new Color32(255,0,0,255);
-        } else {
-            happinessDeltaText.color = new Color32(0,0,0,255);
+        if (coinDeltaText.text[0] == '-')
+        {
+            coinDeltaText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            coinDeltaText.color = new Color32(0, 0, 0, 255);
+        }
+
+        if (greenDeltaText.text[0] == '-')
+        {
+            greenDeltaText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            greenDeltaText.color = new Color32(0, 0, 0, 255);
+        }
+
+        if (happinessDeltaText.text[0] == '-')
+        {
+            happinessDeltaText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            happinessDeltaText.color = new Color32(0, 0, 0, 255);
         }
     }
 
+    /*
+    Change the specified tile GameObject to a new tile GameObject with the
+    specified tile type.
+    */
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
-        //Debug.Log("on tile type changed");
+        // Unregeister the old tile's callback method
         tile.unregisterMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
-        int typeInt=0;
+
+        int typeInt = 0;
         if (tile.Type == Tile.TileType.Desert)
         {
             typeInt = 0;
@@ -339,28 +397,36 @@ public class GameController : MonoBehaviour
         {
             typeInt = 3;
         }
+
+        // Create the new tile GameObject and set its attributes
         GameObject tileGONew = Instantiate(tileGameObjs[typeInt]) as GameObject;
         tileGONew.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
         tileGONew.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
+        // Set the location of the new tile GameObject
         Vector3 tileLocation = new Vector3(tile.X, tile.Y, tile.Z);
         var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
         tileGONew.transform.position = finalPosition;
-        tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
-        Destroy(tileGO);
 
+        // Register the new tile's callback method
+        tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+
+        // Remove the old tile GameObject from the game
+        Destroy(tileGO);
     }
 
-
+    /*
+    Changes the happiness image on the metrics bar.
+    */
     public void ChangeImageSprite(float modifier)
     {
-        if(modifier < 1)
+        if (modifier < 1)
         {
             happinessImage.GetComponent<Image>().sprite = sadImage;
-        
-        } else
+        }
+        else
         {
             happinessImage.GetComponent<Image>().sprite = happyImage;
-
         }
     }
 
