@@ -48,11 +48,6 @@ public class MouseController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(1) || Input.GetMouseButton(2) || Input.GetAxis("Mouse ScrollWheel") != mouseScrollPosition)
-        {
-            RemoveTooltip();
-            mouseScrollPosition = Input.GetAxis("Mouse ScrollWheel");
-        }
 
         if (GameController.Instance.Game.HasStarted)
         {
@@ -110,6 +105,7 @@ public class MouseController : MonoBehaviour
                         }
                     }
                 }
+      
             }
             else
             {
