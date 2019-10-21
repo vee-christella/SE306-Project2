@@ -9,7 +9,8 @@ public class ForestSpawn : Event
     public ForestSpawn(Game game) : base(20, 2, 0)
     {
         this.Type = EventType.Good;
-        this.Description = "Seedlings from trees, flowers and plants have been blown to different parts of the map, starting more plant growth.";
+        this.Description = "Seedlings from trees, flowers and plants have been blown to different parts of the map, starting more plant growth. " +
+            "Good events like forests spawning have a higher chance of happening the more green points you have!";
         this.Game = game;
         this.Title = "Forest Spawn";
         this.TileDeltaDesc = "More forests have naturally grown in your town!";
