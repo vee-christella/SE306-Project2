@@ -14,46 +14,57 @@ public class ShopController : MonoBehaviour
     public GameObject RecreationalShop;
     public Button OtherTab;
     public GameObject OtherShop;
-   public void OpenShop(){
-       Shop.SetActive(true);
-       Debug.Log("clicked");
-       Time.timeScale = 1;
-   }
+    public void OpenShop() 
+    {
+        Animator animator = Shop.GetComponent<Animator>();
+        bool isOpen = animator.GetBool("open");
 
-   public void CloseShop(){
-       Shop.SetActive(false);
-       Time.timeScale = 1;
-   }
+        animator.SetBool("open", true);
+    }
 
-   public void OpenEnergyGeneratorTab(){
-       reset();
-       EnergyGeneratorTab.interactable = false;
-       EnergyGeneratorShop.SetActive(true);
-   }
-   public void OpenUtilitiesTab(){
-       reset();
-       UtilitiesTab.interactable = false;
-       UtilitiesShop.SetActive(true);
-   }
-   public void OpenRecreationalTab(){
-       reset();
-       RecreationalTab.interactable = false;
-       RecreationalShop.SetActive(true);
-   }
-   public void OpenOtherTab(){
-       reset();
-       OtherTab.interactable = false;
-       OtherShop.SetActive(true);
-   }
-   private void reset(){
-       EnergyGeneratorTab.interactable = true;
-       UtilitiesTab.interactable = true;
-       RecreationalTab.interactable = true;
-       OtherTab.interactable = true;
-       EnergyGeneratorShop.SetActive(false);
-       UtilitiesShop.SetActive(false);
-       RecreationalShop.SetActive(false);
-       OtherShop.SetActive(false);
-   }
+    public void CloseShop() 
+    {
+        Animator animator = Shop.GetComponent<Animator>();
+        bool isOpen = animator.GetBool("open");
+        
+        animator.SetBool("open", false);
+
+    }
+
+    public void OpenEnergyGeneratorTab()
+    {
+        reset();
+        EnergyGeneratorTab.interactable = false;
+        EnergyGeneratorShop.SetActive(true);
+    }
+    public void OpenUtilitiesTab()
+    {
+        reset();
+        UtilitiesTab.interactable = false;
+        UtilitiesShop.SetActive(true);
+    }
+    public void OpenRecreationalTab()
+    {
+        reset();
+        RecreationalTab.interactable = false;
+        RecreationalShop.SetActive(true);
+    }
+    public void OpenOtherTab()
+    {
+        reset();
+        OtherTab.interactable = false;
+        OtherShop.SetActive(true);
+    }
+    private void reset()
+    {
+        EnergyGeneratorTab.interactable = true;
+        UtilitiesTab.interactable = true;
+        RecreationalTab.interactable = true;
+        OtherTab.interactable = true;
+        EnergyGeneratorShop.SetActive(false);
+        UtilitiesShop.SetActive(false);
+        RecreationalShop.SetActive(false);
+        OtherShop.SetActive(false);
+    }
 
 }

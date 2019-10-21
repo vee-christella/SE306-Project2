@@ -3,48 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
-public class MovieTheatreBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler 
+public class MovieTheatreBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    MovieTheatre movieTheatre = new MovieTheatre();
     public Text blurb;
-    public Text metrics;
-    public GameObject metricsObject;
-    public GameObject blurbObject;
+    public TextMeshProUGUI buildingName;
+    public TextMeshProUGUI coinMetric;
+    public TextMeshProUGUI greenMetric;
+    public TextMeshProUGUI happinessMetric;
     public GameObject panel;
     public Button endTurn;
 
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
+    
     // Start is called before the first frame update
     void Start()
     {
-        MovieTheatre movieTheatre = new MovieTheatre();
-        blurb.text = movieTheatre.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + movieTheatre.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + movieTheatre.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + movieTheatre.InitialBuildHappiness.ToString() +
-        "\n\nMoney per turn: " + movieTheatre.GenerateMoney.ToString() +
-        "\nGreen Points per turn: " + movieTheatre.GenerateGreen.ToString() +
-        "\nHappiness per turn: " + movieTheatre.GenerateHappiness.ToString();
+        goldCost.text = movieTheatre.InitialBuildMoney.ToString();
+        if(movieTheatre.InitialBuildGreen > 0){
+            greenPointsCost.text = "+"+movieTheatre.InitialBuildGreen.ToString();
+        } else {
+            greenPointsCost.text = movieTheatre.InitialBuildGreen.ToString();
+        }
+        if(movieTheatre.InitialBuildHappiness > 0){
+            happinessCost.text = "+"+movieTheatre.InitialBuildHappiness.ToString()+"%";
+        } else {
+            happinessCost.text = movieTheatre.InitialBuildHappiness.ToString()+"%";
+        }
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
     }
     
     public void OnPointerEnter(PointerEventData pointerEventData){
+        blurb.text = movieTheatre.Blurb;
+        buildingName.text = movieTheatre.Name;
+        coinMetric.text = movieTheatre.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = movieTheatre.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = movieTheatre.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
-        blurbObject.SetActive(true);
-        metricsObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData pointerEventData){
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
-        endTurn.interactable = false;
+        //endTurn.interactable = false;
     }
 }

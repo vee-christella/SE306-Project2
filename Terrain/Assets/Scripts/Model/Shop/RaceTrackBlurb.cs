@@ -3,48 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class RaceTrackBlurb : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    RaceTrack raceTrack = new RaceTrack();
     public Text blurb;
-    public Text metrics;
-    public GameObject metricsObject;
-    public GameObject blurbObject;
+    public TextMeshProUGUI buildingName;
+    public TextMeshProUGUI coinMetric;
+    public TextMeshProUGUI greenMetric;
+    public TextMeshProUGUI happinessMetric;
     public GameObject panel;
     public Button endTurn;
 
+    public TextMeshProUGUI goldCost;
+    public TextMeshProUGUI greenPointsCost;
+    public TextMeshProUGUI happinessCost;
+    
     // Start is called before the first frame update
     void Start()
     {
-        RaceTrack raceTrack = new RaceTrack();
-        blurb.text = raceTrack.Blurb;
-        metrics.text = "METRICS\n\n" +
-        "Cost: " + raceTrack.InitialBuildMoney.ToString() +
-        "\n\nInitial Green Points: " + raceTrack.InitialBuildGreen.ToString() +
-        "\nInitial Happiness: " + raceTrack.InitialBuildHappiness.ToString() +
-        "\n\nMoney per turn: " + raceTrack.GenerateMoney.ToString() +
-        "\nGreen Points per turn: " + raceTrack.GenerateGreen.ToString() +
-        "\nHappiness per turn: " + raceTrack.GenerateHappiness.ToString();
+        goldCost.text = raceTrack.InitialBuildMoney.ToString();
+        if(raceTrack.InitialBuildGreen > 0){
+            greenPointsCost.text = "+"+raceTrack.InitialBuildGreen.ToString();
+        } else {
+            greenPointsCost.text = raceTrack.InitialBuildGreen.ToString();
+        }
+        if(raceTrack.InitialBuildHappiness > 0){
+            happinessCost.text = "+"+raceTrack.InitialBuildHappiness.ToString()+"%";
+        } else {
+            happinessCost.text = raceTrack.InitialBuildHappiness.ToString()+"%";
+        }
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
     }
     
     public void OnPointerEnter(PointerEventData pointerEventData){
+        blurb.text = raceTrack.Blurb;
+        buildingName.text = raceTrack.Name;
+        coinMetric.text = raceTrack.GenerateMoney.ToString() + " / turn";
+        greenMetric.text = raceTrack.GenerateGreen.ToString() + " / turn";
+        happinessMetric.text = raceTrack.GenerateHappiness.ToString() + " / turn";
         panel.SetActive(true);
-        blurbObject.SetActive(true);
-        metricsObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData pointerEventData){
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
     }
     public void OnPointerClick(PointerEventData pointerEventData) {
         panel.SetActive(false);
-        blurbObject.SetActive(false);
-        metricsObject.SetActive(false);
-        endTurn.interactable = false;
+        //endTurn.interactable = false;
     }
 }

@@ -10,6 +10,12 @@ public class PauseMenuController : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    public GameObject achievementPanel;
+    public GameObject optionPanel;
+    public GameObject helpPanel;
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -29,6 +35,9 @@ public class PauseMenuController : MonoBehaviour
     {
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
+        helpPanel.SetActive(false);
+        achievementPanel.SetActive(false);
+        optionPanel.SetActive(false);
         Time.timeScale = 1f;
     }
 
@@ -41,6 +50,8 @@ public class PauseMenuController : MonoBehaviour
 
     public void MenuButton()
     {
+        gameIsPaused = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
 
     }

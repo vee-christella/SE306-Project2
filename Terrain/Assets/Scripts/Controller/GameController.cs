@@ -7,193 +7,541 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
 
-    public static GameController Instance { get; protected set; }
+    private GameGrid gameGrid;
     Game game;
     EventController eventController;
-
+    int[,] map;
     public Game Game { get => game; protected set => game = value; }
     public EventController EventController { get => eventController; set => eventController = value; }
-
-    public Sprite[] sprites = new Sprite[7];
-
+    public int[,] Map { get => map; set => map = value; }
+    public static GameController Instance { get; protected set; }
+    public GameObject tutorialOverlay;
+    public GameObject[] tileGameObjs = new GameObject[4];
     public TextMeshProUGUI coinCount;
     public TextMeshProUGUI greenCount;
     public TextMeshProUGUI happinessCount;
     public TextMeshProUGUI currentTurn;
     public TextMeshProUGUI maxTurn;
-
     public TextMeshProUGUI coinDeltaText;
     public TextMeshProUGUI greenDeltaText;
     public TextMeshProUGUI happinessDeltaText;
-    // Start is called before the first frame update
+    //public TextMeshProUGUI errorText;
+    public TextMeshProUGUI placeholder;
+    public GameObject errorPopup;
+    public GameObject happinessImage;
+
+    public AudioSource EndMusic;
+    public AudioClip victoryClip;
+    public AudioClip loseClip;
+
+    private bool badEventOccured;
+
+
+    public AudioSource goodMainMusic;
+    public AudioSource badMainMusic;
+
+    // Set the introductions by the advisor for each level
+    public GameObject level1Intro;
+    public GameObject level2Intro;
+    public GameObject level3Intro;
+
+    public Sprite happyImage;
+    public Sprite sadImage;
+
+
+    public string[] greenMetricCheatCode = { "i", "l", "o", "v", "e", "e", "a", "r", "t", "h" };
+    public string[] loseCheatCode = { "p", "l", "a", "s", "t", "i", "c", "b", "a", "g", "s" };
+    public string[] happinessCheatCode = { "h", "a", "p", "p", "y" };
+    public string[] moneyCheatCode = { "r", "i", "c", "h", "b", "o", "y" };
+    public int greenCheatIndex = 0;
+    public int loseCheatIndex = 0;
+    public int happinessCheatIndex = 0;
+    public int moneyCheatIndex = 0;
+
     void Start()
     {
+        Debug.Log("Game Controller Started");
+        gameGrid = FindObjectOfType<GameGrid>();
         Instance = this;
-        Game = new Game(10, 10);
-        eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
-        for (int i = 0; i < Game.Rows; i++)
+        badEventOccured = false;
+        goodMainMusic.Play();
+
+
+        // Change the map generation depending on the game mode/difficulty
+        switch (PlayerPrefs.GetInt("Level"))
         {
-            for (int j = 0; j < Game.Columns; j++)
-            {
-                Tile tile = Game.getTileAt(i, j);
+            case 0:
+                Game = new Game(5, 5);
+                assignCallBackMethodsToGame();
+                Game.InitialiseMetrics(200, 0, 50, 1000);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
 
-                GameObject tileGO = new GameObject();
-                tileGO.name = "Tile(" + i + ", " + j + ")";
-                tileGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-
-                SpriteRenderer tileSR = tileGO.AddComponent<SpriteRenderer>();
-                tileSR.sortingLayerName = "Tile";
-
-                int random = Random.Range(0, 7);
-
-                switch (PrototypeLevel.Arr[i, j])
+                for (int x = 0; x < Game.Rows; x++)
                 {
-                    case 0:
-                    case 1:
-                        tile.setType(Tile.TileType.Desert);
-                        break;
-                    case 2:
-                    case 3:
-                        tile.setType(Tile.TileType.Mountain);
-                        break;
-                    case 4:
-                    case 5:
-                        tile.setType(Tile.TileType.Plain);
-                        break;
-                    case 6:
-                        tile.setType(Tile.TileType.Water);
-                        break;
+                    for (int z = 0; z < Game.Columns; z++)
+                    {
+                        switch (Map[x, z])
+                        {
+                            case 0:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Desert);
+                                break;
+                            case 1:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Mountain);
+                                break;
+                            case 2:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Plain);
+                                break;
+                            case 3:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Water);
+                                break;
+                        }
+                    }
                 }
-
-                tileSR.sprite = sprites[PrototypeLevel.Arr[i, j]];
-                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
-
-
-                Debug.Log("i = " + i + ", j = " + j);
-                Debug.Log(i == 5 && j == 4);
-
-                GameObject buildingGO = new GameObject();
-                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ")";
-                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
-                SpriteRenderer buildingSR = buildingGO.AddComponent<SpriteRenderer>();
-                buildingSR.sortingLayerName = "Building";
-                tile.registerMethodCallbackBuildingCreated((titleBuildingData) => { OnBuildingChange(titleBuildingData, buildingGO); });
-
-                // Place the TownHall
-                if (i == 5 && j == 4)
+                placeholder.text = "Tutorial";
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                assignCallBackMethodsToGame();
+                Game.InitialiseMetrics(200, 0, 50, 1000);
+                Map = PrototypeLevel.Arr;
+                placeholder.text = "Level 1";
+                for (int x = 0; x < Game.Rows; x++)
                 {
-                    Debug.Log("BANANA");
-                    BuildingController.Instance.addBuildingToTile("Town Hall", tile);
+                    for (int z = 0; z < Game.Columns; z++)
+                    {
+                        switch (Map[x, z])
+                        {
+                            case 0:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Desert);
+                                break;
+                            case 1:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Mountain);
+                                break;
+                            case 2:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Plain);
+                                break;
+                            case 3:
+                                Game.getTileAt(x, z).setType(Tile.TileType.Water);
+                                break;
+                        }
+                    }
                 }
-
-                
-            }
+                Game.addBuildingToTile("Town Hall", game.getTileAt(4, 4));
+                level1Intro.SetActive(true);
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                assignCallBackMethodsToGame();
+                WorldGenerator.generateWorld(Game);
+                game.InitialiseMetrics(200, 0, 50, 1000);
+                placeholder.text = "Level 2";
+                level2Intro.SetActive(true);
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                assignCallBackMethodsToGame();
+                WorldGenerator.generateWorld(Game);
+                WorldGenerator.addBuildingsToWorld(Game);
+                placeholder.text = "Level 3";
+                game.InitialiseMetrics(200, -500, 50, 1000);
+                level3Intro.SetActive(true);
+                break;
+            default:
+                Game = new Game(15, 15);
+                assignCallBackMethodsToGame();
+                WorldGenerator.generateWorld(Game);
+                game.InitialiseMetrics(200, 0, 50, 1000);
+                placeholder.text = "Level 2";
+                level2Intro.SetActive(true);
+                break;
         }
 
-        StartingMetrics();
-        Camera.main.transform.position = new Vector3(game.Columns / 2, game.Rows / 2, -10);
+        Game.IsEnd = false;
+        Game.HasStarted = false;
+        eventController = (EventController)gameObject.GetComponentInChildren(typeof(EventController), true);
+        eventController.Game = Game;
+        eventController.GameController = this;
 
+        Game.HasStarted = true;
+        StartingMetrics();
+
+        Debug.Log("World loaded");
     }
 
+    public void assignCallBackMethodsToGame()
+    {
+        // Populate the map with game tiles
+        for (int x = 0; x < Game.Rows; x++)
+        {
+            for (int z = 0; z < Game.Columns; z++)
+            {
+                Tile tile = Game.getTileAt(x, z);
+                GameObject tileGO = new GameObject();//Instantiate(tileGameObjs[0]) as GameObject;
+                tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGO); });
+                // Create empty building game objects
+                GameObject buildingGO = new GameObject();
+                buildingGO.name = "Building(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
+                buildingGO.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
+                // Register the callback method for the tile so that it can be changed dynamically
+                tile.registerMethodCallbackBuildingCreated((tileBuildingData) => { BuildingController.Instance.ChangeBuildingModel(tileBuildingData, buildingGO); });
+            }
+        }
+    }
+
+    /*
+    Handles the player's attempt at entering the green points cheat code.
+    */
+    public void greenCheat()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(greenMetricCheatCode[greenCheatIndex]))
+            {
+                greenCheatIndex++;
+            }
+            else
+            {
+                greenCheatIndex = 0;
+            }
+        }
+        if (greenCheatIndex == greenMetricCheatCode.Length)
+        {
+            game.greenCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            greenCheatIndex = 0;
+        }
+    }
+
+    /*
+    Handles the player's attempt at entering the happiness cheat code.
+    */
+    public void happinessCheat()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(happinessCheatCode[happinessCheatIndex]))
+            {
+                happinessCheatIndex++;
+            }
+            else
+            {
+                happinessCheatIndex = 0;
+            }
+        }
+        if (happinessCheatIndex == happinessCheatCode.Length)
+        {
+            game.happinessCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            happinessCheatIndex = 0;
+        }
+    }
+
+    /*
+    Handles the player's attempt at entering the lose game cheat code.
+    */
+    public void loseCheat()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(loseCheatCode[loseCheatIndex]))
+            {
+                loseCheatIndex++;
+            }
+            else
+            {
+                loseCheatIndex = 0;
+            }
+        }
+        if (loseCheatIndex == loseCheatCode.Length)
+        {
+            game.loseCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            loseCheatIndex = 0;
+        }
+    }
+
+    public void moneyCheat()
+    {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(moneyCheatCode[moneyCheatIndex])) {
+                moneyCheatIndex++;
+            }
+            else {
+                moneyCheatIndex = 0;
+            }
+        }
+        if (moneyCheatIndex == moneyCheatCode.Length) {
+            game.moneyCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            moneyCheatIndex = 0;
+        }
+    }
+
+
+    /*
+    Handles when the end turn button is clicked.
+    */
     public void callNextTurn()
     {
-        game.nextTurn();
+        Debug.Log("Next turn button clicked");
+        game.NextTurn();
 
         if (game.GameEvent != null)
         {
-            EventController.DisplayPopup(game.GameEvent);
+            EventController.DisplayEventPopup();
+
+            if (game.GameEvent.Type != Event.EventType.Good) // if event is bad
+            {
+                if (!badEventOccured) // if currently not bad event
+                {
+                    badMainMusic.Play();
+                    goodMainMusic.Stop();
+                    badEventOccured = true;
+                }
+            } else
+            {
+                if (badEventOccured)
+                {
+                    badMainMusic.Stop();
+                    goodMainMusic.Play();
+                    badEventOccured = false;
+                }
+            }
         }
 
+        Debug.Log("Finished event logic");
+
         SetMetrics(game.Money, game.Green, game.Happiness);
-        SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
+        SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
         SetTurn(game.CurrentTurn);
     }
+
 
     // Update is called once per frame
     void Update()
     {
-
+        CheckMetrics();
+        greenCheat();
+        loseCheat();
+        happinessCheat();
+        moneyCheat();
     }
 
-    // Initialise the starting metrics on the screen
+    /*
+    Initialise the starting metrics on the screen
+    */
     public void StartingMetrics()
     {
-        game.InitialiseMetrics(200, 0, 50, 1000);
         SetMetrics(game.Money, game.Green, game.Happiness);
-        SetDelta(0, 0, 0);
+        SetDelta(game.GenerateMoney, game.GenerateGreen, game.GenerateHappiness);
 
-        game.InitialiseTurns(0, 50);
+        game.InitialiseTurns(0, 100);
         maxTurn.text = game.MaxTurns.ToString();
         SetTurn(0);
     }
 
+    /*
+    Sets the metric text values on the metrics bar.
+    */
     public void SetMetrics(float coin, float green, float happiness)
     {
-        coinCount.text = coin.ToString();
-        greenCount.text = green.ToString();
-        happinessCount.text = happiness.ToString();
+        coinCount.text = System.Math.Round(coin, 2).ToString();
+        greenCount.text = System.Math.Round(green, 2).ToString();
+        happinessCount.text = System.Math.Round(happiness, 2).ToString();
     }
 
+    /*
+    Sets the metric delta text values on the metrics bar.
+    */
     public void SetDelta(float coinDelta, float greenDelta, float happinessDelta)
     {
-        if(coinDelta < 0)
+        if (coinDelta < 0)
         {
-            coinDeltaText.text = coinDelta.ToString();
+            coinDeltaText.text = System.Math.Round(coinDelta, 2).ToString();
         }
         else
         {
-            coinDeltaText.text = "+ " + coinDelta.ToString();
+            coinDeltaText.text = "+ " + System.Math.Round(coinDelta, 2).ToString(); ;
         }
 
-        if(greenDelta < 0)
+        if (greenDelta < 0)
         {
-            greenDeltaText.text = greenDelta.ToString();
+            greenDeltaText.text = System.Math.Round(greenDelta, 2).ToString(); ;
 
-        } else
+        }
+        else
         {
-            greenDeltaText.text = "+ " + greenDelta.ToString();
+            greenDeltaText.text = "+ " + System.Math.Round(greenDelta, 2).ToString(); ;
         }
 
         if (happinessDelta < 0)
         {
-            happinessDeltaText.text = happinessDelta.ToString();
-        } else
+            happinessDeltaText.text = System.Math.Round(happinessDelta, 2).ToString(); ;
+        }
+        else
         {
-            happinessDeltaText.text = "+ " + happinessDelta.ToString();
+            happinessDeltaText.text = "+ " + System.Math.Round(happinessDelta, 2).ToString(); ;
         }
     }
 
+    /*
+    Sets the current turn text and colour.
+    */
     public void SetTurn(float turn)
     {
         currentTurn.text = turn.ToString();
+
+        //if (float.Parse(currentTurn.text) == 50)
+        //{
+        //    currentTurn.color = new Color32(186, 103, 2, 255);
+        //}
+
+        //if (float.Parse(currentTurn.text) == 75)
+        //{
+        //    currentTurn.color = new Color32(255, 0, 0, 255);
+        //}
     }
 
+    /*
+    Changes the metrics' text colours depending on whether they're positively or 
+    negatively affecting the player's gameplay.
+    */
+    public void CheckMetrics()
+    {
+        if (float.Parse(coinCount.text) <= 100)
+        {
+            coinCount.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            coinCount.color = new Color32(0, 0, 0, 255);
+        }
+        if (float.Parse(greenCount.text) < 0)
+        {
+            greenCount.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            greenCount.color = new Color32(0, 0, 0, 255);
+        }
+        if (float.Parse(happinessCount.text) <= 25)
+        {
+            happinessCount.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            happinessCount.color = new Color32(0, 0, 0, 255);
+        }
+
+        if (coinDeltaText.text[0] == '-')
+        {
+            coinDeltaText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            coinDeltaText.color = new Color32(0, 0, 0, 255);
+        }
+
+        if (greenDeltaText.text[0] == '-')
+        {
+            greenDeltaText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            greenDeltaText.color = new Color32(0, 0, 0, 255);
+        }
+
+        if (happinessDeltaText.text[0] == '-')
+        {
+            happinessDeltaText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            happinessDeltaText.color = new Color32(0, 0, 0, 255);
+        }
+    }
+
+    /*
+    Change the specified tile GameObject to a new tile GameObject with the
+    specified tile type.
+    */
     public void OnTileTypeChanged(Tile tile, GameObject tileGO)
     {
-        Debug.Log("on tile type changed");
-        int random = 0;
+        Debug.Log("OnTileType Method called");
+
+        // Unregeister the old tile's callback method
+        tile.unregisterMethodCallbackTypeChanged();
+        if (tileGO != null)
+        {
+            GameObject tileGONew = changeTileObject(tile, tileGO);
+            // Register the new tile's callback method
+            tile.registerMethodCallbackTypeChanged((tileData) => { OnTileTypeChanged(tileData, tileGONew); });
+        }
+
+    }
+
+    private GameObject changeTileObject(Tile tile, GameObject tileGO)
+    {
+
+        int typeInt = 0;
         if (tile.Type == Tile.TileType.Desert)
         {
-            random = Random.Range(0, 1);
+            typeInt = 0;
         }
         else if (tile.Type == Tile.TileType.Mountain)
         {
-            random = Random.Range(2, 3);
+            typeInt = 1;
         }
         else if (tile.Type == Tile.TileType.Plain)
         {
-            random = Random.Range(4, 5);
+            typeInt = 2;
         }
         else if (tile.Type == Tile.TileType.Water)
         {
-            random = 6;
+            typeInt = 3;
         }
-        tileGO.GetComponent<SpriteRenderer>().sprite = sprites[random];
 
+        // Create the new tile GameObject and set its attributes
+        GameObject tileGONew = Instantiate(tileGameObjs[typeInt]);
+        tileGONew.name = "Tile(" + tile.X + ", " + tile.Y + ", " + tile.Z + ")";
+        tileGONew.transform.position = new Vector3(tile.X, tile.Y, tile.Z);
+
+        // Set the location of the new tile GameObject
+        /*Vector3 tileLocation = new Vector3(tile.X, tile.Y, tile.Z);
+        var finalPosition = gameGrid.GetNearestPointOnGrid(tileLocation);
+        tileGONew.transform.position = finalPosition;
+        */
+
+        // Remove the old tile GameObject from the game
+        Destroy(tileGO);
+        tileGO.name = tileGO.name + "_to_destroy";
+        return tileGONew;
+    }
+    /*
+    Changes the happiness image on the metrics bar.
+    */
+    public void ChangeImageSprite(float modifier)
+    {
+        if (modifier < 1)
+        {
+            happinessImage.GetComponent<Image>().sprite = sadImage;
+        }
+        else
+        {
+            happinessImage.GetComponent<Image>().sprite = happyImage;
+        }
     }
 
-    public void OnBuildingChange(Tile tile, GameObject buildingGO)
+    public void PlayEndSound(bool victory)
     {
-        BuildingController.Instance.ChangeBuildingSprite(tile, buildingGO);
+        if (victory)
+        {
+            EndMusic.PlayOneShot(victoryClip);
+        } else
+        {
+            EndMusic.PlayOneShot(loseClip);
+        }
     }
 }
