@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3D-GameScene-Vee.unity
     guid: 020db4f0ba1374ea7be13ba1f1b75126
+    path: Assets/Scenes/3D-GameScene.unity
+    guid: 020db4f0ba1374ea7be13ba1f1b75126
   m_configObjects: {}

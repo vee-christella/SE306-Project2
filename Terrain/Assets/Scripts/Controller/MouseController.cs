@@ -239,6 +239,11 @@ public class MouseController : MonoBehaviour
         buildingForCreating = "Oil Refinery";
         setCancelButton();
     }
+    public void SetMode_Pollutant()
+    {
+        buildingForCreating = "Pollutant";
+        setCancelButton();
+    }
     public void SetMode_RaceTrack()
     {
         buildingForCreating = "Race Track";
@@ -344,7 +349,25 @@ public class MouseController : MonoBehaviour
 
     private double getSellPrice(Building building)
     {
-        return building.InitialBuildMoney * 0.25 * -1;
+        double modifier;
+
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 1:
+                modifier = 0.25;
+                break;
+            case 2:
+                modifier = 0.2;
+                break;
+            case 3:
+                modifier = 0.1;
+                break;
+            default:
+                modifier = 0.1;
+                break;
+        }
+
+        return building.InitialBuildMoney * modifier * -1;//
     }
 
     public void SellBuilding()

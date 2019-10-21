@@ -7,7 +7,7 @@ public class AcidRain : Event
 
     private double probability;
 
-    public AcidRain(Game game) :base (-5,-1,-5)
+    public AcidRain(Game game) :base (-100,-5,-50)
     {
         this.Type = EventType.BuildingDestroyer;
         this.Description = "Acid rain contains lots of acid and is very destructive for buildings and the environment. They come from the bad effects of coal-burning power plants, factories, and cars. When humans burn fossil fuels, toxic fumes are released into the atmosphere, and when it reaches Earth, it makes rain turn into acid rain which enters water systems and sinks into the soil";

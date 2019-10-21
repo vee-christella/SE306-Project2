@@ -6,7 +6,7 @@ public class Flood : Event
 {
     private double probability;
 
-    public Flood(Game game) : base(-5, -1, -5)
+    public Flood(Game game) : base(-100, -2, -50)
     {
         this.Type = EventType.TileChanger;
         this.Description = "Flooding means that excess water is destroying your city. Storms, high tides and rising sea levels increase the risk of flooding. Flooding can also occur from rivers not being able to hold the amount of water they receive, as well as flash flooding which occurs randomly when heavy rain occurs and your town's drainage is too weak.";
@@ -25,10 +25,10 @@ public class Flood : Event
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                if (tiles[i, j].Type == Tile.TileType.Desert)
+                if (tiles[i, j].Type == Tile.TileType.Desert ||  tiles[i,j].Type == Tile.TileType.Plain)
                 {
                     Debug.Log("Found a tile with desert");
-                    int random = Random.Range(0, 2);
+                    int random = Random.Range(0, 4);
 
                     // 50% chance to change desert tile to water tile
                     if (random == 1)

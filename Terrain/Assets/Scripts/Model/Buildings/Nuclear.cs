@@ -5,7 +5,7 @@ using UnityEngine;
 public class Nuclear : Building
 {
     // Initialise stats for each Nuclear plant building
-    public Nuclear() : base(5, -300, -20, -50, 50, -10, -5, 4)
+    public Nuclear() : base(5, -150, -25, -10, 15, -2, -4, 4)
     {
         this.TypeOfBuilding = BuildingType.EnergySource;
         this.Name = "Nuclear Plant";
