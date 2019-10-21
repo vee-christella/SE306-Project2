@@ -3,13 +3,18 @@
 /*
 Retrieved from: https://unity3d.college/2017/10/08/simple-unity3d-snap-grid-system/
 
-Allows tiles to be placed/snap to a grid
+This class acts as the base grid for the game world. It allows tiles and buildings 
+to be placed/snap to a grid. Grid points are whole numbers in the x-z plane,
+starting at (0, 0).
 */
 public class GameGrid : MonoBehaviour
 {
     [SerializeField]
     private float size = 1f;
 
+    /*
+    Gets the nearest whole number coordinates to a point anywhere in the gameworld.
+    */
     public Vector3 GetNearestPointOnGrid(Vector3 position)
     {
         position -= transform.position;
@@ -30,7 +35,8 @@ public class GameGrid : MonoBehaviour
     }
 
     /*
-    Method to draw circles to show the grid squares' corners
+    Method to draw circles to show the grid squares' corners.
+    This won't be shown when the game is playing, as is only used for development.
     */
     private void OnDrawGizmos()
     {

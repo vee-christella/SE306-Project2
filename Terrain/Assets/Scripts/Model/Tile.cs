@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+/*
+Class to represent a game tile that makes up part of the game world. Players can build
+buildings on tiles. Tiles have different types, which affect which buildings can be
+built on top of them.
+*/
 public class Tile
 {
     public enum TileType
@@ -72,7 +77,7 @@ public class Tile
     public bool placeBuilding(Building building)
     {
         Debug.Log("Building Created");
-        
+
         if ((this.building == null) && IsBuildable(building))
         {
 
@@ -98,7 +103,6 @@ public class Tile
 
     public bool removeBuilding()
     {
-        Debug.Log("Building Removed");
         if (this.building != null)
         {
             this.building = null;
@@ -107,9 +111,12 @@ public class Tile
             {
                 CallbackBuildingChange(this);
             }
+            Debug.Log("Building removed");
 
             return true;
         }
+
+        Debug.Log("No building to remove");
         return false;
     }
 
