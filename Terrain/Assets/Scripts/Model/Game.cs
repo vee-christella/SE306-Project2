@@ -556,19 +556,24 @@ public class Game
 
     private void getModifier(float happinessDelta)
     {
+        if (Happiness >= 90 && Happiness + happinessDelta < 90)
+        {
+            Debug.Log("90 down");
+            modifier -= (float)0.1;
+        }
+
+        if (Happiness >= 70 && Happiness + happinessDelta < 70)
+        {
+            Debug.Log("70 down");
+
+            modifier -= (float)0.1;
+        }
+
         if (Happiness >= 50 && Happiness + happinessDelta < 50)
         {
             Debug.Log("50 down");
 
             modifier -= (float)0.1;
-        }
-
-        if (Happiness < 50 && Happiness + happinessDelta >= 50)
-        {
-            Debug.Log("50 up");
-
-            modifier += (float)0.1;
-
         }
 
         if (Happiness >= 30 && Happiness + happinessDelta < 30)
@@ -585,18 +590,19 @@ public class Game
             modifier += (float)0.1;
         }
 
+        if (Happiness < 50 && Happiness + happinessDelta >= 50)
+        {
+            Debug.Log("50 up");
+
+            modifier += (float)0.1;
+
+        }
+
         if (Happiness < 70 && Happiness + happinessDelta >= 70)
         {
             Debug.Log("70 up");
 
             modifier += (float)0.1;
-        }
-
-        if (Happiness >= 70 && Happiness + happinessDelta < 70)
-        {
-            Debug.Log("70 down");
-
-            modifier -= (float)0.1;
         }
 
         if (Happiness < 90 && Happiness + happinessDelta >= 90)
@@ -606,11 +612,7 @@ public class Game
             modifier += (float)0.1;
         }
 
-        if (Happiness >= 90 && Happiness + happinessDelta < 90)
-        {
-            Debug.Log("90 down");
-            modifier -= (float)0.1;
-        }
+
     }
 
     private void calculateDelta()
