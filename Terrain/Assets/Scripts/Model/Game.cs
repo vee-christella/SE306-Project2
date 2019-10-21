@@ -274,10 +274,10 @@ public class Game
             {
                 // The building was successfully built
                 UpdateMetrics(building);
-                if(buildingType == "Oil Refinery"){
+                if(buildingName == "Oil Refinery"){
                     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOilRig);
                 }
-                if(buildingType == "Nuclear Plant"){
+                if(buildingName == "Nuclear Plant"){
                     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildNuclear);
                 }
                 return building;
