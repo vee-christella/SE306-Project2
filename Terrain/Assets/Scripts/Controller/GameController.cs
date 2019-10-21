@@ -36,9 +36,11 @@ public class GameController : MonoBehaviour
     public string[] greenMetricCheatCode = {"i","l","o","v","e","e","a","r","t","h"};
     public string[] loseCheatCode = {"p","l","a","s","t","i","c","b","a","g","s"};
     public string[] happinessCheatCode = {"h","a","p","p","y"};
+    public string[] moneyCheatCode = {"r","i","c","h","b","o","y"};
     public int greenCheatIndex = 0;
     public int loseCheatIndex = 0;
     public int happinessCheatIndex = 0;
+    public int moneyCheatIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -183,6 +185,23 @@ public class GameController : MonoBehaviour
             happinessCheatIndex = 0;
         }
     }
+
+    public void moneyCheat()
+    {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(moneyCheatCode[moneyCheatIndex])) {
+                moneyCheatIndex++;
+            }
+            else {
+                moneyCheatIndex = 0;    
+            }
+        }
+        if (moneyCheatIndex == moneyCheatCode.Length) {
+            game.moneyCheat();
+            SetDelta(game.MoneyDelta, game.GreenDelta, game.GenerateHappiness);
+            moneyCheatIndex = 0;
+        }
+    }
     
 
     public void callNextTurn()
@@ -209,6 +228,7 @@ public class GameController : MonoBehaviour
         greenCheat();
         loseCheat();
         happinessCheat();
+        moneyCheat();
     }
 
     // Initialise the starting metrics on the screen

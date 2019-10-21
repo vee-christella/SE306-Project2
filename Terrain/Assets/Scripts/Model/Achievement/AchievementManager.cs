@@ -56,15 +56,13 @@ public class AchievementManager
         achievements[7].Title = "Win in 80 turns";
         achievements[7].Blurb = "Awesome job! You are a master of preventing climate change!";
         achievements[7].HowToComplete = "Win the game within 80 turns in any level";
-        achievements[7].CountToComplete = 80;
-        achievements[7].CurrentCount = 0;
+        achievements[7].CountToComplete = 1;
+        achievements[7].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[7].Title, 0);
         achievements[8].Title = "Win in 90 turns";
         achievements[8].Blurb = "Great job! You are an expert in preventing climate change!";
         achievements[8].HowToComplete = "Win the game within 90 turns in any level";
-        achievements[8].CountToComplete = 90;
-        achievements[8].CurrentCount = 0;
-
-        //AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.BuildOlilRig);
+        achievements[8].CountToComplete = 1;
+        achievements[8].CurrentCount = PlayerPrefs.GetInt("Count" + achievements[8].Title, 0);
     }
 
     public static AchievementManager GetAchievementManager(){

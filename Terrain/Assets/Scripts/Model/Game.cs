@@ -153,6 +153,12 @@ public class Game
         GenerateGreen = 1000;
     }
 
+    public void moneyCheat()
+    {
+        MoneyDelta = 1000;
+        GenerateMoney = 1000;
+    }
+
     public void loseCheat()
     {
         MoneyDelta = -1000;
@@ -171,18 +177,6 @@ public class Game
     public void NextTurn()
     {
         this.currentTurn++;
-
-        for (int i = 7; i < 9; i++)
-        {
-            Achievement[] listOfAchievements = AchievementManager.GetAchievementManager().achievements;
-            listOfAchievements[i].CurrentCount = (int) currentTurn;
-            listOfAchievements[i].AchievementRef.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text =
-            listOfAchievements[i].CurrentCount.ToString() + " out of " + listOfAchievements[i].CountToComplete;
-            if (currentTurn > listOfAchievements[i].CountToComplete)
-            {
-                listOfAchievements[i].AchievementRef.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color32(255,0,0,255);
-            }
-        }
 
         getModifier(GenerateHappiness);
 
@@ -210,20 +204,14 @@ public class Game
         {
             AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win);
 
-            // AchievementController achievementController = new AchievementController();
-            // if(currentTurn <= 80) 
-            // {
-            //     Achievement achivement = AchievementManager.GetAchievementManager().achievements[(int) AchievementType.Win80Turns];
-            //     achivement.CurrentCount = achivement.CountToComplete - 1;
-            //     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win80Turns);
-            // }
-
-            // if(currentTurn <= 90)
-            // {
-            //     Achievement achivement = AchievementManager.GetAchievementManager().achievements[(int) AchievementType.Win90Turns];
-            //     achivement.CurrentCount = achivement.CountToComplete - 1;
-            //     AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win80Turns);
-            // }
+            if(currentTurn <= 80) 
+            {
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win80Turns);
+            }
+            if(currentTurn <= 90)
+            {
+                AchievementManager.GetAchievementManager().increaseAchievementCounter(AchievementType.Win90Turns);
+            }
 
             this.endGame(true);
             // Check if the user has lost the game by exceeding the max number
