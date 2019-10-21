@@ -162,12 +162,6 @@ public class GameController : MonoBehaviour
         StartingMetrics();
 
         Debug.Log("World loaded");
-
-        Game.getTileAt(0, 0).Type = Tile.TileType.Desert;
-        Game.getTileAt(0, 0).Type = Tile.TileType.Water;
-        Game.getTileAt(0, 0).Type = Tile.TileType.Plain;
-        Game.getTileAt(0, 0).Type = Tile.TileType.Mountain;
-        Game.getTileAt(0, 0).CallbackTypeChanged(Game.getTileAt(0, 0));
     }
 
     public void assignCallBackMethodsToGame()
