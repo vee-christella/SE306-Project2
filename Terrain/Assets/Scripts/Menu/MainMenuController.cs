@@ -7,11 +7,31 @@ public class MainMenuController : MonoBehaviour
 {
 
 
-    public void PlayGame()
+    public void PlayEasyGame()
     {
 
         // Set the game map to generate level 1
         PlayerPrefs.SetInt("Level", 1);
+
+        SceneManager.LoadScene("3D-GameScene");
+
+    }
+
+    public void PlayMediumGame()
+    {
+
+        // Set the game map to generate level 1
+        PlayerPrefs.SetInt("Level", 2);
+
+        SceneManager.LoadScene("3D-GameScene");
+
+    }
+
+    public void PlayHardGame()
+    {
+
+        // Set the game map to generate level 1
+        PlayerPrefs.SetInt("Level", 3);
 
         SceneManager.LoadScene("3D-GameScene");
 

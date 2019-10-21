@@ -8,8 +8,10 @@ public class Drought : Event
     public Drought(Game game) :base(-5,-1,-5)
     {
         this.Type = EventType.TileChanger;
-        this.Description = "Droughts everywhere are projected to become more intense, and summer temperatures are projected to continue rising.";
+        this.Description = "Droughts occur when there is less rain than expected, which means that your town is running out of water! Your water supply is lacking and some of your water tiles have dried up into desert tiles.";
         Game = game;
+        this.Title = "Drought";
+        this.TileDeltaDesc = "All your buildings that are built on dried up water tiles have been disabled.";
     }
 
     public int TurnToOccur { get => turnToOccur; set => turnToOccur = value; }
