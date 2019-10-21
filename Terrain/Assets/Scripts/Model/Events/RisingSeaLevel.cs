@@ -6,11 +6,13 @@ public class RisingSeaLevel : Event
 {
     private double probability;
 
-    public RisingSeaLevel(Game game) : base(-5, -1, -5)
+    public RisingSeaLevel(Game game) : base(-150, -5, 0)
     {
         this.Type = EventType.TileChanger;
         this.Game = game;
-        this.Description = "Global sea level is projected to rise another 1 to 4 feet by 2100. This is the result of added water from melting glaciers and the expansion of seawater as it warms. Rising sea levels will increase the risk of erosion, coastal flooding and saltwater intrusion, increasing the need for coastal protection";
+        this.Title = "Rising Sea Level";
+        this.Description = "Global sea levels are expected to rise another 1 to 4 feet in the next 80 years. This is the result of extra water from melting glaciers and increasing sea levels from global warming. Rising sea levels is extremely worrying and harmful for the environment and future.";
+        this.TileDeltaDesc = "The outer tiles of your map has been converted to water tiles.";
     }
 
     public double Probability { get => probability; set => probability = value; }

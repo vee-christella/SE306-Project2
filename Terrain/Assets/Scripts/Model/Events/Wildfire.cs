@@ -6,12 +6,14 @@ public class Wildfire : Event
 {
     private double probability;
 
-    public Wildfire(Game game) : base(-5, -1, -5)
+    public Wildfire(Game game) : base(-100, -3, 0)
     {
         this.Type = EventType.BuildingDestroyer;
-        this.Description = "Severe heat and drought fuel wildfires, conditions scientists have linked to climate change. The hotter weather makes forests drier and more susceptible to burning with the average wildfire season three and a half months longer than it was a few decades back.";
+        this.Description = "Wildfires occur when fires are naturally started, burning large areas of the environment. Severe heat and drought make forests drier which fuel wildfires.";
         this.Game = game;
+        this.Title = "Wildfire";
         this.DestroysBuildings = true;
+        this.TileDeltaDesc = "Some of your forests have been destroyed.";
     }
 
     public double Probability { get => probability; set => probability = value; }

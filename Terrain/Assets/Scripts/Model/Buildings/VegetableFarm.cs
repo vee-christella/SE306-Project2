@@ -7,7 +7,7 @@ public class VegetableFarm : Building
     // Initialise stats for each Vegetable Farm building
 
     
-    public VegetableFarm() : base(15, -20, 20, 0, 7, 8, 0, 3)
+    public VegetableFarm() : base(15, -70, 0, 0, 6, -2, 0, 3)
     {   
         this.TypeOfBuilding = BuildingType.Recreational;
         this.Name = "Vegetable Farm";

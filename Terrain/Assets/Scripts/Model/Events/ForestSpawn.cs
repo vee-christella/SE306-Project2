@@ -6,10 +6,13 @@ public class ForestSpawn : Event
 {
     private double probability;
 
-    public ForestSpawn(Game game) : base(2, 2, 2)
+    public ForestSpawn(Game game) : base(20, 2, 0)
     {
         this.Type = EventType.Good;
+        this.Description = "Seedlings from trees, flowers and plants have been blown to different parts of the map, starting more plant growth.";
         this.Game = game;
+        this.Title = "Forest Spawn";
+        this.TileDeltaDesc = "More forests have naturally grown in your town!";
     }
 
     public double Probability { get => probability; set => probability = value; }
@@ -25,7 +28,7 @@ public class ForestSpawn : Event
             {
                 if (tiles[i, j].Type == Tile.TileType.Plain)
                 {
-                    int random = Random.Range(0,15);
+                    int random = Random.Range(0,20);
                     // 50% chance to change tiles to desert
                     if (random == 1)
                     {

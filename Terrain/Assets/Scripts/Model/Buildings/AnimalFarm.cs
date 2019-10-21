@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimalFarm : Building
 {
     // Initialise stats for each Vegan Farm building
-    public AnimalFarm() : base(17, -100, 20, 0, 7, 8, 0, 3)
+    public AnimalFarm() : base(17, -100, -10, 0, 12, -5, 0, 3)
     {   
         this.TypeOfBuilding = BuildingType.Utility;
         this.Name = "Animal Farm";

@@ -29,6 +29,7 @@ public class Game
     // xDelta is the amount generated per turn after happiness modifiers
     float moneyDelta;
     float greenDelta;
+    GameDifficulty difficulty;
     Event gameEvent;
     float currentTurn;
     float maxTurns;
@@ -41,6 +42,7 @@ public class Game
     public float modifier = 1;
     GameObject errorMessage;
 
+    public GameDifficulty Difficulty { get => difficulty; set => difficulty = value; }
     public int Rows { get => rows; }
     public int Columns { get => columns; }
     public Tile[,] Tiles { get => tiles; set => tiles = value; }
@@ -62,6 +64,34 @@ public class Game
 
     public Game(int rows, int columns)
     {
+        /*
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 0:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+            case 1:
+                Game = new Game(10, 10);
+                Map = PrototypeLevel.Arr;
+                break;
+            case 2:
+                Game = new Game(15, 15);
+                break;
+            case 3:
+                Game = new Game(20, 20);
+                break;
+            default:
+                Game = new Game(5, 5);
+                tutorialOverlay.SetActive(true);
+                Map = TutorialLevel.Arr;
+                break;
+
+        }
+        */
+
+
         this.isEnd = false;
         this.currentTurn = 0;
         this.rows = rows;
@@ -156,7 +186,9 @@ public class Game
 
         Happiness = Happiness + GenerateHappiness;
 
-        calculateDeltas();
+        // If Happiness is >100 or <0, set it to 100 or 0 respectively 
+        Happiness = (Happiness > 100) ? 100 : Happiness;
+        Happiness = (Happiness < 0) ? 0 : Happiness;
 
         // Update the metrics
         Money = Money + moneyDelta;
@@ -178,9 +210,9 @@ public class Game
         // Get a random event to occur (if any)
         GameEvent = EventForNextTurn();
 
-        if ((GameEvent != null) && (GameEvent.GetType().Name.ToString() == "RisingSeaLevel"))
+        if (GameEvent != null && GameEvent.GetType().Name.ToString() == "RisingSeaLevel" || GameEvent != null && GameEvent.GetType().Name.ToString() == "EarthQuake")
         {
-            // The bad event "RisingSeaLevel" should only occur once per game
+            // The bad events "RisingSeaLevel" "EarthQuake" should only occur once per game
             badEventList.Remove(GameEvent);
         }
 
@@ -203,6 +235,9 @@ public class Game
         this.IsVictory = isVictory;
     }
 
+    /*
+    Adds the specified building to the specified tile.
+    */
     public Building addBuildingToTile(string buildingName, Tile tile)
     {
         string buildingClassName = Building.resolveBuildingClassName(buildingName);
@@ -215,32 +250,14 @@ public class Game
         {
             if (tile.placeBuilding(building))
             {
-                Debug.Log("==== Game not null = " + building != null);
+                // The building was successfully built
                 UpdateMetrics(building);
                 return building;
             }
-            else
-            {
-                if (tile.Building != null)
-                {
-                    GameController.Instance.ShowError("Another building already exists on this tile.");
-                }
-                else
-                {
-                    // Show error message
-                    GameController.Instance.ShowError(building.Name + " cannot be built on a " + tile.Type + " tile.");
-                }
-
-                return null;
-            }
         }
-        else
-        {
-            // Show error message
-            GameController.Instance.ShowError("You do not have enough money to build a " + building.Name + ". ");
 
-            return null;
-        }
+        // The building was not built
+        return null;
     }
 
     /*
@@ -249,7 +266,23 @@ public class Game
     public void SellBuilding(Tile tile)
     {
         Building building = tile.Building;
-        float CostToSell = building.InitialBuildMoney * (float)0.25 * -1;
+        float CostToSell;
+
+        switch (PlayerPrefs.GetInt("Level"))
+        {
+            case 1:
+                CostToSell = building.InitialBuildMoney * 0.25f * -1;
+                break;
+            case 2:
+                CostToSell = building.InitialBuildMoney * 0.2f * -1;
+                break;
+            case 3:
+                CostToSell = building.InitialBuildMoney * 0.1f * -1;
+                break;
+            default:
+                CostToSell = building.InitialBuildMoney * 0.1f * -1;
+                break;
+        }
 
         // Check that there's a building to remove/that it's been removed successfully
         if (tile.removeBuilding())
@@ -287,21 +320,21 @@ public class Game
         float goodEventProbability;
         float difficultyOffset = 0.1f;
 
-        //       switch (gameDifficulty)
-        //       {
-        //           case GameDifficulty.Easy:
-        //               difficultyOffset = 0.1f;
-        //               break;
-        //           case GameDifficulty.Medium:
-        //                difficultyOffset = 0.2f;
-        //               break;
-        //            case GameDifficulty.Hard:
-        //               difficultyOffset = 0.3f;
-        //               break;
-        //           default:
-        //               difficultyOffset = 0.1f;
-        //               break;
-        //       }
+        switch (gameDifficulty)
+        {
+            case GameDifficulty.Easy:
+                difficultyOffset = 0.1f;
+                break;
+            case GameDifficulty.Medium:
+                difficultyOffset = 0.2f;
+                break;
+            case GameDifficulty.Hard:
+                difficultyOffset = 0.3f;
+                break;
+            default:
+                difficultyOffset = 0.1f;
+                break;
+        }
 
         // Calculate the green points effect on good/bad event probability
         goodEventProbability = Mathf.Floor((greenPoints / 2000 * 100) / 2f);
@@ -347,13 +380,16 @@ public class Game
         badEventList.Add(new RisingSeaLevel(this));
         badEventList.Add(new Wildfire(this));
         badEventList.Add(new HeatWave(this));
+        badEventList.Add(new EarthQuake(this));
 
         goodEventList.Add(new ForestSpawn(this));
         goodEventList.Add(new Circus(this));
+        goodEventList.Add(new Rejuvenation(this));
+
     }
 
     /*
-    Changes the metrics with regards to the effects of the building that has just been placed.
+    Changes the metrics with regards to the effects of a building that has just been placed.
     */
     public void UpdateMetrics(Building building)
     {
@@ -373,7 +409,6 @@ public class Game
         {
             Happiness += building.InitialBuildHappiness;
         }
-
 
         GenerateMoney += building.GenerateMoney;
         GenerateGreen += building.GenerateGreen;
@@ -503,6 +538,8 @@ public class Game
         // Round to 2 decimal places
         moneyDelta = (float)System.Math.Round(moneyDelta, 2);
         greenDelta = (float)System.Math.Round(greenDelta, 2);
+
+        GameController.Instance.ChangeImageSprite(modifier);
     }
 
 }
