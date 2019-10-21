@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour
     public GameObject happiArrow;
     public GameObject turnsArrow;
 
+    public GameObject conversationBubble;
+
     public GameObject endTurnButton;
     public GameObject turnGenerationArrow;
     public GameObject endTurnsArrow;
@@ -81,6 +83,11 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += digit;
             yield return null;
         }
+    }
+
+    public void skipIntro()
+    {
+        conversationBubble.SetActive(false);
     }
 
 
@@ -234,8 +241,14 @@ public class DialogueManager : MonoBehaviour
         //boxAnimator.SetBool("isOpen", false);
         //avatarAnimator.SetBool("isOpen", false);
 
-
-        TutorialController.Instance.tutorialIndex++;
+        if (PlayerPrefs.GetInt("Level") == 0)
+        {
+            TutorialController.Instance.tutorialIndex++;
+        }
+        else
+        {
+            conversationBubble.SetActive(false);
+        }
 
         overlay.SetActive(false);
     }
