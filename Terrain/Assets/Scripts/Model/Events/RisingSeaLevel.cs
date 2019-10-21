@@ -11,7 +11,11 @@ public class RisingSeaLevel : Event
         this.Type = EventType.TileChanger;
         this.Game = game;
         this.Title = "Rising Sea Level";
-        this.Description = "Global sea levels are expected to rise another 1 to 4 feet in the next 80 years. This is the result of extra water from melting glaciers and increasing sea levels from global warming. Rising sea levels is extremely worrying and harmful for the environment and future.";
+        this.Description =  "This is the result of extra water from melting glaciers and increasing sea levels from global warming." +
+            " Rising sea levels is extremely worrying and harmful for the environment and future. " +
+            "Events like rising sea levels have a higher chance of happening the lower your green points are " +
+            "and the longer it takes you to reach 1000 green points! Thankfully, sea levels won't rise for the foreseeable" +
+            "future.";
         this.TileDeltaDesc = "The outer tiles of your map has been converted to water tiles.";
     }
 

@@ -9,6 +9,11 @@ public class EarthQuake : Event
     {
         this.Type = EventType.TileChanger;
         this.Game = game;
+        this.Description = "Earth quakes happen when two large pieces of the Earth's crust suddenly slip. " +
+            "This causes shock waves to shake the surface of the Earth in the form of an earthquake. " +
+            "Thankfully, an earthquake of this magnitude won't happen again in the foreseeable future.";
+        this.Title = "Earthquake";
+        this.TileDeltaDesc = "Some of your mountains have turned into plain tiles.";
     }
 
     public override void TileDelta(Tile[,] tiles, bool doDestoryBuildings)

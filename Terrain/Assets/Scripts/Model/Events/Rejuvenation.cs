@@ -10,7 +10,8 @@ public class Rejuvenation : Event
         this.Type = EventType.Good;
         this.Game = game;
         this.Title = "Rejuvenation";
-        this.Description = "Your abundance in green points has caused the earth to heal.";
+        this.Description = "Your abundance in green points has caused triggered an event that causes the earth to heal. " +
+            "Events like rejuvenation have a higher chance of happening the more green points you have.";
         this.TileDeltaDesc = "Some desert tiles have been turned to fertile plain tiles.";
     }
 
