@@ -487,7 +487,7 @@ public class Game
 
         goodEventList.Add(new ForestSpawn(this));
         goodEventList.Add(new Circus(this));
-        goodEventList.Add(new Rejuevnation(this));
+        goodEventList.Add(new Rejuvenation(this));
         
     }
 

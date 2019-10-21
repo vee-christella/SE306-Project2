@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rejuvenation : Event
 {
 
-    public Rejuevnation(Game game):base(50,5,0)
+    public Rejuvenation(Game game):base(50,5,0)
     {
         this.Type = EventType.Good;
         this.Game = game;

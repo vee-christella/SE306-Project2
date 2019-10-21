@@ -2477,8 +2477,8 @@ MonoBehaviour:
   toolTip: {fileID: 195287303}
   sellButton: {fileID: 1726821657}
   cancelButtonString: {fileID: 1102332961}
-  CantBuildSound: {fileID: 498495402}
-  CantBuildClip: {fileID: 8300000, guid: 61ef8e00b5fe084479f2d06fbc62bf3c, type: 3}
+  CantBuildSound: {fileID: 0}
+  CantBuildClip: {fileID: 0}
 --- !u!4 &127397728
 Transform:
   m_ObjectHideFlags: 0
@@ -14589,7 +14589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0aa16b267369c4abb576298b1701c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialOverlay: {fileID: 1249473070}
+  tutorialOverlay: {fileID: 0}
   tileGameObjs:
   - {fileID: 337495820829161866, guid: 4bd75631be2c85a4aa68ea8d4af43133, type: 3}
   - {fileID: 2342857596658124763, guid: 2ec8b24ee36ef5c4f809916d8b094d3c, type: 3}
@@ -14604,10 +14604,10 @@ MonoBehaviour:
   greenDeltaText: {fileID: 71564547}
   happinessDeltaText: {fileID: 967482030}
   errorText: {fileID: 420207498}
-  happinessImage: {fileID: 724108025}
-  placeholder: {fileID: 92666521}
-  happyImage: {fileID: 21300000, guid: 8d5f997e73f454b88804c5c735f370f5, type: 3}
-  sadImage: {fileID: 21300000, guid: 539e6953896ed489898e66cd4e1cbe18, type: 3}
+  happinessImage: {fileID: 0}
+  placeholder: {fileID: 0}
+  happyImage: {fileID: 0}
+  sadImage: {fileID: 0}
   errorMessage: {fileID: 1372066692}
   greenMetricCheatCode:
   - i
@@ -18244,6 +18244,8 @@ MonoBehaviour:
     type: 3}
   model_OilRefinery: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
     type: 3}
+  model_Pollutant: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
+    type: 3}
   model_RaceTrack: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
     type: 3}
   model_RecyclingPlant: {fileID: 6295135433214186290, guid: 4d891683e3889c240aa5a93e2467fa4e,
@@ -21415,8 +21417,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1675714898}
   m_HandleRect: {fileID: 1675714897}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.70175445
+  m_Value: 0.0000001795151
+  m_Size: 0.70175433
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -27486,17 +27488,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPopupPanel: {fileID: 1759686435}
   buildingDestroyedPanel: {fileID: 1303554465}
-  yesButton: {fileID: 2008572193}
-  closeButton: {fileID: 1708685034}
-  noButton: {fileID: 2005450822}
+  yesButton: {fileID: 0}
+  closeButton: {fileID: 0}
+  noButton: {fileID: 0}
   costToRepair: 0
   eventInfo: {fileID: 2009157942}
   moneyEffect: {fileID: 1986489568}
   greenPointsEffect: {fileID: 603849303}
-  happinesEffect: {fileID: 438737336}
+  happinesEffect: {fileID: 0}
   costToRepairEffect: {fileID: 1986574246}
-  eventTitle: {fileID: 58466089}
-  impact: {fileID: 2112036785}
+  eventTitle: {fileID: 0}
+  impact: {fileID: 0}
 --- !u!114 &1759686438
 MonoBehaviour:
   m_ObjectHideFlags: 0
